@@ -371,6 +371,16 @@ Edges:
 
 `ToleranceProfile` defines accepted measurement differences for seam length, notch placement, closure gaps, scale, and grainline angle.
 
+`UnitProfile` defines canonical units, source units, conversion factors, and scale evidence.
+
+`FabricRollProfile` defines usable fabric width, selvage allowance, fold mode, nap direction, print repeat, and shrinkage assumptions.
+
+`MarkerPolicy` defines allowed rotation/mirroring, grainline tolerance, piece spacing, fold requirements, and whether seam allowance/cut lines are included.
+
+`MarkerPlan` is the optimized or reviewable arrangement of cut pieces within a fabric-width strip.
+
+`MarkerPlacement` records a panel's position, rotation, mirror state, grainline error, and cut-count identity within a marker.
+
 ## Paper-Ingested Concepts
 
 From `Computational Pattern Making from 3D Garment Models`, the graph gains these durable concepts:
@@ -743,6 +753,23 @@ ToleranceProfile
   -> MeasurementReport
   -> ValidationReport
   -> ExportGateReport
+
+UnitProfile
+  -> CandidateNormalizerReport
+  -> MeasurementReport
+  -> ExportConformanceReport
+  -> RoundTripReport
+
+FabricRollProfile
+  -> MarkerPolicy
+  -> MarkerPlan
+  -> MarkerPlacement
+  -> CuttingPlan
+
+PatternGraph
+  -> MarkerPolicy
+  -> MarkerPlan
+  -> ValidationReport
 ```
 
 ## Representation Boundary Rules
@@ -755,6 +782,8 @@ ToleranceProfile
 - `MarkerPlan` can reuse packing algorithms, but must respect grain, folds, fabric width, size runs, and cutting constraints that ordinary UV packing ignores.
 - `ValidationReport` is the guardrail between generated candidates and user-facing pattern output.
 - `PatternGraphCandidate` must never export directly. It must pass candidate-to-export interop and be promoted to `PatternGraph`.
+- Canonical internal units are millimeters. Source units must be recorded, converted, and round-trip tested.
+- Marker layout is a constrained garment problem, not generic UV packing: fabric width, grainline, folds, nap, print direction, and cut counts matter.
 
 ## Product Architecture Implications
 

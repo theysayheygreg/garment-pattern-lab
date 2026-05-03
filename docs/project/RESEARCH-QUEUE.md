@@ -73,6 +73,9 @@ Questions:
 - Which hard errors block SVG/PDF/DXF export?
 - What round-trip tests prove an export preserved geometry and semantics?
 - How should mesh-derived candidates from the 2202.10272 pipeline become pattern candidates?
+- What canonical unit profile is required for every candidate and export format?
+- How should fabric roll width, fold mode, grainline, nap, print direction, and cut count be represented?
+- Which marker/nesting algorithm should be used first for optimized fabric layout?
 
 Outputs:
 
@@ -80,6 +83,7 @@ Outputs:
 - `docs/project/PATTERN-SCHEMA.md`
 - `docs/project/PATTERN-VALIDATION-CHECKLIST.md`
 - `prototype/browser/fixtures/invalid-candidate.pattern.json`
+- `prototype/browser/fixtures/marker-plan.example.json`
 
 ### R3: First Prototype Tech Stack
 

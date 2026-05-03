@@ -24,3 +24,4 @@
 - Added AI sketch and 3D exploration lanes for GPT Image 2 sketch corpus generation, modern image-to-3D candidate frameworks, and visual-corpus evaluation.
 - Refined the third AI exploration lane into a garment-type pattern-reference corpus for construction correctness examples.
 - Added candidate-to-export interop layer for measuring, correcting, validating, and round-tripping pattern candidates before SVG/PDF/DXF export.
+- Expanded interop with canonical millimeter units, scale proof, and marker/fabric-roll layout planning.

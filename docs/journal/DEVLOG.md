@@ -42,3 +42,4 @@ AI exploration lane:
 Interop layer:
 
 - Added the missing bridge between research candidates and export files: `PatternGraphCandidate` must be normalized, measured, corrected, validated, gated, exported, and round-trip checked before it can become a user-facing pattern.
+- Added two important production primitives to that bridge: canonical millimeter units with scale proof, and marker planning against usable fabric roll width with grain/fold/nap constraints.

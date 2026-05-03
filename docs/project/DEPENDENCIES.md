@@ -104,6 +104,9 @@ Needed:
 - Cut sheet.
 - Assembly steps.
 - Versioned pattern JSON.
+- Canonical unit profile and scale proof.
+- Marker/fabric layout planning by usable roll width.
+- Fabric utilization and consumption estimate.
 
 Later:
 
@@ -134,6 +137,7 @@ Later:
 - Rust/Cargo, wasm-pack, cargo-watch, Node, and pnpm for Graphite source exploration.
 - Blender app/binary for headless Python previews and rendered diagnostics.
 - Web workers for responsive browser-side geometry, validation, and future inference tasks.
+- Nesting/marker-planning algorithms for irregular pattern-piece placement within fabric-width constraints.
 - Future: a robust curve-offset and polygon-boolean library is likely mandatory.
 
 ### Vision / AI

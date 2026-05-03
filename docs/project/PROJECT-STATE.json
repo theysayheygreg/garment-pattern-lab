@@ -20,12 +20,14 @@
     "run-image-to-3d-candidate-spike",
     "define-visual-corpus-schema",
     "define-candidate-to-export-interop-schema",
-    "define-roundtrip-export-tests"
+    "define-roundtrip-export-tests",
+    "define-canonical-unit-profile",
+    "define-marker-layout-profile"
   ],
   "candidateToExportInterop": {
     "localPlan": "docs/project/CANDIDATE-TO-EXPORT-INTEROP.md",
-    "thesis": "Any mesh-derived, AI-derived, imported, or program-generated candidate must be normalized, measured, corrected, validated, and round-trip tested before promotion to PatternGraph or export.",
-    "firstPrototypePath": "candidate JSON -> normalize -> measure -> correct tiny issues -> validate -> export SVG -> reimport SVG -> round-trip report"
+    "thesis": "Any mesh-derived, AI-derived, imported, or program-generated candidate must be normalized to canonical millimeters, scale-proven, measured, corrected, validated, marker-aware, and round-trip tested before promotion to PatternGraph or export.",
+    "firstPrototypePath": "candidate JSON -> normalize to millimeters -> prove scale -> measure geometry/fabric footprint -> correct tiny issues -> validate -> export SVG -> reimport SVG -> round-trip report"
   },
   "ownablePipelineLane": {
     "id": "browser-native-threejs-webgpu-wasm",
