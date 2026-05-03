@@ -85,6 +85,12 @@ Outputs:
 - `prototype/browser/fixtures/invalid-candidate.pattern.json`
 - `prototype/browser/fixtures/marker-plan.example.json`
 
+Deep-dive update:
+
+- Add `FormatSemanticMap`, `SVGSemanticProfile`, `DXFProfile`, and `InteropRoundTripFixture` so export compatibility is measured as semantic preservation, not just file creation.
+- SVG should ship first with stable layer IDs, metadata, unit proof, and reimport checks.
+- DXF/AAMA/ASTM should wait until notches, internal lines, grain/fold lines, labels, cut counts, units, and grade anchors can be expressed without guessing.
+
 ### R3: First Prototype Tech Stack
 
 Goal: choose the smallest stack that can generate, preview, and export.
@@ -137,6 +143,12 @@ Outputs:
 - `prototype/browser` skeleton
 - `prototype/browser/fixtures/a-line-tunic.pattern.json`
 
+Deep-dive update:
+
+- Define `PatternKernel` and `GeometryKernel` contracts before choosing TypeScript, Rust/WASM, C++/Emscripten, or WebGPU implementations.
+- Start with TypeScript geometry in web workers; migrate offset/intersection/triangulation/nesting kernels to WASM only when needed.
+- Treat WebGPU as optional acceleration because browser support is not universal; Three.js `WebGPURenderer` is attractive because it can fall back to WebGL 2.
+
 ### R3d: AI Sketch And Image-To-3D Exploration
 
 Goal: evaluate GPT Image 2 sketch generation, modern image-to-3D frameworks, and a pattern-reference corpus for the 2D reference -> 3D model -> flats -> pattern loop.
@@ -158,6 +170,13 @@ Outputs:
 - `docs/reference/PATTERN-REFERENCE-CORPUS.md`
 - `docs/research/gpt-image-2-sketch-corpus-spike.md`
 - `docs/research/image-to-3d-candidate-spike.md`
+
+Deep-dive update:
+
+- Add `TruthLevel` and `LicenseProfile` to every visual corpus item before it can influence training, evaluation, or display.
+- First visual corpus should be small and strict: sleeveless A-line dress/tunic, A-line skirt, basic bodice shell, simple woven top, and simple pants block.
+- Compare SPAR3D and Hunyuan3D-2 first for local/server image-to-3D candidate spikes; track TRELLIS, TRELLIS.2, and TripoSR as comparison/frontier references.
+- Every image-to-3D output must become `ImageTo3DModelCandidate` plus `MeshQualityReport`; it cannot become pattern truth directly.
 
 ### R4: 2D Sketch Parsing
 
@@ -212,6 +231,11 @@ Outputs:
 - `docs/research/mesh-to-pattern-spike.md`
 - Recommendation: adopt, adapt, or keep as reference only.
 
+Deep-dive update:
+
+- Add `GarmentSegmentation`, `MeshNormalization`, and `MeshQualityReport` before attempting any mesh-to-pattern conversion.
+- A future mesh-derived pattern must still enter the same `PatternGraphCandidate` proof lane as generated/imported 2D candidates.
+
 ### R6: Commercial Tool Interoperability
 
 Goal: understand what files can move into/out of existing tools.
@@ -249,6 +273,13 @@ New source-driven tasks:
 - Check whether Deep Fashion3D is useful for garment-landmark or mesh-reconstruction pretraining despite lacking pattern labels.
 - Identify which SketchTailor/GenPattern-style datasets are public, request-only, or paper-only.
 - Determine whether first-prototype patterns can synthesize enough sketch/pattern pairs for local evaluation.
+
+Deep-dive update:
+
+- Treat LACMA Pattern Project as the strongest first `pattern-truth` public reference candidate because it includes scaled patterns and construction instructions.
+- Treat CoPA primarily as taxonomy/catalog/reference metadata unless full pattern geometry is separately available.
+- Treat OpenPattern and FreeSewing as executable/reference drafting systems for formulas, browser flow, measurements, and generated bespoke outputs.
+- Treat GarmentCodeData as the strongest synthetic paired dataset lane for future ML/drape evaluation.
 
 ## Later
 

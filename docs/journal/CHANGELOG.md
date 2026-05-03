@@ -25,3 +25,6 @@
 - Refined the third AI exploration lane into a garment-type pattern-reference corpus for construction correctness examples.
 - Added candidate-to-export interop layer for measuring, correcting, validating, and round-tripping pattern candidates before SVG/PDF/DXF export.
 - Expanded interop with canonical millimeter units, scale proof, and marker/fabric-roll layout planning.
+- Added a consolidated deep-dive synthesis for candidate proof, browser geometry kernels, marker optimization, visual corpus truth levels, GPT Image 2 sketch generation, and image-to-3D candidate frameworks.
+- Expanded the product knowledge graph with `PatternKernel`, `GeometryKernel`, WASM/WebGPU runtime nodes, marker optimizer metrics, visual corpus truth/licensing nodes, image-to-3D mesh quality nodes, and SVG/DXF semantic round-trip fixtures.
+- Updated the research queue and project state with the next concrete spikes: pattern kernel contracts, visual corpus schema, marker optimizer interface, SVG semantic profile, and SPAR3D/Hunyuan comparison.

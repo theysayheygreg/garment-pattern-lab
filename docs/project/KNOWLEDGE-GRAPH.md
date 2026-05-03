@@ -772,6 +772,176 @@ PatternGraph
   -> ValidationReport
 ```
 
+## Deep Dive Research Additions
+
+Source synthesis: `docs/research/deep-dive-synthesis-2026-05-03.md`.
+
+### Browser Kernel Layer
+
+`PatternKernel` is the product-facing API that turns measurements, garment parameters, and `PatternGraph` revisions into derived geometry, previews, validation reports, and exports.
+
+`GeometryKernel` owns deterministic 2D/3D geometric operations: curve flattening, length measurement, offsets, intersections, winding, containment, triangulation, and placement helpers.
+
+`CurveKernel` owns curve-specific operations such as Bezier length, projection, split, resampling, smoothing, and seam-length comparison.
+
+`OffsetKernel` owns seam-line to cut-line generation and must record joins, corners, allowance changes, and failure cases.
+
+`TriangulationKernel` turns panel geometry into preview meshes while preserving panel, edge, seam, grain, and notch metadata.
+
+`WebWorkerGeometryRuntime` runs heavier TypeScript geometry operations off the UI thread.
+
+`WasmGeometryRuntime` is the future deterministic geometry runtime for libraries or custom kernels compiled from Rust or C++.
+
+`WebGPUAccelerationProfile` records which optional rendering, compute, simulation, or batch-evaluation operations can use WebGPU and what fallback exists.
+
+`StaticAssemblyPreview` is the first useful 3D view: panels positioned around a body or simple avatar without claiming physical drape.
+
+`ClothRelaxationPreview` is a later preview mode using simulation or relaxation to reveal tension, collisions, and likely fit problems.
+
+### Marker And Nesting Layer
+
+`MarkerOptimizer` chooses and configures a marker-placement engine for garment constraints.
+
+`NestingAlgorithm` names the placement strategy, such as deterministic strip placement, no-fit-polygon placement, genetic search, local optimization, or hybrid search.
+
+`NoFitPolygon` represents the collision-free translation boundary between two irregular pieces.
+
+`PlacementSearch` records candidate placements, search strategy, objective score, and stopping reason.
+
+`FabricConstraintSet` combines roll width, usable width, selvage margin, fold mode, nap direction, print repeat, shrinkage, cut count, piece spacing, and allowed rotations/mirroring.
+
+`ConsumptionReport` reports total fabric length, area utilization, waste estimate, unplaced pieces, and comparison against previous marker plans.
+
+`MarkerQualityMetric` records utilization, grain error, fold compliance, placement spacing, cut-count completion, and review status.
+
+### Reference Corpus And Correctness Layer
+
+`ReferenceCorpus` is the curated set of sketches, generated images, pattern references, scaled patterns, renders, meshes, and evaluation fixtures.
+
+`PatternReferenceItem` is a single reference with source URL/path, license, garment family, view type, construction metadata, and truth level.
+
+`LicenseProfile` records whether an item can be used for product display, training, evaluation, internal research, or not at all.
+
+`TruthLevel` separates visual-only references from semantic-reviewed references, pattern-reference examples, pattern-truth fixtures, and round-trip fixtures.
+
+`EvalFixture` is a locked input/output pair for checking sketch parsing, pattern generation, validation, export, marker layout, or image-to-3D behavior.
+
+`CorrectnessRuleSet` is a group of garment-family expectations derived from reference patterns: required panel roles, seam pairs, grain directions, notches, finishing pieces, closures, suspicious omissions, and acceptable variants.
+
+### Image-To-3D Candidate Layer
+
+`ImageTo3DFramework` records the framework, version, model checkpoint, hardware/runtime, license, and output formats for systems such as SPAR3D, Hunyuan3D-2, TRELLIS, TRELLIS.2, or TripoSR.
+
+`ReconstructionProfile` records input image assumptions, preprocessing, conditioning mode, inference settings, runtime, and generated asset types.
+
+`MeshNormalization` records scale, orientation, origin, material/texture handling, simplification, and conversion to project units.
+
+`MeshQualityReport` scores silhouette preservation, garment/body separation, topology cleanliness, UV presence, island count, watertightness, triangle count, and usefulness for pattern inference.
+
+`GarmentSegmentation` separates garment regions, body/figure regions, construction feature lines, and candidate seam hints.
+
+### Interop Export Fixtures
+
+`InteropRoundTripFixture` locks a source `PatternGraph`, export format, exported file, reimport result, tolerance profile, and pass/fail report.
+
+`FormatSemanticMap` maps internal pattern semantics to SVG layers, PDF annotations, DXF/AAMA/ASTM blocks/layers, or future CAD targets.
+
+`DXFProfile` records DXF dialect, units, layers, blocks, labels, notches, internal lines, grain/fold lines, grade references, and importer/exporter compatibility notes.
+
+`SVGSemanticProfile` records SVG layer IDs, element metadata, transform policy, units, viewBox scale, path precision, and reimport expectations.
+
+## Deep Dive Edges
+
+```text
+PatternGraph
+  -> PatternKernel
+  -> GeometryKernel
+  -> ValidationReport
+  -> ExportGateReport
+```
+
+```text
+GeometryKernel
+  -> CurveKernel
+  -> OffsetKernel
+  -> TriangulationKernel
+```
+
+```text
+GeometryKernel
+  -> WebWorkerGeometryRuntime
+  -> WasmGeometryRuntime
+  -> WebGPUAccelerationProfile
+```
+
+```text
+PatternGraph
+  -> StaticAssemblyPreview
+  -> ClothRelaxationPreview
+  -> FitValidation
+```
+
+```text
+PatternGraph
+  -> FabricConstraintSet
+  -> MarkerOptimizer
+  -> NestingAlgorithm
+  -> MarkerPlan
+  -> ConsumptionReport
+  -> MarkerQualityMetric
+```
+
+```text
+NestingAlgorithm
+  -> NoFitPolygon
+  -> PlacementSearch
+  -> MarkerPlacement
+```
+
+```text
+ReferenceCorpus
+  -> PatternReferenceItem
+  -> LicenseProfile
+  -> TruthLevel
+  -> EvalFixture
+```
+
+```text
+PatternReferenceFamily
+  -> CorrectnessRuleSet
+  -> ValidationReport
+```
+
+```text
+ImagePrompt
+  -> ImageTo3DFramework
+  -> ReconstructionProfile
+  -> MeshNormalization
+  -> MeshQualityReport
+  -> 3DGarmentMesh
+```
+
+```text
+3DGarmentMesh
+  -> GarmentSegmentation
+  -> SeamHint
+  -> PatternGraphCandidate
+```
+
+```text
+PatternGraph
+  -> FormatSemanticMap
+  -> SVGSemanticProfile
+  -> InteropRoundTripFixture
+```
+
+```text
+PatternGraph
+  -> FormatSemanticMap
+  -> DXFProfile
+  -> InteropRoundTripFixture
+```
+
 ## Representation Boundary Rules
 
 - `PatternGraph` is the manufacturing source of truth.
@@ -784,6 +954,20 @@ PatternGraph
 - `PatternGraphCandidate` must never export directly. It must pass candidate-to-export interop and be promoted to `PatternGraph`.
 - Canonical internal units are millimeters. Source units must be recorded, converted, and round-trip tested.
 - Marker layout is a constrained garment problem, not generic UV packing: fabric width, grainline, folds, nap, print direction, and cut counts matter.
+- The browser app should define `GeometryKernel` contracts before committing to TypeScript, Rust/WASM, C++/Emscripten, or WebGPU implementation details.
+- WebGPU is an optional acceleration tier, not a prototype dependency.
+- Reference images must carry `TruthLevel` and `LicenseProfile` before they can influence training, evaluation, or product display.
+- Image-to-3D outputs become `ImageTo3DModelCandidate` / `3DGarmentMesh` evidence, not pattern truth.
+- Export compatibility is semantic: a file that preserves curves but loses units, layer meaning, grainlines, notches, labels, or cut counts fails conformance.
+
+## Deep Dive Product Decisions
+
+- Keep the first prototype browser-first: `PatternGraph` JSON, SVG/PDF export, Three.js preview, TypeScript geometry, and an explicit `GeometryKernel` boundary.
+- Build a simple deterministic marker planner before integrating libnest2d or Deepnest-style optimized placement.
+- Treat DXF/AAMA/ASTM as a semantic-export milestone after SVG round-trip fixtures work.
+- Build the first visual corpus as a reviewed evaluation set, not as a training set.
+- Compare SPAR3D and Hunyuan3D-2 first for image-to-3D candidate generation; keep TRELLIS, TRELLIS.2, and TripoSR as comparison/frontier references.
+- Use GPT Image 2 for controlled sketch and technical-flat corpus generation with prompt provenance and semantic review.
 
 ## Product Architecture Implications
 

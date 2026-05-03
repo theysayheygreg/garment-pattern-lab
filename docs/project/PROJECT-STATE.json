@@ -22,7 +22,35 @@
     "define-candidate-to-export-interop-schema",
     "define-roundtrip-export-tests",
     "define-canonical-unit-profile",
-    "define-marker-layout-profile"
+    "define-marker-layout-profile",
+    "write-pattern-kernel-contracts",
+    "write-visual-corpus-schema",
+    "write-marker-optimizer-interface",
+    "write-svg-semantic-profile",
+    "run-spar3d-hunyuan-comparison"
+  ],
+  "deepDiveResearchPasses": [
+    {
+      "date": "2026-05-03",
+      "localSynthesis": "docs/research/deep-dive-synthesis-2026-05-03.md",
+      "knowledgeGraphUpdate": "docs/project/KNOWLEDGE-GRAPH.md",
+      "focus": [
+        "candidate-to-export semantic proof",
+        "browser-native geometry kernel",
+        "marker and fabric-roll optimization",
+        "pattern-reference truth levels",
+        "gpt-image-2 sketch corpus",
+        "image-to-3d candidate frameworks"
+      ],
+      "productDecisions": [
+        "PatternGraph remains manufacturing truth",
+        "GeometryKernel contracts come before choosing TypeScript/WASM/WebGPU implementations",
+        "WebGPU is optional acceleration rather than a prototype dependency",
+        "marker layout is garment-constrained irregular nesting, not UV packing",
+        "visual corpus items require TruthLevel and LicenseProfile",
+        "image-to-3d outputs are mesh candidates, not direct pattern truth"
+      ]
+    }
   ],
   "candidateToExportInterop": {
     "localPlan": "docs/project/CANDIDATE-TO-EXPORT-INTEROP.md",

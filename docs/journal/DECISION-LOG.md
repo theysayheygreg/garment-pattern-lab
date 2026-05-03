@@ -66,3 +66,36 @@
 **Why:** The paper assumes a 3D garment mesh already exists. Greg's original product idea starts from a sketch and needs a first credible export path. The paper is extremely valuable, but mostly because it names the sewing-aware constraints that normal UV workflows miss: seam reflection symmetry, darts, grain alignment, anisotropic textile deformation, patch complexity, and multi-pose seam placement.
 
 **Door status:** Closed for prototype 1. Open as a future research branch after the pattern graph and validation/export stack exist.
+
+## 2026-05-03: Browser geometry gets a kernel boundary before stack commitment
+
+**Question:** Should the ownable browser lane immediately commit to TypeScript, Rust/WASM, C++/Emscripten, or WebGPU for geometry?
+
+**Options considered:**
+
+- Write all geometry directly in TypeScript.
+- Start with Rust/WASM or C++/Emscripten from day one.
+- Depend on WebGPU compute for hard geometry and simulation tasks.
+- Define a `GeometryKernel` contract first and allow implementation tiers.
+
+**Where it landed:** Define `PatternKernel` and `GeometryKernel` contracts first. Start with TypeScript/web-worker implementations where possible, and move offset/intersection/triangulation/nesting kernels to WASM only when the interface and fixtures prove what is needed.
+
+**Why:** The prototype needs deterministic pattern output more than it needs clever runtime technology. Three.js can cover the viewport, WebGPU can accelerate later, and mature native geometry libraries can still be pulled through WASM behind the same API.
+
+**Door status:** Closed as architecture principle. Open for exact kernel implementation.
+
+## 2026-05-03: Visual references require truth and license levels
+
+**Question:** Can generated sketches, pattern reference images, and dataset examples all go into one loose corpus?
+
+**Options considered:**
+
+- Store every useful image together with informal notes.
+- Split generated sketches from real pattern images only.
+- Give every corpus item a `TruthLevel` and `LicenseProfile`.
+
+**Where it landed:** Every visual corpus item needs `TruthLevel` and `LicenseProfile`.
+
+**Why:** A fashion sketch, a catalog envelope, a scaled pattern PDF, and a round-tripped `PatternGraph` fixture are not equally true. The product needs to know which references can inform prompts, which can validate construction, which can train models, and which can be displayed.
+
+**Door status:** Closed for corpus schema. Open for exact licensing review per source.
