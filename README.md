@@ -2,13 +2,32 @@
 
 An automated garment-pattern research and prototype project.
 
-The idea: take a 2D garment sketch on a figure, infer a 3D garment fitted to a target body, and produce real 2D sewing-pattern panels with cut and assembly instructions.
+The idea: take a 2D garment sketch on a figure, infer garment intent against a target body, and produce real 2D sewing-pattern panels with cut and assembly instructions.
 
 The practical thesis is sharper than "UV unwrap a mesh." UV unwrapping is useful geometry, but a garment pattern is semantic manufacturing data: panels, seam relationships, ease, darts, grainline, notches, seam allowance, labels, fabric assumptions, grading rules, and sewing order. The pattern should be the source of truth, with 3D simulation used to prove and refine it.
 
+## Architecture At A Glance
+
+```text
+sketch / visual intent
+  -> semantic garment intent
+  -> measurements + garment parameters
+  -> PatternGraphCandidate
+  -> validation / correction / proof
+  -> PatternGraph
+  -> human-readable pattern package
+  -> optional 3D preview / later industrial outputs
+```
+
+The core rule:
+
+**`PatternGraph` is the manufacturing source of truth.**
+
+Sketches, meshes, UVs, AI outputs, vector edits, and 3D previews are useful inputs or views. They are not trusted as the sewing pattern until they pass through candidate normalization, validation, correction, and export proof.
+
 ## Product Direction
 
-**Sketch + body measurements/avatar -> semantic garment topology -> parametric 2D pattern -> 3D drape validation -> exportable sewing package.**
+**Sketch + body measurements/avatar -> semantic garment topology -> parametric 2D pattern -> validation -> human-readable sewing package.**
 
 The first prototype targets one garment type:
 
@@ -20,6 +39,62 @@ Why this garment:
 - It still exercises important real pattern concepts: bodice fit, waist/hip ease, shoulder slope, side seams, darts or dartless shaping, hem sweep, grainline, notches, seam allowance.
 - It can be validated by both pattern logic and a visible 3D drape.
 - It is familiar enough that bad output is obvious.
+
+## V1 Output Lane
+
+Prototype 1 outputs a human-readable pattern package:
+
+- SVG pattern sheets.
+- Tiled PDF or print-ready package.
+- Cut sheet.
+- Assembly instructions.
+- Validation report.
+- Source `PatternGraph` JSON.
+- Simple 3D preview.
+
+Machine-readable cutter and industrial CAD files are a later lane: DXF/AAMA/ASTM, cutter-ready marker files, CAD round trips, and factory metadata. They should build on the same `PatternGraph`, but they do not define prototype 1 success.
+
+## Main V1 Pipeline
+
+```text
+front/back sketch
+  -> manual or assisted landmarks
+  -> GarmentParameters
+  -> first-garment drafting formulas
+  -> PatternGraphCandidate
+  -> validation
+  -> PatternGraph
+  -> SVG/PDF/cut instructions
+  -> simple Three.js preview
+```
+
+The first prototype can use manual landmarking. The real proof is whether the generated pattern package is understandable and useful to a human reviewer.
+
+## Tooling Direction
+
+Recommended prototype stack:
+
+- TypeScript/browser runtime.
+- Three.js for live 3D preview.
+- SVG/Canvas overlay for sketch annotation.
+- `@flatten-js/core` for first geometry primitives.
+- `polygon-clipping` or `martinez-polygon-clipping` for polygon booleans.
+- `earcut` for preview triangulation.
+- `svg-pathdata` / `svgson` for SVG fixture tooling.
+
+Upgrade path:
+
+- Clipper2 / Clipper2-WASM for robust offsets and polygon operations.
+- Rust/WASM with `kurbo`, `lyon`, `usvg`, or `resvg`.
+- WebGPU for acceleration after correctness is proven.
+
+Reference and prior-art tools:
+
+- FreeSewing, OpenPattern, GarmentCode, and GarmentCodeData for pattern-generation and data ideas.
+- Graphite for future vector/layer/node editing inspiration.
+- Blender for headless preview, UV/projection, and render experiments.
+- Substance 3D Painter for layer/projection/PBR editing concepts.
+- CLO/Marvelous/Optitex/Browzwear/Lectra for commercial workflow expectations.
 
 ## Current State
 
@@ -34,6 +109,7 @@ The initial docs contain:
 - Reference bibliography.
 - Notes on why UV unwrapping is not enough by itself.
 - Initial decisions and open questions.
+- Architecture overview, dependency register, and example/corpus needs.
 
 ## Project Structure
 
@@ -51,12 +127,15 @@ handoffs/        Agent handoff notes
 
 ## Working Docs
 
+- [Architecture Overview](docs/project/ARCHITECTURE-OVERVIEW.md)
 - [Product Plan](docs/project/PRODUCT-PLAN.md)
 - [Build Plan](docs/project/BUILD-PLAN.md)
 - [Project Board](docs/project/PROJECT-BOARD.md)
 - [Product Knowledge Graph](docs/project/KNOWLEDGE-GRAPH.md)
 - [Roadmap](docs/project/ROADMAP.md)
 - [Dependencies](docs/project/DEPENDENCIES.md)
+- [Dependency Register](docs/project/DEPENDENCY-REGISTER.md)
+- [Example And Corpus Needs](docs/project/EXAMPLE-NEEDS.md)
 - [Research Queue](docs/project/RESEARCH-QUEUE.md)
 - [Graphite + Blender Pipeline Notes](docs/project/GRAPHITE-BLENDER-PIPELINE.md)
 - [Browser-Native Pipeline](docs/project/BROWSER-NATIVE-PIPELINE.md)

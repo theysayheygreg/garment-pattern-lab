@@ -74,3 +74,8 @@ Output strategy:
 
 - Split outputs into two lanes. V1 is the human-readable sewing-pattern package: SVG/PDF/print package, cut sheet, assembly instructions, validation report, and PatternGraph JSON.
 - Machine-readable cutter/CAD output remains later: DXF/AAMA/ASTM, cutter-ready marker files, industrial CAD round-trip, and factory production metadata.
+
+Architecture overview:
+
+- Added `docs/project/ARCHITECTURE-OVERVIEW.md` as the high-level design document for the current pipeline, tool stack, output lanes, validation philosophy, designer editing lane, and corpus strategy.
+- Updated the README so the remote repo front door now explains `PatternGraph` as manufacturing truth, the v1 human-readable package, and the current browser/geometry/preview tool direction.
