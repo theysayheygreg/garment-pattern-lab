@@ -55,3 +55,4 @@
 - Scaffolded `app/`, reusable `packages/`, and `garments/a-line-dress-tunic/` so core product code stays separate from garment-specific programs and fixtures.
 - Expanded the roadmap with pipeline package owners, first-garment folder paths, and a granular validation-first B0-B10 build sequence.
 - Added Onshape deep-dive reference for future multi-user collaboration, PDM, PLM, MBD/PMI, release/version discipline, and high-end rendering.
+- Added the ideal outcome to product design: being a good clothing designer should not require CAD expertise.

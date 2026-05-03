@@ -4,6 +4,8 @@ Date: 2026-05-03
 
 Lens: Pattern Lab is not another mouse-and-keyboard CAD/3D editor. It is a human-centered, natural-language-led sketch-to-pattern workbench that gets as close to art -> garment as the craft allows.
 
+Ideal outcome: being a good clothing designer should not mean you have to be an expert at CAD.
+
 ## 1. Natural Intent, Not CAD Operation
 
 The primary interaction should be garment language:

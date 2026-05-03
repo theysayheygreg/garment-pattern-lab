@@ -150,3 +150,7 @@ Onshape reference pass:
 - Added `ONSHAPE-DEEP-DIVE.md` as a CAD/PDM/PLM/collaboration analog, not a v1 prototype requirement.
 - Captured Onshape lessons around simultaneous editing, comments, Follow Mode, integrated PDM, versions/branches/releases, Arena PLM connection, MBD/PMI, and Render Studio.
 - Product implication: Pattern Lab should eventually make the structured garment/pattern object the live source of truth for collaboration, lifecycle records, manufacturing annotations, and previews. V1 still only needs revision/provenance hooks.
+
+Product design tightening:
+
+- Added the ideal outcome: being a good clothing designer should not mean you have to be an expert at CAD.

@@ -12,6 +12,10 @@ The system is allowed to use AI, computer vision, geometry kernels, generated sk
 
 **Start with the garment idea. End with a pattern draft a person can inspect, adjust, print, and sew as a sample.**
 
+Ideal outcome:
+
+**Being a good clothing designer should not mean you have to be an expert at CAD.**
+
 ## Product Differentiator
 
 **Garment Pattern Lab is not another mouse-and-keyboard CAD/3D editor.**
