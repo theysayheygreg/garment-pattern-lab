@@ -23,7 +23,7 @@ So the rule is:
 ```text
 User-facing output: sewing pattern conventions.
 Internal architecture: standards-aware where useful.
-Later interoperability: ASTM/AAMA/DXF/ISO profiles.
+Later export options: ASTM/AAMA/DXF/ISO profiles.
 ```
 
 ASTM and ISO references should be treated as backstage material. They can help us avoid painting ourselves into a corner, but they should not make the v1 package feel like a factory compliance document.
@@ -184,7 +184,7 @@ The product should distinguish four related but different standards profiles:
 | `SewingPatternSheetProfile` | Human-readable pattern sheets for designers, indie shops, sample makers, and sewers. | V1 |
 | `MeasurementProfile` | Body measurement names, units, landmarks, and source. | V1 backstage |
 | `ConstructionProfile` | Stitch/seam terminology and assembly metadata. | Later backstage |
-| `DXFProfile` / `ASTMProfile` | Industrial pattern CAD exchange. | Later backstage |
+| `DXFProfile` / `ASTMProfile` | Industry-standard pattern CAD exchange/export option. | Later export option |
 
 This keeps the output familiar to fashion designers while preserving a path to commercial interchange later.
 
@@ -211,7 +211,7 @@ Avoid in the normal designer flow:
 - "grade reference line"
 - "interop format profile"
 
-Those concepts can still exist internally and in later export settings.
+Those concepts can still exist internally and in later industry-standard export settings.
 
 ## Current Knowledge Base Coverage
 

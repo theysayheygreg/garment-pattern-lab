@@ -63,9 +63,9 @@ The package should let a person print, cut, review, and sew:
 - source `PatternGraph` JSON
 - simple 3D preview image/view
 
-### Later: Machine-Readable Industrial Output
+### Later: Industry-Standard / Machine-Readable Output
 
-Machine-readable cutter and CAD files are a later lane:
+Industry-standard and machine-readable production files are a later export lane:
 
 - DXF/AAMA/ASTM
 - cutter-ready marker files
@@ -73,7 +73,7 @@ Machine-readable cutter and CAD files are a later lane:
 - factory production metadata
 - tech pack integration
 
-The later lane should build on the same `PatternGraph`, but it should not define prototype 1 success.
+This lane should be exposed as an optional export target after the human-readable pattern package is credible. It should build on the same `PatternGraph`, but it should not define prototype 1 success or shape the designer-facing workflow.
 
 ## Core Data Flow
 

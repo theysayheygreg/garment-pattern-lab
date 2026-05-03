@@ -88,9 +88,9 @@ This is the priority: pattern docs that a person can print, cut, review, and sew
 - Basic 3D preview render.
 - Validation report: seam lengths, edge matches, missing notches, impossible closures, body clearance/ease checks.
 
-**V2/later: machine-readable production files**
+**V2/later: industry-standard / machine-readable production files**
 
-This is not a near-term priority. Machine-readable cutter/CAD output can build on the same `PatternGraph`, but only after human-readable pattern packages are credible.
+This is not a near-term priority. Industry-standard and machine-readable cutter/CAD output can build on the same `PatternGraph`, but only after human-readable pattern packages are credible.
 
 - DXF/AAMA/ASTM export.
 - Machine cutter-ready nesting/marker files.

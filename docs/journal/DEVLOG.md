@@ -93,3 +93,4 @@ Pattern standards pass:
 - Current read: there is no single universal ASME-like standard for human-readable sewing pattern sheets.
 - Product direction: define our own small `SewingPatternSheetProfile` from common pattern conventions, while tracking formal standards separately for measurements, construction metadata, and later DXF/ASTM exchange.
 - Clarified the user reality: most designers, indie studios, small shops, and even capable sample rooms should not need to see ASTM/ISO/AAMA language in v1. Those standards stay backstage unless the user is doing advanced export/interoperability work.
+- Reframed industry-standard output as an explicit later export option, parallel to machine-readable cutter/CAD output. It should not shape the v1 designer-facing package.

@@ -52,7 +52,7 @@ Prototype 1 outputs a human-readable pattern package:
 - Source `PatternGraph` JSON.
 - Simple 3D preview.
 
-Machine-readable cutter and industrial CAD files are a later lane: DXF/AAMA/ASTM, cutter-ready marker files, CAD round trips, and factory metadata. They should build on the same `PatternGraph`, but they do not define prototype 1 success.
+Industry-standard and machine-readable outputs are a later export lane: DXF/AAMA/ASTM, cutter-ready marker files, CAD round trips, and factory metadata. They should build on the same `PatternGraph`, but they do not define prototype 1 success.
 
 ## Main V1 Pipeline
 
@@ -176,7 +176,7 @@ The first prototype is successful when it can:
 - Sleeves, collars, plackets, pockets, linings, facings beyond simple neckline/armhole binding notes.
 - Fully automatic physical fit guarantee.
 - Factory-ready tech pack.
-- Machine-readable cutter/CAD output and commercial interoperability beyond SVG/PDF exploration.
+- Industry-standard / machine-readable cutter/CAD output and commercial interoperability beyond SVG/PDF exploration.
 
 ## Core Principle
 

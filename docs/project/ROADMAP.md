@@ -16,7 +16,7 @@ Prototype 1 output lane:
 
 - Human-readable pattern docs for a person to print, cut, review, and sew.
 - Instructions should live in or alongside the pattern package.
-- Machine-readable cutter/CAD files are a later industrial output lane, not a prototype 1 priority.
+- Industry-standard / machine-readable cutter/CAD files are a later industrial export lane, not a prototype 1 priority.
 
 ## Current Status
 
@@ -193,7 +193,7 @@ Exit criteria:
 
 ### RR12: Commercial Interoperability Matrix
 
-Goal: understand what real pattern tools can consume and preserve, while keeping machine-readable cutting/CAD output as a later lane.
+Goal: understand what real pattern tools can consume and preserve, while keeping industry-standard / machine-readable cutting/CAD output as a later export lane.
 
 Deliverables:
 
@@ -235,7 +235,7 @@ Exit criteria:
 - Pattern grammar is the source of truth.
 - 3D preview validates and communicates; it does not own the pattern.
 - Human-readable SVG/PDF/print export matters more than photorealistic drape.
-- Machine-readable cutter/CAD output is later than prototype 1.
+- Industry-standard / machine-readable cutter/CAD output is later than prototype 1.
 - A human patternmaker review is a required milestone before claiming "sewable."
 
 ## Dependency Graph

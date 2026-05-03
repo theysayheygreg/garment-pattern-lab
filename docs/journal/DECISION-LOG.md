@@ -102,15 +102,15 @@
 
 ## 2026-05-03: Prototype output is human-readable first
 
-**Question:** Should prototype 1 target human-readable sewing-pattern packages or machine-readable cutter/CAD output?
+**Question:** Should prototype 1 target human-readable sewing-pattern packages or industry-standard / machine-readable cutter/CAD output?
 
 **Options considered:**
 
 - Treat SVG/PDF/DXF/cutter outputs as one export surface.
-- Prioritize machine-readable production files early.
-- Split outputs into human-readable v1 and machine-readable later.
+- Prioritize industry-standard / machine-readable production files early.
+- Split outputs into human-readable v1 and industry-standard / machine-readable exports later.
 
-**Where it landed:** Split the lanes. V1 is a human-readable pattern package a person can print, cut, review, and sew from. Machine-readable cutter/CAD files are later.
+**Where it landed:** Split the lanes. V1 is a human-readable pattern package a person can print, cut, review, and sew from. Industry-standard / machine-readable cutter/CAD files are later output options.
 
 **Why:** The first product proof is whether a human can understand and evaluate the generated pattern. Industrial cutter files need stricter format semantics, hardware assumptions, cutting clearances, and CAD round-trip proof. That is valuable, but it should not distract from making the first human-readable pattern credible.
 

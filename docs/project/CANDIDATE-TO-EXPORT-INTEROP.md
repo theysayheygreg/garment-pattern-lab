@@ -546,7 +546,7 @@ Required:
 
 ### DXF/AAMA/ASTM Conformance
 
-This is a later backstage export lane, not a v1 designer-facing pattern package requirement.
+This is a later industry-standard export option, not a v1 designer-facing pattern package requirement.
 
 Future required:
 
