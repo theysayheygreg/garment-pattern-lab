@@ -79,7 +79,12 @@ This lane should be exposed as an optional export target after the human-readabl
 
 ### 1. Sketch And Intent
 
-Inputs can be raster sketches, vector sketches, generated technical flats, or traced front/back drawings.
+Inputs split into two lanes, documented in [Input Lanes](INPUT-LANES.md):
+
+- GPT Image 2 generated sketch fixtures: controlled technical flats, croquis sketches, and prompt-edited variants with prompt/model provenance.
+- Human-authored drawings and vectors: uploaded or local raster/vector sketches that need preprocessing, tracing, landmarking, and ambiguity review.
+
+Both lanes converge into the same normalized contract: `InputProvenance`, `TraceLayer` or `ReferenceSheet`, `LandmarkSet`, `SketchIntent`, and `AmbiguityReport`.
 
 Early automation can be weak because manual correction is allowed. The important output is not perfect computer vision; it is usable semantic intent:
 
@@ -93,6 +98,8 @@ Early automation can be weak because manual correction is allowed. The important
 - center front/back
 - closure hints
 - dart or dartless preference
+
+The generated lane tunes prompt language and produces project-owned fixtures. The human lane builds the actual designer-facing ingestion flow: upload, crop, deskew, trace, mark landmarks, review ambiguity, and confirm the garment intent.
 
 ### 2. Measurements And Parameters
 

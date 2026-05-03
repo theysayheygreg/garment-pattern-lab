@@ -179,3 +179,19 @@
 **Why:** The product needs to know what real patterns look like, but the original examples should come from project-owned GPT Image 2 sketches, project-authored `PatternGraph` fixtures, or explicitly licensed/generated pattern sources. Reference patterns judge correctness after the fact.
 
 **Door status:** Closed as corpus policy. Open for explicit per-source permissions later.
+
+## 2026-05-03: Sketch input splits into generated and human-authored lanes
+
+**Question:** Should generated GPT Image 2 sketches and human designer drawings use one input lane or two?
+
+**Options considered:**
+
+- Treat all images as generic sketch inputs.
+- Split generated and human-authored inputs into separate upstream lanes that normalize into the same downstream contract.
+- Focus only on generated examples until the pattern pipeline works.
+
+**Where it landed:** Split the upstream lanes. GPT Image 2 generated sketches are controlled project-owned fixtures driven by prompt recipes and review metadata. Human-authored drawings, vectors, scans, and uploads are product-shaped inputs driven by preprocessing, tracing, landmarking, privacy/consent state, and ambiguity review.
+
+**Why:** The generated lane is how the project makes repeatable examples and tunes design-language consistency. The human lane is the actual designer workflow and needs better ingestion UX, error handling, and review surfaces. Both should still converge into `InputProvenance`, `LandmarkSet`, `SketchIntent`, and `AmbiguityReport` before drafting.
+
+**Door status:** Closed as architecture direction. Open for exact folder schema, upload UX, and prompt-recipe schema.

@@ -45,7 +45,7 @@ Source links:
 - Hunyuan3D-2: https://github.com/Tencent-Hunyuan/Hunyuan3D-2
 - TripoSR announcement: https://stability.ai/news-updates/triposr-3d-generation
 
-## Lane 1: Garment Sketch Creation With GPT Image 2
+## Input Lane A: Garment Sketch Creation With GPT Image 2
 
 Goal: create a controlled visual corpus of fashion sketches and technical flats that downstream systems can understand, annotate, and eventually convert into patterns.
 
@@ -59,6 +59,8 @@ This lane is not just "make pretty fashion art." It should create image families
 - fabric and print variations
 - pose/style variants
 - ambiguity cases
+
+This is the generated-fixture input lane described in [Input Lanes](INPUT-LANES.md). Its primary design surface is prompt language, prompt metadata, and review consistency. Human-authored drawings and uploads use a separate ingestion lane with crop, trace, landmark, and ambiguity-review tools.
 
 ### Product Use Cases
 

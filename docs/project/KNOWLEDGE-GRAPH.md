@@ -534,6 +534,20 @@ This graph now folds in the first broad reference pass:
 
 ### AI Sketch And Visual Corpus Layer
 
+`InputLane` separates generated fixture inputs from human-authored/uploaded inputs while keeping the downstream contract shared.
+
+`GeneratedSketchInput` is a `gpt-image-generated` input with prompt recipe, model, generation date, and semantic review provenance.
+
+`HumanSketchInput` is a `human-authored` input from a local file, upload, scan, vector drawing, or design-app export.
+
+`InputProvenance` records origin, rights, privacy/consent state, transform history, and whether the asset is reusable, private, or reference-only.
+
+`UploadSession` is the future web ingestion event that creates an immutable source asset plus working derivatives.
+
+`PreprocessReport` records crop, rotation, deskew, background cleanup, resolution, format conversion, and scale-calibration state.
+
+`AmbiguityReport` records visible or inferred uncertainty before sketch intent becomes pattern parameters.
+
 `GeneratedSketch` is a model-created sketch or technical flat with known prompt metadata.
 
 `PromptRecipe` is a reusable prompt template for generating controlled garment views.
@@ -741,6 +755,28 @@ MultiViewImageSet
 
 FeatureLine
   -> GarmentLandmark
+```
+
+```text
+InputLane
+  -> GeneratedSketchInput
+  -> GeneratedSketch
+  -> ReferenceSheet
+  -> LandmarkSet
+  -> SketchIntent
+```
+
+```text
+InputLane
+  -> HumanSketchInput
+  -> UploadSession
+  -> InputProvenance
+  -> PreprocessReport
+  -> RasterSketchLayer
+  -> VectorSketchLayer
+  -> LandmarkSet
+  -> SketchIntent
+  -> AmbiguityReport
 ```
 
 ```text

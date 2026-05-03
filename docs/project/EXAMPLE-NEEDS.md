@@ -22,9 +22,9 @@ Keep these separated so the project does not confuse inspiration images with pat
 
 | Bucket | Count | Purpose |
 | --- | ---: | --- |
-| Human/reference sketches or flats | 5 | Manual landmark and semantic review tests. |
-| GPT Image 2 technical flats | 5 | Controlled prompt recipe tests. |
-| GPT Image 2 croquis / garment-on-body sketches | 5 | Figure/garment separation tests. |
+| Human-authored sketches or vector flats | 5 | Upload/local-folder ingestion, trace, landmark, and semantic review tests. |
+| GPT Image 2 technical flats | 5 | Generated-fixture prompt recipe tests. |
+| GPT Image 2 croquis / garment-on-body sketches | 5 | Generated-fixture figure/garment separation tests. |
 | Real pattern-reference or pattern-truth items | 5 | Construction correctness checks. |
 
 Recommended composition:
@@ -33,6 +33,16 @@ Recommended composition:
 - Items 6-10: `pattern-reference` examples from public patterns or license-safe sources. Copyrighted public patterns are acceptable for reference-only review and evaluation notes, but not copied geometry, redistributed PDFs, or training fixtures.
 - Items 11-15: GPT Image 2 front/back technical flats.
 - Items 16-20: GPT Image 2 croquis/on-body sketches.
+
+## Input Lane Examples
+
+The first examples should explicitly name their input lane:
+
+- `gpt-image-generated`: project-created sketch fixtures with prompt recipe, model, generation date, and review status.
+- `human-authored-local`: designer sketches, Procreate exports, scans, SVGs, or flats stored in a local folder for prototype ingestion.
+- `human-authored-upload`: future browser-upload examples with immutable original asset, working derivative, trace layers, landmark corrections, privacy/consent state, and ambiguity report.
+
+Both generated and human-authored examples should end in the same normalized objects: `InputProvenance`, `LandmarkSet`, `SketchIntent`, and `AmbiguityReport`.
 
 ## Prototype Exemplar And Variation Set
 

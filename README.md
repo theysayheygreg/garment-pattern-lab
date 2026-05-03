@@ -9,7 +9,8 @@ The practical thesis is sharper than "UV unwrap a mesh." UV unwrapping is useful
 ## Architecture At A Glance
 
 ```text
-sketch / visual intent
+generated sketch fixture or human-authored sketch
+  -> upload / prompt provenance / preprocessing
   -> semantic garment intent
   -> measurements + garment parameters
   -> PatternGraphCandidate
@@ -69,6 +70,15 @@ front/back sketch
 ```
 
 The first prototype can use manual landmarking. The real proof is whether the generated pattern package is understandable and useful to a human reviewer.
+
+## Input Lanes
+
+There are two sketch-input lanes:
+
+- GPT Image 2 generated fixtures, where prompt language, controlled variation, and provenance are the main design surfaces.
+- Human-authored drawings and vectors, where upload/local-folder ingestion, cleanup, tracing, landmarking, and ambiguity review are the product surface.
+
+Both lanes converge into `InputProvenance`, `LandmarkSet`, `SketchIntent`, and `AmbiguityReport` before drafting begins. See [docs/project/INPUT-LANES.md](docs/project/INPUT-LANES.md).
 
 ## Tooling Direction
 

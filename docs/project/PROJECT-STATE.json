@@ -30,7 +30,9 @@
     "run-spar3d-hunyuan-comparison",
     "define-designer-sketch-to-model-editing-loop",
     "write-designer-sketch-projection-spike",
-    "define-v1-sketch-edit-to-parameter-map"
+    "define-v1-sketch-edit-to-parameter-map",
+    "write-input-lane-schema",
+    "prototype-local-human-input-folder"
   ],
   "deepDiveResearchPasses": [
     {
@@ -84,6 +86,12 @@
     "v1": "human-readable pattern package for a person to print, cut, review, and sew from: SVG/PDF/print package, cut sheet, assembly instructions, validation report, and source PatternGraph JSON",
     "later": "machine-readable industrial/cutter lane: DXF/AAMA/ASTM, cutter-ready marker files, industrial CAD round trip, and factory production metadata",
     "priority": "v1-human-readable-first"
+  },
+  "inputStrategy": {
+    "localPlan": "docs/project/INPUT-LANES.md",
+    "generatedLane": "GPT Image 2 generated sketch fixtures with prompt recipes, model provenance, controlled variation, and semantic review",
+    "humanLane": "human-authored drawings, scans, vectors, and future uploads with immutable source assets, preprocessing, tracing, landmarking, privacy/consent state, and ambiguity review",
+    "sharedContract": "InputProvenance + LandmarkSet + SketchIntent + AmbiguityReport before GarmentParameters"
   },
   "ownablePipelineLane": {
     "id": "browser-native-threejs-webgpu-wasm",

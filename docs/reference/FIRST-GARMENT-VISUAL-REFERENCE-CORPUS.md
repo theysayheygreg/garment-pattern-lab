@@ -31,6 +31,15 @@ Truth levels for this lane:
 - `pattern-reference`: shows real pattern pieces, construction diagrams, cutting layout, or instructions, but may not be suitable as direct geometry truth.
 - `pattern-truth`: licensed or project-created pattern geometry that can be measured, compared, and used as a correctness fixture.
 
+## Two Input Lanes For Visual Corpus
+
+The first garment visual corpus should separate pipeline inputs from reference material:
+
+- GPT Image 2 generated sketches are project-created input fixtures. Store prompt recipes, model/version metadata, generated images, and semantic review notes. These are the best first inputs for controlled pipeline tests because the project can vary one design feature at a time.
+- Human-authored drawings and vectors are product-shaped input fixtures. Start with local image/vector files in a folder, then evolve toward browser upload with crop, cleanup, tracing, landmarking, and semantic review. Treat uploaded user work as private unless the owner explicitly marks it reusable.
+
+Public/copyrighted visual references and public pattern PDFs should not silently become input fixtures. Use them as `visual-only`, `semantic-reviewed`, or `pattern-reference` evaluation material unless their rights clearly allow reuse.
+
 ## Sketches / Designs Lane
 
 This lane should populate visual references for what the designer means by "sleeveless A-line woven dress/tunic." It should avoid copyrighted fashion flats from stock sites unless they are used only as off-repo inspiration notes.
