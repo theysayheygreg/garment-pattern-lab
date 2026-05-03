@@ -27,7 +27,9 @@
     "write-visual-corpus-schema",
     "write-marker-optimizer-interface",
     "write-svg-semantic-profile",
-    "run-spar3d-hunyuan-comparison"
+    "run-spar3d-hunyuan-comparison",
+    "define-designer-sketch-to-model-editing-loop",
+    "write-designer-sketch-projection-spike"
   ],
   "deepDiveResearchPasses": [
     {
@@ -80,6 +82,13 @@
       "pipelineRole": "index actual pattern-reference images by garment family so generated flats can be checked against known construction solutions"
     }
   ],
+  "designerEditingLane": {
+    "id": "designer-sketch-to-model-editing-loop",
+    "localPlan": "docs/project/DESIGNER-SKETCH-3D-EDITING.md",
+    "researchSpike": "docs/research/designer-sketch-projection-spike.md",
+    "thesis": "A clothing designer should be able to edit a raster or vector sketch layer and see the result on the garment model, but every edit must be classified as visual-only, semantic intent, material preview, pattern candidate, or final pattern revision before it can affect manufacturing output.",
+    "pipelineRole": "bridge designer-facing sketch/vector/PBR-style editing with live 3D feedback while preserving PatternGraph as manufacturing truth"
+  },
   "externalTooling": [
     {
       "id": "graphite",

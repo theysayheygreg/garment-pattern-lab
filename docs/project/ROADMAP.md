@@ -18,7 +18,7 @@ Project seed created. Research references collected. No implementation has start
 
 ## Research Roadmap To Prototype 1
 
-These are the twelve research tracks that still need closure before or alongside the first working prototype. The order matters: the first six create the manufacturing spine; the later six open the AI, 3D, and interoperability lanes without letting them own pattern truth too early.
+These are the research tracks that still need closure before or alongside the first working prototype. The order matters: the first six create the manufacturing spine; the later tracks open the AI, 3D, designer-editing, and interoperability lanes without letting them own pattern truth too early.
 
 ### RR1: First-Garment Drafting Formulas
 
@@ -198,6 +198,27 @@ Exit criteria:
 
 - The prototype has a credible first export target and a known path toward industrial exchange formats.
 - Import/export failures are classified as geometry, unit, semantic layer, or tool-support issues.
+
+### RR13: Designer Sketch-To-Model Editing Loop
+
+Goal: let a clothing designer edit the sketch or vector interpretation and see the change represented on the garment model in real time.
+
+This lane is inspired by texture-paint and PBR authoring tools, but it should stay garment-aware. Blender's texture paint model proves the old UV/3D split: paint in a 2D image editor or directly on the 3D viewport through UVs. Substance-style workflows raise the bar with layer stacks, masks, projections, material channels, texture sets, and live viewport feedback. Garment Pattern Lab needs a lighter version focused on garment design intent: silhouette edits, seam/decal/style lines, panel color/material zones, surface placement, and pattern-impact warnings.
+
+Deliverables:
+
+- `docs/project/DESIGNER-SKETCH-3D-EDITING.md`
+- `docs/research/designer-sketch-projection-spike.md`
+- UI model for raster sketch, vector sketch layer, surface projection layer, material/PBR preview layer, and garment-model preview
+- decision on whether edits apply to `SketchIntent`, `GarmentParameters`, `PatternGraphCandidate`, texture/material preview only, or final `PatternGraph`
+- interaction requirements for brush/vector editing, layer stack, masks, symmetry/mirror, projection gizmo, undo/revision history, and manual correction
+
+Exit criteria:
+
+- A designer can edit a line or region in 2D and see corresponding model feedback.
+- Every edit is classified as visual-only, semantic intent, pattern-affecting, or material-affecting.
+- The preview can show PBR-ish material/color/decal intent without confusing it with sewable pattern geometry.
+- Pattern-affecting edits still pass through `PatternGraphCandidate` validation before export.
 
 ## Guiding Constraints
 

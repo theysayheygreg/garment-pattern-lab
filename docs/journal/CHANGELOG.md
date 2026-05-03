@@ -29,3 +29,4 @@
 - Expanded the product knowledge graph with `PatternKernel`, `GeometryKernel`, WASM/WebGPU runtime nodes, marker optimizer metrics, visual corpus truth/licensing nodes, image-to-3D mesh quality nodes, and SVG/DXF semantic round-trip fixtures.
 - Updated the research queue and project state with the next concrete spikes: pattern kernel contracts, visual corpus schema, marker optimizer interface, SVG semantic profile, and SPAR3D/Hunyuan comparison.
 - Promoted the twelve remaining research areas into a formal research roadmap inside `docs/project/ROADMAP.md`.
+- Added a thirteenth research lane for designer sketch-to-model editing, including raster/vector sketch layers, surface projections, PBR-style material preview layers, edit classification, and live model feedback.

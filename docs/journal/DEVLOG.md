@@ -55,3 +55,8 @@ Roadmap refinement:
 
 - Promoted the twelve remaining research areas into a formal `Research Roadmap To Prototype 1`.
 - The roadmap now explicitly sequences the work: drafting formulas, schema, and validation first; geometry/SVG/marker next; Graphite, Blender, visual corpus, GPT Image 2, image-to-3D, and commercial interop as parallel expansion tracks.
+
+Designer editing lane:
+
+- Added a missing clothing-designer workbench lane: edit the original sketch or vector interpretation and see it represented on the garment model.
+- The lane borrows from Blender texture paint and Substance-style projection/material workflows, but keeps a hard classification boundary between visual-only edits, semantic intent, material preview, pattern candidates, and final pattern revisions.

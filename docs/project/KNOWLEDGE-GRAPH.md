@@ -542,6 +542,32 @@ This graph now folds in the first broad reference pass:
 
 `PatternTruthLink` connects an image or 3D output to an actual `PatternGraph`, measurement set, and validation report.
 
+### Designer Sketch-To-Model Editing Layer
+
+`DesignerSketchEditor` is the user-facing surface where a clothing designer can edit raster sketches, vectorized sketches, semantic garment lines, material/color regions, and preview projections.
+
+`RasterSketchLayer` is an editable bitmap source layer, such as a pencil sketch, Procreate drawing, scanned fashion sketch, or generated image.
+
+`VectorSketchLayer` is a structured curve/shape interpretation of the sketch that can carry semantic tags for silhouette, seam hint, style line, trim, pocket, closure, print, or material boundary.
+
+`SketchRevision` records an edit history item with author, timestamp, source layer, operation, target classification, and before/after references.
+
+`SurfaceProjectionLayer` maps a 2D sketch/vector/texture element onto a 3D garment surface through UV coordinates, view projection, panel-local coordinates, decals, or generated surface anchors.
+
+`SurfaceAnchor` binds a visual mark to a panel, body/garment landmark, UV coordinate, barycentric mesh coordinate, seam edge, or garment region.
+
+`MaterialPreviewLayer` records material and color intent for model preview without claiming manufacturing validity.
+
+`PBRMaterialChannel` records preview channels such as base color, roughness, normal/bump, opacity, fabric weave texture, trim mask, decal mask, and stitching/embroidery hint.
+
+`ProjectionFeedbackReport` records distortion, seam crossing, hidden-surface ambiguity, UV stretch, projection misses, and whether an edit is visual-only, semantic, material-affecting, or pattern-affecting.
+
+`DesignerEditClassification` separates edits into `visual-only`, `semantic-intent`, `material-preview`, `pattern-candidate`, and `pattern-revision` categories.
+
+`LiveModelPreview` is an interactive garment model view that updates from sketch edits, material layers, surface projections, and pattern changes.
+
+`PBRPreviewProfile` defines the level of material preview fidelity needed by the product, from flat colors to fabric texture, roughness, normal detail, decals, and lighting presets.
+
 ## Secondary Ingest Edges
 
 ```text
@@ -724,6 +750,41 @@ PatternGraph
 PatternGraph
   -> CorrectnessRule
   -> ValidationReport
+```
+
+```text
+RasterSketchLayer
+  -> VectorSketchLayer
+  -> DesignerSketchEditor
+  -> SketchRevision
+```
+
+```text
+VectorSketchLayer
+  -> DesignerEditClassification
+  -> SketchIntent
+```
+
+```text
+VectorSketchLayer
+  -> SurfaceProjectionLayer
+  -> SurfaceAnchor
+  -> LiveModelPreview
+  -> ProjectionFeedbackReport
+```
+
+```text
+MaterialPreviewLayer
+  -> PBRMaterialChannel
+  -> PBRPreviewProfile
+  -> LiveModelPreview
+```
+
+```text
+DesignerEditClassification
+  -> PatternGraphCandidate
+  -> ValidationReport
+  -> PatternGraphRevision
 ```
 
 ```text
@@ -959,6 +1020,8 @@ PatternGraph
 - Reference images must carry `TruthLevel` and `LicenseProfile` before they can influence training, evaluation, or product display.
 - Image-to-3D outputs become `ImageTo3DModelCandidate` / `3DGarmentMesh` evidence, not pattern truth.
 - Export compatibility is semantic: a file that preserves curves but loses units, layer meaning, grainlines, notches, labels, or cut counts fails conformance.
+- Designer sketch/model edits must be classified before they affect output. A projected decal, color zone, print, or PBR material preview is not a pattern change unless it becomes a validated `PatternGraphCandidate` or `PatternGraphRevision`.
+- Live 3D preview is feedback for design intent; it must not silently rewrite sewable pattern geometry.
 
 ## Deep Dive Product Decisions
 
@@ -968,6 +1031,7 @@ PatternGraph
 - Build the first visual corpus as a reviewed evaluation set, not as a training set.
 - Compare SPAR3D and Hunyuan3D-2 first for image-to-3D candidate generation; keep TRELLIS, TRELLIS.2, and TripoSR as comparison/frontier references.
 - Use GPT Image 2 for controlled sketch and technical-flat corpus generation with prompt provenance and semantic review.
+- Add a designer-facing edit loop where raster/vector sketch edits, material/PBR preview layers, and surface projections update a live model while preserving `PatternGraph` as manufacturing truth.
 
 ## Product Architecture Implications
 

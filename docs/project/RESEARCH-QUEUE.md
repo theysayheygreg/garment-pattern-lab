@@ -195,6 +195,33 @@ Outputs:
 - Test sketch set.
 - Manual annotation UI requirements.
 
+### R4b: Designer Sketch-To-Model Editing Loop
+
+Goal: define the clothing-designer editing surface between sketch/vector intent and live 3D garment preview.
+
+Questions:
+
+- Should the editor start from raster sketch cleanup, vector interpretation, or both?
+- Which edits are visual-only, semantic-intent edits, material/PBR preview edits, or pattern-affecting edits?
+- How does a 2D line or region project onto the garment model: UV map, surface projection, decal layer, panel-local coordinates, or view-dependent projection?
+- What should the designer see side by side: original sketch, vector sketch, UV/surface projection, model preview, pattern flats, or validation warnings?
+- Which PBR/material concepts matter for garments at prototype scale: base color, roughness, normal/bump, opacity, fabric texture, decal, stitching/trim mask?
+- How should layer stacks, masks, symmetry/mirroring, undo, revision history, and manual correction work?
+- How does the edit loop preserve the boundary that `PatternGraph` remains manufacturing truth?
+
+Outputs:
+
+- `docs/project/DESIGNER-SKETCH-3D-EDITING.md`
+- `docs/research/designer-sketch-projection-spike.md`
+- editing state schema for vector sketch layers, projection layers, material preview layers, and model feedback
+- first interaction prototype requirements
+
+Source-driven notes:
+
+- Blender texture paint validates the basic split: paint/edit UV textures in 2D or paint directly in the 3D viewport through UVs.
+- Substance Painter-style workflows suggest a higher-quality authoring target: layer stacks, masks, projection modes, texture sets, PBR channels, material previews, and reprojection concerns.
+- For this product, projection edits must be classified before they can affect pattern output: visual-only, semantic intent, material-affecting, pattern-candidate-affecting, or final pattern revision.
+
 ## Medium Priority
 
 ### R5: 3D Assembly And Drape
