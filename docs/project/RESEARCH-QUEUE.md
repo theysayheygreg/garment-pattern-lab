@@ -77,6 +77,23 @@ Outputs:
 - `docs/project/TECH-STACK-DECISION.md`
 - Prototype setup instructions.
 
+### R3b: Graphite And Blender Pipeline Spikes
+
+Goal: decide exactly how Graphite-style vector editing and Blender automation should support the prototype without replacing the pattern graph.
+
+Questions:
+
+- Can Graphite's vector crates handle the curve length, split, offset, and intersection operations needed for sewing panels?
+- What semantic SVG layer conventions survive Graphite editing and Blender import?
+- What minimal `PatternGraph` fields are needed for a Blender Python preview?
+- Can Blender render useful validation views from panels and seam pairs without a full cloth solve?
+
+Outputs:
+
+- `docs/research/graphite-vector-audit.md`
+- `docs/research/blender-headless-preview-spike.md`
+- `docs/research/svg-roundtrip-spike.md`
+
 ### R4: 2D Sketch Parsing
 
 Goal: decide how much automation belongs in v0.

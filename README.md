@@ -58,6 +58,7 @@ handoffs/        Agent handoff notes
 - [Roadmap](docs/project/ROADMAP.md)
 - [Dependencies](docs/project/DEPENDENCIES.md)
 - [Research Queue](docs/project/RESEARCH-QUEUE.md)
+- [Graphite + Blender Pipeline Notes](docs/project/GRAPHITE-BLENDER-PIPELINE.md)
 - [Reference Index](docs/reference/REFERENCES.md)
 - [UV to Pattern Notes](docs/reference/UV-UNWRAP-TO-PATTERN.md)
 - [Computational Pattern Making Paper Ingest](docs/reference/papers/computational-pattern-making-2202.10272-ingest.md)

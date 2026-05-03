@@ -21,3 +21,9 @@ Reference expansion:
 
 - Ingested the rest of the first bibliography at the same product-graph depth: fundamentals, commercial CAD, open pattern tools, UV workflows, and the remaining research papers.
 - The strongest architectural result is now clearer: `PatternGraph` remains manufacturing truth; GarmentCode-style `PatternProgram` is a likely authoring layer; UV islands and 3D meshes are candidate geometry; raster pattern encodings and diffusion/ML models are future generation helpers.
+
+Tooling setup:
+
+- Pulled Graphite and Blender source checkouts under ignored `external/`.
+- Installed Rust/Cargo, wasm-pack, cargo-watch, and Blender 5.1.1.
+- Added a project note that positions Graphite as the 2D/vector annotation workbench and Blender as the scriptable 3D/render/diagnostic workbench.

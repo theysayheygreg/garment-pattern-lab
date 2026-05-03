@@ -124,10 +124,13 @@ Later:
 ### 3D / Geometry
 
 - Blender: UV unwrap, mesh tooling, Python automation.
+- Graphite: vector/raster editor and nondestructive node-graph reference for sketch cleanup, semantic curve editing, and possible Rust vector geometry reuse.
 - Three.js: browser 3D preview.
 - Unity/Unreal: useful reference for UV channels, but not likely first prototype runtime.
 - trimesh / shapely / numpy / scipy if Python-based geometry experiments are chosen.
 - Poppler/pdftotext: local paper ingestion and reference extraction.
+- Rust/Cargo, wasm-pack, cargo-watch, Node, and pnpm for Graphite source exploration.
+- Blender app/binary for headless Python previews and rendered diagnostics.
 - Future: a robust curve-offset and polygon-boolean library is likely mandatory.
 
 ### Vision / AI

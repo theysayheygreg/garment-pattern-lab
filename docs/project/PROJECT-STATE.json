@@ -10,7 +10,35 @@
     "define-pattern-schema",
     "write-sewing-aware-validation-checklist",
     "choose-prototype-tech-stack",
-    "audit-GarmentCode-and-FreeSewing-for-reuse"
+    "audit-GarmentCode-and-FreeSewing-for-reuse",
+    "run-graphite-vector-audit",
+    "run-blender-headless-preview-spike",
+    "run-svg-roundtrip-spike"
+  ],
+  "externalTooling": [
+    {
+      "id": "graphite",
+      "localPath": "external/Graphite",
+      "upstream": "https://github.com/GraphiteEditor/Graphite.git",
+      "checkout": "b27b4c6",
+      "status": "clean shallow checkout; frontend npm setup complete; cargo metadata verified",
+      "pipelineRole": "2D vector cleanup, semantic sketch annotation, nondestructive edit graph reference, possible Rust vector geometry reuse"
+    },
+    {
+      "id": "blender-source",
+      "localPath": "external/blender",
+      "upstream": "https://github.com/blender/blender.git",
+      "checkout": "9b81403e",
+      "status": "clean shallow checkout with Git LFS smudge disabled",
+      "pipelineRole": "source reference for Python automation, SVG import, mesh, UV, cloth, rendering, and interchange"
+    },
+    {
+      "id": "blender-app",
+      "localPath": "/Applications/Blender.app",
+      "version": "5.1.1",
+      "status": "installed via Homebrew cask; blender binary linked at /opt/homebrew/bin/blender",
+      "pipelineRole": "headless preview, render, and scriptable 3D diagnostics"
+    }
   ],
   "ingestedReferenceFamilies": [
     {
