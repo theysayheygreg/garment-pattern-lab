@@ -4,6 +4,12 @@ An automated garment-pattern research and prototype project.
 
 The idea: take a 2D garment sketch on a figure, infer garment intent against a target body, and produce real 2D sewing-pattern panels with cut and assembly instructions.
 
+Product statement:
+
+**A sketch-to-pattern workbench for fashion designers.**
+
+Longer version: Garment Pattern Lab turns fashion sketches into reviewable first-draft sewing patterns, keeping AI and 3D preview behind a sewing-aware pattern graph that designers can inspect, correct, print, and sample.
+
 The practical thesis is sharper than "UV unwrap a mesh." UV unwrapping is useful geometry, but a garment pattern is semantic manufacturing data: panels, seam relationships, ease, darts, grainline, notches, seam allowance, labels, fabric assumptions, grading rules, and sewing order. The pattern should be the source of truth, with 3D simulation used to prove and refine it.
 
 ## Architecture At A Glance
@@ -139,6 +145,7 @@ handoffs/        Agent handoff notes
 ## Working Docs
 
 - [Architecture Overview](docs/project/ARCHITECTURE-OVERVIEW.md)
+- [Product Design Brief](docs/project/PRODUCT-DESIGN.md)
 - [Decision Log](docs/journal/DECISION-LOG.md)
 - [Things Tried / Architecture History](docs/journal/THINGS-TRIED.md)
 - [Product Plan](docs/project/PRODUCT-PLAN.md)

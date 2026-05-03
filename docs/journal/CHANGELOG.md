@@ -45,3 +45,4 @@
 - Added corpus methodology: run one first-garment exemplar through the full pipeline, but validate family behavior against a 5-10 item same-garment variation set.
 - Clarified corpus rights policy: copyrighted public patterns are allowed as reference-only evaluation material, while GPT Image 2/project-owned sketches and authored PatternGraph fixtures provide original pipeline inputs.
 - Split sketch input into two lanes: GPT Image 2 generated fixtures for prompt-controlled original examples, and human-authored drawings/vectors/uploads for the designer-facing ingestion path.
+- Added product design framing: Garment Pattern Lab is a sketch-to-pattern workbench for fashion designers, not just an AI garment pipeline.

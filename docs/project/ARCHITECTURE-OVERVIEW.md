@@ -1,6 +1,6 @@
 # Architecture Overview
 
-Garment Pattern Lab turns visual garment intent into a validated, human-readable sewing-pattern package.
+Garment Pattern Lab is a sketch-to-pattern workbench for fashion designers. It turns visual garment intent into a validated, human-readable sewing-pattern package.
 
 The architecture is built around one constraint:
 
@@ -13,6 +13,8 @@ Sketches, meshes, UVs, AI outputs, vector edits, and 3D previews are useful inpu
 This document is the current architecture, not the full research archive.
 
 As the product direction narrows, update this overview to reflect the working product shape. Preserve older explored approaches, deferred lanes, and rejected options in [Things Tried / Architecture History](../journal/THINGS-TRIED.md). Record durable product choices in [Decision Log](../journal/DECISION-LOG.md).
+
+The product framing lives in [Product Design Brief](PRODUCT-DESIGN.md). Keep this architecture in service of that promise, not the other way around.
 
 ## System Pipeline
 

@@ -4,11 +4,19 @@
 
 Garment Pattern Lab turns a visual clothing idea into an editable, manufacturable sewing-pattern package.
 
+The product statement is:
+
+**A sketch-to-pattern workbench for fashion designers.**
+
+Longer version: Garment Pattern Lab turns fashion sketches into reviewable first-draft sewing patterns, keeping AI and 3D preview behind a sewing-aware pattern graph that designers can inspect, correct, print, and sample.
+
 The product does not try to replace patternmakers in the first version. It gives designers, makers, and small studios a fast first draft that obeys the shape of real patternmaking: body measurements, ease, seam topology, grainline, cut pieces, seam allowance, notches, and assembly instructions.
 
 The key product bet:
 
 **Users should sketch garments, but the system should output pattern grammar, not arbitrary meshes.**
+
+See [Product Design Brief](PRODUCT-DESIGN.md) for the user promise, trust model, and v1 experience shape.
 
 ## User
 

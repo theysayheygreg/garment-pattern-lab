@@ -108,3 +108,9 @@ Input lane clarification:
 - Split sketch inputs into two explicit lanes: GPT Image 2 generated fixtures and human-authored drawings/vectors/uploads.
 - Added `INPUT-LANES.md` with prompt-recipe expectations, upload/local-folder ingestion shape, shared output contract, provenance/privacy notes, and quality gates.
 - Updated architecture, corpus, examples, and knowledge graph docs so both lanes converge into `InputProvenance`, `LandmarkSet`, `SketchIntent`, and `AmbiguityReport`.
+
+Product design pass:
+
+- Added `PRODUCT-DESIGN.md` to name the product as a sketch-to-pattern workbench for fashion designers rather than an AI pipeline.
+- Captured the user promise: start with a garment idea, end with a reviewable first-draft pattern a person can inspect, adjust, print, and sew as a sample.
+- Updated the README, product plan, architecture overview, and decision log around that north-star statement.

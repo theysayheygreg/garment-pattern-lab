@@ -195,3 +195,19 @@
 **Why:** The generated lane is how the project makes repeatable examples and tunes design-language consistency. The human lane is the actual designer workflow and needs better ingestion UX, error handling, and review surfaces. Both should still converge into `InputProvenance`, `LandmarkSet`, `SketchIntent`, and `AmbiguityReport` before drafting.
 
 **Door status:** Closed as architecture direction. Open for exact folder schema, upload UX, and prompt-recipe schema.
+
+## 2026-05-03: Product is a sketch-to-pattern workbench
+
+**Question:** What is the product statement beyond "a cool AI pipeline"?
+
+**Options considered:**
+
+- AI garment-pattern generator.
+- Sketch-to-3D-to-pattern automation pipeline.
+- Sketch-to-pattern workbench for fashion designers.
+
+**Where it landed:** Position Garment Pattern Lab as a sketch-to-pattern workbench for fashion designers.
+
+**Why:** The value is not the pipeline itself. The value is helping designers turn a sketch into a reviewable first-draft sewing pattern with visible assumptions, editable parameters, validation, and human-readable output. This keeps AI, 3D preview, and geometry kernels in service of the craft instead of becoming the product identity.
+
+**Door status:** Closed as north-star positioning. Open for naming/brand language later.
