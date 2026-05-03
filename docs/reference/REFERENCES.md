@@ -56,6 +56,28 @@ Adjacent product/competitor context:
 - Wild Ginger Software. Custom-sized sewing patterns and professional pattern software.
   https://www.wildginger.com/
 
+## CAD / PDM / PLM / Collaboration Analogs
+
+Deep ingest: `docs/reference/ONSHAPE-DEEP-DIVE.md`
+
+- Onshape Product Data Management. Official help on cloud-native integrated CAD/PDM, document management, versions/history, releases, workflows, where-used, and Arena connection.
+  https://cad.onshape.com/help/Content/Home/product_data_management.htm
+
+- Onshape Sharing and Collaboration. Official help for document sharing, simultaneous editing, comments, permissions, Follow Mode, and ownership.
+  https://cad.onshape.com/help/Content/Collaboration/sharing_and_collaboration.htm
+
+- Onshape Versions, Branching, and Merging. Official help for workspaces, immutable versions, document history, branches, releases, and compare/history workflows.
+  https://cad.onshape.com/help/Content/Primer/versions.htm
+
+- Onshape-Arena Connection. CAD/PDM/PLM integration reference for BOM sync, Arena change workflows, metadata, part numbers, neutral files, supplier access, and revision alignment.
+  https://www.onshape.com/en/features/onshape-arena-connection
+
+- Onshape Model-Based Definition. Official help for MBD/PMI, inspection table, tolerances, STEP export, and validation of associated manufacturing annotations.
+  https://cad.onshape.com/help/Content/PartStudio/model_based_definition.htm
+
+- Onshape Render Studio. Version-bound cloud rendering reference for high-end product communication.
+  https://cad.onshape.com/help/Content/RenderStudio/render_studio_basics.htm
+
 ## Open Source / Free Pattern Tools
 
 Deep ingest: `docs/reference/OPEN-TOOLS-INGEST.md`

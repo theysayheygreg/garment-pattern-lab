@@ -169,6 +169,7 @@ handoffs/        Agent handoff notes
 - [Kew Competitor And Inspiration Shortlist](docs/reference/KEW-COMPETITOR-SHORTLIST.md)
 - [Kew Competitor Deep Dive](docs/reference/KEW-COMPETITOR-DEEP-DIVE.md)
 - [Kew Sample Image Analysis](docs/reference/KEW-SAMPLE-IMAGE-ANALYSIS.md)
+- [Onshape Deep Dive](docs/reference/ONSHAPE-DEEP-DIVE.md)
 - [Decision Log](docs/journal/DECISION-LOG.md)
 - [Things Tried / Architecture History](docs/journal/THINGS-TRIED.md)
 - [Product Plan](docs/project/PRODUCT-PLAN.md)

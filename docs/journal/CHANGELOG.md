@@ -54,3 +54,4 @@
 - Added product pillars and prototype build order docs.
 - Scaffolded `app/`, reusable `packages/`, and `garments/a-line-dress-tunic/` so core product code stays separate from garment-specific programs and fixtures.
 - Expanded the roadmap with pipeline package owners, first-garment folder paths, and a granular validation-first B0-B10 build sequence.
+- Added Onshape deep-dive reference for future multi-user collaboration, PDM, PLM, MBD/PMI, release/version discipline, and high-end rendering.

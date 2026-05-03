@@ -144,3 +144,9 @@ Next design phase:
 - Added `PROTOTYPE-BUILD-ORDER.md` with a concrete B0-B10 build sequence from scaffold and seed fixtures through validation, generation, export, 3D preview, sketch landmarks, assistant edits, semantic trace layers, and human review.
 - Scaffolded the product-engine folder split: `app/`, reusable `packages/`, and first-garment `garments/a-line-dress-tunic/`.
 - Expanded the roadmap with package ownership, first-garment fixture paths, pipeline areas, and a more granular validation-first build order.
+
+Onshape reference pass:
+
+- Added `ONSHAPE-DEEP-DIVE.md` as a CAD/PDM/PLM/collaboration analog, not a v1 prototype requirement.
+- Captured Onshape lessons around simultaneous editing, comments, Follow Mode, integrated PDM, versions/branches/releases, Arena PLM connection, MBD/PMI, and Render Studio.
+- Product implication: Pattern Lab should eventually make the structured garment/pattern object the live source of truth for collaboration, lifecycle records, manufacturing annotations, and previews. V1 still only needs revision/provenance hooks.

@@ -259,3 +259,19 @@
 **Why:** A beautiful preview can make weak pattern geometry feel more trustworthy than it is. The prototype should first prove that it can represent, check, and export sewing-aware pattern data. 3D and natural language then become feedback and control layers over a validated craft contract.
 
 **Door status:** Closed for prototype 1 build sequence. Open for exact implementation stack after geometry spikes.
+
+## 2026-05-03: Onshape informs future product records, not v1 scope
+
+**Question:** Should Onshape-style multi-user CAD/PDM/PLM/MBD/rendering change the first prototype?
+
+**Options considered:**
+
+- Expand v1 toward collaborative PDM/PLM immediately.
+- Ignore Onshape because it is mechanical CAD, not apparel design.
+- Capture Onshape as a future reference architecture while keeping v1 focused on one validated human-readable pattern package.
+
+**Where it landed:** Onshape belongs in the reference lane. It informs future Pattern Lab workspaces, revision history, release packages, review comments, PDM/PLM bridges, sewing-PMI/MBD analogs, and version-bound renders. It does not expand prototype 1.
+
+**Why:** The useful lesson is that the structured product object can be the live source of truth for collaboration, data management, manufacturing information, and communication views. Pattern Lab should eventually do that for garments through `PatternGraph` and pattern/product records, but the first proof still has to generate and validate one credible sewing pattern.
+
+**Door status:** Closed for v1 scope. Open for future collaboration/PDM/PLM roadmap.

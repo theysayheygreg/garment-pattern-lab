@@ -12,6 +12,7 @@
   "adjacentProductContext": "docs/reference/KEW-COMPETITOR-SHORTLIST.md",
   "adjacentProductDeepDive": "docs/reference/KEW-COMPETITOR-DEEP-DIVE.md",
   "adjacentProductSampleImageAnalysis": "docs/reference/KEW-SAMPLE-IMAGE-ANALYSIS.md",
+  "cadPdmPlmReference": "docs/reference/ONSHAPE-DEEP-DIVE.md",
   "sourceOfTruth": "pattern-grammar-first",
   "buildScaffold": {
     "appShell": "app/",
@@ -59,7 +60,8 @@
     "write-designer-sketch-projection-spike",
     "define-v1-sketch-edit-to-parameter-map",
     "write-input-lane-schema",
-    "prototype-local-human-input-folder"
+    "prototype-local-human-input-folder",
+    "define-pattern-project-revision-provenance-hooks"
   ],
   "deepDiveResearchPasses": [
     {

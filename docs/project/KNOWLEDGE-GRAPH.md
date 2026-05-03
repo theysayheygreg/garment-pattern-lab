@@ -25,6 +25,12 @@ ProductPillar
   -> PrototypeBuildSlice
   -> ProductPackage
   -> GarmentProgram
+
+PatternGraph
+  -> PatternProductRecord
+  -> PatternReleaseRevision
+  -> FuturePDMRecord
+  -> FuturePLMBridge
 ```
 
 The system should infer visual intent, but constrain output through sewing-aware structures.
@@ -1262,6 +1268,23 @@ GarmentProgram
   -> HumanReadableOutputPackage
 ```
 
+```text
+PatternGraph
+  -> SewingPMI
+  -> ValidationLinkedAnnotation
+  -> HumanReadablePatternPackage
+  -> FutureMachineReadableExport
+```
+
+```text
+PatternProject
+  -> WorkingDraft
+  -> ImmutableVersion
+  -> ReleasedPatternPackage
+  -> ReviewComment
+  -> WhereUsedRecord
+```
+
 ## Representation Boundary Rules
 
 - `PatternGraph` is the manufacturing source of truth.
@@ -1283,6 +1306,8 @@ GarmentProgram
 - Live 3D preview is feedback for design intent; it must not silently rewrite sewable pattern geometry.
 - Product pillars constrain implementation choices: natural-language/task-led interaction and validation-first package generation should win over broad CAD/editor parity.
 - Reusable product logic belongs in `app/` or `packages/`; garment-specific drafting rules, fixtures, references, and generated evidence belong under `garments/`.
+- Onshape-style PDM/PLM/collaboration is a future product architecture reference. Prototype 1 should only preserve revision/provenance hooks, not build enterprise lifecycle workflows.
+- Pattern Lab's MBD analog is `SewingPMI`: manufacturing information embedded in `PatternGraph`, with SVG/PDF/export views generated from it.
 
 ## Deep Dive Product Decisions
 
@@ -1293,6 +1318,7 @@ GarmentProgram
 - Compare SPAR3D and Hunyuan3D-2 first for image-to-3D candidate generation; keep TRELLIS, TRELLIS.2, and TripoSR as comparison/frontier references.
 - Use GPT Image 2 for controlled sketch and technical-flat corpus generation with prompt provenance and semantic review.
 - Add a designer-facing edit loop where raster/vector sketch edits, material/PBR preview layers, and surface projections update a live model while preserving `PatternGraph` as manufacturing truth.
+- Borrow from Onshape as a later product-record model: live collaboration, immutable versions, release packages, where-used records, PLM bridges, MBD/PMI validation, and version-bound render/preview outputs.
 
 ## Product Architecture Implications
 
