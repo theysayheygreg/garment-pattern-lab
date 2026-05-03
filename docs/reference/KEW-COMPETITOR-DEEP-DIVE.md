@@ -25,6 +25,10 @@ For Garment Pattern Lab, the key conclusion is:
 
 **Do not rebuild a full 2D editor plus full 3D editor. Build pattern-intelligence services that make the hard apparel pillars accessible through narrow, reviewable tasks.**
 
+Said more directly:
+
+**Garment Pattern Lab is not another mouse-and-keyboard CAD/3D editor. It should be human-centered, natural-language-led, and as close to art -> garment as the craft allows.**
+
 The pillars that matter are sketch/vector cleanup, pattern topology, grading logic, fabric/simulation approximations, 3D preview and fit checks, marker/fabric usage, tech-pack/package output, permissions/provenance, and downstream product records.
 
 Existing tools mostly assume skilled mouse-and-keyboard operation in 2D/3D workspaces. Garment Pattern Lab should use structured prompts, landmarks, generated fixtures, task-specific controls, visible assumptions, and validation gates so the designer does not have to become a CAD operator to get a useful first draft.

@@ -5,6 +5,7 @@
   "currentMilestone": "M0-project-grounding",
   "prototypeTarget": "sleeveless-a-line-woven-dress-tunic",
   "productStatement": "A sketch-to-pattern workbench for fashion designers.",
+  "productDifferentiator": "Not another mouse-and-keyboard CAD/3D editor; human-centered, natural-language-led, task-led, narrow, validated, and as close to art -> garment as the craft allows.",
   "productDesignBrief": "docs/project/PRODUCT-DESIGN.md",
   "adjacentProductContext": "docs/reference/KEW-COMPETITOR-SHORTLIST.md",
   "adjacentProductDeepDive": "docs/reference/KEW-COMPETITOR-DEEP-DIVE.md",

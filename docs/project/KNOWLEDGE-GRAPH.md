@@ -614,6 +614,12 @@ This graph now folds in the first broad reference pass:
 
 `TaskLedPatternService` is the preferred product response: expose a capability as a narrow, reviewable, validated task rather than a full editor clone.
 
+`NaturalLanguageIntentInterface` is the preferred first interaction layer for design edits, confirmations, warnings, and export requests.
+
+`HumanCenteredWorkflow` keeps the user in garment/design language rather than CAD operation language.
+
+`ExpertEditorAvoidance` records the product constraint that full mouse-and-keyboard CAD/3D editor parity is not the v1 goal.
+
 `SemanticTraceWorkbench` converts raster/vector source drawings into garment-tagged curves and landmarks without requiring generic Illustrator-style path editing.
 
 `GradeRuleService` applies parameterized size changes to a trusted `PatternGraph` after the base pattern is valid.
@@ -883,7 +889,10 @@ CompetitorCapabilityMap
   -> KewAdjacentPlatform
   -> OptitexCapabilityPillar
   -> InteractionModelRisk
+  -> ExpertEditorAvoidance
   -> TaskLedPatternService
+  -> NaturalLanguageIntentInterface
+  -> HumanCenteredWorkflow
   -> PatternGraph
 ```
 

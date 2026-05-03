@@ -10,6 +10,12 @@ Product statement:
 
 Longer version: Garment Pattern Lab turns fashion sketches into reviewable first-draft sewing patterns, keeping AI and 3D preview behind a sewing-aware pattern graph that designers can inspect, correct, print, and sample.
 
+The product differentiator:
+
+**Garment Pattern Lab is not another mouse-and-keyboard CAD/3D editor. It should be human-centered, natural-language-led, and as close to art -> garment as the craft allows.**
+
+Existing systems prove many of the necessary pillars: grading, fabric simulation, marker planning, 3D preview, tech-pack bridges, and CAD interop. The opportunity is to make those pillars task-led, narrow, validated, and conversational/assistive instead of asking every designer to become an expert CAD operator.
+
 The practical thesis is sharper than "UV unwrap a mesh." UV unwrapping is useful geometry, but a garment pattern is semantic manufacturing data: panels, seam relationships, ease, darts, grainline, notches, seam allowance, labels, fabric assumptions, grading rules, and sewing order. The pattern should be the source of truth, with 3D simulation used to prove and refine it.
 
 ## Architecture At A Glance

@@ -211,3 +211,19 @@
 **Why:** The value is not the pipeline itself. The value is helping designers turn a sketch into a reviewable first-draft sewing pattern with visible assumptions, editable parameters, validation, and human-readable output. This keeps AI, 3D preview, and geometry kernels in service of the craft instead of becoming the product identity.
 
 **Door status:** Closed as north-star positioning. Open for naming/brand language later.
+
+## 2026-05-03: Do not become another CAD editor
+
+**Question:** What is the real differentiator after the Kew/Optitex competitor pass?
+
+**Options considered:**
+
+- Build another expert 2D/3D apparel CAD editor.
+- Clone an Illustrator/Substance-style mouse-and-keyboard editing surface for apparel.
+- Make apparel CAD pillars task-led, narrow, validated, and conversational/assistive.
+
+**Where it landed:** Garment Pattern Lab should be human-centered and natural-language-led, as close to art -> garment as the craft allows. Existing systems prove the capability pillars, but the interaction model should be different.
+
+**Why:** Optitex, CLO, Browzwear, Lectra, Gerber, Illustrator, and Substance-style tools ask users to become expert operators in dense 2D/3D editors. The product opportunity is to preserve the craft while reducing the operation burden: let users state intent, confirm semantics, review warnings, and export validated pattern packages without hand-authoring every CAD object.
+
+**Door status:** Closed as product differentiator. Open for exact interaction design and prototype UI.

@@ -12,6 +12,25 @@ The system is allowed to use AI, computer vision, geometry kernels, generated sk
 
 **Start with the garment idea. End with a pattern draft a person can inspect, adjust, print, and sew as a sample.**
 
+## Product Differentiator
+
+**Garment Pattern Lab is not another mouse-and-keyboard CAD/3D editor.**
+
+The product should be human-centered, natural-language-led, and as close to art -> garment as the craft allows.
+
+Existing systems such as Optitex, CLO, Browzwear, Lectra, Gerber, Illustrator, and Substance-style editors prove many of the eventual capability pillars. They also ask users to become expert operators inside dense 2D/3D editing environments.
+
+Our opportunity is different:
+
+- make the same pillars task-led
+- keep each task narrow enough to review
+- validate before export
+- expose assumptions in plain language
+- let natural language and semantic handles drive the first interaction
+- keep direct manipulation as correction, not the whole product
+
+The first successful version should feel less like opening CAD and more like collaborating with a patient pattern assistant: "make the hem longer," "turn this into a square neckline," "show me the seams that do not match," "use a looser woven fit," "make this printable."
+
 ## The Real Product
 
 The product is a translation surface between three ways designers think:
@@ -56,6 +75,8 @@ The first useful version can be manual in places. It can ask the user to place l
 This is not:
 
 - a black-box "generate me clothes" toy
+- another mouse-and-keyboard CAD package
+- a full Illustrator/Substance-style editor clone
 - a 3D mesh flattener with sewing labels added afterward
 - commercial factory CAD in v1
 - a machine-cutter workflow in v1

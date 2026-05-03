@@ -16,6 +16,12 @@ As the product direction narrows, update this overview to reflect the working pr
 
 The product framing lives in [Product Design Brief](PRODUCT-DESIGN.md). Keep this architecture in service of that promise, not the other way around.
 
+## Product Differentiator
+
+Garment Pattern Lab is not another mouse-and-keyboard CAD/3D editor. The architecture should support a human-centered, natural-language-led path from art to garment with as few steps as the craft allows.
+
+That means competitor pillars such as grading, fabric simulation, marker planning, 3D preview, and tech-pack bridges should become task-led, narrow, validated services. They should not force v1 into full editor parity with Optitex, CLO, Illustrator, Substance, or industrial CAD.
+
 ## System Pipeline
 
 ```text
@@ -33,6 +39,7 @@ Prototype 1 narrows that to:
 
 ```text
 front/back sketch
+  -> natural-language or guided intent confirmation
   -> manual or assisted landmarks
   -> GarmentParameters
   -> first-garment drafting formulas

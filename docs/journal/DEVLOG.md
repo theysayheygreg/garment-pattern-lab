@@ -126,3 +126,8 @@ Kew competitor deep dive:
 - Added `KEW-COMPETITOR-DEEP-DIVE.md`, ingesting every item from the Kew shortlist into capability pillars, interaction-model lessons, and follow-up research.
 - Optitex now has explicit treatment as the closest eventual capability map: 2D drafting, 3D validation, grading, fabric simulation, marker making, print placement, tech-pack essentials, and interop.
 - Recorded the product stance that Optitex-style pillars should become narrow validated services, not a clone of full Illustrator/Substance/CAD mouse-and-keyboard editing.
+
+Product differentiator hardening:
+
+- Promoted the central differentiator into the README, product design brief, architecture overview, decision log, knowledge graph, and project state.
+- The product should not become another mouse-and-keyboard CAD/3D editor. It should be human-centered, natural-language-led, task-led, narrow, validated, and as close to art -> garment as the craft allows.
