@@ -191,6 +191,9 @@ Deep ingest for the remaining research references: `docs/reference/papers/RESEAR
 
 ## Visual Corpus And Image-To-3D
 
+- First garment visual reference corpus. Candidate sources and metadata plan for sleeveless A-line woven dress/tunic sketches, technical flats, croquis/on-body references, and pattern references.
+  `docs/reference/FIRST-GARMENT-VISUAL-REFERENCE-CORPUS.md`
+
 - Met Open Access. Public-domain visual garment/object imagery.
   https://www.metmuseum.org/about-the-met/policies-and-documents/open-access
 
