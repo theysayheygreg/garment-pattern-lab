@@ -80,6 +80,10 @@ For the first usable corpus, prefer project-created pattern-truth over external 
 
 ## Suggested First 20 Corpus Items
 
+The visual lane should mirror the real-pattern lane: choose one clean primary exemplar for the end-to-end prototype, then maintain 5-10 same-family visual variations to test whether sketch parsing and parameter extraction understand the range of designer intent.
+
+Visual variations should cover neckline shape/depth, shoulder width, armhole depth, tunic vs dress length, hem sweep, dart/closure hints, and binding/facing clues.
+
 | Slot | Item | Source | Download now? | Truth level target |
 |---|---|---|---|---|
 | 1 | Front/back clean technical flat, loose pullover A-line tunic | Project-generated | Yes, after generation | `semantic-reviewed` |

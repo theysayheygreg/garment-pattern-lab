@@ -100,3 +100,4 @@ First garment reference population:
 - Added `docs/reference/FIRST-GARMENT-VISUAL-REFERENCE-CORPUS.md` for sketches/designs: technical flats, croquis/on-body references, open museum visuals, and project-generated sketch fixture plans.
 - Added `docs/reference/PATTERN-REFERENCE-CORPUS.md` for real patterns: Atacac, FreeSewing, Peppermint, Fabrics-Store, Mood, LACMA, Adelica, Oliver + S, Sew Different, SewGuide, and Lekala leads with license/truth-level caveats.
 - Strongest direction: author our own first `PatternGraph` fixture, use FreeSewing and Atacac as license-reviewable pattern-truth candidates, and treat most free commercial/blog PDFs as pattern-reference rather than reusable geometry.
+- Added the exemplar-plus-variation-set testing rule: choose one primary reference for the first end-to-end run, then compare against 5-10 same-family references so validation learns the normal range instead of one pattern's quirks.

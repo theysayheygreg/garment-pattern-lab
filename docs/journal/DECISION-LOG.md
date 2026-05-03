@@ -147,3 +147,19 @@
 **Why:** The fashion-designer and sewer-facing output needs pattern sheets, useful measurements, labels, line styles, pattern information, scale proof, tiling, validation notes, and readable page layout. CAD-to-technical-drawing workflows are a helpful analog for document generation, but the product should not feel like mechanical CAD.
 
 **Door status:** Closed as v1 architecture direction. Open for exact sheet schema and visual conventions.
+
+## 2026-05-03: First prototype uses one exemplar plus a variation set
+
+**Question:** Should the first garment pipeline validate against one real pattern reference or many same-family examples?
+
+**Options considered:**
+
+- Validate against one chosen reference only.
+- Collect many examples before building anything.
+- Run one primary exemplar end to end, then compare against a 5-10 item same-family variation set.
+
+**Where it landed:** Use one primary exemplar for the first full pipeline, plus a variation set of roughly 5-10 sleeveless A-line woven dress/tunic references.
+
+**Why:** One exemplar keeps the prototype concrete. The variation set keeps validation from overfitting one designer's construction choices. Every design is slightly different, so family-level checks should learn ranges and variants: closure, darts, length, hem sweep, armhole shape, finishing, fold/split construction, and seam allowance conventions.
+
+**Door status:** Closed for prototype methodology. Open for which exact exemplar becomes the first run.

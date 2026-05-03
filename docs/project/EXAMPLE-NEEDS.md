@@ -34,6 +34,33 @@ Recommended composition:
 - Items 11-15: GPT Image 2 front/back technical flats.
 - Items 16-20: GPT Image 2 croquis/on-body sketches.
 
+## Prototype Exemplar And Variation Set
+
+The first end-to-end prototype should choose one primary exemplar garment to run through the whole pipeline and verify against a real pattern reference.
+
+That exemplar should be a simple, adult, sleeveless A-line woven tunic/dress with the least ambiguous construction path:
+
+- front and back body panels
+- loose pullover or simple back opening
+- neckline and armholes finished by binding or simple facing
+- explicit grain/fold lines
+- explicit seam allowance state
+- visible cut labels and cut counts
+
+Do not overfit the system to that one exemplar. Each garment family should also have a variation set of roughly 5-10 same-family references so validation can measure the expected range rather than one pattern's quirks.
+
+For the sleeveless A-line woven dress/tunic, the variation set should cover:
+
+- pullover vs back opening / zipper
+- dartless loose body vs bust-dart body
+- tunic length vs dress length
+- binding finish vs facing finish
+- center-front/back cut on fold vs split-back construction
+- narrower shoulder/armhole vs broader shoulder coverage
+- modest hem sweep vs wider A-line flare
+
+Use the variation set to define warnings and acceptable ranges: expected panel roles, seam-pair behavior, finishing expectations, head-entry/closure logic, grain/fold handling, notch placement, and seam allowance/hem allowance conventions.
+
 ## Garment Families To Cover First
 
 1. Sleeveless A-line dress/tunic.

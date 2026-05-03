@@ -46,6 +46,14 @@ modify, and redistribute the pattern file or generated derivative pattern data.
 
 ## First Five To Actually Use
 
+Choose one primary exemplar to run end-to-end through the prototype and verify against a real pattern reference. Use the rest as a same-family variation set.
+
+Recommended first exemplar:
+
+`peppermint-shift-style`
+
+Reason: it is closest to the first product shape: sleeveless woven shift/dress, bias binding, back opening with hook and eye, darts, seam allowance stated, and print-scale grid. Because it is copyrighted, it should be used as a `pattern-reference` for validation and feature checks, not copied as reusable geometry. The project-owned `PatternGraph` should be authored independently and checked against this reference's high-level construction expectations.
+
 The first real-pattern mini-corpus should be:
 
 1. `freesewing-bella-bodice-block`
@@ -58,6 +66,18 @@ This gives one clean parametric block, two open tunic relatives with real
 geometry packages, one very close shift/dress construction reference, and one
 rich sleeveless woven dress package with facings, darts, grainlines, cut labels,
 and seam allowance annotations.
+
+For stronger statistical coverage, expand this mini-corpus to 5-10 same-family references before trusting family-level validation rules. The goal is to learn the normal range of first-garment construction choices, not average them into one bland pattern.
+
+Variation dimensions to track:
+
+- pullover, back neck slit, back zipper, and side zipper
+- dartless, bust dart, and shoulder-dart variants
+- binding vs facing neckline/armhole finishes
+- tunic length, knee length, and above-knee dress length
+- straight shift vs modest A-line vs wider flare
+- cut-on-fold front/back vs split-back construction
+- seam allowance included, excluded, or mixed by edge
 
 ## Features To Extract Into PatternGraph
 
