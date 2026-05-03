@@ -30,3 +30,4 @@
 - Updated the research queue and project state with the next concrete spikes: pattern kernel contracts, visual corpus schema, marker optimizer interface, SVG semantic profile, and SPAR3D/Hunyuan comparison.
 - Promoted the twelve remaining research areas into a formal research roadmap inside `docs/project/ROADMAP.md`.
 - Added a thirteenth research lane for designer sketch-to-model editing, including raster/vector sketch layers, surface projections, PBR-style material preview layers, edit classification, and live model feedback.
+- Refined the designer editing lane into a smaller v1: edit concrete sketch features such as shoulder opening, armhole, neckline, side silhouette, hem length, and hem sweep, then map those edits to garment parameters before regenerating pattern/model feedback.

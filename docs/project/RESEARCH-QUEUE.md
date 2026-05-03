@@ -201,6 +201,9 @@ Goal: define the clothing-designer editing surface between sketch/vector intent 
 
 Questions:
 
+- Which v1 direct edits should ship first: shoulder opening, armhole, neckline, side silhouette, hem length, hem sweep, or ease?
+- How does each v1 edit map to `GarmentParameters` instead of becoming arbitrary moved vector geometry?
+- How should a drag handle, curve edit, or numeric field stay synchronized?
 - Should the editor start from raster sketch cleanup, vector interpretation, or both?
 - Which edits are visual-only, semantic-intent edits, material/PBR preview edits, or pattern-affecting edits?
 - How does a 2D line or region project onto the garment model: UV map, surface projection, decal layer, panel-local coordinates, or view-dependent projection?
@@ -213,6 +216,7 @@ Outputs:
 
 - `docs/project/DESIGNER-SKETCH-3D-EDITING.md`
 - `docs/research/designer-sketch-projection-spike.md`
+- v1 edit-to-parameter map for shoulder opening, armhole, neckline, side silhouette, hem length, and hem sweep
 - editing state schema for vector sketch layers, projection layers, material preview layers, and model feedback
 - first interaction prototype requirements
 
@@ -220,6 +224,8 @@ Source-driven notes:
 
 - Blender texture paint validates the basic split: paint/edit UV textures in 2D or paint directly in the 3D viewport through UVs.
 - Substance Painter-style workflows suggest a higher-quality authoring target: layer stacks, masks, projection modes, texture sets, PBR channels, material previews, and reprojection concerns.
+- V1 should be smaller: edit the current sketch/vector interpretation, convert edits into explicit garment-parameter changes, regenerate pattern/model feedback, and validate.
+- The larger version can replicate more of a Graphite-like layered vector editor for fabrics, stitches, trims, prints, appliques, annotations, and material regions.
 - For this product, projection edits must be classified before they can affect pattern output: visual-only, semantic intent, material-affecting, pattern-candidate-affecting, or final pattern revision.
 
 ## Medium Priority

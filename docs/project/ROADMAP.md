@@ -203,19 +203,21 @@ Exit criteria:
 
 Goal: let a clothing designer edit the sketch or vector interpretation and see the change represented on the garment model in real time.
 
-This lane is inspired by texture-paint and PBR authoring tools, but it should stay garment-aware. Blender's texture paint model proves the old UV/3D split: paint in a 2D image editor or directly on the 3D viewport through UVs. Substance-style workflows raise the bar with layer stacks, masks, projections, material channels, texture sets, and live viewport feedback. Garment Pattern Lab needs a lighter version focused on garment design intent: silhouette edits, seam/decal/style lines, panel color/material zones, surface placement, and pattern-impact warnings.
+V1 should be a sketch-parameter editing loop, not a full creative suite. A designer should be able to change concrete garment features such as shoulder opening, armhole shape, neckline, side silhouette, hem length, or hem sweep, then see the sketch, pattern flats, validation, and model preview update. The later version can grow toward a Graphite/Substance-style editor with layers for fabrics, stitches, trims, prints, decals, masks, and material/PBR channels.
 
 Deliverables:
 
 - `docs/project/DESIGNER-SKETCH-3D-EDITING.md`
 - `docs/research/designer-sketch-projection-spike.md`
 - UI model for raster sketch, vector sketch layer, surface projection layer, material/PBR preview layer, and garment-model preview
+- v1 edit map for shoulder opening, armhole, neckline, hem length, hem sweep, and side silhouette
 - decision on whether edits apply to `SketchIntent`, `GarmentParameters`, `PatternGraphCandidate`, texture/material preview only, or final `PatternGraph`
 - interaction requirements for brush/vector editing, layer stack, masks, symmetry/mirror, projection gizmo, undo/revision history, and manual correction
 
 Exit criteria:
 
-- A designer can edit a line or region in 2D and see corresponding model feedback.
+- A designer can change a sketch feature such as shoulder opening or hem length and see corresponding model/pattern feedback.
+- The system records the underlying parameter change instead of only storing a moved curve.
 - Every edit is classified as visual-only, semantic intent, pattern-affecting, or material-affecting.
 - The preview can show PBR-ish material/color/decal intent without confusing it with sewable pattern geometry.
 - Pattern-affecting edits still pass through `PatternGraphCandidate` validation before export.

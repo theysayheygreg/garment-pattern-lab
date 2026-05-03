@@ -29,7 +29,8 @@
     "write-svg-semantic-profile",
     "run-spar3d-hunyuan-comparison",
     "define-designer-sketch-to-model-editing-loop",
-    "write-designer-sketch-projection-spike"
+    "write-designer-sketch-projection-spike",
+    "define-v1-sketch-edit-to-parameter-map"
   ],
   "deepDiveResearchPasses": [
     {
@@ -86,8 +87,16 @@
     "id": "designer-sketch-to-model-editing-loop",
     "localPlan": "docs/project/DESIGNER-SKETCH-3D-EDITING.md",
     "researchSpike": "docs/research/designer-sketch-projection-spike.md",
-    "thesis": "A clothing designer should be able to edit a raster or vector sketch layer and see the result on the garment model, but every edit must be classified as visual-only, semantic intent, material preview, pattern candidate, or final pattern revision before it can affect manufacturing output.",
-    "pipelineRole": "bridge designer-facing sketch/vector/PBR-style editing with live 3D feedback while preserving PatternGraph as manufacturing truth"
+    "thesis": "V1 should let a designer change concrete sketch features such as shoulder opening, armhole, neckline, side silhouette, hem length, and hem sweep, map those gestures to GarmentParameters, regenerate pattern/model feedback, and validate before export. The larger editor can later grow into Graphite-like layers for fabrics, stitches, trims, prints, decals, and material/PBR channels.",
+    "pipelineRole": "bridge designer-facing sketch/vector/PBR-style editing with live 3D feedback while preserving PatternGraph as manufacturing truth",
+    "v1EditTargets": [
+      "shoulder-opening",
+      "armhole-shape",
+      "neckline",
+      "side-silhouette",
+      "hem-length",
+      "hem-sweep"
+    ]
   },
   "externalTooling": [
     {
