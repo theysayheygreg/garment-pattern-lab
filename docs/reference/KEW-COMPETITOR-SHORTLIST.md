@@ -6,6 +6,8 @@ Source context: Kiko is the apparel designer whose original idea sparked this pr
 
 This note is adjacent reference material for Garment Pattern Lab. It should not collapse the two products into one roadmap. Garment Pattern Lab is currently a sketch-to-pattern workbench for fashion designers. Kew appears broader: a connected apparel and product-development platform that spans creative input, technical structure, product records, collaboration, launch, and downstream operational continuity.
 
+Deep ingest: [Kew Competitor Deep Dive](KEW-COMPETITOR-DEEP-DIVE.md)
+
 These projects may unify over time, but the current useful stance is:
 
 - treat Kew as sibling market/context research

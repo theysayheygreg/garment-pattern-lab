@@ -24,7 +24,10 @@ Deep ingest: `docs/reference/FUNDAMENTALS-INGEST.md`
 
 Deep ingest: `docs/reference/COMMERCIAL-SOFTWARE-INGEST.md`
 
-Adjacent product/competitor context: `docs/reference/KEW-COMPETITOR-SHORTLIST.md`
+Adjacent product/competitor context:
+
+- `docs/reference/KEW-COMPETITOR-SHORTLIST.md`
+- `docs/reference/KEW-COMPETITOR-DEEP-DIVE.md`
 
 - Lectra Modaris. Patternmaking, grading, 3D prototyping, 2D/3D sync, pattern conversion.
   https://www.lectra.com/en/fashion/products/modaris
@@ -233,6 +236,9 @@ Deep ingest for the remaining research references: `docs/reference/papers/RESEAR
 
 - Kew competitor and inspiration shortlist. Kiko's adjacent apparel-platform reference set covering Lifecycle PLM, Illustrator, CLO, Browzwear, Lectra, Optitex, collaboration, Shopify, and Photoroom.
   `docs/reference/KEW-COMPETITOR-SHORTLIST.md`
+
+- Kew competitor deep dive. Capability and interaction-model ingest for each shortlist item, with Optitex decomposed into service pillars rather than full editor parity.
+  `docs/reference/KEW-COMPETITOR-DEEP-DIVE.md`
 
 - Graphite. Nondestructive vector/layer/node editor prior art.
   https://github.com/GraphiteEditor/Graphite

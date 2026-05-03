@@ -120,3 +120,9 @@ Kew adjacent reference:
 - Added `KEW-COMPETITOR-SHORTLIST.md` from Kiko's related apparel-platform exploration.
 - Kept Kew and Garment Pattern Lab distinct: Kew is broader platform/product-market context; Garment Pattern Lab remains the narrower sketch-to-pattern workbench.
 - Linked the shortlist beside the product design doc as competitive, interoperability, and possible future-unification context.
+
+Kew competitor deep dive:
+
+- Added `KEW-COMPETITOR-DEEP-DIVE.md`, ingesting every item from the Kew shortlist into capability pillars, interaction-model lessons, and follow-up research.
+- Optitex now has explicit treatment as the closest eventual capability map: 2D drafting, 3D validation, grading, fabric simulation, marker making, print placement, tech-pack essentials, and interop.
+- Recorded the product stance that Optitex-style pillars should become narrow validated services, not a clone of full Illustrator/Substance/CAD mouse-and-keyboard editing.

@@ -147,6 +147,7 @@ handoffs/        Agent handoff notes
 - [Architecture Overview](docs/project/ARCHITECTURE-OVERVIEW.md)
 - [Product Design Brief](docs/project/PRODUCT-DESIGN.md)
 - [Kew Competitor And Inspiration Shortlist](docs/reference/KEW-COMPETITOR-SHORTLIST.md)
+- [Kew Competitor Deep Dive](docs/reference/KEW-COMPETITOR-DEEP-DIVE.md)
 - [Decision Log](docs/journal/DECISION-LOG.md)
 - [Things Tried / Architecture History](docs/journal/THINGS-TRIED.md)
 - [Product Plan](docs/project/PRODUCT-PLAN.md)

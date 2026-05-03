@@ -602,6 +602,36 @@ This graph now folds in the first broad reference pass:
 
 `PBRPreviewProfile` defines the level of material preview fidelity needed by the product, from flat colors to fabric texture, roughness, normal detail, decals, and lighting presets.
 
+### Competitor And Platform Context Layer
+
+`CompetitorCapabilityMap` records what adjacent products prove about the apparel software landscape without turning those products into requirements.
+
+`KewAdjacentPlatform` represents Kiko's broader connected apparel/product-development direction, spanning creative input, technical structure, product records, collaboration, factory communication, launch output, and AI imagery.
+
+`OptitexCapabilityPillar` is a decomposed capability from Optitex-like systems, such as 2D drafting, 3D validation, grading, fabric simulation, marker making, print placement, avatar editing, tech-pack output, or CAD compatibility.
+
+`InteractionModelRisk` records cases where a competitor proves a capability but uses an interaction model Garment Pattern Lab should avoid, such as full mouse-and-keyboard CAD or general-purpose 3D editing.
+
+`TaskLedPatternService` is the preferred product response: expose a capability as a narrow, reviewable, validated task rather than a full editor clone.
+
+`SemanticTraceWorkbench` converts raster/vector source drawings into garment-tagged curves and landmarks without requiring generic Illustrator-style path editing.
+
+`GradeRuleService` applies parameterized size changes to a trusted `PatternGraph` after the base pattern is valid.
+
+`FabricClassSimulationService` turns fabric assumptions into preview and warning behavior before attempting high-fidelity cloth simulation.
+
+`MarkerPlanningService` creates fabric-width-aware human-readable layout plans before industrial nesting optimization.
+
+`TechPackBridge` maps `PatternPackageModel` and `PatternGraph` data into later tech-pack fields.
+
+`ViewProfile` defines role-specific product surfaces, such as designer sketch view, patternmaker validation view, sample-room print package view, and industrial export view.
+
+`AccessPolicy` records who can view, edit, export, or reuse pattern projects, body measurements, and uploaded source assets.
+
+`ProductRecordExport` is a later bridge to commerce/product systems such as Shopify.
+
+`MarketingImageCandidate` is an AI/product-photography output candidate and must stay separate from `ValidationRender`.
+
 ## Secondary Ingest Edges
 
 ```text
@@ -846,6 +876,43 @@ DesignerEditClassification
   -> PatternGraphCandidate
   -> ValidationReport
   -> PatternGraphRevision
+```
+
+```text
+CompetitorCapabilityMap
+  -> KewAdjacentPlatform
+  -> OptitexCapabilityPillar
+  -> InteractionModelRisk
+  -> TaskLedPatternService
+  -> PatternGraph
+```
+
+```text
+SemanticTraceWorkbench
+  -> HumanSketchInput
+  -> VectorSketchLayer
+  -> LandmarkSet
+  -> SketchIntent
+```
+
+```text
+PatternGraph
+  -> GradeRuleService
+  -> MarkerPlanningService
+  -> TechPackBridge
+  -> ProductRecordExport
+```
+
+```text
+PatternGraph
+  -> FabricClassSimulationService
+  -> LiveModelPreview
+  -> ValidationReport
+```
+
+```text
+MarketingImageCandidate
+  -> ProductRecordExport
 ```
 
 ```text

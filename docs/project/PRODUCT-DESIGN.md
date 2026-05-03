@@ -197,3 +197,5 @@ Kiko's Kew exploration is adjacent but broader. Kew appears to be investigating 
 Garment Pattern Lab should not copy that scope in v1. The useful shared problem is narrower and important: messy creative input must become editable technical structure without losing designer intent.
 
 Keep [Kew Competitor And Inspiration Shortlist](../reference/KEW-COMPETITOR-SHORTLIST.md) beside this product brief as market and interoperability context. Treat it as possible future unification context, not a current product requirement.
+
+The deeper pass is [Kew Competitor Deep Dive](../reference/KEW-COMPETITOR-DEEP-DIVE.md). Its main product lesson is that Optitex and peer systems prove the eventual capability map, but not the interaction model. Garment Pattern Lab should borrow pillars like grading, fabric checks, marker planning, 3D preview, and tech-pack bridges as narrow validated services rather than rebuilding a full Illustrator/Substance/CAD-style editor stack.

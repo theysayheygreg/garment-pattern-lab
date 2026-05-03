@@ -7,6 +7,7 @@
   "productStatement": "A sketch-to-pattern workbench for fashion designers.",
   "productDesignBrief": "docs/project/PRODUCT-DESIGN.md",
   "adjacentProductContext": "docs/reference/KEW-COMPETITOR-SHORTLIST.md",
+  "adjacentProductDeepDive": "docs/reference/KEW-COMPETITOR-DEEP-DIVE.md",
   "sourceOfTruth": "pattern-grammar-first",
   "nextActions": [
     "write-first-garment-drafting-formulas",

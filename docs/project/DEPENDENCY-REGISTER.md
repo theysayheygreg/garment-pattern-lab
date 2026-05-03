@@ -75,6 +75,20 @@ This register tracks dependencies and prior art by whether Garment Pattern Lab s
 | Graphite | reference/later candidate | Nondestructive vector/layer/node editor. | Study architecture; do not fork before first PatternGraph fixture. |
 | Designer edit classification | build | Boundary between visual, semantic, material, and pattern edits. | Required for RR13. |
 
+## Competitor Capability Pillars
+
+| Item | Status | Role | Notes |
+| --- | --- | --- | --- |
+| Optitex 2D/3D CAD | reference | Capability map for 2D pattern, 3D validation, grading, marker, fabric simulation, tech-pack essentials. | Do not copy the full expert editor model; decompose into task-led services. |
+| Optitex 3D for Illustrator | reference | Creative vector tool plus 3D garment validation bridge. | Strong proof that designers want creative-tool continuity; avoid inheriting Illustrator cleanup burden. |
+| CLO | reference | Modern 3D garment simulation and 2D/3D workflow expectation. | Use as 3D preview/validation expectation, not v1 authoring model. |
+| Browzwear VStitcher | reference | Enterprise virtual sampling, material/avatar libraries, grading, tech packs. | Library and workflow reference; photoreal rendering is not the moat. |
+| Lifecycle PLM AI/Tech Pack Studio | reference | AI concept -> technical sketch -> tech pack category signal. | Good adjacency for generated sketch lane and later tech-pack bridge. |
+| Lectra Modaris / Gerber AccuMark | reference/later | Industrial pattern/grading/marker/production semantics. | Later interop and export profiles after human-readable package is credible. |
+| Illustrator Image Trace / path tools | reference | Raster-to-vector and manual path cleanup baseline. | Build semantic trace review, not a generic vector editor. |
+| Airtable/Salesforce/Notion | reference/later | Role-specific views, permissions, workspace shell. | Future cloud/collab only; track provenance and owner now. |
+| Shopify / Photoroom | reference/later | Launch commerce and imagery pipelines. | Kew/platform adjacency; keep out of v1 pattern workbench. |
+
 ## AI, Images, And Datasets
 
 | Item | Status | Role | Notes |

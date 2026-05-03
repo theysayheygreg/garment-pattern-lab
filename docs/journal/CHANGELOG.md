@@ -47,3 +47,4 @@
 - Split sketch input into two lanes: GPT Image 2 generated fixtures for prompt-controlled original examples, and human-authored drawings/vectors/uploads for the designer-facing ingestion path.
 - Added product design framing: Garment Pattern Lab is a sketch-to-pattern workbench for fashion designers, not just an AI garment pipeline.
 - Added Kiko/Kew competitor shortlist as adjacent reference context beside the product design brief.
+- Added Kew competitor deep dive and updated the knowledge base with competitor capability and Optitex pillar framing.
