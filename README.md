@@ -61,6 +61,11 @@ handoffs/        Agent handoff notes
 - [Reference Index](docs/reference/REFERENCES.md)
 - [UV to Pattern Notes](docs/reference/UV-UNWRAP-TO-PATTERN.md)
 - [Computational Pattern Making Paper Ingest](docs/reference/papers/computational-pattern-making-2202.10272-ingest.md)
+- [Fundamentals Ingest](docs/reference/FUNDAMENTALS-INGEST.md)
+- [Commercial Software Ingest](docs/reference/COMMERCIAL-SOFTWARE-INGEST.md)
+- [Open Tools Ingest](docs/reference/OPEN-TOOLS-INGEST.md)
+- [UV Geometry Ingest](docs/reference/UV-GEOMETRY-INGEST.md)
+- [Research Papers Ingest](docs/reference/papers/RESEARCH-PAPERS-INGEST.md)
 - [First Garment Spec](docs/design/FIRST-GARMENT.md)
 
 ## Prototype Definition

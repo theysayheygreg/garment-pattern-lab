@@ -364,6 +364,282 @@ From `Computational Pattern Making from 3D Garment Models`, the graph gains thes
 - The main user-facing layout controls in the paper are maximum corners per patch and maximum allowed stretch.
 - Seam allowance was explicitly future work in the paper, which means Garment Pattern Lab must own seam allowance separately from any borrowed flattening method.
 
+## Source Coverage
+
+This graph now folds in the first broad reference pass:
+
+| Source family | Ingest doc | Product role |
+| --- | --- | --- |
+| Patternmaking fundamentals | `docs/reference/FUNDAMENTALS-INGEST.md` | Defines drafting, blocks, ease, darts, grainlines, allowances, notches, grading, and construction metadata. |
+| Commercial garment software | `docs/reference/COMMERCIAL-SOFTWARE-INGEST.md` | Defines the expected industrial surface: 2D/3D sync, avatars, fabric properties, tension, markers, tech packs, guide sheets, and approval gates. |
+| Open/free pattern tools | `docs/reference/OPEN-TOOLS-INGEST.md` | Defines reusable software idioms: parametric designs, measurement tables, formula-driven drafting, repositories, SVG/PDF export, and visual editing. |
+| UV/modeling/game workflows | `docs/reference/UV-GEOMETRY-INGEST.md` | Defines UV as a geometry helper, with strict separation between texture islands and sewable pattern panels. |
+| Research papers after 2202.10272 | `docs/reference/papers/RESEARCH-PAPERS-INGEST.md` | Defines pattern programs, synthetic datasets, sketch-to-mesh, multimodal generation, raster pattern encodings, and 3D garment benchmarks. |
+
+## Secondary Ingest Nodes
+
+### Fundamentals Layer
+
+`BodyLandmark` is a body-derived or sketch-derived anchor point such as bust level, waist level, hip level, shoulder point, or armhole depth.
+
+`DraftingRuleSet` is the explicit math and construction sequence that converts measurements plus design choices into a block or final pattern.
+
+`BlockPattern` is a reusable base pattern such as a bodice block, skirt block, sleeve block, or torso sloper.
+
+`PatternTransformation` is a controlled flat-pattern operation such as slash-and-spread, dart rotation, flare, lengthening, shortening, neckline change, or armhole change.
+
+`EaseProfile` describes wearing ease and design ease by body zone and garment type.
+
+`Notch` is alignment metadata attached to sewable edges, not just a drawing mark.
+
+`GradeRule` describes how points and curves move across a size run.
+
+`SizeRun` is a family of related sizes for graded production.
+
+### Industrialization Layer
+
+`IndustrializationMetadata` covers labels, cut counts, fold lines, fabric direction, material notes, size, variant, and revision state.
+
+`StyleSheet` is a commercial-system style record that binds a garment style to patterns, materials, measurements, construction choices, and sample context.
+
+`FabricPropertySet` captures material inputs for simulation and validation: weight, stretch, shear, bend, thickness, friction, and preset identity.
+
+`TensionMap` is simulation output that can reveal fit stress, drag lines, and questionable ease.
+
+`MarkerPlan` and `NestingPlan` arrange cut pieces for material use; they are related to UV packing, but driven by fabric, grain, folds, sizes, and cutting constraints.
+
+`TechPack` is the handoff package for production: pattern references, bill of materials, measurements, construction notes, grading, and review status.
+
+`GuideSheet` is the maker-facing cut and sew instruction surface.
+
+### Parametric Tooling Layer
+
+`ParametricDesign` is a reusable pattern generator whose output is determined by measurements and options.
+
+`MeasurementTable` is the editable source of body or avatar measurements.
+
+`DraftingFormula` is the individual expression-level rule used by CAD tools such as Seamly2D/Valentina-style systems.
+
+`PatternCADDocument` is an editable pattern file with construction geometry, final pattern geometry, labels, and export state.
+
+`PatternRepository` and `PatternVersion` store reusable designs and historical revisions.
+
+`VisualPatternEditor` is the human correction surface for curves, labels, points, seams, notches, and options.
+
+### Pattern Program Layer
+
+`PatternProgram` is a code-like representation of a garment pattern, inspired most strongly by GarmentCode.
+
+`Component` is a reusable garment subsystem such as bodice, skirt, waistband, sleeve, collar, or closure.
+
+`SemanticInterface` names how components connect before final panel geometry is resolved.
+
+`AbstractStitch` is a high-level stitch relation between component interfaces.
+
+`DependentParameter` is a derived variable that keeps garment proportions consistent when measurements or options change.
+
+`ComponentLibrary` is the catalog of reusable garment components.
+
+### UV And Geometry Layer
+
+`GeometrySeam` is a cut path on a mesh for parameterization. It can become a seam hint, but it is not automatically a sewing seam.
+
+`UVIsland` is a flattened mesh region used for texture or geometry layout. It can suggest a panel candidate, but cannot be trusted as a garment pattern without semantic checks.
+
+`ParameterizationMethod` names flattening methods such as ABF, LSCM, or paper-specific anisotropic textile parameterization.
+
+`UVChannel` is an engine/modeling channel for texture or lightmap coordinates.
+
+`NonOverlapConstraint` is required for lightmaps and useful for packing, but still different from marker making.
+
+### Dataset And ML Layer
+
+`SyntheticDataset` is a generated corpus of paired measurements, patterns, 3D drapes, renders, and metadata.
+
+`TrainingCorpus` is any collection used to train or evaluate sketch parsing, pattern generation, drape prediction, or reconstruction.
+
+`GroundTruthPattern` is a known-valid sewing pattern used as supervision or evaluation target.
+
+`DrapePipeline` turns a pattern into a simulated garment and produces mesh plus fit diagnostics.
+
+`DatasetFilter` removes invalid garments, failed simulations, impossible sewing relationships, or out-of-bounds measurements.
+
+`RasterPatternEncoding` represents sewing patterns as image-like tensors for ML.
+
+`PatternLatentSpace` is the learned space where pattern topology and geometry can be interpolated or generated.
+
+`MultimodalPatternGenerator` maps text, sketch/image, or incomplete-pattern conditioning into candidate sewing patterns.
+
+`ConditioningSignal` is the normalized input to that generator.
+
+`EdgeToken` and `PanelToken` are compact vectorized representations of pattern structure.
+
+`FeatureLine` is a visible garment geometry cue in 3D reconstruction datasets.
+
+`ImageToMeshReconstruction` maps garment images to 3D mesh estimates.
+
+`SketchToPatternModel`, `DualGraphRepresentation`, `PatternParser`, `2D3DCorrespondence`, and `FeatureHumanModel` are later research nodes, not prototype commitments.
+
+## Secondary Ingest Edges
+
+```text
+MeasurementSet
+  -> BodyLandmark
+  -> DraftingRuleSet
+  -> BlockPattern
+  -> PatternTransformation
+  -> PatternGraph
+
+GarmentParameters
+  -> EaseProfile
+  -> PatternGraph
+
+PatternGraph
+  -> IndustrializationMetadata
+  -> TechPack
+  -> ManufacturingPackage
+
+PatternGraph
+  -> GuideSheet
+
+PatternGraph
+  -> GradeRule
+  -> SizeRun
+
+PatternGraph
+  -> MarkerPlan
+  -> NestingPlan
+  -> CuttingPlan
+
+PatternGraph
+  -> PatternCADDocument
+  -> SVGExport
+
+PatternGraph
+  -> PatternCADDocument
+  -> PDFExport
+
+PatternRepository
+  -> PatternVersion
+  -> PatternGraphRevision
+
+VisualPatternEditor
+  -> PatternGraphRevision
+
+ParametricDesign
+  -> MeasurementTable
+  -> MeasurementSet
+
+ParametricDesign
+  -> DraftingFormula
+  -> DraftingRuleSet
+```
+
+```text
+PatternProgram
+  -> Component
+  -> Panel
+
+Component
+  -> SemanticInterface
+  -> AbstractStitch
+  -> SeamPair
+
+GarmentParameters
+  -> DependentParameter
+  -> PatternProgram
+
+ComponentLibrary
+  -> PatternGrammar
+
+ComponentSwap
+  -> PatternGraphRevision
+```
+
+```text
+3DGarmentMesh
+  -> GeometrySeam
+  -> UVIsland
+  -> PatternGraphCandidate
+  -> ValidationReport
+
+ParameterizationMethod
+  -> UVIsland
+
+UVChannel
+  -> PreviewTexture
+
+IslandPacking
+  -> SVGExport
+
+AutoSeamCandidate
+  -> SeamHint
+  -> ComputationalPatternMakingPipeline
+```
+
+```text
+BodyShapeSample
+  -> AutomaticMeasurementExtraction
+  -> MeasurementSet
+
+PatternSampling
+  -> PatternGraph
+  -> DrapePipeline
+  -> DrapedMesh
+  -> DatasetFilter
+
+SyntheticDataset
+  -> TrainingCorpus
+
+GroundTruthPattern
+  -> EvaluationBenchmark
+```
+
+```text
+SketchInput
+  -> SketchEncoder
+  -> ImplicitGarmentField
+  -> Generated3DGarment
+  -> 3DGarmentMesh
+
+TextPrompt
+  -> ConditioningSignal
+  -> MultimodalPatternGenerator
+  -> PatternGraphCandidate
+
+ImagePrompt
+  -> ConditioningSignal
+
+IncompletePattern
+  -> ConditioningSignal
+
+PatternGraph
+  -> RasterPatternEncoding
+  -> PatternLatentSpace
+  -> PatternGraphCandidate
+
+RasterPatternEncoding
+  -> VectorDecode
+  -> PatternGraphCandidate
+
+MultiViewImageSet
+  -> ImageToMeshReconstruction
+  -> 3DGarmentMesh
+
+FeatureLine
+  -> GarmentLandmark
+```
+
+## Representation Boundary Rules
+
+- `PatternGraph` is the manufacturing source of truth.
+- `PatternProgram` is a promising authoring and generation representation.
+- `RasterPatternEncoding` is an ML convenience representation, not an export format.
+- `3DGarmentMesh` is preview, supervision, or a future source for mesh-to-pattern. It is not the pattern.
+- `UVIsland` is a flattened geometry region. It becomes useful only after seam semantics, grainline, allowances, labels, and construction metadata are added.
+- `MarkerPlan` can reuse packing algorithms, but must respect grain, folds, fabric width, size runs, and cutting constraints that ordinary UV packing ignores.
+- `ValidationReport` is the guardrail between generated candidates and user-facing pattern output.
+
 ## Product Architecture Implications
 
 ### Mainline For Prototype 1
@@ -416,4 +692,3 @@ The pattern schema should include:
 - Add manual seam-hint support to future 3D workflows.
 - Add panel-complexity controls: maximum corners per panel and maximum allowed stretch.
 - Add seam allowance as Garment Pattern Lab's responsibility, not borrowed paper functionality.
-

@@ -38,6 +38,12 @@ Outputs:
 - `docs/project/PATTERN-SCHEMA.md`
 - JSON example for first garment.
 
+New source-driven decision:
+
+- Compare a direct `PatternGraph` JSON schema against a GarmentCode-style `PatternProgram` layer.
+- Decide whether `RasterPatternEncoding` belongs only in future ML experiments or should exist as a debug/export artifact.
+- Preserve `PatternGraph` as the manufacturing truth even if pattern programs, edge tokens, or raster encodings are used upstream.
+
 ### R2b: Sewing-Aware Validation Rules
 
 Goal: turn the paper's manufacturability criteria into prototype checks.
@@ -154,6 +160,13 @@ Outputs:
 
 - Dataset inventory.
 - Licensing notes.
+
+New source-driven tasks:
+
+- Audit GarmentCodeData access, license, schema, and drape pipeline setup.
+- Check whether Deep Fashion3D is useful for garment-landmark or mesh-reconstruction pretraining despite lacking pattern labels.
+- Identify which SketchTailor/GenPattern-style datasets are public, request-only, or paper-only.
+- Determine whether first-prototype patterns can synthesize enough sketch/pattern pairs for local evaluation.
 
 ## Later
 

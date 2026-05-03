@@ -6,11 +6,38 @@
   "prototypeTarget": "sleeveless-a-line-woven-dress-tunic",
   "sourceOfTruth": "pattern-grammar-first",
   "nextActions": [
-    "ingest-public-patternmaking-reference",
     "write-first-garment-drafting-formulas",
     "define-pattern-schema",
     "write-sewing-aware-validation-checklist",
-    "choose-prototype-tech-stack"
+    "choose-prototype-tech-stack",
+    "audit-GarmentCode-and-FreeSewing-for-reuse"
+  ],
+  "ingestedReferenceFamilies": [
+    {
+      "id": "patternmaking-fundamentals",
+      "localIngest": "docs/reference/FUNDAMENTALS-INGEST.md",
+      "productImpact": "adds drafting, blocks, ease, darts, allowances, notches, and grading concepts"
+    },
+    {
+      "id": "commercial-garment-software",
+      "localIngest": "docs/reference/COMMERCIAL-SOFTWARE-INGEST.md",
+      "productImpact": "adds industrialization metadata, 2D/3D sync, avatars, fabric properties, markers, tech packs, guide sheets, and validation surfaces"
+    },
+    {
+      "id": "open-free-pattern-tools",
+      "localIngest": "docs/reference/OPEN-TOOLS-INGEST.md",
+      "productImpact": "adds parametric design, measurement tables, drafting formulas, pattern repositories, visual editing, and SVG/PDF export concepts"
+    },
+    {
+      "id": "uv-geometry-workflows",
+      "localIngest": "docs/reference/UV-GEOMETRY-INGEST.md",
+      "productImpact": "clarifies UV islands and geometry seams as candidate helpers, not sewing-pattern truth"
+    },
+    {
+      "id": "research-papers-after-2202.10272",
+      "localIngest": "docs/reference/papers/RESEARCH-PAPERS-INGEST.md",
+      "productImpact": "adds pattern programs, synthetic paired datasets, sketch-to-mesh models, multimodal pattern generation, raster encodings, and 3D reconstruction benchmarks"
+    }
   ],
   "ingestedPapers": [
     {
@@ -19,6 +46,42 @@
       "localPdf": "docs/reference/papers/computational-pattern-making-from-3d-garment-models-2202.10272.pdf",
       "localIngest": "docs/reference/papers/computational-pattern-making-2202.10272-ingest.md",
       "productImpact": "adds sewing-aware validation constraints and a future mesh-to-pattern branch"
+    },
+    {
+      "id": "arxiv-2306.03642",
+      "title": "GarmentCode: Programming Parametric Sewing Patterns",
+      "localIngest": "docs/reference/papers/RESEARCH-PAPERS-INGEST.md",
+      "productImpact": "strongest reference for a pattern-program representation"
+    },
+    {
+      "id": "arxiv-2405.17609",
+      "title": "GarmentCodeData: A Dataset of 3D Made-to-Measure Garments With Sewing Patterns",
+      "localIngest": "docs/reference/papers/RESEARCH-PAPERS-INGEST.md",
+      "productImpact": "strongest reference for paired synthetic pattern and drape data"
+    },
+    {
+      "id": "arxiv-2303.00167",
+      "title": "Sketch2Cloth: Sketch-based 3D Garment Generation with Unsigned Distance Fields",
+      "localIngest": "docs/reference/papers/RESEARCH-PAPERS-INGEST.md",
+      "productImpact": "treats sketch-to-3D as an ideation and candidate-geometry branch, not manufacturing output"
+    },
+    {
+      "id": "arxiv-2504.21476",
+      "title": "GarmentDiffusion: 3D Garment Sewing Pattern Generation with Multimodal Diffusion Transformers",
+      "localIngest": "docs/reference/papers/RESEARCH-PAPERS-INGEST.md",
+      "productImpact": "adds multimodal pattern-candidate generation from text, image, and incomplete pattern inputs"
+    },
+    {
+      "id": "arxiv-2505.02592",
+      "title": "GarmentImage: Raster Encoding of Garment Sewing Patterns with Diverse Topologies",
+      "localIngest": "docs/reference/papers/RESEARCH-PAPERS-INGEST.md",
+      "productImpact": "adds raster pattern encoding as an ML helper representation"
+    },
+    {
+      "id": "arxiv-2003.12753",
+      "title": "Deep Fashion3D: A Dataset and Benchmark for 3D Garment Reconstruction from Single Images",
+      "localIngest": "docs/reference/papers/RESEARCH-PAPERS-INGEST.md",
+      "productImpact": "adds 3D garment reconstruction and feature-line concepts for later sketch/image-to-mesh work"
     }
   ],
   "prototype1DoneWhen": [

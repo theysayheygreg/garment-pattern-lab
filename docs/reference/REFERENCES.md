@@ -4,6 +4,8 @@ This file is the project bibliography. Keep links here and write interpretation 
 
 ## Patternmaking Fundamentals
 
+Deep ingest: `docs/reference/FUNDAMENTALS-INGEST.md`
+
 - Pattern Drafting and Grading for Basic Patterns. ResearchGate. Covers measurements, pattern terms, basic skirt/bodice/sleeve blocks, grading rules.  
   https://www.researchgate.net/publication/368816976_PATTERN_DRAFTING_AND_GRADING_FOR_BASIC_PATTERNS
 
@@ -19,6 +21,8 @@ This file is the project bibliography. Keep links here and write interpretation 
 - Patternmaking for Fashion Design, Helen Joseph Armstrong. Standard fashion-school reference. Commercial/copyrighted; cite for awareness, do not ingest without a lawful source.
 
 ## Commercial Garment Software
+
+Deep ingest: `docs/reference/COMMERCIAL-SOFTWARE-INGEST.md`
 
 - Lectra Modaris. Patternmaking, grading, 3D prototyping, 2D/3D sync, pattern conversion.  
   https://www.lectra.com/en/fashion/products/modaris
@@ -43,6 +47,8 @@ This file is the project bibliography. Keep links here and write interpretation 
 
 ## Open Source / Free Pattern Tools
 
+Deep ingest: `docs/reference/OPEN-TOOLS-INGEST.md`
+
 - Seamly2D. Free/open-source pattern drafting CAD.  
   https://seamly.io/
 
@@ -66,6 +72,8 @@ This file is the project bibliography. Keep links here and write interpretation 
 
 ## UV Unwrapping / 3D Modeling
 
+Deep ingest: `docs/reference/UV-GEOMETRY-INGEST.md`
+
 - Blender UV Tools. Describes unwrap, seams, Angle Based Flattening, LSCM.  
   https://docs.blender.org/manual/id/4.0/modeling/meshes/editing/uv.html
 
@@ -87,6 +95,8 @@ This file is the project bibliography. Keep links here and write interpretation 
   https://docs.unity.com/en-us/asset-transformer-sdk/2025.7/manual/functions/uv-pipeline
 
 ## Research: Sketch / 3D / Pattern Generation
+
+Deep ingest for the remaining research references: `docs/reference/papers/RESEARCH-PAPERS-INGEST.md`
 
 - Computational Pattern Making from 3D Garment Models. Segments 3D garment shapes into patches and computes 2D parameterizations for cut-and-sew patterns.  
   https://arxiv.org/abs/2202.10272

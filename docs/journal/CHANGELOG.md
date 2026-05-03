@@ -17,3 +17,5 @@
 - Added deep paper ingest note for `Computational Pattern Making from 3D Garment Models`.
 - Added `docs/project/KNOWLEDGE-GRAPH.md`.
 - Updated product plan, roadmap, dependencies, research queue, build plan, project board, backlog, UV notes, fundamentals, decision log, and devlog with sewing-aware validation concepts from the paper.
+- Added deep ingest notes for patternmaking fundamentals, commercial software, open/free tools, UV geometry workflows, and remaining research papers.
+- Expanded the product knowledge graph with secondary-ingest nodes and edges for pattern programs, parametric tools, industrialization metadata, UV boundaries, datasets, multimodal generation, and ML representations.
