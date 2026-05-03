@@ -94,3 +94,9 @@ Pattern standards pass:
 - Product direction: define our own small `SewingPatternSheetProfile` from common pattern conventions, while tracking formal standards separately for measurements, construction metadata, and later DXF/ASTM exchange.
 - Clarified the user reality: most designers, indie studios, small shops, and even capable sample rooms should not need to see ASTM/ISO/AAMA language in v1. Those standards stay backstage unless the user is doing advanced export/interoperability work.
 - Reframed industry-standard output as an explicit later export option, parallel to machine-readable cutter/CAD output. It should not shape the v1 designer-facing package.
+
+First garment reference population:
+
+- Added `docs/reference/FIRST-GARMENT-VISUAL-REFERENCE-CORPUS.md` for sketches/designs: technical flats, croquis/on-body references, open museum visuals, and project-generated sketch fixture plans.
+- Added `docs/reference/PATTERN-REFERENCE-CORPUS.md` for real patterns: Atacac, FreeSewing, Peppermint, Fabrics-Store, Mood, LACMA, Adelica, Oliver + S, Sew Different, SewGuide, and Lekala leads with license/truth-level caveats.
+- Strongest direction: author our own first `PatternGraph` fixture, use FreeSewing and Atacac as license-reviewable pattern-truth candidates, and treat most free commercial/blog PDFs as pattern-reference rather than reusable geometry.

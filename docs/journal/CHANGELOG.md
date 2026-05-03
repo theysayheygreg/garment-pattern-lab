@@ -41,3 +41,4 @@
 - Added a dedicated pattern standards and conventions reference, separating common sewing-pattern notation from ASTM/ISO measurement, seam, stitch, and DXF exchange standards.
 - Clarified that ASTM/ISO/AAMA references are backstage interop and schema material, while the v1 user-facing output should stay sewing-native for designers, small shops, sample makers, and sewers.
 - Reframed industry-standard ASTM/AAMA/DXF output as a later export option alongside machine-readable cutter/CAD output, not a v1 product surface.
+- Added first-garment reference corpora for the two requested lanes: sketch/design visual references and real pattern/construction references.

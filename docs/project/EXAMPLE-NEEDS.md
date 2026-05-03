@@ -138,6 +138,8 @@ Recommended composition:
 
 ## Source Leads
 
+- First garment visual reference corpus: sketches/designs lane for sleeveless A-line woven dress/tunic visuals, flats, croquis/on-body references, and license-safe metadata. `docs/reference/FIRST-GARMENT-VISUAL-REFERENCE-CORPUS.md`
+- First garment real-pattern reference corpus: actual pattern and construction reference lane, including pattern-reference/pattern-truth candidates, PatternGraph extraction fields, and validation checks. `docs/reference/PATTERN-REFERENCE-CORPUS.md`
 - LACMA Pattern Project: scaled historic pattern PDFs with images and construction instructions. https://www.lacma.org/patternproject
 - FreeSewing: made-to-measure generated patterns and parametric designs. https://freesewing.org/
 - OpenPattern: formula-generated full-scale bespoke patterns. https://openpattern.readthedocs.io/
