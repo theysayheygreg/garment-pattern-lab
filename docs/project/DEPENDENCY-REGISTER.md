@@ -44,9 +44,11 @@ This register tracks dependencies and prior art by whether Garment Pattern Lab s
 
 | Item | Status | Role | Notes |
 | --- | --- | --- | --- |
-| SVG | build/candidate | First editable export. | Need semantic profile and round-trip fixtures. |
-| PDF/tiled output | build | Printable package. | Can use browser print/HTML or SVG-to-PDF tooling later. |
-| DXF/AAMA/ASTM | reference/later | Industrial exchange. | Needs semantic mapping after SVG works. |
+| Human-readable SVG | build/candidate | First editable/printable pattern export. | Need semantic profile, labels, instructions, and round-trip fixtures. |
+| PDF/tiled output | build | Printable human package. | Can use browser print/HTML or SVG-to-PDF tooling later. |
+| Cut sheet and assembly instructions | build | Human-readable making package. | V1 priority; a person should understand what to cut and sew. |
+| DXF/AAMA/ASTM | reference/later | Industrial exchange and machine-readable production. | Not v1 priority; needs semantic mapping after human-readable package works. |
+| Machine cutter-ready files | later | Fabric cutting machine lane. | Explicitly out of prototype 1 scope. |
 | ASTM D6673 | reference | Industrial apparel DXF layer semantics. | Use as layer/block target for later DXF profile. |
 | Patro ASTM DXF notes | reference | Practical ASTM layer map. | Useful for piece boundary, notches, grain, internal lines, sew lines, annotations. |
 | CLO DXF import/export | reference | Commercial import/export behavior. | CLO supports AAMA/ASTM DXF workflows; test after semantic SVG works. |
@@ -108,6 +110,6 @@ Defer:
 
 - libnest2d until marker fixtures exist.
 - Clipper2-WASM until JS offsets fail against fixtures.
-- DXF/AAMA/ASTM until SVG semantic round trip passes.
+- DXF/AAMA/ASTM and machine-cutter output until the human-readable package is credible.
 - Graphite fork or deep integration until v1 designer edits exist.
 - Hunyuan3D-2 dependency until license isolation is designed.

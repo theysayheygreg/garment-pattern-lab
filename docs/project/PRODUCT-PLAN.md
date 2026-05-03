@@ -72,7 +72,13 @@ The internal representation should be a structured pattern document:
 
 This can later map to SVG, PDF, DXF/AAMA/ASTM, GarmentCode-style code, or a custom JSON schema.
 
-### Output
+### Output Strategy
+
+There are two output lanes, and prototype 1 only needs the first.
+
+**V1: human-readable pattern package**
+
+This is the priority: pattern docs that a person can print, cut, review, and sew from. The package should be readable even if no cutting machine or CAD system is involved.
 
 - Editable SVG pattern.
 - Printable tiled PDF.
@@ -81,6 +87,16 @@ This can later map to SVG, PDF, DXF/AAMA/ASTM, GarmentCode-style code, or a cust
 - JSON pattern graph.
 - Basic 3D preview render.
 - Validation report: seam lengths, edge matches, missing notches, impossible closures, body clearance/ease checks.
+
+**V2/later: machine-readable production files**
+
+This is not a near-term priority. Machine-readable cutter/CAD output can build on the same `PatternGraph`, but only after human-readable pattern packages are credible.
+
+- DXF/AAMA/ASTM export.
+- Machine cutter-ready nesting/marker files.
+- Industrial CAD round-trip.
+- Factory-oriented cutting metadata.
+- Tech pack and production integration.
 
 ## First Prototype
 
@@ -127,7 +143,7 @@ The first prototype targets a sleeveless A-line woven dress/tunic.
    - hem sweep
    - dart on/off
 9. System re-renders pattern and preview.
-10. User exports SVG/PDF and instructions.
+10. User exports a human-readable SVG/PDF/print package and instructions.
 
 ## MVP Feature Set
 
@@ -176,7 +192,7 @@ Use four layers:
 2. **Pattern grammar layer:** generate valid 2D sewing topology from parameters and measurements.
 3. **Candidate-to-export interop layer:** normalize, measure, correct, validate, and round-trip any candidate before it becomes an exportable pattern.
 4. **Simulation/validation layer:** assemble the pattern into 3D and check fit, collision, seam consistency, and visual intent.
-5. **Export layer:** produce human-readable and machine-readable pattern assets.
+5. **Export layer:** produce human-readable pattern assets first; preserve enough structured data for later machine-readable outputs.
 
 The pattern grammar layer must stay central. If the system starts from a generated 3D mesh and simply flattens it, it will produce islands, not necessarily sewable pattern pieces.
 

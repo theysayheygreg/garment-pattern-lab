@@ -78,7 +78,12 @@
   "candidateToExportInterop": {
     "localPlan": "docs/project/CANDIDATE-TO-EXPORT-INTEROP.md",
     "thesis": "Any mesh-derived, AI-derived, imported, or program-generated candidate must be normalized to canonical millimeters, scale-proven, measured, corrected, validated, marker-aware, and round-trip tested before promotion to PatternGraph or export.",
-    "firstPrototypePath": "candidate JSON -> normalize to millimeters -> prove scale -> measure geometry/fabric footprint -> correct tiny issues -> validate -> export SVG -> reimport SVG -> round-trip report"
+    "firstPrototypePath": "candidate JSON -> normalize to millimeters -> prove scale -> measure geometry/fabric footprint -> correct tiny issues -> validate -> export human-readable SVG/PDF/cut sheet -> reimport SVG -> round-trip report"
+  },
+  "outputStrategy": {
+    "v1": "human-readable pattern package for a person to print, cut, review, and sew from: SVG/PDF/print package, cut sheet, assembly instructions, validation report, and source PatternGraph JSON",
+    "later": "machine-readable industrial/cutter lane: DXF/AAMA/ASTM, cutter-ready marker files, industrial CAD round trip, and factory production metadata",
+    "priority": "v1-human-readable-first"
   },
   "ownablePipelineLane": {
     "id": "browser-native-threejs-webgpu-wasm",

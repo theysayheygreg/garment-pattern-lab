@@ -34,3 +34,4 @@
 - Started executing the research roadmap with a dependency/prior-art pass across drafting, schema, validation, geometry, SVG, marker planning, visual corpus, image-to-3D, commercial interop, and designer editing.
 - Added `DEPENDENCY-REGISTER.md`, `EXAMPLE-NEEDS.md`, and `roadmap-research-pass-2026-05-03.md`.
 - Expanded references with FreeSewing core/dev docs, GarmentCode repo/specs, browser geometry libraries, marker/nesting libraries, visual corpus sources, image-to-3D frameworks, and designer/PBR prior art.
+- Split output strategy into a v1 human-readable pattern package lane and a later machine-readable cutter/CAD lane.

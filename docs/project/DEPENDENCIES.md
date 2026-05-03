@@ -108,7 +108,7 @@ First research-pass recommendation:
 
 Needed:
 
-- SVG export.
+- Human-readable SVG export.
 - Printable PDF/tiled pages.
 - Cut sheet.
 - Assembly steps.
@@ -119,13 +119,14 @@ Needed:
 
 Later:
 
+- Machine-readable cutter-ready outputs.
 - DXF/AAMA/ASTM export.
 - CLO/Marvelous/Browzwear import/export experiments.
 - Tech pack generation.
 
 First research-pass recommendation:
 
-- Own a strict `PatternGraph -> SVG -> RoundTripReport` path before DXF.
+- Own a strict `PatternGraph -> human-readable SVG/PDF package -> RoundTripReport` path before DXF.
 - Use visible semantic groups/layers, stable IDs, metadata/provenance, units in millimeters, and a 100 mm scale square.
 - Treat DXF/AAMA/ASTM as a later semantic mapping problem after SVG round-trip fixtures pass.
 

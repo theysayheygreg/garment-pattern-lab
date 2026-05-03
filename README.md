@@ -12,7 +12,7 @@ The practical thesis is sharper than "UV unwrap a mesh." UV unwrapping is useful
 
 The first prototype targets one garment type:
 
-**Sleeveless A-line dress/tunic for woven fabric**, front/back sketch input, one target body measurement set, SVG/PDF pattern export, and a simple 3D preview.
+**Sleeveless A-line dress/tunic for woven fabric**, front/back sketch input, one target body measurement set, human-readable SVG/PDF pattern package, and a simple 3D preview.
 
 Why this garment:
 
@@ -81,7 +81,7 @@ The first prototype is successful when it can:
 3. Generate editable 2D pattern panels from a measurement set.
 4. Add seam allowance, grainline, notches, labels, and cut counts.
 5. Produce a basic 3D assembled preview on an avatar.
-6. Export SVG/PDF with a cut sheet and assembly order.
+6. Export human-readable SVG/PDF with a cut sheet and assembly order.
 7. Preserve a machine-readable pattern representation for later grading and simulation.
 
 ## Non-Goals For Prototype 1
@@ -92,7 +92,7 @@ The first prototype is successful when it can:
 - Sleeves, collars, plackets, pockets, linings, facings beyond simple neckline/armhole binding notes.
 - Fully automatic physical fit guarantee.
 - Factory-ready tech pack.
-- Commercial CAD interoperability beyond SVG/PDF exploration.
+- Machine-readable cutter/CAD output and commercial interoperability beyond SVG/PDF exploration.
 
 ## Core Principle
 

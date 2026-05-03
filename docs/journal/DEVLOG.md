@@ -69,3 +69,8 @@ Research roadmap execution:
 - Added a dependency register that separates reuse candidates, reference-only prior art, build-ourselves components, and risky/deferred dependencies.
 - Added an example-needs register that names the starter corpus, validation fixtures, SVG round-trip fixtures, geometry torture fixtures, marker cases, commercial interop samples, and designer-edit examples.
 - The strongest implementation path is now: build `PatternGraph` and validation in-house; prototype geometry with TypeScript libraries; use Three.js for preview; use semantic SVG before DXF; keep optimized nesting, image-to-3D, Graphite-like editing, and commercial interop as measured follow-on lanes.
+
+Output strategy:
+
+- Split outputs into two lanes. V1 is the human-readable sewing-pattern package: SVG/PDF/print package, cut sheet, assembly instructions, validation report, and PatternGraph JSON.
+- Machine-readable cutter/CAD output remains later: DXF/AAMA/ASTM, cutter-ready marker files, industrial CAD round-trip, and factory production metadata.

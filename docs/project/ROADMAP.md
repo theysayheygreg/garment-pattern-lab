@@ -12,6 +12,12 @@ The first prototype should prove the full pipeline at small scale:
 sketch -> landmarks -> design parameters -> pattern graph -> SVG/PDF pattern -> simple 3D preview -> validation report
 ```
 
+Prototype 1 output lane:
+
+- Human-readable pattern docs for a person to print, cut, review, and sew.
+- Instructions should live in or alongside the pattern package.
+- Machine-readable cutter/CAD files are a later industrial output lane, not a prototype 1 priority.
+
 ## Current Status
 
 Project seed created. Research references collected. No implementation has started.
@@ -187,7 +193,7 @@ Exit criteria:
 
 ### RR12: Commercial Interoperability Matrix
 
-Goal: understand what real pattern tools can consume and preserve.
+Goal: understand what real pattern tools can consume and preserve, while keeping machine-readable cutting/CAD output as a later lane.
 
 Deliverables:
 
@@ -196,7 +202,7 @@ Deliverables:
 
 Exit criteria:
 
-- The prototype has a credible first export target and a known path toward industrial exchange formats.
+- The prototype has a credible human-readable export target and a known later path toward industrial exchange formats.
 - Import/export failures are classified as geometry, unit, semantic layer, or tool-support issues.
 
 ### RR13: Designer Sketch-To-Model Editing Loop
@@ -228,7 +234,8 @@ Exit criteria:
 - Manual controls are allowed wherever automation is uncertain.
 - Pattern grammar is the source of truth.
 - 3D preview validates and communicates; it does not own the pattern.
-- SVG/PDF export matters more than photorealistic drape.
+- Human-readable SVG/PDF/print export matters more than photorealistic drape.
+- Machine-readable cutter/CAD output is later than prototype 1.
 - A human patternmaker review is a required milestone before claiming "sewable."
 
 ## Dependency Graph
@@ -498,6 +505,7 @@ Tasks:
 - Add validation report.
 - Add source sketch and parameter summary.
 - Add versioned JSON pattern graph.
+- Leave machine-cutter output out of scope except for preserving structured data that could support it later.
 
 Deliverables:
 

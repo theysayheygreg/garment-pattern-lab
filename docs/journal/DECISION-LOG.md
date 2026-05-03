@@ -99,3 +99,19 @@
 **Why:** A fashion sketch, a catalog envelope, a scaled pattern PDF, and a round-tripped `PatternGraph` fixture are not equally true. The product needs to know which references can inform prompts, which can validate construction, which can train models, and which can be displayed.
 
 **Door status:** Closed for corpus schema. Open for exact licensing review per source.
+
+## 2026-05-03: Prototype output is human-readable first
+
+**Question:** Should prototype 1 target human-readable sewing-pattern packages or machine-readable cutter/CAD output?
+
+**Options considered:**
+
+- Treat SVG/PDF/DXF/cutter outputs as one export surface.
+- Prioritize machine-readable production files early.
+- Split outputs into human-readable v1 and machine-readable later.
+
+**Where it landed:** Split the lanes. V1 is a human-readable pattern package a person can print, cut, review, and sew from. Machine-readable cutter/CAD files are later.
+
+**Why:** The first product proof is whether a human can understand and evaluate the generated pattern. Industrial cutter files need stricter format semantics, hardware assumptions, cutting clearances, and CAD round-trip proof. That is valuable, but it should not distract from making the first human-readable pattern credible.
+
+**Door status:** Closed for prototype 1. Open for later industrial output roadmap.

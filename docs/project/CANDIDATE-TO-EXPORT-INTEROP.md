@@ -15,12 +15,16 @@ Outputs can become:
 
 - canonical `PatternGraph`
 - corrected `PatternGraphRevision`
-- SVG
-- tiled PDF
+- human-readable SVG
+- tiled PDF / print package
+- cut sheet and assembly instructions
 - DXF/AAMA/ASTM later
+- machine cutter-ready files much later
 - tech-pack/cut-sheet metadata
 
 The interop layer exists because a candidate can look plausible and still fail as a pattern. It must measure, correct, test, and prove the candidate before export.
+
+Prototype 1 targets the human-readable lane: a person should be able to print, cut, review, and sew from the exported package. Machine-readable cutter/CAD output is a later industrial lane.
 
 ## Position In The Pipeline
 
@@ -33,7 +37,8 @@ flowchart LR
   E --> F["Validation Harness"]
   F --> G{"Export gate"}
   G -->|"pass"| H["PatternGraph"]
-  H --> I["SVG / PDF / DXF"]
+  H --> I["Human-readable SVG / PDF / cut sheet"]
+  H --> K["Later DXF / machine cutter files"]
   G -->|"fail"| J["Review queue"]
   J --> E
 ```
