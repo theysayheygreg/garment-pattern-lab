@@ -1,5 +1,7 @@
 # Dependencies
 
+Detailed dependency tracking now lives in `docs/project/DEPENDENCY-REGISTER.md`.
+
 ## Product Dependencies
 
 ### Patternmaking Knowledge
@@ -95,6 +97,13 @@ Prototype choices:
 - Blender Python for offline mesh/drape experiments if needed.
 - Research XPBD cloth approaches for later.
 
+First research-pass recommendation:
+
+- Start with TypeScript/browser geometry behind a `GeometryKernel`.
+- Test `@flatten-js/core`, `polygon-clipping` or `martinez-polygon-clipping`, and `earcut`.
+- Keep Clipper2/WASM as the measured upgrade path for offsets/booleans once fixtures prove the JS stack is not enough.
+- Keep libnest2d as an optional later marker/nesting engine, not the MVP policy layer.
+
 ### Export
 
 Needed:
@@ -113,6 +122,12 @@ Later:
 - DXF/AAMA/ASTM export.
 - CLO/Marvelous/Browzwear import/export experiments.
 - Tech pack generation.
+
+First research-pass recommendation:
+
+- Own a strict `PatternGraph -> SVG -> RoundTripReport` path before DXF.
+- Use visible semantic groups/layers, stable IDs, metadata/provenance, units in millimeters, and a 100 mm scale square.
+- Treat DXF/AAMA/ASTM as a later semantic mapping problem after SVG round-trip fixtures pass.
 
 ## Software Dependencies To Evaluate
 
@@ -168,6 +183,15 @@ Later:
 - Example sketches with known intended patterns.
 - Measurement sets.
 - Garment category taxonomy.
+
+Detailed example tracking now lives in `docs/project/EXAMPLE-NEEDS.md`.
+
+First research-pass recommendation:
+
+- Build a 20-item starter corpus with explicit truth levels and license profiles.
+- Prefer FreeSewing/OpenPattern/GarmentCodeData/2021 Zenodo for pattern-truth or generated fixtures.
+- Use Met/Smithsonian open access as visual-only garment references.
+- Treat CoPA as taxonomy/private-research metadata unless explicit permissions allow more.
 
 ## Risky Dependencies
 

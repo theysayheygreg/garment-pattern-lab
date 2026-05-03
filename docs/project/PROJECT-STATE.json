@@ -53,6 +53,26 @@
         "visual corpus items require TruthLevel and LicenseProfile",
         "image-to-3d outputs are mesh candidates, not direct pattern truth"
       ]
+    },
+    {
+      "date": "2026-05-03",
+      "localSynthesis": "docs/research/roadmap-research-pass-2026-05-03.md",
+      "dependencyRegister": "docs/project/DEPENDENCY-REGISTER.md",
+      "exampleNeeds": "docs/project/EXAMPLE-NEEDS.md",
+      "focus": [
+        "roadmap dependency execution",
+        "OSS and prior-art candidates",
+        "example and corpus needs",
+        "build-versus-reuse boundaries"
+      ],
+      "productDecisions": [
+        "build PatternGraph and validation ourselves",
+        "prototype geometry with TypeScript libraries before WASM",
+        "use Three.js for model preview",
+        "use semantic SVG before DXF",
+        "build simple garment-aware marker planner before optimized nesting",
+        "use truth and license levels for every corpus item"
+      ]
     }
   ],
   "candidateToExportInterop": {

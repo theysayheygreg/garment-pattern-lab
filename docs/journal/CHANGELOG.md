@@ -31,3 +31,6 @@
 - Promoted the twelve remaining research areas into a formal research roadmap inside `docs/project/ROADMAP.md`.
 - Added a thirteenth research lane for designer sketch-to-model editing, including raster/vector sketch layers, surface projections, PBR-style material preview layers, edit classification, and live model feedback.
 - Refined the designer editing lane into a smaller v1: edit concrete sketch features such as shoulder opening, armhole, neckline, side silhouette, hem length, and hem sweep, then map those edits to garment parameters before regenerating pattern/model feedback.
+- Started executing the research roadmap with a dependency/prior-art pass across drafting, schema, validation, geometry, SVG, marker planning, visual corpus, image-to-3D, commercial interop, and designer editing.
+- Added `DEPENDENCY-REGISTER.md`, `EXAMPLE-NEEDS.md`, and `roadmap-research-pass-2026-05-03.md`.
+- Expanded references with FreeSewing core/dev docs, GarmentCode repo/specs, browser geometry libraries, marker/nesting libraries, visual corpus sources, image-to-3D frameworks, and designer/PBR prior art.

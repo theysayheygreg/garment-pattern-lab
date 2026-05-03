@@ -62,3 +62,10 @@ Designer editing lane:
 - The lane borrows from Blender texture paint and Substance-style projection/material workflows, but keeps a hard classification boundary between visual-only edits, semantic intent, material preview, pattern candidates, and final pattern revisions.
 - Refined the first version to avoid a too-large editor build: v1 should support direct garment-feature edits such as shoulder opening, armhole, neckline, hem length, hem sweep, and side silhouette, then map each gesture to explicit `GarmentParameters`.
 - The larger Graphite-like layer editor remains valuable later for fabrics, stitches, trims, prints, appliques, annotations, masks, and material regions.
+
+Research roadmap execution:
+
+- Started working through the thirteen research roadmap lanes with a dependency and example-needs pass.
+- Added a dependency register that separates reuse candidates, reference-only prior art, build-ourselves components, and risky/deferred dependencies.
+- Added an example-needs register that names the starter corpus, validation fixtures, SVG round-trip fixtures, geometry torture fixtures, marker cases, commercial interop samples, and designer-edit examples.
+- The strongest implementation path is now: build `PatternGraph` and validation in-house; prototype geometry with TypeScript libraries; use Three.js for preview; use semantic SVG before DXF; keep optimized nesting, image-to-3D, Graphite-like editing, and commercial interop as measured follow-on lanes.
