@@ -136,3 +136,4 @@ Kew sample image analysis:
 
 - Added `KEW-SAMPLE-IMAGE-ANALYSIS.md` for Kiko's screenshot showing reference photo, croquis grid, body landmarks, technical sketch, and design callouts in one project canvas.
 - Captured the useful Pattern Lab lesson: learn from the information architecture and semantic callouts, but do not turn v1 into a broad freeform board product.
+- Added the follow-on nuance: the screenshot lacks a 3D render, and vector-editable/layered source tooling is useful soon as an interpretation bridge, not as a full Illustrator clone.

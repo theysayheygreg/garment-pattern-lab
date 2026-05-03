@@ -50,3 +50,4 @@
 - Added Kew competitor deep dive and updated the knowledge base with competitor capability and Optitex pillar framing.
 - Promoted the core product differentiator: not another mouse-and-keyboard CAD/3D editor, but a human-centered, natural-language-led, task-led path from art to garment.
 - Added Kew sample image analysis and knowledge-graph nodes for reference images, croquis guides, measurement overlays, technical callouts, and ambiguity questions.
+- Clarified that Kew-style vector/layer editing is a useful pipeline bridge and that Pattern Lab's added value is the missing pattern/validation/3D feedback loop.

@@ -656,6 +656,14 @@ This graph now folds in the first broad reference pass:
 
 `ProjectCanvasReference` is a broad Kew-like workspace artifact that combines reference images, sketches, body guides, and annotations; it is context for Pattern Lab, not a v1 product requirement.
 
+`SemanticVectorLayer` is an editable vector layer whose curves carry garment semantics rather than only visual path data.
+
+`EditableTraceLayer` is a vectorized interpretation of raster or screenshot input that can be corrected before pattern generation.
+
+`LayeredSourceDocument` stores reference, guide, callout, trace, material, and pattern-affecting layers separately.
+
+`Missing3DPreviewGap` records that a reference/product workflow has visual and technical annotation but no 3D fit/drape feedback yet.
+
 ## Secondary Ingest Edges
 
 ```text
@@ -969,6 +977,21 @@ TechnicalSketchCallout
 TechnicalSketchCallout
   -> VisualOnlyAnnotation
   -> MaterialPreviewLayer
+```
+
+```text
+ProjectCanvasReference
+  -> LayeredSourceDocument
+  -> EditableTraceLayer
+  -> SemanticVectorLayer
+  -> SketchIntent
+```
+
+```text
+ProjectCanvasReference
+  -> Missing3DPreviewGap
+  -> LiveModelPreview
+  -> ValidationReport
 ```
 
 ```text
