@@ -8,6 +8,12 @@ The architecture is built around one constraint:
 
 Sketches, meshes, UVs, AI outputs, vector edits, and 3D previews are useful inputs or views. They are not trusted as the sewing pattern until they pass through candidate normalization, validation, correction, and export proof.
 
+## Maintenance Policy
+
+This document is the current architecture, not the full research archive.
+
+As the product direction narrows, update this overview to reflect the working product shape. Preserve older explored approaches, deferred lanes, and rejected options in [Things Tried / Architecture History](../journal/THINGS-TRIED.md). Record durable product choices in [Decision Log](../journal/DECISION-LOG.md).
+
 ## System Pipeline
 
 ```text

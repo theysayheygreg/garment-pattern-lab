@@ -115,3 +115,19 @@
 **Why:** The first product proof is whether a human can understand and evaluate the generated pattern. Industrial cutter files need stricter format semantics, hardware assumptions, cutting clearances, and CAD round-trip proof. That is valuable, but it should not distract from making the first human-readable pattern credible.
 
 **Door status:** Closed for prototype 1. Open for later industrial output roadmap.
+
+## 2026-05-03: Architecture overview tracks current direction
+
+**Question:** How should the project preserve older architectural alternatives while narrowing into a real product direction?
+
+**Options considered:**
+
+- Keep appending every explored branch to the architecture overview.
+- Overwrite old material and lose research history.
+- Keep the architecture overview current, move old/deferred options into an architecture history, and record durable choices in the decision log.
+
+**Where it landed:** Keep [Architecture Overview](../project/ARCHITECTURE-OVERVIEW.md) as the current product-facing design. Preserve explored, rejected, or deferred paths in [Things Tried / Architecture History](THINGS-TRIED.md). Use this decision log for durable narrowed choices.
+
+**Why:** The README and architecture overview need to stay readable for future builders and remote visitors. The research trail still matters because deferred lanes can become later product branches, fixtures, or validation checks.
+
+**Door status:** Closed as documentation practice. Open to splitting the history file if the archive grows large.

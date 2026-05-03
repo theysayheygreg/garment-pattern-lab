@@ -36,3 +36,4 @@
 - Expanded references with FreeSewing core/dev docs, GarmentCode repo/specs, browser geometry libraries, marker/nesting libraries, visual corpus sources, image-to-3D frameworks, and designer/PBR prior art.
 - Split output strategy into a v1 human-readable pattern package lane and a later machine-readable cutter/CAD lane.
 - Added a high-level architecture overview and ported the core pipeline/tooling summary into the README.
+- Added architecture maintenance policy, `THINGS-TRIED.md`, README links, and a decision-log entry for preserving explored options while keeping the current architecture overview focused.

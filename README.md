@@ -110,6 +110,7 @@ The initial docs contain:
 - Notes on why UV unwrapping is not enough by itself.
 - Initial decisions and open questions.
 - Architecture overview, dependency register, and example/corpus needs.
+- Decision log and architecture-history trail for choices that narrow the product direction.
 
 ## Project Structure
 
@@ -128,6 +129,8 @@ handoffs/        Agent handoff notes
 ## Working Docs
 
 - [Architecture Overview](docs/project/ARCHITECTURE-OVERVIEW.md)
+- [Decision Log](docs/journal/DECISION-LOG.md)
+- [Things Tried / Architecture History](docs/journal/THINGS-TRIED.md)
 - [Product Plan](docs/project/PRODUCT-PLAN.md)
 - [Build Plan](docs/project/BUILD-PLAN.md)
 - [Project Board](docs/project/PROJECT-BOARD.md)
