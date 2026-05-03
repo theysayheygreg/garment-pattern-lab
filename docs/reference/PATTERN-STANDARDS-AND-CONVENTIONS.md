@@ -12,6 +12,22 @@ Instead, the standards landscape has three layers:
 
 For Garment Pattern Lab, the product-facing v1 should follow sewing-pattern conventions, not engineering-drawing conventions. Formal standards should inform the internal schema and later interoperability.
 
+## Target User Reality
+
+The target user is a fashion designer, indie studio, small clothing shop, sample maker, or sewing-literate maker. Many of these users may never interact directly with ASTM, ISO, AAMA, or commercial CAD exchange standards.
+
+Even a very capable sample room may work mostly from house patterns, blocks, tech sketches, printed pattern pieces, sample notes, and the patternmaker's own notation habits. The product should meet that world first.
+
+So the rule is:
+
+```text
+User-facing output: sewing pattern conventions.
+Internal architecture: standards-aware where useful.
+Later interoperability: ASTM/AAMA/DXF/ISO profiles.
+```
+
+ASTM and ISO references should be treated as backstage material. They can help us avoid painting ourselves into a corner, but they should not make the v1 package feel like a factory compliance document.
+
 ## Human-Readable Pattern Conventions
 
 These conventions are widely used across commercial and indie sewing patterns, even when individual publishers draw them differently:
@@ -47,13 +63,14 @@ Closest formal standard for 2D sewn-pattern piece data exchange.
 
 Role for this product:
 
-- later DXF/ASTM profile
+- backstage later DXF/ASTM profile
 - layer semantics for piece boundary, notches, grainline, mirror/fold line, internal lines, drill holes, sew lines, annotations, grade references, stripe/plaid references, and validation curves
 - useful evidence that pattern exchange needs semantic layers, not just geometry
 
 Important limitation:
 
 - This is not a human-readable pattern sheet standard.
+- It is likely too manufacturing/CAD-oriented for the prototype user to read directly.
 - It does not define piece-to-piece sewing relationships or 2D/3D correspondence.
 - Public secondary references report ASTM D6673-10 as withdrawn in 2019, while ASTM still lists D6673 pages; verify exact current status before treating it as active.
 
@@ -63,7 +80,7 @@ Older apparel DXF exchange convention used by commercial systems.
 
 Role for this product:
 
-- later import/export compatibility research
+- backstage import/export compatibility research
 - useful comparison target for CLO, Browzwear, Optitex, Gerber/Accumark, Lectra, and other apparel CAD workflows
 
 Important limitation:
@@ -77,7 +94,7 @@ Size designation of clothes and anthropometric/body-measurement definitions.
 
 Role for this product:
 
-- measurement vocabulary
+- backstage measurement vocabulary
 - body measurement schema
 - avatar/measurement-set consistency
 - future size chart and fit-mannequin work
@@ -92,7 +109,7 @@ Terminology relating to body dimensions for apparel sizing.
 
 Role for this product:
 
-- measurement terminology
+- backstage measurement terminology
 - body-measurement schema naming
 - future US-oriented measurement profile
 
@@ -106,7 +123,7 @@ Body measurement tables for specific figure types and ranges.
 
 Role for this product:
 
-- optional baseline size tables
+- backstage optional baseline size tables
 - future standard-size fixtures
 
 Important limitation:
@@ -120,7 +137,7 @@ Stitch and seam terminology/classification.
 
 Role for this product:
 
-- construction steps
+- backstage construction steps
 - seam type metadata
 - tech-pack and production notes later
 
@@ -164,12 +181,37 @@ The product should distinguish four related but different standards profiles:
 
 | Profile | Purpose | Prototype priority |
 | --- | --- | --- |
-| `SewingPatternSheetProfile` | Human-readable pattern sheets for designers and sewers. | V1 |
-| `MeasurementProfile` | Body measurement names, units, landmarks, and source. | V1 |
-| `ConstructionProfile` | Stitch/seam terminology and assembly metadata. | Later v1 / v2 |
-| `DXFProfile` / `ASTMProfile` | Industrial pattern CAD exchange. | Later |
+| `SewingPatternSheetProfile` | Human-readable pattern sheets for designers, indie shops, sample makers, and sewers. | V1 |
+| `MeasurementProfile` | Body measurement names, units, landmarks, and source. | V1 backstage |
+| `ConstructionProfile` | Stitch/seam terminology and assembly metadata. | Later backstage |
+| `DXFProfile` / `ASTMProfile` | Industrial pattern CAD exchange. | Later backstage |
 
 This keeps the output familiar to fashion designers while preserving a path to commercial interchange later.
+
+## Product Voice Rule
+
+Avoid exposing formal standards names in the primary v1 UI unless the user explicitly opens an advanced/export/interop area.
+
+Prefer:
+
+- "grainline"
+- "cut on fold"
+- "cut 2 main fabric"
+- "seam allowance included"
+- "print this square at 100 mm"
+- "front panel"
+- "side seam notches"
+- "construction note"
+
+Avoid in the normal designer flow:
+
+- "ASTM D6673 layer 7"
+- "ISO 4916 seam class"
+- "DXF/AAMA block"
+- "grade reference line"
+- "interop format profile"
+
+Those concepts can still exist internally and in later export settings.
 
 ## Current Knowledge Base Coverage
 

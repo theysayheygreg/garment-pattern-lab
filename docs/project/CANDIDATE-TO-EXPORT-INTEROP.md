@@ -546,6 +546,8 @@ Required:
 
 ### DXF/AAMA/ASTM Conformance
 
+This is a later backstage export lane, not a v1 designer-facing pattern package requirement.
+
 Future required:
 
 - explicit target units

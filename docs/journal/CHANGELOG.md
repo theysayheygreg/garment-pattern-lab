@@ -39,3 +39,4 @@
 - Added architecture maintenance policy, `THINGS-TRIED.md`, README links, and a decision-log entry for preserving explored options while keeping the current architecture overview focused.
 - Added CAD-to-technical-drawing reference pass, then separated it from the sewing-first product architecture with `PatternPackageModel`, `PatternPackageComposer`, and `SewingPatternSheetProfile`.
 - Added a dedicated pattern standards and conventions reference, separating common sewing-pattern notation from ASTM/ISO measurement, seam, stitch, and DXF exchange standards.
+- Clarified that ASTM/ISO/AAMA references are backstage interop and schema material, while the v1 user-facing output should stay sewing-native for designers, small shops, sample makers, and sewers.
