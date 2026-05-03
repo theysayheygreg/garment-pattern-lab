@@ -64,6 +64,11 @@ The internal representation should be a structured pattern document:
 - Cut counts.
 - Construction order.
 - 3D placement around avatar for simulation.
+- Panel complexity and corner count.
+- Seam-pair length and reflection-symmetry validation.
+- Dart geometry and dart symmetry validation.
+- Grain-axis alignment.
+- Material deformation budget for future mesh-derived patterns.
 
 This can later map to SVG, PDF, DXF/AAMA/ASTM, GarmentCode-style code, or a custom JSON schema.
 
@@ -174,6 +179,29 @@ Use four layers:
 
 The pattern grammar layer must stay central. If the system starts from a generated 3D mesh and simply flattens it, it will produce islands, not necessarily sewable pattern pieces.
 
+The `Computational Pattern Making from 3D Garment Models` paper adds a future branch, but not a replacement for the first prototype:
+
+```text
+3D garment mesh -> sewing-aware patch layout -> anisotropic textile flattening -> PatternGraphCandidate
+```
+
+That branch is valuable only if its output is converted into the same `PatternGraph` and passed through the same validation/export stack.
+
+## Validation Model
+
+Validation is product-critical. A visually plausible pattern is not enough.
+
+Prototype validation should include:
+
+- paired seam length checks
+- paired seam reflection-symmetry checks where applicable
+- dart leg and dart symmetry checks
+- panel corner-count and panel-complexity warnings
+- grainline presence and grain alignment notes
+- seam allowance/cut-line presence
+- self-intersection checks for panels and cut lines
+- explicit limitations in the exported package
+
 ## Product Risks
 
 - Sketches are ambiguous. Front-only sketches cannot resolve back construction.
@@ -193,4 +221,3 @@ Prototype 1 succeeds if a human with sewing knowledge says:
 - The cut labels make sense.
 - The garment could plausibly be mocked up in muslin.
 - The system has a clear path to supporting a second garment type.
-

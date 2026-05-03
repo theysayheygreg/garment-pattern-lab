@@ -13,6 +13,7 @@ Next actions:
 - Ingest a public/free patternmaking source into concise project notes.
 - Choose first draft method for sleeveless A-line tunic.
 - Write first-garment formulas.
+- Write sewing-aware validation checklist from the paper ingest.
 - Choose prototype tech stack.
 
 ## Ready Next
@@ -44,6 +45,21 @@ Risk:
 
 - Too much schema too early. Keep it just rich enough for the first garment.
 
+### M2.5: Sewing-Aware Validation
+
+Scope:
+
+- Seam length validation.
+- Seam reflection-symmetry scoring.
+- Dart symmetry checks.
+- Grainline checks.
+- Panel complexity warnings.
+- Self-intersection checks.
+
+Risk:
+
+- Reflection symmetry can become math-heavy. Start approximate and make the report honest.
+
 ## Blocked / Needs Research
 
 ### R1: Lawful Reference Ingestion
@@ -64,7 +80,13 @@ Need:
 
 - Decide browser Three.js vs Blender automation vs deferred preview.
 
+### R4: Mesh-To-Pattern Paper Implementation
+
+Need:
+
+- Find whether the paper's released implementation is accessible and usable.
+- Decide whether it is a future branch or reference-only.
+
 ## Backlog
 
 See `BACKLOG.md`.
-

@@ -54,11 +54,13 @@ handoffs/        Agent handoff notes
 - [Product Plan](docs/project/PRODUCT-PLAN.md)
 - [Build Plan](docs/project/BUILD-PLAN.md)
 - [Project Board](docs/project/PROJECT-BOARD.md)
+- [Product Knowledge Graph](docs/project/KNOWLEDGE-GRAPH.md)
 - [Roadmap](docs/project/ROADMAP.md)
 - [Dependencies](docs/project/DEPENDENCIES.md)
 - [Research Queue](docs/project/RESEARCH-QUEUE.md)
 - [Reference Index](docs/reference/REFERENCES.md)
 - [UV to Pattern Notes](docs/reference/UV-UNWRAP-TO-PATTERN.md)
+- [Computational Pattern Making Paper Ingest](docs/reference/papers/computational-pattern-making-2202.10272-ingest.md)
 - [First Garment Spec](docs/design/FIRST-GARMENT.md)
 
 ## Prototype Definition

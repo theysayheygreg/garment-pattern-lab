@@ -63,6 +63,7 @@ Tasks:
 - [x] Write dependency map.
 - [x] Write research queue.
 - [ ] Ingest one public/free patternmaking reference into concise notes.
+- [x] Ingest `Computational Pattern Making from 3D Garment Models` into product knowledge graph.
 - [ ] Draft first-garment formula sheet.
 - [ ] Decide prototype tech stack.
 
@@ -126,6 +127,11 @@ Tasks:
 - Define notches.
 - Define grainlines.
 - Define seam allowance and hem allowance rules.
+- Define seam-pair reflection symmetry scoring.
+- Define dart symmetry scoring.
+- Define panel corner-count and complexity warnings.
+- Define material/fabric deformation budget fields for future mesh-derived pattern candidates.
+- Define optional 3D source mesh, user seam hints, and target-pose references.
 - Define export metadata.
 - Create a hand-authored JSON example for the first garment.
 
@@ -140,6 +146,34 @@ Acceptance criteria:
 - Schema distinguishes seam line from cut line.
 - Schema can be exported to SVG.
 - Schema can be checked for seam-length compatibility.
+- Schema can attach validation results to panels, seam pairs, darts, and grain axes.
+
+## Phase 2.5: Sewing-Aware Validation Harness
+
+Goal: implement validation before the 3D preview makes the output look more trustworthy than it is.
+
+Tasks:
+
+- Implement seam length validation.
+- Implement rough seam reflection-symmetry validation for paired curves.
+- Implement panel closedness and self-intersection checks.
+- Implement panel corner-count warnings.
+- Implement dart-leg and dart-symmetry checks.
+- Implement grainline-required checks.
+- Implement seam allowance / cut-line presence checks.
+- Produce a machine-readable `validation.json` and human-readable `validation.md`.
+
+Deliverables:
+
+- `docs/project/PATTERN-VALIDATION-CHECKLIST.md`
+- Validation output fixture for first garment.
+
+Acceptance criteria:
+
+- Bad seam pairs fail loudly before export.
+- Missing grainlines or seam allowances fail loudly before export.
+- The report distinguishes errors from warnings.
+- The report cites known limitations when checks are approximate.
 
 ## Phase 3: Minimal Pattern Generator
 
@@ -158,6 +192,7 @@ Tasks:
 - Add labels and cut counts.
 - Add simple construction order.
 - Implement seam-walk validation.
+- Run the sewing-aware validation harness.
 - Export SVG.
 
 Deliverables:
@@ -171,6 +206,8 @@ Acceptance criteria:
 - Front and back panels are closed.
 - Side seams match within tolerance.
 - Shoulder seams match within tolerance.
+- Reflection-symmetry warnings are reported for paired seams.
+- Panel complexity warnings are reported.
 - Neckline and armhole finishing instructions are present.
 - SVG opens in Inkscape/Illustrator/browser.
 - Pattern includes measurement and parameter provenance.
@@ -218,6 +255,7 @@ Tasks:
 - Stitch side/shoulder seams in preview.
 - Show basic draped/relaxed form or static assembled shell.
 - Report collisions/clearance roughly.
+- Preserve the pattern graph as source of truth; preview must not silently rewrite pattern geometry.
 - Show visual comparison against intended silhouette if feasible.
 
 Deliverables:
@@ -315,6 +353,30 @@ Acceptance criteria:
 - User can override every inferred landmark.
 - Failed detections degrade gracefully.
 
+## Phase 8.5: 3D Mesh To Pattern Research Branch
+
+Goal: evaluate the paper-derived route after the pattern graph/export/validation stack exists.
+
+Tasks:
+
+- Create or import a simple 3D sleeveless tunic mesh.
+- Identify or prototype a patch-layout workflow with user seam hints.
+- Evaluate whether an anisotropic textile flattening library exists or must be built.
+- Convert generated patches into `PatternGraphCandidate`.
+- Run the same validation harness as the pattern-first route.
+- Compare output against grammar-generated pattern.
+
+Deliverables:
+
+- `docs/research/mesh-to-pattern-spike.md`
+- Candidate pattern output and validation report.
+
+Acceptance criteria:
+
+- Mesh-derived output can be represented in the same pattern graph.
+- Validation catches seam, dart, grain, and panel-complexity problems.
+- The branch is either promoted, backlogged, or rejected with evidence.
+
 ## Phase 9: Second Garment Decision
 
 Goal: decide the next expansion based on what prototype 1 proved.
@@ -340,4 +402,3 @@ Prototype 1 is done when:
 - A simple 3D preview exists.
 - A human review has produced concrete pass/fail notes.
 - The next prototype decision is recorded in the decision log.
-

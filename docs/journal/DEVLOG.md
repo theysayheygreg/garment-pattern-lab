@@ -12,3 +12,7 @@ Initial direction:
 - Start with sleeveless A-line woven dress/tunic.
 - Preserve references and open research questions in project docs.
 
+Later update:
+
+- Ingested `Computational Pattern Making from 3D Garment Models` into the product knowledge graph.
+- Added paper-specific concepts: sewing-aware patch layout, anisotropic textile parameterization, seam/dart reflection symmetry, grain alignment, panel complexity, and future mesh-to-pattern branch.

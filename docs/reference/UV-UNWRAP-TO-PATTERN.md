@@ -45,6 +45,8 @@ UV-style algorithms are still useful:
 
 The correct architecture uses UV/parameterization as one tool inside a sewing-aware pipeline.
 
+The 2022 `Computational Pattern Making from 3D Garment Models` paper makes that distinction concrete. Its flattening pipeline is sewing-aware because it adds panel shape constraints, fabric strain bounds, seam equality, seam reflection symmetry, dart handling, grain alignment, and an anisotropic woven-fabric distortion model. That is much closer to patternmaking than a normal UV unwrap.
+
 ## Recommended Architecture
 
 ```text
@@ -61,9 +63,20 @@ The important inversion:
 
 **Do not generate arbitrary 3D mesh first and ask UV unwrap to discover patternmaking. Generate pattern topology first, then use 3D preview to test it.**
 
+If a later workflow does start from a 3D mesh, it must become:
+
+```text
+3D garment mesh
+  -> sewing-aware patch layout
+  -> anisotropic textile parameterization
+  -> PatternGraphCandidate
+  -> validation/export/human review
+```
+
+The output still has to pass through the same pattern graph and validation stack.
+
 ## Commercial Tool Lesson
 
 Tools like CLO, Optitex, Browzwear, Lectra, and AccuMark generally treat real 2D patterns as the serious source of production truth. 3D simulation is powerful, but it is often driven by pattern pieces, stitch relationships, avatars, and fabric properties.
 
 This project should follow that lesson.
-

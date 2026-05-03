@@ -78,6 +78,30 @@ Prototype implication:
 
 - Validation must compare paired seams and flag mismatches.
 
+### Seam Reflection Symmetry
+
+For many sewn joins, equal length is not the whole story. Paired seam curves should often be mirror-compatible so the pieces can be placed together and sewn along a matching curve.
+
+Prototype implication:
+
+- Add a seam reflection/similarity warning even if the first implementation is approximate.
+
+### Panel Complexity
+
+Practical panels should usually be understandable and cuttable: few large pieces, smooth boundaries, limited corners, and intentional darts or seams.
+
+Prototype implication:
+
+- Track panel corner count and warn when a generated panel becomes too complex.
+
+### Textile Deformation Budget
+
+Woven fabric behaves anisotropically: warp/weft stretch and diagonal shear are not the same. Future mesh flattening should respect material-specific limits.
+
+Prototype implication:
+
+- Prototype 1 should at least record fabric assumptions and grainline. Later mesh-derived patterns need explicit stretch/shear budgets.
+
 ## First Garment Needs
 
 The sleeveless A-line tunic needs:
@@ -95,4 +119,3 @@ The sleeveless A-line tunic needs:
 ## Implementation Rule
 
 Do not hide patternmaking in a black box. The generated pattern should expose measurements, ease, and design parameters so a human can diagnose the result.
-

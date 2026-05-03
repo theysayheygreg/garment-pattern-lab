@@ -16,9 +16,11 @@ Status:
 - [x] Dependencies.
 - [x] Research queue.
 - [x] Reference index.
+- [x] Computational Pattern Making paper ingest.
 - [ ] Public-source patternmaking ingestion.
 - [ ] First-garment drafting formulas.
 - [ ] Pattern schema.
+- [ ] Sewing-aware validation checklist.
 - [ ] Tech stack decision.
 
 ## Milestone M1: First Garment Rulebook
@@ -46,6 +48,19 @@ Exit criteria:
 
 - Schema represents panels, curves, seams, darts, grainlines, notches, labels, and export metadata.
 - Schema distinguishes seam line from cut line.
+- Schema supports seam/dart symmetry validation and grain-axis validation.
+
+## Milestone M2.5: Sewing-Aware Validation
+
+Deliverables:
+
+- `docs/project/PATTERN-VALIDATION-CHECKLIST.md`
+- Validation fixtures.
+
+Exit criteria:
+
+- Seam length, seam reflection, dart symmetry, grainline, panel complexity, and self-intersection checks are specified.
+- The prototype cannot export a pattern without a validation report.
 
 ## Milestone M3: Measurement-To-Pattern Generator
 
@@ -101,4 +116,3 @@ Exit criteria:
 
 - A pattern/sewing-literate reviewer has judged whether the output is mockup-worthy.
 - Next move is selected from evidence.
-

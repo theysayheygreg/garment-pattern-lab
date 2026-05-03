@@ -51,3 +51,18 @@
 
 **Door status:** Open. Replace pieces with automation only after the generated pattern is credible.
 
+## 2026-05-03: Paper ingest adds validation requirements, not a new prototype route
+
+**Question:** Should `Computational Pattern Making from 3D Garment Models` change prototype 1 from pattern-grammar-first to 3D-mesh-first?
+
+**Options considered:**
+
+- Switch prototype 1 to mesh-first and attempt sewing-aware flattening.
+- Keep prototype 1 pattern-grammar-first and use the paper as validation/schema guidance.
+- Split immediately into two prototype branches.
+
+**Where it landed:** Keep prototype 1 pattern-grammar-first. Use the paper to deepen the schema, validation model, and future mesh-to-pattern research branch.
+
+**Why:** The paper assumes a 3D garment mesh already exists. Greg's original product idea starts from a sketch and needs a first credible export path. The paper is extremely valuable, but mostly because it names the sewing-aware constraints that normal UV workflows miss: seam reflection symmetry, darts, grain alignment, anisotropic textile deformation, patch complexity, and multi-pose seam placement.
+
+**Door status:** Closed for prototype 1. Open as a future research branch after the pattern graph and validation/export stack exist.

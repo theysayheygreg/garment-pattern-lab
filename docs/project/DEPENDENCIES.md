@@ -52,6 +52,11 @@ Needed:
 - Curves and edges.
 - Edge-to-edge stitch relationships.
 - Semantic labels.
+- Seam-pair reflection-symmetry metadata.
+- Dart geometry and symmetry metadata.
+- Grain-axis metadata.
+- Panel complexity metadata.
+- Validation results attached to graph entities.
 - Measurements and parameters.
 - Export mapping.
 
@@ -76,10 +81,12 @@ Needed:
 - 2D curve operations.
 - Seam allowance offsetting.
 - Polygon/curve validation.
+- Curve reflection/similarity scoring for seam pairs.
 - Mesh generation from panels.
 - Basic cloth drape or coarse preview.
 - Collision with avatar.
 - Seam tension and length checks.
+- Optional future anisotropic textile parameterization for 3D mesh flattening.
 
 Prototype choices:
 
@@ -120,6 +127,8 @@ Later:
 - Three.js: browser 3D preview.
 - Unity/Unreal: useful reference for UV channels, but not likely first prototype runtime.
 - trimesh / shapely / numpy / scipy if Python-based geometry experiments are chosen.
+- Poppler/pdftotext: local paper ingestion and reference extraction.
+- Future: a robust curve-offset and polygon-boolean library is likely mandatory.
 
 ### Vision / AI
 
@@ -157,4 +166,4 @@ Later:
 - Training data from commercial patterns.
 - Physics simulation treated as proof of real-world fit.
 - Fully automatic sketch interpretation before the output grammar is constrained.
-
+- Mesh-derived pattern generation treated as production-ready before sewing-aware validation and human review.

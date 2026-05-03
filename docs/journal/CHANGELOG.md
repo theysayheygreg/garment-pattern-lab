@@ -14,3 +14,6 @@
 - Added software landscape and fundamentals notes.
 - Added initial decision log and devlog.
 - Added local full PDF copy of `Computational Pattern Making from 3D Garment Models` from arXiv.
+- Added deep paper ingest note for `Computational Pattern Making from 3D Garment Models`.
+- Added `docs/project/KNOWLEDGE-GRAPH.md`.
+- Updated product plan, roadmap, dependencies, research queue, build plan, project board, backlog, UV notes, fundamentals, decision log, and devlog with sewing-aware validation concepts from the paper.

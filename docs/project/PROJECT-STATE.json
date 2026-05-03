@@ -9,7 +9,17 @@
     "ingest-public-patternmaking-reference",
     "write-first-garment-drafting-formulas",
     "define-pattern-schema",
+    "write-sewing-aware-validation-checklist",
     "choose-prototype-tech-stack"
+  ],
+  "ingestedPapers": [
+    {
+      "id": "arxiv-2202.10272",
+      "title": "Computational Pattern Making from 3D Garment Models",
+      "localPdf": "docs/reference/papers/computational-pattern-making-from-3d-garment-models-2202.10272.pdf",
+      "localIngest": "docs/reference/papers/computational-pattern-making-2202.10272-ingest.md",
+      "productImpact": "adds sewing-aware validation constraints and a future mesh-to-pattern branch"
+    }
   ],
   "prototype1DoneWhen": [
     "measurement-to-pattern-generator-works",
@@ -19,4 +29,3 @@
     "human-pattern-review-recorded"
   ]
 }
-

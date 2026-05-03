@@ -91,6 +91,7 @@ This file is the project bibliography. Keep links here and write interpretation 
 - Computational Pattern Making from 3D Garment Models. Segments 3D garment shapes into patches and computes 2D parameterizations for cut-and-sew patterns.  
   https://arxiv.org/abs/2202.10272
   Local PDF: `docs/reference/papers/computational-pattern-making-from-3d-garment-models-2202.10272.pdf`
+  Deep ingest: `docs/reference/papers/computational-pattern-making-2202.10272-ingest.md`
 
 - GarmentCode: Programming Parametric Sewing Patterns.  
   https://arxiv.org/abs/2306.03642
