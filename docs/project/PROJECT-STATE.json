@@ -9,6 +9,7 @@
   "productDesignBrief": "docs/project/PRODUCT-DESIGN.md",
   "productPillars": "docs/project/PRODUCT-PILLARS.md",
   "prototypeBuildOrder": "docs/project/PROTOTYPE-BUILD-ORDER.md",
+  "v01SpikePlan": "docs/project/V0.1-SPIKE-PLAN.md",
   "adjacentProductContext": "docs/reference/KEW-COMPETITOR-SHORTLIST.md",
   "adjacentProductDeepDive": "docs/reference/KEW-COMPETITOR-DEEP-DIVE.md",
   "adjacentProductSampleImageAnalysis": "docs/reference/KEW-SAMPLE-IMAGE-ANALYSIS.md",
@@ -42,6 +43,13 @@
     "folderRule": "Reusable product logic belongs in app/ or packages/. First-garment drafting, fixtures, references, and generated packages belong in garments/a-line-dress-tunic/."
   },
   "nextActions": [
+    "v0.1-create-one-measurement-fixture",
+    "v0.1-create-one-parameter-fixture",
+    "v0.1-build-ugly-first-garment-generator",
+    "v0.1-export-one-svg-package",
+    "v0.1-create-static-preview",
+    "v0.1-write-readiness-report",
+    "v0.1-capture-human-sanity-check",
     "B1-hand-author-valid-PatternGraph-seed",
     "B1-hand-author-invalid-pattern-fixtures",
     "B2-implement-validation-core-fixture-harness",

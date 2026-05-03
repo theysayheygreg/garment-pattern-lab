@@ -165,3 +165,9 @@ Validation interaction refinement:
 
 - Clarified that validation should mostly be backend instrumentation for interpolation quality and package readiness, not a traditional IDE/game-engine/3D-tool console of errors and warnings.
 - Replaced repair-framed product language with refinement, readiness, interpretation, safe normalization, and designer-facing choices when intent is ambiguous.
+
+Orrery response and v0.1 setup:
+
+- Added `docs/research/codex-orrery-response-2026-05-03.md` with Codex's opinionated response to all 18 Orrery review findings.
+- Added `docs/project/V0.1-SPIKE-PLAN.md` as the immediate build plan: one garment, one measurement set, one ugly generator, one SVG package, one static preview, one readiness report, one human sanity check.
+- Updated roadmap/build plan/prototype build order so the dirty spike comes before polishing the clean B0-B10 architecture.

@@ -29,6 +29,20 @@ Status:
 
 The implementation order is intentionally validation-first. The prototype should earn trust by producing measurable pattern documents before it spends too much energy on beautiful 3D or broad editor tooling.
 
+After Orrery's design review and Codex's response, the first implementation move is not the clean B0-B10 sequence. It is the v0.1 dirty end-to-end spike:
+
+```text
+one garment
+one measurement set
+one ugly generator
+one SVG package
+one static preview
+one validation/readiness report
+one human sanity check
+```
+
+Canonical next-step plan: [V0.1 Dirty End-To-End Spike Plan](V0.1-SPIKE-PLAN.md)
+
 ### B0: Repo Scaffold And Contracts
 
 Status: in progress.

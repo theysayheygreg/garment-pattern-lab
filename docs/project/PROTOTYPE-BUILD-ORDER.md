@@ -4,6 +4,8 @@ Date: 2026-05-03
 
 This is the working build path from product pillars to a first usable prototype.
 
+Update after architecture review: before hardening the clean B0-B10 layers, build the dirty v0.1 path in [V0.1 Spike Plan](V0.1-SPIKE-PLAN.md). That spike is intentionally narrow: one garment, one measurement set, one ugly generator, one SVG package, one static preview, one readiness report, one human sanity check.
+
 ## Folder Boundary
 
 Reusable product engine:
@@ -207,6 +209,7 @@ Exit:
 
 ## Implementation Bias
 
+- Build the ugly end-to-end spike before polishing layer boundaries.
 - Build validation before 3D beauty.
 - Build manual landmarking before automatic sketch parsing.
 - Build semantic vector correction before generic vector editing.

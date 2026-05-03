@@ -73,6 +73,22 @@ These areas are the working product pipeline. Each has a reusable app/package ow
 
 Full build order: [Prototype Build Order](PROTOTYPE-BUILD-ORDER.md)
 
+Immediate implementation plan: [V0.1 Dirty End-To-End Spike Plan](V0.1-SPIKE-PLAN.md)
+
+The first build move should be brutally simple:
+
+```text
+one garment
+one measurement set
+one ugly generator
+one SVG package
+one static preview
+one validation/readiness report
+one human sanity check
+```
+
+This v0.1 spike should happen before polishing the clean B0-B10 architecture. The spike's job is to reveal the real schema, geometry, export, preview, and readiness needs.
+
 The real build order is:
 
 1. **B0: Repo Scaffold And Contracts**
@@ -520,6 +536,7 @@ Goal: generate the first garment from measurements and parameters with no sketch
 
 Tasks:
 
+- Start from the dirty v0.1 spike plan before extracting clean reusable abstractions.
 - Create product package skeleton under `packages/`.
 - Create first-garment program skeleton under `garments/a-line-dress-tunic/`.
 - Add measurement fixture JSON under `garments/a-line-dress-tunic/fixtures/measurements/`.
