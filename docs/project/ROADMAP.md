@@ -16,6 +16,189 @@ sketch -> landmarks -> design parameters -> pattern graph -> SVG/PDF pattern -> 
 
 Project seed created. Research references collected. No implementation has started.
 
+## Research Roadmap To Prototype 1
+
+These are the twelve research tracks that still need closure before or alongside the first working prototype. The order matters: the first six create the manufacturing spine; the later six open the AI, 3D, and interoperability lanes without letting them own pattern truth too early.
+
+### RR1: First-Garment Drafting Formulas
+
+Goal: make the sleeveless A-line woven tunic draftable without inventing patternmaking logic in code.
+
+Deliverables:
+
+- `docs/project/FIRST-GARMENT-DRAFTING.md`
+- required measurement list
+- ease defaults
+- neckline, armhole, shoulder, side seam, hem, and closure rules
+- seam allowance, hem allowance, notches, labels, cut counts, and construction order
+
+Exit criteria:
+
+- A developer can generate the front/back panels from measurements and parameters.
+- The draft states where human patternmaker judgment is still required.
+
+### RR2: PatternGraph Schema
+
+Goal: define the JSON representation that becomes manufacturing truth.
+
+Deliverables:
+
+- `docs/project/PATTERN-SCHEMA.md`
+- `prototype/browser/fixtures/a-line-tunic.pattern.json`
+- schema examples for panels, seam lines, cut lines, seam pairs, darts, grainlines, labels, validation, export metadata, and provenance
+
+Exit criteria:
+
+- The first garment can be represented without hidden assumptions.
+- Schema separates seam geometry from cut geometry.
+
+### RR3: Sewing-Aware Validation Checklist
+
+Goal: define what makes a candidate pattern fail before export.
+
+Deliverables:
+
+- `docs/project/PATTERN-VALIDATION-CHECKLIST.md`
+- invalid fixture set with intentional seam, grainline, scale, self-intersection, label, and allowance failures
+- validation report shape for errors, warnings, and known limitations
+
+Exit criteria:
+
+- Bad candidates cannot become exportable `PatternGraph` objects.
+- Every failure points to a specific panel, seam, dart, grainline, unit profile, or export field.
+
+### RR4: Geometry Kernel Decision
+
+Goal: decide the smallest robust geometry stack for prototype 1.
+
+Deliverables:
+
+- `docs/project/TECH-STACK-DECISION.md`
+- `docs/research/geometry-kernel-spike.md`
+- operation matrix for TypeScript, Rust/WASM, C++/Emscripten, WebGPU, Graphite crates, and candidate libraries
+
+Exit criteria:
+
+- `PatternKernel` and `GeometryKernel` interfaces are specified.
+- First implementation path is chosen for curve length, offsets, intersections, triangulation, and marker placement.
+
+### RR5: SVG Semantic Profile And Round Trip
+
+Goal: make SVG a trustworthy first export format.
+
+Deliverables:
+
+- `docs/project/SVG-SEMANTIC-PROFILE.md`
+- `docs/research/svg-roundtrip-spike.md`
+- SVG layer/metadata map for cut lines, seam lines, internal lines, notches, grain/fold lines, labels, units, and provenance
+
+Exit criteria:
+
+- Exported SVG can be reimported and checked against the source `PatternGraph`.
+- Unit scale and semantic layer preservation are measured, not eyeballed.
+
+### RR6: Marker Planner Spike
+
+Goal: create a first honest fabric-width layout before optimized nesting.
+
+Deliverables:
+
+- `docs/project/MARKER-PLANNER.md`
+- `prototype/browser/fixtures/marker-plan.example.json`
+- comparison notes for deterministic strip placement vs libnest2d/Deepnest-style optimization
+
+Exit criteria:
+
+- The system can place cut pieces inside a usable fabric width with grain, spacing, cut count, fold, and fabric-length reporting.
+- The report distinguishes valid-but-wasteful from invalid placement.
+
+### RR7: Graphite And Blender Audits
+
+Goal: decide what the pulled tools actually contribute to the pipeline.
+
+Deliverables:
+
+- `docs/research/graphite-vector-audit.md`
+- `docs/research/blender-headless-preview-spike.md`
+- notes on semantic SVG survival through Graphite/editors and minimal Blender Python preview fields
+
+Exit criteria:
+
+- Graphite is classified as vector editor, geometry source, both, or reference only.
+- Blender preview can be accepted, deferred, or replaced by browser Three.js with evidence.
+
+### RR8: Visual Corpus Schema
+
+Goal: make image references usable without confusing inspiration with truth.
+
+Deliverables:
+
+- `docs/project/VISUAL-CORPUS-SCHEMA.md`
+- `TruthLevel` and `LicenseProfile` definitions
+- sample entries for generated sketch, technical flat, real pattern reference, pattern-truth fixture, and round-trip fixture
+
+Exit criteria:
+
+- Every visual item records source, allowed use, garment family, construction features, review status, and truth level.
+
+### RR9: Pattern Reference Corpus
+
+Goal: collect real construction examples for correctness checks.
+
+Deliverables:
+
+- `docs/reference/PATTERN-REFERENCE-CORPUS.md`
+- first reference set for sleeveless A-line tunic/dress, A-line skirt, bodice shell, simple woven top, and simple pants block
+- notes for LACMA, OpenPattern, FreeSewing, GarmentCodeData, and CoPA usefulness/limits
+
+Exit criteria:
+
+- Each garment family has expected panel roles, seam pairs, grainline rules, finishing pieces, and suspicious omissions.
+
+### RR10: GPT Image 2 Sketch Corpus Spike
+
+Goal: test whether generated sketches and flats can become controlled fixtures.
+
+Deliverables:
+
+- `docs/research/gpt-image-2-sketch-corpus-spike.md`
+- prompt recipes for front/back flats, croquis sketches, and reference sheets
+- 20-item reviewed mini-corpus plan
+
+Exit criteria:
+
+- Generated images are reviewed into `SketchIntent` records or rejected with reasons.
+- Prompt recipes preserve enough construction semantics to be useful.
+
+### RR11: Image-To-3D Comparison
+
+Goal: evaluate mesh candidates without mistaking them for patterns.
+
+Deliverables:
+
+- `docs/research/image-to-3d-candidate-spike.md`
+- SPAR3D vs Hunyuan3D-2 comparison on the same small input set
+- tracking notes for TRELLIS, TRELLIS.2, and TripoSR
+
+Exit criteria:
+
+- Outputs are scored with `MeshQualityReport`.
+- The project knows whether image-to-3D is useful for preview, seam hints, mesh-to-pattern research, or only inspiration.
+
+### RR12: Commercial Interoperability Matrix
+
+Goal: understand what real pattern tools can consume and preserve.
+
+Deliverables:
+
+- `docs/project/EXPORT-COMPATIBILITY-MATRIX.md`
+- notes for CLO, Seamly2D, Illustrator/Inkscape, SVG, DXF/AAMA/ASTM, PDF, and future CAD formats
+
+Exit criteria:
+
+- The prototype has a credible first export target and a known path toward industrial exchange formats.
+- Import/export failures are classified as geometry, unit, semantic layer, or tool-support issues.
+
 ## Guiding Constraints
 
 - One garment type only.

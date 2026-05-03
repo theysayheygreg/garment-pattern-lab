@@ -50,3 +50,8 @@ Deep-dive research pass:
 - Strengthened the knowledge graph with browser kernel nodes, marker/nesting nodes, visual-corpus truth nodes, image-to-3D candidate nodes, and semantic export fixtures.
 - The strongest product decision stayed consistent: generated geometry is welcome, but only a proven `PatternGraph` can be exported as a pattern.
 - The next build-facing work is now clearer: write the `PatternGraph` schema, browser `GeometryKernel` contract, SVG semantic profile, simple marker planner, and small visual corpus schema.
+
+Roadmap refinement:
+
+- Promoted the twelve remaining research areas into a formal `Research Roadmap To Prototype 1`.
+- The roadmap now explicitly sequences the work: drafting formulas, schema, and validation first; geometry/SVG/marker next; Graphite, Blender, visual corpus, GPT Image 2, image-to-3D, and commercial interop as parallel expansion tracks.

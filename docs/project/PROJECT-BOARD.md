@@ -16,6 +16,18 @@ Next actions:
 - Write sewing-aware validation checklist from the paper ingest.
 - Choose prototype tech stack.
 
+### RR0: Research Roadmap Spine
+
+Owner: planning/research agent
+
+Status: Active.
+
+Next actions:
+
+- Close RR1, RR2, and RR3 together: first-garment drafting formulas, `PatternGraph` schema, and sewing-aware validation checklist.
+- Then close RR4, RR5, and RR6 as the prototype-enabling technical research: geometry kernel, SVG semantic round trip, and marker planner.
+- Keep RR7-RR12 parallel but non-blocking until the manufacturing spine is coherent.
+
 ## Ready Next
 
 ### M1: First Garment Rulebook
