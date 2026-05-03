@@ -349,6 +349,28 @@ Edges:
 - `ValidationReport -> PatternGraphRevision`
 - `ValidationReport -> HumanReview`
 
+### Candidate-To-Export Interop
+
+`PatternGraphCandidate` is an incomplete or untrusted pattern output from mesh flattening, AI generation, imported files, or early drafting code.
+
+`CandidateProvenance` records source model, source file, source mesh, prompt, paper pipeline, user edit, license, and transformation history.
+
+`CandidateNormalizerReport` records unit normalization, panel extraction, source-layer mapping, missing fields, and ambiguity.
+
+`MeasurementReport` stores geometric measurements before and after correction.
+
+`CorrectionOperation` records automatic, assisted, or manual edits that change a candidate.
+
+`ExportGateReport` determines whether the candidate can be promoted to `PatternGraph` and exported.
+
+`ExportConformanceReport` checks whether SVG/PDF/DXF output preserved required semantics and file-format expectations.
+
+`RoundTripReport` compares exported and reimported geometry/metadata.
+
+`InteropFormatProfile` defines the target semantics for SVG, PDF, DXF/AAMA/ASTM, or another format.
+
+`ToleranceProfile` defines accepted measurement differences for seam length, notch placement, closure gaps, scale, and grainline angle.
+
 ## Paper-Ingested Concepts
 
 From `Computational Pattern Making from 3D Garment Models`, the graph gains these durable concepts:
@@ -694,6 +716,35 @@ PatternGraph
   -> ValidationReport
 ```
 
+```text
+PatternGraphCandidate
+  -> CandidateProvenance
+  -> CandidateNormalizerReport
+  -> MeasurementReport
+  -> CorrectionOperation
+  -> PatternGraphRevision
+  -> ValidationReport
+  -> ExportGateReport
+  -> PatternGraph
+
+PatternGraph
+  -> InteropFormatProfile
+  -> SVGExport
+  -> ExportConformanceReport
+  -> RoundTripReport
+
+PatternGraph
+  -> InteropFormatProfile
+  -> DXFExport
+  -> ExportConformanceReport
+  -> RoundTripReport
+
+ToleranceProfile
+  -> MeasurementReport
+  -> ValidationReport
+  -> ExportGateReport
+```
+
 ## Representation Boundary Rules
 
 - `PatternGraph` is the manufacturing source of truth.
@@ -703,6 +754,7 @@ PatternGraph
 - `UVIsland` is a flattened geometry region. It becomes useful only after seam semantics, grainline, allowances, labels, and construction metadata are added.
 - `MarkerPlan` can reuse packing algorithms, but must respect grain, folds, fabric width, size runs, and cutting constraints that ordinary UV packing ignores.
 - `ValidationReport` is the guardrail between generated candidates and user-facing pattern output.
+- `PatternGraphCandidate` must never export directly. It must pass candidate-to-export interop and be promoted to `PatternGraph`.
 
 ## Product Architecture Implications
 

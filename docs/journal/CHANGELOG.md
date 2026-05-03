@@ -23,3 +23,4 @@
 - Added browser-native Three.js/WebGPU/WASM pipeline plan for an ownable 2D reference -> 3D model -> flats -> pattern product lane.
 - Added AI sketch and 3D exploration lanes for GPT Image 2 sketch corpus generation, modern image-to-3D candidate frameworks, and visual-corpus evaluation.
 - Refined the third AI exploration lane into a garment-type pattern-reference corpus for construction correctness examples.
+- Added candidate-to-export interop layer for measuring, correcting, validating, and round-tripping pattern candidates before SVG/PDF/DXF export.

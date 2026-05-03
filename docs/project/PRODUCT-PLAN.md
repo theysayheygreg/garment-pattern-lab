@@ -174,8 +174,9 @@ Use four layers:
 
 1. **Vision layer:** parse sketch into landmarks and style parameters.
 2. **Pattern grammar layer:** generate valid 2D sewing topology from parameters and measurements.
-3. **Simulation/validation layer:** assemble the pattern into 3D and check fit, collision, seam consistency, and visual intent.
-4. **Export layer:** produce human-readable and machine-readable pattern assets.
+3. **Candidate-to-export interop layer:** normalize, measure, correct, validate, and round-trip any candidate before it becomes an exportable pattern.
+4. **Simulation/validation layer:** assemble the pattern into 3D and check fit, collision, seam consistency, and visual intent.
+5. **Export layer:** produce human-readable and machine-readable pattern assets.
 
 The pattern grammar layer must stay central. If the system starts from a generated 3D mesh and simply flattens it, it will produce islands, not necessarily sewable pattern pieces.
 
@@ -185,7 +186,7 @@ The `Computational Pattern Making from 3D Garment Models` paper adds a future br
 3D garment mesh -> sewing-aware patch layout -> anisotropic textile flattening -> PatternGraphCandidate
 ```
 
-That branch is valuable only if its output is converted into the same `PatternGraph` and passed through the same validation/export stack.
+That branch is valuable only if its output is converted into the same `PatternGraphCandidate` contract, passed through the candidate-to-export interop layer, and only then promoted to `PatternGraph`.
 
 ## Validation Model
 
@@ -201,6 +202,8 @@ Prototype validation should include:
 - seam allowance/cut-line presence
 - self-intersection checks for panels and cut lines
 - explicit limitations in the exported package
+- export conformance checks
+- round-trip import/export checks
 
 ## Product Risks
 

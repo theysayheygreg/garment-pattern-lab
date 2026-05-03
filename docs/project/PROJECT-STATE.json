@@ -18,8 +18,15 @@
     "scaffold-prototype-browser",
     "run-gpt-image-2-sketch-corpus-spike",
     "run-image-to-3d-candidate-spike",
-    "define-visual-corpus-schema"
+    "define-visual-corpus-schema",
+    "define-candidate-to-export-interop-schema",
+    "define-roundtrip-export-tests"
   ],
+  "candidateToExportInterop": {
+    "localPlan": "docs/project/CANDIDATE-TO-EXPORT-INTEROP.md",
+    "thesis": "Any mesh-derived, AI-derived, imported, or program-generated candidate must be normalized, measured, corrected, validated, and round-trip tested before promotion to PatternGraph or export.",
+    "firstPrototypePath": "candidate JSON -> normalize -> measure -> correct tiny issues -> validate -> export SVG -> reimport SVG -> round-trip report"
+  },
   "ownablePipelineLane": {
     "id": "browser-native-threejs-webgpu-wasm",
     "localPlan": "docs/project/BROWSER-NATIVE-PIPELINE.md",

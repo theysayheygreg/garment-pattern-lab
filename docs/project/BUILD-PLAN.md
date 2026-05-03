@@ -56,11 +56,13 @@ Deliverables:
 
 - `docs/project/PATTERN-VALIDATION-CHECKLIST.md`
 - Validation fixtures.
+- `docs/project/CANDIDATE-TO-EXPORT-INTEROP.md`
 
 Exit criteria:
 
 - Seam length, seam reflection, dart symmetry, grainline, panel complexity, and self-intersection checks are specified.
 - The prototype cannot export a pattern without a validation report.
+- Candidate outputs cannot export directly; they must be normalized, measured, corrected, validated, and round-trip tested.
 
 ## Milestone M3: Measurement-To-Pattern Generator
 

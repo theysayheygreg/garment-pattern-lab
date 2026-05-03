@@ -50,6 +50,7 @@ Not parallelizable:
 - Pattern generator depends on drafting rules and schema.
 - Automated sketch parsing should wait until manual landmark mapping works.
 - Fit automation depends on generated pattern and preview validation.
+- Export depends on candidate-to-export interop: normalize, measure, correct, validate, and round-trip.
 
 ## Phase 0: Project Grounding
 
@@ -68,6 +69,7 @@ Tasks:
 - [ ] Draft first-garment formula sheet.
 - [ ] Decide prototype tech stack.
 - [x] Draft browser-native Three.js/WebGPU/WASM pipeline lane.
+- [x] Define candidate-to-export interop layer.
 
 Acceptance criteria:
 
@@ -163,6 +165,9 @@ Tasks:
 - Implement dart-leg and dart-symmetry checks.
 - Implement grainline-required checks.
 - Implement seam allowance / cut-line presence checks.
+- Implement candidate normalization and measurement report shape.
+- Implement export gate semantics.
+- Implement SVG round-trip test requirements.
 - Produce a machine-readable `validation.json` and human-readable `validation.md`.
 
 Deliverables:
@@ -176,6 +181,7 @@ Acceptance criteria:
 - Missing grainlines or seam allowances fail loudly before export.
 - The report distinguishes errors from warnings.
 - The report cites known limitations when checks are approximate.
+- Candidates cannot be promoted to exportable `PatternGraph` unless the export gate passes.
 
 ## Phase 3: Minimal Pattern Generator
 

@@ -61,6 +61,26 @@ Outputs:
 - `docs/project/PATTERN-VALIDATION-CHECKLIST.md`
 - Validation fixture with intentional failures.
 
+### R2c: Candidate-To-Export Interop Layer
+
+Goal: define the bridge between `PatternGraphCandidate` outputs and exportable pattern files.
+
+Questions:
+
+- What is the minimum viable `PatternGraphCandidate` schema?
+- Which measurements must run before correction?
+- Which correction operations can be automatic, assisted, or manual?
+- Which hard errors block SVG/PDF/DXF export?
+- What round-trip tests prove an export preserved geometry and semantics?
+- How should mesh-derived candidates from the 2202.10272 pipeline become pattern candidates?
+
+Outputs:
+
+- `docs/project/CANDIDATE-TO-EXPORT-INTEROP.md`
+- `docs/project/PATTERN-SCHEMA.md`
+- `docs/project/PATTERN-VALIDATION-CHECKLIST.md`
+- `prototype/browser/fixtures/invalid-candidate.pattern.json`
+
 ### R3: First Prototype Tech Stack
 
 Goal: choose the smallest stack that can generate, preview, and export.

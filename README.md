@@ -61,6 +61,7 @@ handoffs/        Agent handoff notes
 - [Graphite + Blender Pipeline Notes](docs/project/GRAPHITE-BLENDER-PIPELINE.md)
 - [Browser-Native Pipeline](docs/project/BROWSER-NATIVE-PIPELINE.md)
 - [AI Sketch And 3D Exploration](docs/project/AI-SKETCH-3D-EXPLORATION.md)
+- [Candidate-To-Export Interop Layer](docs/project/CANDIDATE-TO-EXPORT-INTEROP.md)
 - [Reference Index](docs/reference/REFERENCES.md)
 - [UV to Pattern Notes](docs/reference/UV-UNWRAP-TO-PATTERN.md)
 - [Computational Pattern Making Paper Ingest](docs/reference/papers/computational-pattern-making-2202.10272-ingest.md)
