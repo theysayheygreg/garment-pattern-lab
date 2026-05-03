@@ -480,6 +480,28 @@ This graph now folds in the first broad reference pass:
 
 `SketchToPatternModel`, `DualGraphRepresentation`, `PatternParser`, `2D3DCorrespondence`, and `FeatureHumanModel` are later research nodes, not prototype commitments.
 
+### AI Sketch And Visual Corpus Layer
+
+`GeneratedSketch` is a model-created sketch or technical flat with known prompt metadata.
+
+`PromptRecipe` is a reusable prompt template for generating controlled garment views.
+
+`VisualCorpusItem` is an indexed image, sketch, render, or 3D candidate with license, source, and review metadata.
+
+`SketchStyle` describes whether the artifact is a croquis sketch, technical flat, isolated garment drawing, rendered concept, or construction-focused line drawing.
+
+`ReferenceSheet` groups related views such as front/back technical flats or sketch/render/pattern triplets.
+
+`ImageTo3DModelCandidate` is a mesh/GLB/OBJ generated from a sketch, photo, or render by systems such as SPAR3D, Hunyuan3D, TRELLIS, or TripoSR.
+
+`MeshCandidateReport` scores a generated 3D output for silhouette preservation, mesh cleanliness, garment-body separation, and usefulness for mesh-to-pattern research.
+
+`CorpusTruthLevel` separates visual-only artifacts from semantically reviewed artifacts and pattern-truth fixtures.
+
+`SemanticReview` is human or model-assisted review of whether a sketch's garment semantics are clear enough to drive `SketchIntent`.
+
+`PatternTruthLink` connects an image or 3D output to an actual `PatternGraph`, measurement set, and validation report.
+
 ## Secondary Ingest Edges
 
 ```text
@@ -628,6 +650,30 @@ MultiViewImageSet
 
 FeatureLine
   -> GarmentLandmark
+```
+
+```text
+PromptRecipe
+  -> GeneratedSketch
+  -> VisualCorpusItem
+  -> SemanticReview
+  -> SketchIntent
+
+VisualCorpusItem
+  -> CorpusTruthLevel
+
+GeneratedSketch
+  -> ReferenceSheet
+  -> LandmarkSet
+
+GeneratedSketch
+  -> ImageTo3DModelCandidate
+  -> MeshCandidateReport
+  -> 3DGarmentMesh
+
+PatternGraph
+  -> PatternTruthLink
+  -> VisualCorpusItem
 ```
 
 ## Representation Boundary Rules

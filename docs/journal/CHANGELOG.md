@@ -21,3 +21,4 @@
 - Expanded the product knowledge graph with secondary-ingest nodes and edges for pattern programs, parametric tools, industrialization metadata, UV boundaries, datasets, multimodal generation, and ML representations.
 - Added local Graphite and Blender setup notes plus a pipeline plan for 2D sketch, 3D preview/render, and pattern flats.
 - Added browser-native Three.js/WebGPU/WASM pipeline plan for an ownable 2D reference -> 3D model -> flats -> pattern product lane.
+- Added AI sketch and 3D exploration lanes for GPT Image 2 sketch corpus generation, modern image-to-3D candidate frameworks, and visual-corpus evaluation.

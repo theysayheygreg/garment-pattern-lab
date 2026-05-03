@@ -15,7 +15,10 @@
     "run-blender-headless-preview-spike",
     "run-svg-roundtrip-spike",
     "decide-browser-native-tech-stack",
-    "scaffold-prototype-browser"
+    "scaffold-prototype-browser",
+    "run-gpt-image-2-sketch-corpus-spike",
+    "run-image-to-3d-candidate-spike",
+    "define-visual-corpus-schema"
   ],
   "ownablePipelineLane": {
     "id": "browser-native-threejs-webgpu-wasm",
@@ -23,6 +26,23 @@
     "thesis": "Use Three.js for the product 3D viewport, TypeScript for the first PatternGraph loop, WASM for deterministic geometry kernels, and WebGPU only as optional acceleration after the static preview works.",
     "firstPrototypePath": "manual 2D reference annotation -> PatternGraph JSON -> 2D flats SVG/PDF -> Three.js static 3D assembly preview -> validation report"
   },
+  "aiExplorationLanes": [
+    {
+      "id": "gpt-image-2-sketch-creation",
+      "localPlan": "docs/project/AI-SKETCH-3D-EXPLORATION.md",
+      "pipelineRole": "generate controlled garment sketch and technical-flat corpus items with prompt metadata and human semantic review"
+    },
+    {
+      "id": "image-to-3d-candidate-geometry",
+      "localPlan": "docs/project/AI-SKETCH-3D-EXPLORATION.md",
+      "pipelineRole": "evaluate modern image/sketch-to-3D frameworks as visualization and mesh-to-pattern research inputs"
+    },
+    {
+      "id": "visual-corpus-evaluation-bridge",
+      "localPlan": "docs/project/AI-SKETCH-3D-EXPLORATION.md",
+      "pipelineRole": "connect generated sketches, 3D candidates, semantic labels, validation reports, and pattern truth levels"
+    }
+  ],
   "externalTooling": [
     {
       "id": "graphite",

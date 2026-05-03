@@ -113,6 +113,25 @@ Outputs:
 - `prototype/browser` skeleton
 - `prototype/browser/fixtures/a-line-tunic.pattern.json`
 
+### R3d: AI Sketch And Image-To-3D Exploration
+
+Goal: evaluate GPT Image 2 sketch generation, modern image-to-3D frameworks, and corpus/eval scaffolding for the 2D reference -> 3D model -> flats -> pattern loop.
+
+Questions:
+
+- Can GPT Image 2 produce controlled technical flats and garment-on-body sketches with stable construction semantics?
+- Which prompt recipes preserve front/back consistency, seam visibility, darts, and silhouette?
+- Which current image-to-3D model is most useful for garment candidate geometry: SPAR3D, Hunyuan3D-2, TRELLIS, TRELLIS.2, or TripoSR?
+- How do we label generated sketches so they become useful corpus items instead of vibes?
+- What visual truth levels are needed before a generated image can train or evaluate pattern generation?
+
+Outputs:
+
+- `docs/project/AI-SKETCH-3D-EXPLORATION.md`
+- `docs/project/VISUAL-CORPUS-SCHEMA.md`
+- `docs/research/gpt-image-2-sketch-corpus-spike.md`
+- `docs/research/image-to-3d-candidate-spike.md`
+
 ### R4: 2D Sketch Parsing
 
 Goal: decide how much automation belongs in v0.

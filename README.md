@@ -60,6 +60,7 @@ handoffs/        Agent handoff notes
 - [Research Queue](docs/project/RESEARCH-QUEUE.md)
 - [Graphite + Blender Pipeline Notes](docs/project/GRAPHITE-BLENDER-PIPELINE.md)
 - [Browser-Native Pipeline](docs/project/BROWSER-NATIVE-PIPELINE.md)
+- [AI Sketch And 3D Exploration](docs/project/AI-SKETCH-3D-EXPLORATION.md)
 - [Reference Index](docs/reference/REFERENCES.md)
 - [UV to Pattern Notes](docs/reference/UV-UNWRAP-TO-PATTERN.md)
 - [Computational Pattern Making Paper Ingest](docs/reference/papers/computational-pattern-making-2202.10272-ingest.md)
