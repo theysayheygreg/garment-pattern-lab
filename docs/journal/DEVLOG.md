@@ -86,3 +86,9 @@ CAD drawing analogy:
 - Added `docs/research/cad-to-technical-drawings-2026-05-03.md` after a reference pass on CAD-to-technical-drawing workflows.
 - The useful borrow is a sheet/package-composition layer, not CAM: generated views, useful dimensions, labels, page templates, pattern info blocks, scale proof, style profiles, and print-readiness checks.
 - Separated the reference analogy from the product voice. The live architecture now uses sewing-native concepts: `PatternPackageModel`, `PatternPackageComposer`, and `SewingPatternSheetProfile`, downstream of `PatternGraph` and upstream of human-readable SVG/PDF.
+
+Pattern standards pass:
+
+- Added `docs/reference/PATTERN-STANDARDS-AND-CONVENTIONS.md`.
+- Current read: there is no single universal ASME-like standard for human-readable sewing pattern sheets.
+- Product direction: define our own small `SewingPatternSheetProfile` from common pattern conventions, while tracking formal standards separately for measurements, construction metadata, and later DXF/ASTM exchange.

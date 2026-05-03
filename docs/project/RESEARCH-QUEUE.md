@@ -110,9 +110,16 @@ Questions:
 Outputs:
 
 - `docs/research/cad-to-technical-drawings-2026-05-03.md`
+- `docs/reference/PATTERN-STANDARDS-AND-CONVENTIONS.md`
 - `docs/project/PATTERN-SHEET-PROFILE.md`
 - first `PatternPackageModel` JSON fixture
 - first SVG/PDF sheet-composition fixture
+
+Standards update:
+
+- There is no single universal ASME-like standard for human-readable sewing pattern sheets.
+- V1 should define a sewing-native `SewingPatternSheetProfile` based on common pattern conventions.
+- Formal standards should inform adjacent profiles: ASTM D6673/DXF for later pattern data exchange, ISO 8559 and ASTM D5219/D5585 for measurements/sizing, and ISO 4915/4916 plus ASTM D6193 for stitches/seams.
 
 ### R3: First Prototype Tech Stack
 

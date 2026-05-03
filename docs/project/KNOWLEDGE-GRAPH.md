@@ -456,6 +456,12 @@ This graph now folds in the first broad reference pass:
 
 `SewingPatternSheetProfile` is a lightweight sewing pattern convention: line styles, required labels, page sizes, units, pattern-info fields, scale-proof rules, and annotation conventions.
 
+`PatternConventionProfile` separates human-readable sewing pattern conventions from formal interchange standards and construction/measurement standards.
+
+`MeasurementProfile` names the measurement vocabulary, landmarks, units, and source standard or custom measurement set.
+
+`ConstructionProfile` names stitch/seam terminology, construction metadata, and future tech-pack-facing seam classifications.
+
 `HumanReadablePatternPackage` is the v1 output bundle for a sewer or sample room: pattern sheets, tiled PDF, cut sheet, construction guide, validation report, source `PatternGraph`, and optional 3D reference view.
 
 ### Parametric Tooling Layer
