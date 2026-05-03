@@ -4,7 +4,9 @@ Date: 2026-05-03
 
 This note captures a useful adjacent discipline: CAD systems routinely turn model geometry into printable technical drawing packages for machinists, fabricators, inspectors, and craftspeople.
 
-The parallel for Garment Pattern Lab is strong. A validated pattern is not enough by itself. The product also needs a sheet-composition layer that turns `PatternGraph` into a readable, inspectable, printable craft document.
+This is reference inspiration, not the product voice. Garment Pattern Lab is sewing-first and fashion-designer-first. The useful takeaway is that a validated geometry model still needs a human-readable package layer.
+
+For this product, that package should feel like a clear sewing pattern: pattern pieces, cut quantities, grainlines, notches, fold lines, seam allowance, fabric assumptions, print scale, and construction steps.
 
 ## Core Analogy
 
@@ -23,12 +25,12 @@ Garment analog:
 PatternGraph
   -> pattern views / panel sheets / optional 3D reference view
   -> dimensions / notches / grainlines / seam allowance / labels
-  -> tiled sheets / title block / cutting notes / assembly notes
+  -> tiled sheets / pattern information / cutting notes / assembly notes
   -> human-readable pattern package
   -> sewer, patternmaker, or sample room
 ```
 
-The key lesson: the printable package is a semantic product surface, not just a file export.
+The key lesson: the printable sewing pattern package is a semantic product surface, not just a file export.
 
 ## Relevant CAD Concepts
 
@@ -43,9 +45,9 @@ CAD drawings usually organize information into multiple views:
 - isometric reference views
 - exploded or assembly views
 
-For garments, the equivalent views are:
+For garments, the equivalent package surfaces are:
 
-- full panel views
+- full pattern-piece sheets
 - detail views for neckline, armhole, dart, closure, pocket, or facing
 - marker/fabric layout view
 - tiled print-page view
@@ -59,12 +61,12 @@ CAD drawing generation depends on reliable projection from 3D to 2D. Open CASCAD
 Garment relevance:
 
 - 3D preview views should not be screenshots only; they can produce clean line-art references.
-- Pattern output needs a similar distinction between visible view geometry and manufacturing geometry.
+- Pattern output needs a similar distinction between reference visuals and sewing pattern geometry.
 - Section/detail views may be useful for closures, folded edges, bindings, and layered construction.
 
 ### Dimensions And Annotations
 
-Technical drawings are not complete until dimensions, tolerances, callouts, and notes are placed legibly.
+Technical drawings are not complete until dimensions, callouts, and notes are placed legibly. Garment patterns need the same care, but with fewer engineering-style measurements and more sewing-specific labels.
 
 Garment analog:
 
@@ -80,7 +82,7 @@ Garment analog:
 - fabric width and consumption estimate
 - warning notes from validation
 
-The important product lesson is that annotation layout should be generated from semantic entities. A dimension should attach to an edge, seam, dart, or panel role, not just to arbitrary SVG coordinates.
+The important product lesson is that label layout should be generated from semantic entities. A measurement or label should attach to an edge, seam, dart, or panel role, not just to arbitrary SVG coordinates.
 
 ### Page Templates And Title Blocks
 
@@ -106,8 +108,8 @@ Mechanical drawing uses standards such as ASME Y14 and ISO technical drawing sta
 
 Garment analog:
 
-- `PatternSheetProfile`
-- line styles for cut, seam, fold, grain, dart, notch, construction, and annotation lines
+- `SewingPatternSheetProfile`
+- line styles for cut, seam, fold, grain, dart, notch, construction, and label lines
 - required labels and scale markers
 - allowed units and page sizes
 - validation checklist for print readiness
@@ -133,9 +135,9 @@ Risk:
 - dimension references can be fragile when source geometry changes.
 - imported meshes are weaker inputs than proper CAD solids.
 
-Garment implication:
+Sewing-first implication:
 
-`PatternSheetComposer` should attach dimensions and labels to stable `PatternGraph` ids, not anonymous projected geometry.
+`PatternPackageComposer` should attach dimensions and labels to stable `PatternGraph` ids, not anonymous projected geometry.
 
 ### Open CASCADE
 
@@ -148,7 +150,7 @@ Useful parallels:
 - hidden/visible line classification
 - drawing extraction from model shape
 
-Garment implication:
+Sewing-first implication:
 
 If Blender or Three.js preview views become part of the package, we should generate view metadata and line-art layers rather than rely on arbitrary screenshots.
 
@@ -160,7 +162,7 @@ Useful parallel:
 
 - projection can be a deliberate export operation, not just a viewport.
 
-Garment implication:
+Sewing-first implication:
 
 The pattern package can include derived views, but those views must remain downstream of `PatternGraph`.
 
@@ -172,66 +174,66 @@ Useful parallels:
 
 - drawing practices define communication, not just geometry.
 - conventions make drawings readable across tools and shops.
-- title blocks, line styles, dimensions, tolerances, and notes are part of the product.
+- information blocks, line styles, useful dimensions, tolerances, and notes are part of the package.
 
-Garment implication:
+Sewing-first implication:
 
-Garment Pattern Lab should define its own lightweight pattern drawing standard before exporting many file types.
+Garment Pattern Lab should define its own lightweight sewing pattern sheet conventions before exporting many file types.
 
-## Proposed Product Addition
+## Proposed Sewing-First Product Addition
 
 Add a new architecture component:
 
 ```text
 PatternGraph
-  -> PatternDrawingModel
-  -> PatternSheetComposer
+  -> PatternPackageModel
+  -> PatternPackageComposer
   -> HumanReadablePatternPackage
 ```
 
-### PatternDrawingModel
+### PatternPackageModel
 
-A semantic drawing representation derived from `PatternGraph`.
+A semantic sewing-pattern package representation derived from `PatternGraph`.
 
 Likely fields:
 
-- sheet views
-- panel view placements
+- pattern-piece sheets
+- panel placements
 - detail views
-- annotation anchors
-- dimensions
+- label anchors
+- useful measurements
 - labels
 - construction notes
-- title block data
+- pattern information block
 - scale markers
 - validation callouts
 - print/tile metadata
 
-### PatternSheetComposer
+### PatternPackageComposer
 
-The layout engine that places pattern views, labels, dimensions, notes, title block, scale proof, and optional 3D reference views onto printable sheets.
+The layout engine that places pattern pieces, labels, useful measurements, notes, pattern information, scale proof, and optional 3D reference views onto printable sheets.
 
 Responsibilities:
 
 - choose sheet size and scale
 - tile oversize panels across pages
-- place title block and revision metadata
-- place dimensions and callouts without collisions
+- place pattern information and revision metadata
+- place labels and callouts without collisions
 - draw line types consistently
 - include validation warnings and known limitations
 - export SVG/PDF
 - run print-readiness checks
 
-### PatternSheetProfile
+### SewingPatternSheetProfile
 
-A standards-like style and semantics profile for human-readable pattern output.
+A sewing-pattern style and semantics profile for human-readable pattern output.
 
 Responsibilities:
 
 - line styles
 - page sizes
 - units
-- title-block fields
+- pattern information fields
 - required labels
 - scale-proof requirements
 - annotation rules
@@ -239,11 +241,11 @@ Responsibilities:
 
 ## First Prototype Implications
 
-Prototype 1 should not merely export panel SVG paths.
+Prototype 1 should not merely export panel SVG paths, and it should not present itself like a machinist drawing.
 
-It should produce a small technical pattern package:
+It should produce a small sewing pattern package:
 
-1. Cover/title sheet with garment name, measurements, units, scale proof, seam allowance, revision, and validation status.
+1. Pattern information sheet with garment name, measurements, units, scale proof, seam allowance, revision, and validation status.
 2. Pattern-piece sheets with labels, grainlines, fold lines, notches, seam allowance, cut counts, and scale square.
 3. Optional marker/fabric-width layout sheet.
 4. Cut sheet with panel list and fabric assumptions.
@@ -252,13 +254,13 @@ It should produce a small technical pattern package:
 
 ## Research Questions Added
 
-- Which garment-specific line-style conventions should be mandatory in `PatternSheetProfile`?
+- Which garment-specific line-style conventions should be mandatory in `SewingPatternSheetProfile`?
 - Which dimensions are useful to a sewer and which clutter the pattern?
-- How should annotation collision avoidance work for curved pattern pieces?
+- How should label collision avoidance work for curved pattern pieces?
 - Should the 3D reference view be generated as raster preview, vector line art, or both?
 - Can FreeCAD TechDraw's page/template object model inspire our sheet schema?
 - Can Open CASCADE HLR concepts inspire a Three.js/Blender line-art export for model previews?
-- What fields belong in a garment title block for prototype 1?
+- What fields belong in the pattern information block for prototype 1?
 
 ## References
 

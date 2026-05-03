@@ -84,5 +84,5 @@ Architecture overview:
 CAD drawing analogy:
 
 - Added `docs/research/cad-to-technical-drawings-2026-05-03.md` after a reference pass on CAD-to-technical-drawing workflows.
-- The useful borrow is a sheet/document-composition layer, not CAM: generated views, dimensions, annotations, page templates, title blocks, scale proof, standards profiles, and print-readiness checks.
-- Folded this into the product graph as `PatternDrawingModel`, `PatternSheetComposer`, and `PatternSheetProfile`, downstream of `PatternGraph` and upstream of human-readable SVG/PDF.
+- The useful borrow is a sheet/package-composition layer, not CAM: generated views, useful dimensions, labels, page templates, pattern info blocks, scale proof, style profiles, and print-readiness checks.
+- Separated the reference analogy from the product voice. The live architecture now uses sewing-native concepts: `PatternPackageModel`, `PatternPackageComposer`, and `SewingPatternSheetProfile`, downstream of `PatternGraph` and upstream of human-readable SVG/PDF.

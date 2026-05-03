@@ -132,18 +132,18 @@
 
 **Door status:** Closed as documentation practice. Open to splitting the history file if the archive grows large.
 
-## 2026-05-03: Human-readable output needs a drawing-composition layer
+## 2026-05-03: Human-readable output needs a sewing-pattern package layer
 
-**Question:** Should prototype 1 treat SVG/PDF export as raw pattern geometry, or as a composed technical document similar to CAD drawing packages?
+**Question:** Should prototype 1 treat SVG/PDF export as raw pattern geometry, a CAD-like technical drawing, or a sewing-native pattern package?
 
 **Options considered:**
 
 - Export panel paths directly and rely on users to interpret them.
 - Generate a full industrial CAD package immediately.
-- Add a lightweight `PatternDrawingModel` and `PatternSheetComposer` between `PatternGraph` and human-readable SVG/PDF.
+- Add a lightweight `PatternPackageModel` and `PatternPackageComposer` between `PatternGraph` and human-readable SVG/PDF, with CAD drawing systems kept as reference inspiration only.
 
-**Where it landed:** Add `PatternDrawingModel`, `PatternSheetComposer`, and `PatternSheetProfile` downstream of `PatternGraph`.
+**Where it landed:** Add `PatternPackageModel`, `PatternPackageComposer`, and `SewingPatternSheetProfile` downstream of `PatternGraph`.
 
-**Why:** The craftsperson-facing output needs views, dimensions, annotations, line styles, title-block metadata, scale proof, tiling, validation notes, and readable page layout. CAD-to-technical-drawing workflows are the right analog; CAD-to-CAM is later and not prototype-critical.
+**Why:** The fashion-designer and sewer-facing output needs pattern sheets, useful measurements, labels, line styles, pattern information, scale proof, tiling, validation notes, and readable page layout. CAD-to-technical-drawing workflows are a helpful analog for document generation, but the product should not feel like mechanical CAD.
 
 **Door status:** Closed as v1 architecture direction. Open for exact sheet schema and visual conventions.

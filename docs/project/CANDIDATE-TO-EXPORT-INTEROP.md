@@ -15,8 +15,8 @@ Outputs can become:
 
 - canonical `PatternGraph`
 - corrected `PatternGraphRevision`
-- `PatternDrawingModel`
-- `PatternSheetComposer` output
+- `PatternPackageModel`
+- `PatternPackageComposer` output
 - human-readable SVG
 - tiled PDF / print package
 - cut sheet and assembly instructions
@@ -28,7 +28,7 @@ The interop layer exists because a candidate can look plausible and still fail a
 
 Prototype 1 targets the human-readable lane: a person should be able to print, cut, review, and sew from the exported package. Machine-readable cutter/CAD output is a later industrial lane.
 
-The CAD-to-technical-drawing analogy matters here. Export should not mean "write the panel paths." It should mean compose a readable craft document with stable views, dimensions, annotations, page layout, title-block metadata, scale proof, validation notes, and print-readiness checks.
+The CAD-to-technical-drawing analogy is reference material, not the product voice. Export should not mean "write the panel paths," but the output should still read as a sewing pattern package: printable pattern sheets, cut list, grain/fold/notch labels, scale proof, construction notes, validation notes, and print-readiness checks.
 
 ## Position In The Pipeline
 
@@ -529,17 +529,17 @@ Required:
 - validation summary
 - known limitations
 
-### Pattern Sheet Composition
+### Sewing Pattern Package Composition
 
 Required:
 
-- `PatternDrawingModel` derived from a passed `PatternGraph`
-- pattern-piece views attached to stable panel ids
-- annotation anchors attached to seams, darts, notches, fold lines, grainlines, and panel roles
-- title block with pattern name, garment type, measurements/size, revision, units, seam allowance profile, validation status, and date
-- line-style profile for cut, seam, fold, grain, dart, notch, construction, and annotation lines
-- generated dimensions where useful to a sewer, not every possible measurement
-- collision-checked labels and callouts
+- `PatternPackageModel` derived from a passed `PatternGraph`
+- pattern-piece sheets attached to stable panel ids
+- label anchors attached to seams, darts, notches, fold lines, grainlines, and panel roles
+- pattern information block with pattern name, garment type, measurements/size, revision, units, seam allowance profile, validation status, and date
+- sewing-native line style profile for cut, seam, fold, grain, dart, notch, construction, and label lines
+- generated dimensions only where useful to a sewer or reviewer
+- collision-checked labels and sewing callouts
 - scale square and page/tile coordinates
 - optional marker/fabric-width sheet
 - optional 3D reference view generated downstream from `PatternGraph`
@@ -601,9 +601,9 @@ RoundTripReport
 InteropFormatProfile
 ToleranceProfile
 UnitProfile
-PatternDrawingModel
-PatternSheetComposer
-PatternSheetProfile
+PatternPackageModel
+PatternPackageComposer
+SewingPatternSheetProfile
 FabricRollProfile
 MarkerPolicy
 MarkerPlan
@@ -683,4 +683,4 @@ The 2202.10272 mesh-derived route should target this same contract later:
 - Which external tool can serve as a DXF import verifier?
 - How do we display validation failures directly on 2D flats and 3D preview?
 - Which dimensions, callouts, title-block fields, and line-style conventions are required for a readable human pattern sheet?
-- Can CAD technical-drawing view/template systems inspire our `PatternDrawingModel` and `PatternSheetComposer` without importing mechanical GD&T complexity?
+- Can CAD technical-drawing view/template systems inspire our `PatternPackageModel` and `PatternPackageComposer` while keeping the user-facing product sewing-native?

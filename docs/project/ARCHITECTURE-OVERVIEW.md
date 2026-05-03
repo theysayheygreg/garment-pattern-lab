@@ -172,20 +172,22 @@ It includes:
 
 The graph can later drive SVG/PDF, 3D preview, marker planning, DXF/AAMA/ASTM, grading, simulation, or machine cutting.
 
-## Pattern Drawing Package
+## Sewing Pattern Package
 
-The v1 human-readable package should borrow from CAD-to-technical-drawing workflows. A useful craft document is more than exported geometry: it has views, dimensions, callouts, scale proof, title-block metadata, page/tile layout, notes, and readable line styles.
+The v1 human-readable package is for fashion designers, patternmakers, and people sewing samples. It should feel like a clear sewing pattern package, not a mechanical engineering drawing.
+
+The CAD-to-technical-drawing research is useful as background because it shows how model geometry becomes printable instructions. The live product language should stay sewing-first: pattern pieces, grainlines, notches, fold lines, seam allowance, cut quantities, fabric notes, print scale, and construction steps.
 
 Add this downstream architecture component:
 
 ```text
 PatternGraph
-  -> PatternDrawingModel
-  -> PatternSheetComposer
+  -> PatternPackageModel
+  -> PatternPackageComposer
   -> HumanReadablePatternPackage
 ```
 
-`PatternDrawingModel` should attach dimensions and annotations to stable `PatternGraph` ids such as panels, seams, darts, grainlines, fold lines, and notches. `PatternSheetComposer` should own page layout, tiling, title blocks, scale markers, validation callouts, and SVG/PDF export.
+`PatternPackageModel` should attach labels, sewing notes, and only useful dimensions to stable `PatternGraph` ids such as panels, seams, darts, grainlines, fold lines, and notches. `PatternPackageComposer` should own pattern-sheet layout, tiling, scale markers, cut sheets, construction notes, validation callouts, and SVG/PDF export.
 
 ## Designer Editing Lane
 

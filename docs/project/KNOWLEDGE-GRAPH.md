@@ -17,8 +17,8 @@ PatternGraph
   -> PatternGraphRevision
 
 PatternGraph
-  -> PatternDrawingModel
-  -> PatternSheetComposer
+  -> PatternPackageModel
+  -> PatternPackageComposer
   -> HumanReadablePatternPackage
 ```
 
@@ -157,7 +157,7 @@ Edges:
 
 - `PatternGraph -> SVGExport`
 - `PatternGraph -> PDFExport`
-- `PatternGraph -> PatternDrawingModel`
+- `PatternGraph -> PatternPackageModel`
 - `PatternGraph -> 3DAssemblyPreview`
 - `PatternGraph -> ValidationReport`
 
@@ -450,11 +450,11 @@ This graph now folds in the first broad reference pass:
 
 `GuideSheet` is the maker-facing cut and sew instruction surface.
 
-`PatternDrawingModel` is the semantic drawing package derived from `PatternGraph`; it stores views, dimensions, annotation anchors, labels, title-block metadata, scale proof, page/tile metadata, and validation callouts before SVG/PDF rendering.
+`PatternPackageModel` is the sewing-pattern package representation derived from `PatternGraph`; it stores pattern-piece sheets, useful measurements, label anchors, sewing notes, scale proof, page/tile metadata, and validation callouts before SVG/PDF rendering.
 
-`PatternSheetComposer` lays out pattern-piece views, detail views, dimensions, notes, title blocks, scale markers, warnings, and optional 3D reference views onto printable pages.
+`PatternPackageComposer` lays out pattern-piece sheets, detail views, labels, cut notes, construction notes, scale markers, warnings, and optional 3D reference views onto printable pages.
 
-`PatternSheetProfile` is the garment equivalent of a lightweight drawing standard: line styles, required labels, page sizes, units, title-block fields, scale-proof rules, and annotation conventions.
+`SewingPatternSheetProfile` is a lightweight sewing pattern convention: line styles, required labels, page sizes, units, pattern-info fields, scale-proof rules, and annotation conventions.
 
 `HumanReadablePatternPackage` is the v1 output bundle for a sewer or sample room: pattern sheets, tiled PDF, cut sheet, construction guide, validation report, source `PatternGraph`, and optional 3D reference view.
 
@@ -605,8 +605,8 @@ PatternGraph
   -> GuideSheet
 
 PatternGraph
-  -> PatternDrawingModel
-  -> PatternSheetComposer
+  -> PatternPackageModel
+  -> PatternPackageComposer
   -> HumanReadablePatternPackage
 
 PatternGraph
