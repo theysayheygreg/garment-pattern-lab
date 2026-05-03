@@ -24,11 +24,16 @@ Deep ingest: `docs/reference/FUNDAMENTALS-INGEST.md`
 
 Deep ingest: `docs/reference/COMMERCIAL-SOFTWARE-INGEST.md`
 
+Adjacent product/competitor context: `docs/reference/KEW-COMPETITOR-SHORTLIST.md`
+
 - Lectra Modaris. Patternmaking, grading, 3D prototyping, 2D/3D sync, pattern conversion.
   https://www.lectra.com/en/fashion/products/modaris
 
 - Optitex 2D/3D CAD Pattern Design Software. 2D pattern design, 3D visualization, avatar editor, tension maps, fabric management.
   https://optitex.com/products/2d-and-3d-cad-software/
+
+- Optitex 3D for Illustrator. Professional bridge between Illustrator-based creative workflows and 3D garment validation.
+  https://optitex.com/products/3d-design-for-illustrator/
 
 - Optitex 3D Overview. Notes that creating 3D cloth begins from real flat patterns plus style sheet, materials, model measurements.
   https://help.optitex.com/1382687/Content/Optitex_3D/3D_Overview.htm
@@ -41,6 +46,9 @@ Deep ingest: `docs/reference/COMMERCIAL-SOFTWARE-INGEST.md`
 
 - Gerber AccuMark 2D/3D release overview.
   https://www.iafnet.com/2019/11/18/gerber-new-accumark-2d-3d-release/
+
+- Gerber AccuMark / AccuNest. Factory-facing CAD, grading, marker making, and production handoff reference.
+  https://www.lectra.com/en/products/gerber-accumark-accunest-fashion
 
 - Wild Ginger Software. Custom-sized sewing patterns and professional pattern software.
   https://www.wildginger.com/
@@ -222,6 +230,9 @@ Deep ingest for the remaining research references: `docs/reference/papers/RESEAR
   https://github.com/microsoft/TRELLIS.2
 
 ## Designer Editing / PBR Prior Art
+
+- Kew competitor and inspiration shortlist. Kiko's adjacent apparel-platform reference set covering Lifecycle PLM, Illustrator, CLO, Browzwear, Lectra, Optitex, collaboration, Shopify, and Photoroom.
+  `docs/reference/KEW-COMPETITOR-SHORTLIST.md`
 
 - Graphite. Nondestructive vector/layer/node editor prior art.
   https://github.com/GraphiteEditor/Graphite

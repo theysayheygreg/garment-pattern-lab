@@ -114,3 +114,9 @@ Product design pass:
 - Added `PRODUCT-DESIGN.md` to name the product as a sketch-to-pattern workbench for fashion designers rather than an AI pipeline.
 - Captured the user promise: start with a garment idea, end with a reviewable first-draft pattern a person can inspect, adjust, print, and sew as a sample.
 - Updated the README, product plan, architecture overview, and decision log around that north-star statement.
+
+Kew adjacent reference:
+
+- Added `KEW-COMPETITOR-SHORTLIST.md` from Kiko's related apparel-platform exploration.
+- Kept Kew and Garment Pattern Lab distinct: Kew is broader platform/product-market context; Garment Pattern Lab remains the narrower sketch-to-pattern workbench.
+- Linked the shortlist beside the product design doc as competitive, interoperability, and possible future-unification context.

@@ -189,3 +189,11 @@ Long version:
 Internal north-star:
 
 **Do not automate the craft out of sight. Make the craft faster, clearer, and more editable.**
+
+## Adjacent Product Context
+
+Kiko's Kew exploration is adjacent but broader. Kew appears to be investigating a connected apparel and product-development platform across creative vector tools, pattern CAD/3D systems, PLM/tech-pack systems, collaboration, factory communication, launch output, and AI imagery.
+
+Garment Pattern Lab should not copy that scope in v1. The useful shared problem is narrower and important: messy creative input must become editable technical structure without losing designer intent.
+
+Keep [Kew Competitor And Inspiration Shortlist](../reference/KEW-COMPETITOR-SHORTLIST.md) beside this product brief as market and interoperability context. Treat it as possible future unification context, not a current product requirement.
