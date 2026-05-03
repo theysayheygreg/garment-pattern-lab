@@ -8,6 +8,8 @@ This note is adjacent reference material for Garment Pattern Lab. It should not 
 
 Deep ingest: [Kew Competitor Deep Dive](KEW-COMPETITOR-DEEP-DIVE.md)
 
+Sample visual analysis: [Kew Sample Image Analysis](KEW-SAMPLE-IMAGE-ANALYSIS.md)
+
 These projects may unify over time, but the current useful stance is:
 
 - treat Kew as sibling market/context research

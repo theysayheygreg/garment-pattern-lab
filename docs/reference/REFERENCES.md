@@ -240,6 +240,9 @@ Deep ingest for the remaining research references: `docs/reference/papers/RESEAR
 - Kew competitor deep dive. Capability and interaction-model ingest for each shortlist item, with Optitex decomposed into service pillars rather than full editor parity.
   `docs/reference/KEW-COMPETITOR-DEEP-DIVE.md`
 
+- Kew sample image analysis. Product-reference screenshot analysis for Kiko's Kew canvas with croquis guides, inspiration photo, technical sketch, measurement grid, and callouts.
+  `docs/reference/KEW-SAMPLE-IMAGE-ANALYSIS.md`
+
 - Graphite. Nondestructive vector/layer/node editor prior art.
   https://github.com/GraphiteEditor/Graphite
 

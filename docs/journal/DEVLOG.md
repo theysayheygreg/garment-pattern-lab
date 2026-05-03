@@ -131,3 +131,8 @@ Product differentiator hardening:
 
 - Promoted the central differentiator into the README, product design brief, architecture overview, decision log, knowledge graph, and project state.
 - The product should not become another mouse-and-keyboard CAD/3D editor. It should be human-centered, natural-language-led, task-led, narrow, validated, and as close to art -> garment as the craft allows.
+
+Kew sample image analysis:
+
+- Added `KEW-SAMPLE-IMAGE-ANALYSIS.md` for Kiko's screenshot showing reference photo, croquis grid, body landmarks, technical sketch, and design callouts in one project canvas.
+- Captured the useful Pattern Lab lesson: learn from the information architecture and semantic callouts, but do not turn v1 into a broad freeform board product.

@@ -9,6 +9,7 @@
   "productDesignBrief": "docs/project/PRODUCT-DESIGN.md",
   "adjacentProductContext": "docs/reference/KEW-COMPETITOR-SHORTLIST.md",
   "adjacentProductDeepDive": "docs/reference/KEW-COMPETITOR-DEEP-DIVE.md",
+  "adjacentProductSampleImageAnalysis": "docs/reference/KEW-SAMPLE-IMAGE-ANALYSIS.md",
   "sourceOfTruth": "pattern-grammar-first",
   "nextActions": [
     "write-first-garment-drafting-formulas",

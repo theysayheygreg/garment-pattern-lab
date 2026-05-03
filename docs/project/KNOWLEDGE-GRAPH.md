@@ -638,6 +638,24 @@ This graph now folds in the first broad reference pass:
 
 `MarketingImageCandidate` is an AI/product-photography output candidate and must stay separate from `ValidationRender`.
 
+`ReferenceMoodImage` is a visual inspiration or product photo that informs design intent but is not pattern truth.
+
+`CroquisGuideLayer` is a body-reference drawing or overlay used to align garment proportions and landmarks.
+
+`MeasurementGuideOverlay` shows body levels, boxes, axes, or reference grids used to interpret a sketch.
+
+`TechnicalSketchCallout` is a labeled annotation attached to a visible garment or body feature.
+
+`DesignFeatureCallout` marks a design feature such as pleats, hardware, neckline, trim, straps, or fabric treatment.
+
+`PatternAffectingAnnotation` changes garment parameters or construction.
+
+`VisualOnlyAnnotation` affects reference, styling, color, material preview, or mood but does not alter pattern geometry.
+
+`AmbiguityQuestion` is a user-facing clarification needed before a sketch can safely become pattern intent.
+
+`ProjectCanvasReference` is a broad Kew-like workspace artifact that combines reference images, sketches, body guides, and annotations; it is context for Pattern Lab, not a v1 product requirement.
+
 ## Secondary Ingest Edges
 
 ```text
@@ -922,6 +940,35 @@ PatternGraph
 ```text
 MarketingImageCandidate
   -> ProductRecordExport
+```
+
+```text
+ReferenceMoodImage
+  -> ProjectCanvasReference
+  -> TechnicalSketchCallout
+  -> DesignFeatureCallout
+  -> SketchIntent
+  -> AmbiguityQuestion
+  -> GarmentParameters
+```
+
+```text
+CroquisGuideLayer
+  -> MeasurementGuideOverlay
+  -> LandmarkSet
+  -> SketchIntent
+```
+
+```text
+TechnicalSketchCallout
+  -> PatternAffectingAnnotation
+  -> GarmentParameters
+```
+
+```text
+TechnicalSketchCallout
+  -> VisualOnlyAnnotation
+  -> MaterialPreviewLayer
 ```
 
 ```text
