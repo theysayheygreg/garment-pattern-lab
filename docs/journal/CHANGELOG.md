@@ -20,3 +20,4 @@
 - Added deep ingest notes for patternmaking fundamentals, commercial software, open/free tools, UV geometry workflows, and remaining research papers.
 - Expanded the product knowledge graph with secondary-ingest nodes and edges for pattern programs, parametric tools, industrialization metadata, UV boundaries, datasets, multimodal generation, and ML representations.
 - Added local Graphite and Blender setup notes plus a pipeline plan for 2D sketch, 3D preview/render, and pattern flats.
+- Added browser-native Three.js/WebGPU/WASM pipeline plan for an ownable 2D reference -> 3D model -> flats -> pattern product lane.

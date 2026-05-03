@@ -125,12 +125,15 @@ Later:
 
 - Blender: UV unwrap, mesh tooling, Python automation.
 - Graphite: vector/raster editor and nondestructive node-graph reference for sketch cleanup, semantic curve editing, and possible Rust vector geometry reuse.
-- Three.js: browser 3D preview.
+- Three.js: browser 3D preview, static panel assembly, avatar display, glTF/export experiments, and WebGL fallback.
+- WebGPU: optional acceleration for rendering, image preprocessing, cloth/constraint experiments, and heatmaps after the basic app works.
+- WebAssembly: deterministic geometry kernels for curves, offsets, triangulation, seam validation, and self-intersection checks.
 - Unity/Unreal: useful reference for UV channels, but not likely first prototype runtime.
 - trimesh / shapely / numpy / scipy if Python-based geometry experiments are chosen.
 - Poppler/pdftotext: local paper ingestion and reference extraction.
 - Rust/Cargo, wasm-pack, cargo-watch, Node, and pnpm for Graphite source exploration.
 - Blender app/binary for headless Python previews and rendered diagnostics.
+- Web workers for responsive browser-side geometry, validation, and future inference tasks.
 - Future: a robust curve-offset and polygon-boolean library is likely mandatory.
 
 ### Vision / AI

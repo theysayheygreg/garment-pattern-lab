@@ -43,6 +43,7 @@ Parallelizable:
 - Sketch landmark schema and annotation UI.
 - Export format experiments.
 - 3D preview spike.
+- Browser-native Three.js/WASM/WebGPU architecture spike.
 
 Not parallelizable:
 
@@ -66,6 +67,7 @@ Tasks:
 - [x] Ingest `Computational Pattern Making from 3D Garment Models` into product knowledge graph.
 - [ ] Draft first-garment formula sheet.
 - [ ] Decide prototype tech stack.
+- [x] Draft browser-native Three.js/WebGPU/WASM pipeline lane.
 
 Acceptance criteria:
 

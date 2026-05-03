@@ -27,3 +27,8 @@ Tooling setup:
 - Pulled Graphite and Blender source checkouts under ignored `external/`.
 - Installed Rust/Cargo, wasm-pack, cargo-watch, and Blender 5.1.1.
 - Added a project note that positions Graphite as the 2D/vector annotation workbench and Blender as the scriptable 3D/render/diagnostic workbench.
+
+Browser-native lane:
+
+- Added the first owned-runtime plan: Three.js for the product 3D viewport, TypeScript for the earliest app loop, WASM for deterministic geometry kernels, and WebGPU as optional acceleration.
+- Kept the same architectural boundary: `PatternGraph` remains the source of truth; 3D mesh and flats are views/exports generated from it.

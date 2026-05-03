@@ -94,6 +94,25 @@ Outputs:
 - `docs/research/blender-headless-preview-spike.md`
 - `docs/research/svg-roundtrip-spike.md`
 
+### R3c: Browser-Native Three.js / WebGPU / WASM Lane
+
+Goal: design and prototype the ownable web runtime for 2D reference image -> 3D model -> flats -> pattern.
+
+Questions:
+
+- What can ship in TypeScript and Three.js before WASM is required?
+- Which geometry kernels must be deterministic and should move into Rust/WASM?
+- What should use WebGPU compute, and what should stay in CPU workers?
+- How does the browser app preserve `PatternGraph` as source of truth while showing both 2D flats and 3D assembly?
+- What is the smallest useful 3D preview before cloth simulation?
+
+Outputs:
+
+- `docs/project/BROWSER-NATIVE-PIPELINE.md`
+- `docs/project/TECH-STACK-DECISION.md`
+- `prototype/browser` skeleton
+- `prototype/browser/fixtures/a-line-tunic.pattern.json`
+
 ### R4: 2D Sketch Parsing
 
 Goal: decide how much automation belongs in v0.

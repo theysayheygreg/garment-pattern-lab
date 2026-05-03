@@ -13,8 +13,16 @@
     "audit-GarmentCode-and-FreeSewing-for-reuse",
     "run-graphite-vector-audit",
     "run-blender-headless-preview-spike",
-    "run-svg-roundtrip-spike"
+    "run-svg-roundtrip-spike",
+    "decide-browser-native-tech-stack",
+    "scaffold-prototype-browser"
   ],
+  "ownablePipelineLane": {
+    "id": "browser-native-threejs-webgpu-wasm",
+    "localPlan": "docs/project/BROWSER-NATIVE-PIPELINE.md",
+    "thesis": "Use Three.js for the product 3D viewport, TypeScript for the first PatternGraph loop, WASM for deterministic geometry kernels, and WebGPU only as optional acceleration after the static preview works.",
+    "firstPrototypePath": "manual 2D reference annotation -> PatternGraph JSON -> 2D flats SVG/PDF -> Three.js static 3D assembly preview -> validation report"
+  },
   "externalTooling": [
     {
       "id": "graphite",
