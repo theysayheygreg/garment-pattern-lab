@@ -13,6 +13,19 @@
   "adjacentProductDeepDive": "docs/reference/KEW-COMPETITOR-DEEP-DIVE.md",
   "adjacentProductSampleImageAnalysis": "docs/reference/KEW-SAMPLE-IMAGE-ANALYSIS.md",
   "cadPdmPlmReference": "docs/reference/ONSHAPE-DEEP-DIVE.md",
+  "architectureReviews": [
+    {
+      "date": "2026-05-03",
+      "reviewer": "Orrery",
+      "localPath": "docs/research/orrery-design-review-2026-05-03.md",
+      "status": "reference-not-immediate-action",
+      "alignedDecisions": [
+        "candidate-promotion-gate-as-state-machine",
+        "v0.1-dirty-end-to-end-spike-before-layer-hardening"
+      ],
+      "notes": "High-level product, lower-level design, and roadmap observations to revisit before committing schema and prototype architecture."
+    }
+  ],
   "sourceOfTruth": "pattern-grammar-first",
   "buildScaffold": {
     "appShell": "app/",

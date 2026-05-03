@@ -190,6 +190,7 @@ handoffs/        Agent handoff notes
 - [AI Sketch And 3D Exploration](docs/project/AI-SKETCH-3D-EXPLORATION.md)
 - [Candidate-To-Export Interop Layer](docs/project/CANDIDATE-TO-EXPORT-INTEROP.md)
 - [CAD Drawing Reference Analog](docs/research/cad-to-technical-drawings-2026-05-03.md)
+- [Orrery Design Review](docs/research/orrery-design-review-2026-05-03.md)
 - [Reference Index](docs/reference/REFERENCES.md)
 - [Pattern Standards And Conventions](docs/reference/PATTERN-STANDARDS-AND-CONVENTIONS.md)
 - [First Garment Visual Reference Corpus](docs/reference/FIRST-GARMENT-VISUAL-REFERENCE-CORPUS.md)

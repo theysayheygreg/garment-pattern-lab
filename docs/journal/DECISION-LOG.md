@@ -275,3 +275,35 @@
 **Why:** The useful lesson is that the structured product object can be the live source of truth for collaboration, data management, manufacturing information, and communication views. Pattern Lab should eventually do that for garments through `PatternGraph` and pattern/product records, but the first proof still has to generate and validate one credible sewing pattern.
 
 **Door status:** Closed for v1 scope. Open for future collaboration/PDM/PLM roadmap.
+
+## 2026-05-03: Candidate promotion gate is a state machine
+
+**Question:** Should validation be a flat checklist or a promotion state machine?
+
+**Options considered:**
+
+- Treat every validation finding as a checklist item.
+- Let each export target decide ad hoc whether a finding blocks export.
+- Model candidate promotion as a small state machine with severities and policy.
+
+**Where it landed:** Candidate promotion should be a state machine. Checks produce severities such as hard error, soft error, warning, and assumption. Promotion policy decides whether a `PatternGraphCandidate` can become an exportable `PatternGraph`.
+
+**Why:** Different garments and export targets will have different tolerance policies. A flat checklist will not survive the second garment family. A small state machine keeps validation rigorous while still allowing designer-facing language and assisted correction.
+
+**Door status:** Closed as validation architecture direction. Implementation details remain open.
+
+## 2026-05-03: Prototype starts with a dirty end-to-end spike
+
+**Question:** Should prototype 1 be built layer by layer, or start with a rough full-pipeline spike?
+
+**Options considered:**
+
+- Follow B0-B10 strictly in clean sequential layers.
+- Build the app UI first.
+- Build an ugly v0.1 path through the whole pipeline, then harden the layers with integration questions visible.
+
+**Where it landed:** Start implementation with a dirty end-to-end spike: hand-authored seed, trivial validator, hand-coded first-garment generator, SVG with hardcoded labels, and static 3D placement.
+
+**Why:** A clean sequential plan can hide integration risk until too late. A rough full path gives the project one verifiable garment and reveals where schema, validation, export, and preview actually rub against each other.
+
+**Door status:** Closed as first implementation move. The formal build plan can be rationalized after v0.1 exists.

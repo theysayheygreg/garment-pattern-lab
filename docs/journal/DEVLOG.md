@@ -154,3 +154,9 @@ Onshape reference pass:
 Product design tightening:
 
 - Added the ideal outcome: being a good clothing designer should not mean you have to be an expert at CAD.
+
+Orrery design review:
+
+- Added `docs/research/orrery-design-review-2026-05-03.md` as a structural review artifact before implementation.
+- Captured two aligned decisions in the decision log: candidate promotion should be a validation state machine, and implementation should begin with an ugly end-to-end v0.1 spike before hardening layers.
+- Left the rest of the review as reference guidance rather than immediate action, per Greg's note.
