@@ -160,3 +160,8 @@ Orrery design review:
 - Added `docs/research/orrery-design-review-2026-05-03.md` as a structural review artifact before implementation.
 - Captured two aligned decisions in the decision log: candidate promotion should be a validation state machine, and implementation should begin with an ugly end-to-end v0.1 spike before hardening layers.
 - Left the rest of the review as reference guidance rather than immediate action, per Greg's note.
+
+Validation interaction refinement:
+
+- Clarified that validation should be a fix-forward repair loop, not a traditional IDE/game-engine/3D-tool console of errors and warnings.
+- Added product guidance that Pattern Lab should validate continuously, auto-repair safe issues, summarize readiness, and ask designer-facing questions only when intent is ambiguous.

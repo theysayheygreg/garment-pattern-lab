@@ -307,3 +307,19 @@
 **Why:** A clean sequential plan can hide integration risk until too late. A rough full path gives the project one verifiable garment and reveals where schema, validation, export, and preview actually rub against each other.
 
 **Door status:** Closed as first implementation move. The formal build plan can be rationalized after v0.1 exists.
+
+## 2026-05-03: Validation should be fix-forward, not an error console
+
+**Question:** What should validation feel like to the designer?
+
+**Options considered:**
+
+- Traditional diagnostic console with errors and warnings.
+- Export-time stop-and-fix checklist.
+- Continuous, assistive, fix-forward repair loop.
+
+**Where it landed:** Validation should be a smooth repair loop, not a console. The system should validate continuously, apply safe repairs, batch non-blocking issues into readiness summaries, and ask clear design questions only when intent is ambiguous or a correction changes the garment.
+
+**Why:** Traditional CAD, 3D tools, game engines, and IDEs often make users stop at a wall of errors. That is the wrong product feel here. Pattern Lab should behave more like an agentic collaborator: notice issues early, fix what it can, explain what it changed, and keep the designer moving toward a credible pattern package.
+
+**Door status:** Closed as product interaction direction. Implementation details remain open in validation schema and UI.

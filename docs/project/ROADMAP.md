@@ -497,7 +497,8 @@ Tasks:
 - Implement candidate normalization and measurement report shape.
 - Implement export gate semantics.
 - Implement SVG round-trip test requirements.
-- Produce a machine-readable `validation.json` and human-readable `validation.md`.
+- Produce internal `validation.json`, a smooth user-facing repair/readiness summary, and a human-readable `validation.md` for package provenance.
+- Add `FixForwardAction` / `FixSuggestion` records for safe repairs, designer questions, and deferred limitations.
 
 Deliverables:
 
@@ -506,9 +507,10 @@ Deliverables:
 
 Acceptance criteria:
 
-- Bad seam pairs fail loudly before export.
-- Missing grainlines or seam allowances fail loudly before export.
+- Bad seam pairs are caught before export and shown as a repair path, not a last-minute error console.
+- Missing grainlines or seam allowances are auto-repaired where safe, or turned into a clear design question.
 - The report distinguishes errors from warnings.
+- The user-facing output batches validation into readiness and repair language instead of raw diagnostic noise.
 - The report cites known limitations when checks are approximate.
 - Candidates cannot be promoted to exportable `PatternGraph` unless the export gate passes.
 

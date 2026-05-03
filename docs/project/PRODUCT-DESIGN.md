@@ -160,6 +160,8 @@ The product should always expose:
 - scale proof
 - export limitations
 
+But this should not feel like a compiler console. The designer should not discover a wall of errors only when pressing export. Validation and interpretation should run in the background, repair safe issues automatically, summarize readiness in plain language, and ask for judgment only when a decision changes the design.
+
 The product should use language like:
 
 - "needs review"

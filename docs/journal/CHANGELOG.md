@@ -57,3 +57,4 @@
 - Added Onshape deep-dive reference for future multi-user collaboration, PDM, PLM, MBD/PMI, release/version discipline, and high-end rendering.
 - Added the ideal outcome to product design: being a good clothing designer should not require CAD expertise.
 - Added Orrery design review (`docs/research/orrery-design-review-2026-05-03.md`) covering product direction, lower-level design, and roadmap with 18 structural findings before implementation begins. Two findings already aligned with Greg: candidate-promotion gate as a state machine, and v0.1 as a dirty end-to-end spike on one verifiable garment.
+- Clarified validation product direction: fix-forward repair loop, not an IDE/game-engine/3D-tool error console.
