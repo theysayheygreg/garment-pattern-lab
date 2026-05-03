@@ -227,3 +227,35 @@
 **Why:** Optitex, CLO, Browzwear, Lectra, Gerber, Illustrator, and Substance-style tools ask users to become expert operators in dense 2D/3D editors. The product opportunity is to preserve the craft while reducing the operation burden: let users state intent, confirm semantics, review warnings, and export validated pattern packages without hand-authoring every CAD object.
 
 **Door status:** Closed as product differentiator. Open for exact interaction design and prototype UI.
+
+## 2026-05-03: Product engine and garment programs are separate
+
+**Question:** Should first-garment work live inside the app/prototype folders, or should the reusable product engine be separated from garment-specific programs?
+
+**Options considered:**
+
+- Keep everything under one prototype folder until code exists.
+- Put all garment rules inside app code.
+- Separate reusable app/packages from garment programs, fixtures, references, and outputs.
+
+**Where it landed:** Use `app/` for the product shell, `packages/` for reusable core modules, and `garments/a-line-dress-tunic/` for the first garment program and evidence.
+
+**Why:** The A-line tunic is the first proof garment, not the product architecture. If drafting formulas, fixtures, and generated packages are isolated by garment, future garments can reuse `PatternGraph`, geometry, validation, export, preview, and assistant services without inheriting first-garment assumptions.
+
+**Door status:** Closed as repo structure. Open for exact package implementation details.
+
+## 2026-05-03: Validation-first build order
+
+**Question:** Should the first prototype build the UI/3D experience first, or build the pattern document and validation spine first?
+
+**Options considered:**
+
+- Build a visual sketch-to-3D demo first.
+- Build the app shell first.
+- Hand-author `PatternGraph` fixtures, implement validation, then generate/export/preview.
+
+**Where it landed:** Build `PatternGraph` seed fixtures and validation harness before garment generation, 3D preview, and assistant-led editing.
+
+**Why:** A beautiful preview can make weak pattern geometry feel more trustworthy than it is. The prototype should first prove that it can represent, check, and export sewing-aware pattern data. 3D and natural language then become feedback and control layers over a validated craft contract.
+
+**Door status:** Closed for prototype 1 build sequence. Open for exact implementation stack after geometry spikes.

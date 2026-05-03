@@ -51,3 +51,6 @@
 - Promoted the core product differentiator: not another mouse-and-keyboard CAD/3D editor, but a human-centered, natural-language-led, task-led path from art to garment.
 - Added Kew sample image analysis and knowledge-graph nodes for reference images, croquis guides, measurement overlays, technical callouts, and ambiguity questions.
 - Clarified that Kew-style vector/layer editing is a useful pipeline bridge and that Pattern Lab's added value is the missing pattern/validation/3D feedback loop.
+- Added product pillars and prototype build order docs.
+- Scaffolded `app/`, reusable `packages/`, and `garments/a-line-dress-tunic/` so core product code stays separate from garment-specific programs and fixtures.
+- Expanded the roadmap with pipeline package owners, first-garment folder paths, and a granular validation-first B0-B10 build sequence.

@@ -219,6 +219,13 @@ Garment Pattern Lab should not copy that scope in v1. The useful shared problem 
 
 Keep [Kew Competitor And Inspiration Shortlist](../reference/KEW-COMPETITOR-SHORTLIST.md) beside this product brief as market and interoperability context. Treat it as possible future unification context, not a current product requirement.
 
+## Design Phase Artifacts
+
+The product direction now has two companion planning docs:
+
+- [Product Pillars](PRODUCT-PILLARS.md) names the high-level product principles that keep Pattern Lab designer-centered instead of CAD-centered.
+- [Prototype Build Order](PROTOTYPE-BUILD-ORDER.md) turns those principles into a build sequence, folder boundary, and validation-first prototype path.
+
 The deeper pass is [Kew Competitor Deep Dive](../reference/KEW-COMPETITOR-DEEP-DIVE.md). Its main product lesson is that Optitex and peer systems prove the eventual capability map, but not the interaction model. Garment Pattern Lab should borrow pillars like grading, fabric checks, marker planning, 3D preview, and tech-pack bridges as narrow validated services rather than rebuilding a full Illustrator/Substance/CAD-style editor stack.
 
 Kiko's sample Kew screenshot is analyzed in [Kew Sample Image Analysis](../reference/KEW-SAMPLE-IMAGE-ANALYSIS.md). It shows a valuable hybrid surface: reference image, croquis grid, body landmarks, technical sketch, and callouts in one project canvas. Pattern Lab should learn from the information architecture, but not copy the whole board UI in v1.

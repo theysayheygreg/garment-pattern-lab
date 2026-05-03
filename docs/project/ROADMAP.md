@@ -20,7 +20,120 @@ Prototype 1 output lane:
 
 ## Current Status
 
-Project seed created. Research references collected. No implementation has started.
+Project seed created. Research references collected. No production implementation has started.
+
+The implementation scaffold now separates reusable product engine folders from garment-specific folders:
+
+- `app/`: browser workbench shell.
+- `packages/`: reusable app/kernel packages.
+- `garments/a-line-dress-tunic/`: first garment program, fixtures, references, and outputs.
+
+## Product Pillars
+
+Full brief: [Product Pillars](PRODUCT-PILLARS.md)
+
+Pattern Lab is not another mouse-and-keyboard CAD/3D editor. It is a human-centered, natural-language-led sketch-to-pattern workbench that gets as close to art -> garment as the craft allows.
+
+The product pillars are:
+
+1. **Natural Intent, Not CAD Operation**
+   The primary interaction should be garment language and semantic handles. Direct manipulation exists for correction, not as the whole product.
+
+2. **PatternGraph Is The Craft Contract**
+   Sketches, traces, generated images, and 3D views are inputs or feedback. `PatternGraph` is the trusted sewing-aware manufacturing object.
+
+3. **Trace And Layers Are A Bridge**
+   Vector/layer tooling is needed soon, but only as an interpretation bridge from image/art to garment semantics and parameters.
+
+4. **Validation Before Beauty**
+   SVG/PDF export and 3D preview must be backed by validation. Photoreal output is not proof.
+
+5. **3D As Feedback, Not Authorship**
+   The first 3D loop is a sanity preview and warning surface. It must not silently rewrite pattern geometry.
+
+6. **Narrow Services, Broad Future**
+   Grading, fabric simulation, marker planning, tech packs, and interop come later as narrow validated services, not as full editor parity with Optitex/CLO/Illustrator.
+
+## Product Pipeline Areas
+
+These areas are the working product pipeline. Each has a reusable app/package owner and, where needed, a first-garment owner.
+
+| Area | Purpose | Owner folder | First-garment folder |
+| --- | --- | --- | --- |
+| Natural intent interface | Natural-language edits, assumption review, ambiguity questions. | `packages/assistant-core/` | `garments/a-line-dress-tunic/fixtures/` |
+| Source input and trace bridge | Generated sketches, human uploads, croquis guides, editable traces, semantic callouts. | `packages/sketch-intent/` | `garments/a-line-dress-tunic/fixtures/sketches/` |
+| Pattern truth | `PatternGraph`, candidates, panels, seams, labels, measurements, parameters. | `packages/pattern-core/` | `garments/a-line-dress-tunic/fixtures/patterns/` |
+| Geometry kernel | Curves, lengths, offsets, intersections, triangulation handoff. | `packages/geometry-core/` | garment-specific drafting calls into it |
+| Validation gate | Sewing-aware errors, warnings, limitations, candidate promotion, export gate. | `packages/validation-core/` | `garments/a-line-dress-tunic/fixtures/validation/` |
+| Human-readable export | SVG/PDF package, cut sheet, assembly, source JSON, validation report. | `packages/export-core/` | `garments/a-line-dress-tunic/outputs/` |
+| 3D feedback | Simple avatar/proxy, panel orientation, seam visualization, rough fit/ease warnings. | `packages/preview-3d/` | garment-specific preview config |
+| Product shell | Workbench UI orchestration across input, intent, pattern, validation, preview, export. | `app/` | consumes first-garment program |
+
+## Prototype Build Order
+
+Full build order: [Prototype Build Order](PROTOTYPE-BUILD-ORDER.md)
+
+The real build order is:
+
+1. **B0: Repo Scaffold And Contracts**
+   Lock folder boundaries, package ownership, first-garment ownership, and fixture locations.
+
+2. **B1: PatternGraph Seed**
+   Hand-author a valid first-garment candidate plus invalid examples before writing generation code.
+
+3. **B2: Validation Harness First**
+   Implement validation against known-good and known-bad fixtures before 3D or UI can make weak output look credible.
+
+4. **B3: Geometry Kernel V1**
+   Add the smallest geometry needed for curve lengths, offsets, intersections, closedness, self-intersection, and preview triangulation.
+
+5. **B4: First Garment Generator**
+   Generate A-line dress/tunic panels from measurements and parameters.
+
+6. **B5: Human-Readable Export**
+   Export semantic SVG, source JSON, cut sheet, assembly notes, and validation report.
+
+7. **B6: Simple 3D Preview**
+   Add a coarse Three.js preview for orientation, seam pairing, silhouette, and obvious fit/ease issues.
+
+8. **B7: Sketch Input And Landmark Bridge**
+   Add uploaded/local image input, manual landmarks, semantic callout review, and conversion to garment parameters.
+
+9. **B8: Natural-Language Assistant Loop**
+   Add commands like "make the hem longer," "show assumptions," "show unmatched seams," and "make this printable."
+
+10. **B9: Semantic Trace Layers**
+    Add editable traced curves and semantic vector layers without becoming a full vector editor.
+
+11. **B10: Prototype Package And Review Gate**
+    Generate a complete package, run print/scale checks, capture 3D screenshot, and collect sewing-literate review.
+
+## Implementation Folder Plan
+
+```text
+app/
+  README.md
+packages/
+  assistant-core/
+  export-core/
+  geometry-core/
+  pattern-core/
+  preview-3d/
+  sketch-intent/
+  validation-core/
+garments/
+  a-line-dress-tunic/
+    docs/
+    fixtures/
+    references/
+    outputs/
+```
+
+Folder rule:
+
+- Put reusable product logic in `app/` or `packages/`.
+- Put first-garment drafting, fixtures, references, and generated packages in `garments/a-line-dress-tunic/`.
+- If a future garment should reuse it, it does not belong inside the A-line folder.
 
 ## Research Roadmap To Prototype 1
 
@@ -50,7 +163,7 @@ Goal: define the JSON representation that becomes manufacturing truth.
 Deliverables:
 
 - `docs/project/PATTERN-SCHEMA.md`
-- `prototype/browser/fixtures/a-line-tunic.pattern.json`
+- `garments/a-line-dress-tunic/fixtures/patterns/valid-seed.pattern.json`
 - schema examples for panels, seam lines, cut lines, seam pairs, darts, grainlines, labels, validation, export metadata, and provenance
 
 Exit criteria:
@@ -110,7 +223,7 @@ Goal: create a first honest fabric-width layout before optimized nesting.
 Deliverables:
 
 - `docs/project/MARKER-PLANNER.md`
-- `prototype/browser/fixtures/marker-plan.example.json`
+- `garments/a-line-dress-tunic/fixtures/marker/marker-plan.example.json`
 - comparison notes for deterministic strip placement vs libnest2d/Deepnest-style optimization
 
 Exit criteria:
@@ -275,6 +388,9 @@ Tasks:
 - [x] Capture initial references.
 - [x] Define first prototype garment.
 - [x] Write product plan.
+- [x] Write product pillars.
+- [x] Write prototype build order.
+- [x] Scaffold separate app/package/garment folders.
 - [x] Write dependency map.
 - [x] Write research queue.
 - [ ] Ingest one public/free patternmaking reference into concise notes.
@@ -355,7 +471,7 @@ Tasks:
 Deliverables:
 
 - `docs/project/PATTERN-SCHEMA.md`
-- `prototype/examples/a-line-tunic.pattern.json`
+- `garments/a-line-dress-tunic/fixtures/patterns/valid-seed.pattern.json`
 
 Acceptance criteria:
 
@@ -402,9 +518,14 @@ Goal: generate the first garment from measurements and parameters with no sketch
 
 Tasks:
 
-- Create prototype project skeleton.
-- Implement measurement entry or fixture JSON.
-- Implement garment parameter fixture.
+- Create product package skeleton under `packages/`.
+- Create first-garment program skeleton under `garments/a-line-dress-tunic/`.
+- Add measurement fixture JSON under `garments/a-line-dress-tunic/fixtures/measurements/`.
+- Add garment parameter fixture JSON under `garments/a-line-dress-tunic/fixtures/parameters/`.
+- Add one hand-authored candidate fixture under `garments/a-line-dress-tunic/fixtures/patterns/`.
+- Implement `pattern-core` types for `PatternGraphCandidate` and `PatternGraph`.
+- Implement `geometry-core` primitives needed by the first draft.
+- Implement first-garment generator in the garment folder using reusable packages.
 - Generate front/back panels as vector geometry.
 - Generate seam lines.
 - Add seam allowance/cut lines.
@@ -412,14 +533,14 @@ Tasks:
 - Add notches.
 - Add labels and cut counts.
 - Add simple construction order.
-- Implement seam-walk validation.
+- Implement seam-walk validation in `validation-core`.
 - Run the sewing-aware validation harness.
-- Export SVG.
+- Export SVG through `export-core`.
 
 Deliverables:
 
 - Working script/app that generates an SVG pattern for the first garment.
-- Example output in `docs/artifacts/` or `prototype/outputs/`.
+- Example output in `garments/a-line-dress-tunic/outputs/`.
 - Validation report.
 
 Acceptance criteria:
@@ -441,6 +562,15 @@ Tasks:
 
 - Define front/back sketch input requirements.
 - Create landmark schema.
+- Create `sketch-intent` source asset and trace-layer model.
+- Create `LayeredSourceDocument` shape:
+  - reference image layer
+  - croquis/guide layer
+  - editable trace layer
+  - semantic vector layer
+  - callout layer
+  - pattern-affecting annotation layer
+  - visual-only annotation layer
 - Build or script a simple annotation flow:
   - load sketch
   - mark center front/back
@@ -451,6 +581,8 @@ Tasks:
   - mark side silhouette
 - Convert landmarks to garment parameters.
 - Compare generated pattern silhouette to sketch silhouette.
+- Produce ambiguity questions before generation.
+- Keep all inferred parameters editable.
 
 Deliverables:
 
@@ -470,6 +602,7 @@ Goal: assemble the generated pattern into a coarse 3D garment preview.
 
 Tasks:
 
+- Implement `preview-3d` package boundary.
 - Create simple avatar from measurements or use a parametric placeholder.
 - Triangulate generated panels.
 - Place front/back panels around avatar.
@@ -478,6 +611,7 @@ Tasks:
 - Report collisions/clearance roughly.
 - Preserve the pattern graph as source of truth; preview must not silently rewrite pattern geometry.
 - Show visual comparison against intended silhouette if feasible.
+- Link preview warnings to validation report IDs where possible.
 
 Deliverables:
 
@@ -498,6 +632,7 @@ Goal: package the pattern as something a human can review and potentially mock u
 
 Tasks:
 
+- Implement `export-core` package boundary.
 - Export clean SVG.
 - Add tiled print/PDF path.
 - Add cut sheet.
@@ -509,7 +644,7 @@ Tasks:
 
 Deliverables:
 
-- `prototype/outputs/a-line-tunic-v0/`
+- `garments/a-line-dress-tunic/outputs/a-line-dress-tunic-v0/`
   - `pattern.svg`
   - `pattern.pdf` or print-ready HTML/PDF notes
   - `pattern.json`
@@ -555,6 +690,8 @@ Goal: replace manual landmarking with assisted sketch parsing.
 
 Tasks:
 
+- Preserve manual correction as the primary fallback.
+- Add assistant-facing summaries before adding autonomous parsing.
 - Build clean sketch dataset.
 - Try contour extraction.
 - Try garment/person segmentation.

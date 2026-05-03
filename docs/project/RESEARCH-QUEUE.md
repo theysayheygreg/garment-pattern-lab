@@ -82,8 +82,8 @@ Outputs:
 - `docs/project/CANDIDATE-TO-EXPORT-INTEROP.md`
 - `docs/project/PATTERN-SCHEMA.md`
 - `docs/project/PATTERN-VALIDATION-CHECKLIST.md`
-- `prototype/browser/fixtures/invalid-candidate.pattern.json`
-- `prototype/browser/fixtures/marker-plan.example.json`
+- `garments/a-line-dress-tunic/fixtures/patterns/invalid-candidate.pattern.json`
+- `garments/a-line-dress-tunic/fixtures/marker/marker-plan.example.json`
 
 Deep-dive update:
 
@@ -171,8 +171,8 @@ Outputs:
 
 - `docs/project/BROWSER-NATIVE-PIPELINE.md`
 - `docs/project/TECH-STACK-DECISION.md`
-- `prototype/browser` skeleton
-- `prototype/browser/fixtures/a-line-tunic.pattern.json`
+- `app/` browser workbench skeleton
+- `garments/a-line-dress-tunic/fixtures/patterns/valid-seed.pattern.json`
 
 Deep-dive update:
 

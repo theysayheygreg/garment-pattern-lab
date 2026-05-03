@@ -471,8 +471,8 @@ Deliverables:
 
 - `docs/project/VISUAL-CORPUS-SCHEMA.md`
 - `docs/reference/PATTERN-REFERENCE-CORPUS.md`
-- `prototype/browser/fixtures/corpus-index.example.json`
-- `prototype/browser/fixtures/pattern-reference-index.example.json`
+- `garments/a-line-dress-tunic/fixtures/sketches/corpus-index.example.json`
+- `garments/a-line-dress-tunic/references/pattern-reference-index.example.json`
 - truth-level rubric
 - garment-family correctness checklist
 

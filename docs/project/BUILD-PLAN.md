@@ -4,13 +4,15 @@ This is the short operating plan. The full roadmap lives in `ROADMAP.md`.
 
 ## Current Milestone
 
-**M0: Project Grounding**
+**M0: Project Grounding And Product Scaffold**
 
 Goal: make the idea implementation-ready without starting from an under-specified dream.
 
 Status:
 
 - [x] Project scaffold.
+- [x] Product pillars.
+- [x] App/package/garment folder boundary.
 - [x] Product plan.
 - [x] Roadmap.
 - [x] Dependencies.
@@ -22,6 +24,149 @@ Status:
 - [ ] Pattern schema.
 - [ ] Sewing-aware validation checklist.
 - [ ] Tech stack decision.
+
+## Product Build Order
+
+The implementation order is intentionally validation-first. The prototype should earn trust by producing measurable pattern documents before it spends too much energy on beautiful 3D or broad editor tooling.
+
+### B0: Repo Scaffold And Contracts
+
+Status: in progress.
+
+Deliverables:
+
+- `app/`
+- `packages/`
+- `garments/a-line-dress-tunic/`
+- `docs/project/PRODUCT-PILLARS.md`
+- `docs/project/PROTOTYPE-BUILD-ORDER.md`
+
+Exit criteria:
+
+- Reusable product logic has a home outside garment folders.
+- First-garment drafting, fixtures, references, and outputs have a home outside core packages.
+
+### B1: PatternGraph Seed
+
+Deliverables:
+
+- `docs/project/PATTERN-SCHEMA.md`
+- `garments/a-line-dress-tunic/fixtures/patterns/valid-seed.pattern.json`
+- Invalid fixtures for seam, grainline, scale, self-intersection, and allowance errors.
+
+Exit criteria:
+
+- A valid first-garment pattern can be represented without generation code.
+- Known-bad fixtures express the validation failures we care about.
+
+### B2: Validation Harness First
+
+Deliverables:
+
+- `packages/validation-core/`
+- `docs/project/PATTERN-VALIDATION-CHECKLIST.md`
+- Machine-readable and human-readable validation reports.
+
+Exit criteria:
+
+- Bad candidates cannot export.
+- Every error points to a panel, seam, dart, grainline, unit profile, or export field.
+
+### B3: Geometry Kernel V1
+
+Deliverables:
+
+- `packages/geometry-core/`
+- Operation fixtures for curve length, offset, intersection, closedness, self-intersection, and triangulation.
+- `docs/project/TECH-STACK-DECISION.md`
+
+Exit criteria:
+
+- Prototype geometry operations are deterministic enough for pattern validation and SVG export.
+
+### B4: First Garment Generator
+
+Deliverables:
+
+- `garments/a-line-dress-tunic/docs/drafting.md`
+- Measurement and parameter fixtures.
+- Generator that creates front/back panels from measurements and garment parameters.
+
+Exit criteria:
+
+- Side and shoulder seams validate within tolerance.
+- Panel labels, notches, grainlines, allowances, and cut counts exist.
+
+### B5: Human-Readable Export
+
+Deliverables:
+
+- `packages/export-core/`
+- Semantic SVG export.
+- Cut sheet, assembly notes, source JSON, and validation report.
+
+Exit criteria:
+
+- A sewing-literate human can understand what to cut and what assumptions were made.
+
+### B6: Simple 3D Preview
+
+Deliverables:
+
+- `packages/preview-3d/`
+- Coarse Three.js preview.
+- Screenshot artifact.
+
+Exit criteria:
+
+- Front/back orientation, seam pairing, and rough silhouette are visible.
+- Preview warnings link back to validation where possible.
+
+### B7: Sketch Input And Landmark Bridge
+
+Deliverables:
+
+- `packages/sketch-intent/`
+- `LayeredSourceDocument`
+- Manual landmark fixtures.
+
+Exit criteria:
+
+- A human-authored or generated sketch can become editable garment parameters.
+
+### B8: Natural-Language Assistant Loop
+
+Deliverables:
+
+- `packages/assistant-core/`
+- Intent command map for hem, neckline, assumptions, seam warnings, and export readiness.
+
+Exit criteria:
+
+- The user can make at least one natural-language pattern-affecting edit and see the regenerated output pass validation.
+
+### B9: Semantic Trace Layers
+
+Deliverables:
+
+- Editable traced curves for first-garment landmarks and silhouette features.
+- Layer classification for visual-only, semantic intent, pattern-affecting, and material-affecting edits.
+
+Exit criteria:
+
+- The trace layer helps designers correct interpretation without turning v1 into a full vector editor.
+
+### B10: Prototype Package And Review Gate
+
+Deliverables:
+
+- Complete `garments/a-line-dress-tunic/outputs/a-line-dress-tunic-v0/` package.
+- Human review note.
+- Decision-log entry for next garment or repair pass.
+
+Exit criteria:
+
+- The package is ready for sewing-literate critique and the next product decision is evidence-based.
 
 ## Milestone M1: First Garment Rulebook
 

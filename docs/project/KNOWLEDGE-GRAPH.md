@@ -20,6 +20,11 @@ PatternGraph
   -> PatternPackageModel
   -> PatternPackageComposer
   -> HumanReadablePatternPackage
+
+ProductPillar
+  -> PrototypeBuildSlice
+  -> ProductPackage
+  -> GarmentProgram
 ```
 
 The system should infer visual intent, but constrain output through sewing-aware structures.
@@ -1210,6 +1215,53 @@ PatternGraph
   -> InteropRoundTripFixture
 ```
 
+```text
+ProductPillar
+  -> NaturalIntent
+  -> PatternGraphCraftContract
+  -> TraceLayerBridge
+  -> ValidationBeforeBeauty
+  -> PreviewAsFeedback
+  -> NarrowValidatedServices
+```
+
+```text
+PrototypeBuildSlice
+  -> B0RepoScaffold
+  -> B1PatternGraphSeed
+  -> B2ValidationHarness
+  -> B3GeometryKernel
+  -> B4FirstGarmentGenerator
+  -> B5HumanReadableExport
+  -> B6Simple3DPreview
+  -> B7SketchLandmarkBridge
+  -> B8AssistantLoop
+  -> B9SemanticTraceLayers
+  -> B10ReviewGate
+```
+
+```text
+ProductPackage
+  -> AssistantCore
+  -> SketchIntent
+  -> PatternCore
+  -> GeometryCore
+  -> ValidationCore
+  -> ExportCore
+  -> Preview3D
+```
+
+```text
+GarmentProgram
+  -> FirstGarmentDraftingRules
+  -> MeasurementFixture
+  -> GarmentParameterFixture
+  -> PatternFixture
+  -> ValidationFixture
+  -> MarkerFixture
+  -> HumanReadableOutputPackage
+```
+
 ## Representation Boundary Rules
 
 - `PatternGraph` is the manufacturing source of truth.
@@ -1229,6 +1281,8 @@ PatternGraph
 - Export compatibility is semantic: a file that preserves curves but loses units, layer meaning, grainlines, notches, labels, or cut counts fails conformance.
 - Designer sketch/model edits must be classified before they affect output. A projected decal, color zone, print, or PBR material preview is not a pattern change unless it becomes a validated `PatternGraphCandidate` or `PatternGraphRevision`.
 - Live 3D preview is feedback for design intent; it must not silently rewrite sewable pattern geometry.
+- Product pillars constrain implementation choices: natural-language/task-led interaction and validation-first package generation should win over broad CAD/editor parity.
+- Reusable product logic belongs in `app/` or `packages/`; garment-specific drafting rules, fixtures, references, and generated evidence belong under `garments/`.
 
 ## Deep Dive Product Decisions
 

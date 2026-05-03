@@ -125,6 +125,7 @@ This is a project seed, not an implementation repo yet.
 The initial docs contain:
 
 - Product plan and MVP boundary.
+- Product pillars and prototype build order.
 - Roadmap to first prototype.
 - Dependency map.
 - Research queue.
@@ -137,6 +138,17 @@ The initial docs contain:
 ## Project Structure
 
 ```text
+app/            Product workbench shell; reusable UI/orchestration, not garment-specific
+packages/       Reusable product packages and kernel boundaries
+  assistant-core/
+  export-core/
+  geometry-core/
+  pattern-core/
+  preview-3d/
+  sketch-intent/
+  validation-core/
+garments/       Garment programs, fixtures, references, and generated outputs
+  a-line-dress-tunic/
 docs/
   project/       Roadmap, product plan, dependencies, research queue, backlog
   reference/     Bibliography and technical landscape notes
@@ -152,6 +164,8 @@ handoffs/        Agent handoff notes
 
 - [Architecture Overview](docs/project/ARCHITECTURE-OVERVIEW.md)
 - [Product Design Brief](docs/project/PRODUCT-DESIGN.md)
+- [Product Pillars](docs/project/PRODUCT-PILLARS.md)
+- [Prototype Build Order](docs/project/PROTOTYPE-BUILD-ORDER.md)
 - [Kew Competitor And Inspiration Shortlist](docs/reference/KEW-COMPETITOR-SHORTLIST.md)
 - [Kew Competitor Deep Dive](docs/reference/KEW-COMPETITOR-DEEP-DIVE.md)
 - [Kew Sample Image Analysis](docs/reference/KEW-SAMPLE-IMAGE-ANALYSIS.md)

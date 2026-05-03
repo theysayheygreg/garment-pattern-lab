@@ -137,3 +137,10 @@ Kew sample image analysis:
 - Added `KEW-SAMPLE-IMAGE-ANALYSIS.md` for Kiko's screenshot showing reference photo, croquis grid, body landmarks, technical sketch, and design callouts in one project canvas.
 - Captured the useful Pattern Lab lesson: learn from the information architecture and semantic callouts, but do not turn v1 into a broad freeform board product.
 - Added the follow-on nuance: the screenshot lacks a 3D render, and vector-editable/layered source tooling is useful soon as an interpretation bridge, not as a full Illustrator clone.
+
+Next design phase:
+
+- Added `PRODUCT-PILLARS.md` with six high-level product pillars: natural intent, PatternGraph as craft contract, trace/layers as bridge, validation before beauty, 3D as feedback, and narrow validated services.
+- Added `PROTOTYPE-BUILD-ORDER.md` with a concrete B0-B10 build sequence from scaffold and seed fixtures through validation, generation, export, 3D preview, sketch landmarks, assistant edits, semantic trace layers, and human review.
+- Scaffolded the product-engine folder split: `app/`, reusable `packages/`, and first-garment `garments/a-line-dress-tunic/`.
+- Expanded the roadmap with package ownership, first-garment fixture paths, pipeline areas, and a more granular validation-first build order.
