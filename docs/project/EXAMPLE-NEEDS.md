@@ -30,7 +30,7 @@ Keep these separated so the project does not confuse inspiration images with pat
 Recommended composition:
 
 - Items 1-5: `pattern-truth` or `round-trip-fixture` items from FreeSewing, OpenPattern, GarmentCodeData, or the 2021 Zenodo garment-pattern dataset.
-- Items 6-10: `pattern-reference` examples from license-safe sources such as LACMA where rights permit, Atacac Sharewear where share-alike is acceptable, or metadata-only summaries from CoPA.
+- Items 6-10: `pattern-reference` examples from public patterns or license-safe sources. Copyrighted public patterns are acceptable for reference-only review and evaluation notes, but not copied geometry, redistributed PDFs, or training fixtures.
 - Items 11-15: GPT Image 2 front/back technical flats.
 - Items 16-20: GPT Image 2 croquis/on-body sketches.
 
@@ -181,10 +181,13 @@ Use the variation set to define warnings and acceptable ranges: expected panel r
 
 - Record source URL/path for every item.
 - Record license/use assumptions.
-- Do not use commercial pattern files as training or fixtures without explicit permission.
+- Publicly available patterns should be assumed copyrighted unless their license says otherwise.
+- Use copyrighted public patterns for reference-only review, feature extraction, and output verification notes.
+- Do not use commercial/public pattern files as training, copied geometry, redistributed assets, or fixtures without explicit permission.
 - Prefer public-domain, open, museum-published, or generated-in-project examples.
 - Separate examples that can be shown publicly from examples used for private research only.
 - Treat CoPA as taxonomy/private-research metadata unless permissions say otherwise.
 - Treat LACMA as per-item rights review, not automatic reusable training data.
 - Treat GPT Image 2 outputs as generated fixtures with model, snapshot, prompt, and review metadata.
+- Use GPT Image 2/project-owned sketches as the original pipeline trial inputs, then verify generated output against reference-only public patterns.
 - Treat Hunyuan3D-2 outputs as evaluation-only unless license review says otherwise.

@@ -163,3 +163,19 @@
 **Why:** One exemplar keeps the prototype concrete. The variation set keeps validation from overfitting one designer's construction choices. Every design is slightly different, so family-level checks should learn ranges and variants: closure, darts, length, hem sweep, armhole shape, finishing, fold/split construction, and seam allowance conventions.
 
 **Door status:** Closed for prototype methodology. Open for which exact exemplar becomes the first run.
+
+## 2026-05-03: Copyrighted public patterns are reference-only
+
+**Question:** How should the project use publicly available sewing patterns that are almost certainly copyrighted by their designers?
+
+**Options considered:**
+
+- Avoid copyrighted public patterns entirely.
+- Treat them as reusable pattern geometry.
+- Use them as reference-only evaluation material while keeping pipeline inputs and fixtures project-owned or explicitly licensed.
+
+**Where it landed:** Public/copyrighted patterns can be used as `pattern-reference` for manual review, validation expectations, and output comparison. They must not be copied into fixtures, traced as geometry, redistributed, or used as training data without explicit permission.
+
+**Why:** The product needs to know what real patterns look like, but the original examples should come from project-owned GPT Image 2 sketches, project-authored `PatternGraph` fixtures, or explicitly licensed/generated pattern sources. Reference patterns judge correctness after the fact.
+
+**Door status:** Closed as corpus policy. Open for explicit per-source permissions later.

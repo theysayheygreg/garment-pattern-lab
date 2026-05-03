@@ -71,11 +71,11 @@ This lane should teach pattern anatomy and construction expectations for the fir
 
 Real-pattern lane recommendation:
 
-For the first usable corpus, prefer project-created pattern-truth over external pattern downloads:
+For the first usable corpus, prefer project-created sketches and pattern-truth over external pattern downloads:
 
 1. Generate one internal sleeveless A-line tunic `PatternGraph` fixture.
 2. Generate one FreeSewing-adjacent block/slip/skirt reference if license review passes.
-3. Add Adelica 1571 and LACMA as metadata-only `pattern-reference` examples.
+3. Add Adelica 1571, Peppermint Shift Style, Hayden, and LACMA as `pattern-reference` examples for manual comparison and validation notes.
 4. Add Smithsonian/Europeana visual references as `semantic-reviewed` after human markup.
 
 ## Suggested First 20 Corpus Items
@@ -154,4 +154,5 @@ For real pattern references:
 2. Add 8 metadata-only entries without downloading images.
 3. Generate 5 controlled project-owned sketch/flat fixtures with prompt provenance.
 4. Draft the first internal PatternGraph tunic fixture so the real-pattern lane has at least one `pattern-truth` item.
-5. Run item-level rights review before committing any external image or PDF asset.
+5. Verify generated pattern output against public/copyrighted reference patterns without copying their geometry or instructions.
+6. Run item-level rights review before committing any external image or PDF asset.

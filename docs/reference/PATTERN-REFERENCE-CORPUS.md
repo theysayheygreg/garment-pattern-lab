@@ -20,9 +20,32 @@ closures, cut quantities, and construction order.
 | `pattern-truth` | A scaled pattern or generated pattern whose license/provenance allows use as a project fixture. | Use for internal correctness fixtures, PatternGraph conversion tests, and validation comparisons, preserving attribution/license metadata. |
 | `metadata-only` | Useful taxonomy or inspiration where the actual pattern geometry/instructions are unavailable or rights are unclear. | Record garment family, visible features, and missing-data questions only. |
 
-Default posture: treat free commercial/blog patterns as `pattern-reference`,
-not `pattern-truth`, unless the source gives explicit permission to reuse,
-modify, and redistribute the pattern file or generated derivative pattern data.
+Default posture: assume publicly available sewing patterns on the web are still
+copyrighted by their designers or publishers. That is fine for reference-only
+review, but not for copied fixtures.
+
+Use copyrighted public patterns as `pattern-reference`:
+
+- inspect them manually
+- record source URLs and citation metadata
+- extract high-level construction facts and validation expectations
+- compare our original outputs against their visible conventions
+
+Do not use copyrighted public patterns as `pattern-truth` unless the source gives
+explicit permission to reuse, modify, and redistribute the pattern file or
+generated derivative pattern data.
+
+The intended prototype path is:
+
+```text
+project-owned GPT Image 2 sketch / technical flat
+  -> project-owned PatternGraph candidate
+  -> human-readable pattern package
+  -> reference-only comparison against public/copyrighted patterns
+```
+
+Reference patterns help us judge correctness. They should not become the input
+sketch, copied geometry, redistributed asset, or training fixture.
 
 ## Best Candidate Corpus Items
 
@@ -52,7 +75,7 @@ Recommended first exemplar:
 
 `peppermint-shift-style`
 
-Reason: it is closest to the first product shape: sleeveless woven shift/dress, bias binding, back opening with hook and eye, darts, seam allowance stated, and print-scale grid. Because it is copyrighted, it should be used as a `pattern-reference` for validation and feature checks, not copied as reusable geometry. The project-owned `PatternGraph` should be authored independently and checked against this reference's high-level construction expectations.
+Reason: it is closest to the first product shape: sleeveless woven shift/dress, bias binding, back opening with hook and eye, darts, seam allowance stated, and print-scale grid. Because it is copyrighted, it should be used as a `pattern-reference` for validation and feature checks, not copied as reusable geometry. The pipeline input should be a project-owned sketch or technical flat, and the project-owned `PatternGraph` should be authored independently and checked against this reference's high-level construction expectations.
 
 The first real-pattern mini-corpus should be:
 
@@ -161,6 +184,12 @@ Variation dimensions to track:
   into fixtures.
 - It is acceptable to record source metadata, high-level features, and validation
   expectations learned from public descriptions.
+- It is acceptable to keep copyrighted public patterns in the reference set for
+  manual comparison and evaluation notes.
+- Do not train on, redistribute, or trace copyrighted public pattern geometry
+  without explicit permission.
+- GPT Image 2/project-created sketches should provide the original trial inputs
+  for the pipeline; public patterns should verify outputs after the fact.
 - Atacac Sharewear is the cleanest real pattern file lane because it explicitly
   uses CC BY-SA, but derivative PatternGraph fixtures may need to carry the same
   share-alike license.
