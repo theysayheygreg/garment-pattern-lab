@@ -486,7 +486,15 @@ This graph now folds in the first broad reference pass:
 
 `PromptRecipe` is a reusable prompt template for generating controlled garment views.
 
-`VisualCorpusItem` is an indexed image, sketch, render, or 3D candidate with license, source, and review metadata.
+`VisualCorpusItem` is an indexed image, sketch, render, pattern reference, or 3D candidate with license, source, and review metadata.
+
+`PatternReferenceImage` is an actual pattern-piece, cutting-layout, construction-diagram, or pattern-envelope reference image.
+
+`PatternReferenceFamily` groups examples by garment family and construction variant, such as sleeveless A-line dress, button-up shirt, A-line skirt, pants, jacket, or knit tee.
+
+`ConstructionFeature` is a pattern-level feature such as yoke, dart, pleat, placket, collar stand, waistband, facing, lining, pocket bag, two-piece sleeve, or cut-on-fold panel.
+
+`CorrectnessRule` is a garment-family expectation derived from references, such as required panel roles, expected seam pairs, expected finishing, and suspicious omissions.
 
 `SketchStyle` describes whether the artifact is a croquis sketch, technical flat, isolated garment drawing, rendered concept, or construction-focused line drawing.
 
@@ -496,7 +504,7 @@ This graph now folds in the first broad reference pass:
 
 `MeshCandidateReport` scores a generated 3D output for silhouette preservation, mesh cleanliness, garment-body separation, and usefulness for mesh-to-pattern research.
 
-`CorpusTruthLevel` separates visual-only artifacts from semantically reviewed artifacts and pattern-truth fixtures.
+`CorpusTruthLevel` separates visual-only artifacts from semantically reviewed artifacts, pattern-truth fixtures, and pattern-reference-family examples.
 
 `SemanticReview` is human or model-assisted review of whether a sketch's garment semantics are clear enough to drive `SketchIntent`.
 
@@ -662,6 +670,12 @@ PromptRecipe
 VisualCorpusItem
   -> CorpusTruthLevel
 
+PatternReferenceImage
+  -> VisualCorpusItem
+  -> PatternReferenceFamily
+  -> ConstructionFeature
+  -> CorrectnessRule
+
 GeneratedSketch
   -> ReferenceSheet
   -> LandmarkSet
@@ -674,6 +688,10 @@ GeneratedSketch
 PatternGraph
   -> PatternTruthLink
   -> VisualCorpusItem
+
+PatternGraph
+  -> CorrectnessRule
+  -> ValidationReport
 ```
 
 ## Representation Boundary Rules

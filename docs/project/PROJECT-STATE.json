@@ -38,9 +38,9 @@
       "pipelineRole": "evaluate modern image/sketch-to-3D frameworks as visualization and mesh-to-pattern research inputs"
     },
     {
-      "id": "visual-corpus-evaluation-bridge",
+      "id": "pattern-reference-corpus-evaluation-bridge",
       "localPlan": "docs/project/AI-SKETCH-3D-EXPLORATION.md",
-      "pipelineRole": "connect generated sketches, 3D candidates, semantic labels, validation reports, and pattern truth levels"
+      "pipelineRole": "index actual pattern-reference images by garment family so generated flats can be checked against known construction solutions"
     }
   ],
   "externalTooling": [
