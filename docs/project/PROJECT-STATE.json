@@ -1,0 +1,22 @@
+{
+  "project": "garment-pattern-lab",
+  "created": "2026-05-03",
+  "status": "planning",
+  "currentMilestone": "M0-project-grounding",
+  "prototypeTarget": "sleeveless-a-line-woven-dress-tunic",
+  "sourceOfTruth": "pattern-grammar-first",
+  "nextActions": [
+    "ingest-public-patternmaking-reference",
+    "write-first-garment-drafting-formulas",
+    "define-pattern-schema",
+    "choose-prototype-tech-stack"
+  ],
+  "prototype1DoneWhen": [
+    "measurement-to-pattern-generator-works",
+    "manual-sketch-landmarks-generate-pattern",
+    "svg-pdf-json-cut-sheet-assembly-export-package-exists",
+    "simple-3d-preview-exists",
+    "human-pattern-review-recorded"
+  ]
+}
+
