@@ -145,7 +145,7 @@ Candidate sources include:
 
 The validation gate promotes a candidate into a trusted `PatternGraph`.
 
-Validation is not a console. The product should not recreate the traditional IDE/game-engine/3D-software pattern where a user hits export, receives a wall of errors and warnings, and has to stop everything to decode them. Pattern Lab should validate continuously, classify issues quietly, fix-forward where the correction is safe, and ask for designer judgment only when the choice changes intent.
+Validation is not a console. The product should not recreate the traditional IDE/game-engine/3D-software pattern where a user hits export, receives a wall of errors and warnings, and has to stop everything to decode them. Pattern Lab should validate continuously, classify issues quietly, normalize safe details, and ask for designer judgment only when the choice changes intent.
 
 Checks include:
 
@@ -247,24 +247,25 @@ Those edits may inspire pattern changes, but they do not become manufacturing tr
 
 Validation is product-critical. The user-facing 3D view can make weak output look convincing, so validation must be upstream of trust.
 
-The system should distinguish internal validation state from user-facing repair experience.
+The system should distinguish internal validation state from user-facing refinement experience.
 
 Internal validation should distinguish:
 
 - hard errors that block export
-- soft errors that can be auto-corrected or turned into a question
+- soft issues that can be normalized or turned into a question
 - warnings that can proceed with visible provenance
 - assumptions that should be recorded and surfaced naturally
 - limitations that explain what the prototype does not know
 - later-machine-output failures that do not block v1 human-readable output
 
-The user-facing experience should be smooth and fix-forward:
+The user-facing experience should be smooth and designer-centered:
 
-- apply safe repairs automatically with a concise explanation
+- continue safely when the system can infer or normalize the next step
 - batch non-blocking issues into a readiness summary
 - ask one clear design question at a time when intent is ambiguous
 - keep the designer in garment language, not diagnostic codes
 - avoid making export the first moment the user learns the pattern had problems
+- treat validation primarily as backend instrumentation for improving interpretation, generation, and package readiness
 
 ## Browser And Geometry Stack
 

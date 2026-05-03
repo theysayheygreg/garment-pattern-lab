@@ -160,15 +160,17 @@ The product should always expose:
 - scale proof
 - export limitations
 
-But this should not feel like a compiler console. The designer should not discover a wall of errors only when pressing export. Validation and interpretation should run in the background, repair safe issues automatically, summarize readiness in plain language, and ask for judgment only when a decision changes the design.
+But this should not feel like a compiler console, and it should not imply the designer broke something. The designer should not discover a wall of errors only when pressing export. Validation and interpretation should mostly run behind the product surface, improving interpolation quality and package readiness. When something needs attention, the product should present it as a garment-design choice or confidence note, not as a diagnostic failure.
 
 The product should use language like:
 
 - "needs review"
 - "assumed"
 - "confirmed"
-- "blocking issue"
 - "safe to export"
+- "ready to sample"
+- "I interpreted this as"
+- "choose one"
 
 Avoid language like:
 
@@ -176,6 +178,10 @@ Avoid language like:
 - "production ready"
 - "automatically sewable"
 - "guaranteed"
+- "error"
+- "warning"
+- "invalid"
+- "repair"
 
 ## Designer Delight
 

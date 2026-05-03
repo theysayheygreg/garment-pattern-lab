@@ -163,5 +163,5 @@ Orrery design review:
 
 Validation interaction refinement:
 
-- Clarified that validation should be a fix-forward repair loop, not a traditional IDE/game-engine/3D-tool console of errors and warnings.
-- Added product guidance that Pattern Lab should validate continuously, auto-repair safe issues, summarize readiness, and ask designer-facing questions only when intent is ambiguous.
+- Clarified that validation should mostly be backend instrumentation for interpolation quality and package readiness, not a traditional IDE/game-engine/3D-tool console of errors and warnings.
+- Replaced repair-framed product language with refinement, readiness, interpretation, safe normalization, and designer-facing choices when intent is ambiguous.

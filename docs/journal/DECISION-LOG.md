@@ -308,7 +308,7 @@
 
 **Door status:** Closed as first implementation move. The formal build plan can be rationalized after v0.1 exists.
 
-## 2026-05-03: Validation should be fix-forward, not an error console
+## 2026-05-03: Validation should be backend instrumentation, not a designer-facing error console
 
 **Question:** What should validation feel like to the designer?
 
@@ -316,10 +316,10 @@
 
 - Traditional diagnostic console with errors and warnings.
 - Export-time stop-and-fix checklist.
-- Continuous, assistive, fix-forward repair loop.
+- Continuous backend instrumentation for interpretation quality, package readiness, and designer-facing refinement only when needed.
 
-**Where it landed:** Validation should be a smooth repair loop, not a console. The system should validate continuously, apply safe repairs, batch non-blocking issues into readiness summaries, and ask clear design questions only when intent is ambiguous or a correction changes the garment.
+**Where it landed:** Validation is primarily a backend developer and engine-quality tool. It should improve interpolation, pattern generation, package readiness, and internal confidence. The fashion designer should usually experience it as smooth continuation, clear interpretation, and occasional design-facing questions rather than as "you broke something; fix these warnings."
 
-**Why:** Traditional CAD, 3D tools, game engines, and IDEs often make users stop at a wall of errors. That is the wrong product feel here. Pattern Lab should behave more like an agentic collaborator: notice issues early, fix what it can, explain what it changed, and keep the designer moving toward a credible pattern package.
+**Why:** Traditional CAD, 3D tools, game engines, and IDEs often make users stop at a wall of errors. Even "repair" implies the designer caused damage and the computer is scolding them. That is the wrong product feel. Pattern Lab should behave more like an agentic collaborator: interpret, continue, normalize safe details, and surface only meaningful garment-design choices.
 
 **Door status:** Closed as product interaction direction. Implementation details remain open in validation schema and UI.

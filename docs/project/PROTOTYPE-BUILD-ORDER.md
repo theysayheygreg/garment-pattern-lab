@@ -203,7 +203,7 @@ Tasks:
 
 Exit:
 
-- prototype is accepted as mockup-worthy or scoped to repair
+- prototype is accepted as mockup-worthy or scoped to refinement
 
 ## Implementation Bias
 

@@ -497,8 +497,8 @@ Tasks:
 - Implement candidate normalization and measurement report shape.
 - Implement export gate semantics.
 - Implement SVG round-trip test requirements.
-- Produce internal `validation.json`, a smooth user-facing repair/readiness summary, and a human-readable `validation.md` for package provenance.
-- Add `FixForwardAction` / `FixSuggestion` records for safe repairs, designer questions, and deferred limitations.
+- Produce internal `validation.json`, a smooth user-facing readiness/interpretation summary, and a human-readable `validation.md` for package provenance.
+- Add `ContinuationAction` / `InterpretationQuestion` records for safe normalization, designer choices, and deferred limitations.
 
 Deliverables:
 
@@ -507,10 +507,10 @@ Deliverables:
 
 Acceptance criteria:
 
-- Bad seam pairs are caught before export and shown as a repair path, not a last-minute error console.
-- Missing grainlines or seam allowances are auto-repaired where safe, or turned into a clear design question.
+- Bad seam pairs are caught before export and handled as internal package-readiness state, not a last-minute error console.
+- Missing grainlines or seam allowances are normalized where safe, or turned into a clear design question.
 - The report distinguishes errors from warnings.
-- The user-facing output batches validation into readiness and repair language instead of raw diagnostic noise.
+- The user-facing output batches validation into readiness and interpretation language instead of raw diagnostic noise.
 - The report cites known limitations when checks are approximate.
 - Candidates cannot be promoted to exportable `PatternGraph` unless the export gate passes.
 
@@ -684,7 +684,7 @@ Acceptance criteria:
 
 - Review identifies concrete pattern issues.
 - Roadmap updates from evidence, not vibes.
-- Prototype is either accepted as a viable base or scoped to a repair pass.
+- Prototype is either accepted as a viable base or scoped to a refinement pass.
 
 ## Phase 8: Automation Upgrade
 

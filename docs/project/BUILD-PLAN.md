@@ -162,7 +162,7 @@ Deliverables:
 
 - Complete `garments/a-line-dress-tunic/outputs/a-line-dress-tunic-v0/` package.
 - Human review note.
-- Decision-log entry for next garment or repair pass.
+- Decision-log entry for next garment or refinement pass.
 
 Exit criteria:
 
