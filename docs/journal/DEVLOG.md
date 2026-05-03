@@ -80,3 +80,9 @@ Architecture overview:
 - Added `docs/project/ARCHITECTURE-OVERVIEW.md` as the high-level design document for the current pipeline, tool stack, output lanes, validation philosophy, designer editing lane, and corpus strategy.
 - Updated the README so the remote repo front door now explains `PatternGraph` as manufacturing truth, the v1 human-readable package, and the current browser/geometry/preview tool direction.
 - Added a maintenance rule: `ARCHITECTURE-OVERVIEW.md` stays current and product-facing, durable narrowed choices go in `DECISION-LOG.md`, and explored/deferred paths go in `THINGS-TRIED.md`.
+
+CAD drawing analogy:
+
+- Added `docs/research/cad-to-technical-drawings-2026-05-03.md` after a reference pass on CAD-to-technical-drawing workflows.
+- The useful borrow is a sheet/document-composition layer, not CAM: generated views, dimensions, annotations, page templates, title blocks, scale proof, standards profiles, and print-readiness checks.
+- Folded this into the product graph as `PatternDrawingModel`, `PatternSheetComposer`, and `PatternSheetProfile`, downstream of `PatternGraph` and upstream of human-readable SVG/PDF.

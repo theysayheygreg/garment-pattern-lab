@@ -144,6 +144,7 @@ handoffs/        Agent handoff notes
 - [Browser-Native Pipeline](docs/project/BROWSER-NATIVE-PIPELINE.md)
 - [AI Sketch And 3D Exploration](docs/project/AI-SKETCH-3D-EXPLORATION.md)
 - [Candidate-To-Export Interop Layer](docs/project/CANDIDATE-TO-EXPORT-INTEROP.md)
+- [CAD To Technical Drawings Reference Pass](docs/research/cad-to-technical-drawings-2026-05-03.md)
 - [Reference Index](docs/reference/REFERENCES.md)
 - [UV to Pattern Notes](docs/reference/UV-UNWRAP-TO-PATTERN.md)
 - [Computational Pattern Making Paper Ingest](docs/reference/papers/computational-pattern-making-2202.10272-ingest.md)

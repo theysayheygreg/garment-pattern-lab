@@ -90,6 +90,29 @@ Deep-dive update:
 - Add `FormatSemanticMap`, `SVGSemanticProfile`, `DXFProfile`, and `InteropRoundTripFixture` so export compatibility is measured as semantic preservation, not just file creation.
 - SVG should ship first with stable layer IDs, metadata, unit proof, and reimport checks.
 - DXF/AAMA/ASTM should wait until notches, internal lines, grain/fold lines, labels, cut counts, units, and grade anchors can be expressed without guessing.
+- Borrow from CAD-to-technical-drawing workflows: define `PatternDrawingModel`, `PatternSheetComposer`, and `PatternSheetProfile` so human-readable SVG/PDF output has generated views, dimensions, callouts, title-block metadata, scale proof, page/tile layout, and print-readiness checks.
+
+### R2d: Pattern Sheet Composition / CAD Drawing Analog
+
+Goal: turn validated `PatternGraph` into readable pattern sheets, not just exported paths.
+
+Questions:
+
+- Which fields belong in the prototype title block: pattern name, garment family, size/measurement set, units, seam allowance, revision, validation status, date, source/provenance, and limitations?
+- Which garment dimensions and callouts help a sewer without cluttering the sheet?
+- How should dimensions attach to semantic graph ids so edits do not break labels?
+- What line styles are mandatory for cut lines, seam lines, fold lines, grainlines, darts, notches, construction lines, and annotations?
+- How should page tiling, tile coordinates, and scale-square proof be represented?
+- Should optional 3D reference views be raster screenshots, generated line art, or both?
+- Which FreeCAD TechDraw concepts should inspire the schema: page objects, projection groups, SVG templates, dimensions linked to source geometry, and scripted generation?
+- Which Open CASCADE hidden-line-removal concepts are useful for future 3D reference views?
+
+Outputs:
+
+- `docs/research/cad-to-technical-drawings-2026-05-03.md`
+- `docs/project/PATTERN-SHEET-PROFILE.md`
+- first `PatternDrawingModel` JSON fixture
+- first SVG/PDF sheet-composition fixture
 
 ### R3: First Prototype Tech Stack
 

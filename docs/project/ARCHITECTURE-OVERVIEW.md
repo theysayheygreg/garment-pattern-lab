@@ -172,6 +172,21 @@ It includes:
 
 The graph can later drive SVG/PDF, 3D preview, marker planning, DXF/AAMA/ASTM, grading, simulation, or machine cutting.
 
+## Pattern Drawing Package
+
+The v1 human-readable package should borrow from CAD-to-technical-drawing workflows. A useful craft document is more than exported geometry: it has views, dimensions, callouts, scale proof, title-block metadata, page/tile layout, notes, and readable line styles.
+
+Add this downstream architecture component:
+
+```text
+PatternGraph
+  -> PatternDrawingModel
+  -> PatternSheetComposer
+  -> HumanReadablePatternPackage
+```
+
+`PatternDrawingModel` should attach dimensions and annotations to stable `PatternGraph` ids such as panels, seams, darts, grainlines, fold lines, and notches. `PatternSheetComposer` should own page layout, tiling, title blocks, scale markers, validation callouts, and SVG/PDF export.
+
 ## Designer Editing Lane
 
 The designer editing lane has two scopes.

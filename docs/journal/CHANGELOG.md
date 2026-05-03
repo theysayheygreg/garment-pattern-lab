@@ -37,3 +37,4 @@
 - Split output strategy into a v1 human-readable pattern package lane and a later machine-readable cutter/CAD lane.
 - Added a high-level architecture overview and ported the core pipeline/tooling summary into the README.
 - Added architecture maintenance policy, `THINGS-TRIED.md`, README links, and a decision-log entry for preserving explored options while keeping the current architecture overview focused.
+- Added CAD-to-technical-drawing reference pass and folded the analogy into the architecture as `PatternDrawingModel`, `PatternSheetComposer`, and `PatternSheetProfile`.

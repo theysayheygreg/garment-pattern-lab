@@ -15,6 +15,8 @@ Outputs can become:
 
 - canonical `PatternGraph`
 - corrected `PatternGraphRevision`
+- `PatternDrawingModel`
+- `PatternSheetComposer` output
 - human-readable SVG
 - tiled PDF / print package
 - cut sheet and assembly instructions
@@ -25,6 +27,8 @@ Outputs can become:
 The interop layer exists because a candidate can look plausible and still fail as a pattern. It must measure, correct, test, and prove the candidate before export.
 
 Prototype 1 targets the human-readable lane: a person should be able to print, cut, review, and sew from the exported package. Machine-readable cutter/CAD output is a later industrial lane.
+
+The CAD-to-technical-drawing analogy matters here. Export should not mean "write the panel paths." It should mean compose a readable craft document with stable views, dimensions, annotations, page layout, title-block metadata, scale proof, validation notes, and print-readiness checks.
 
 ## Position In The Pipeline
 
@@ -525,6 +529,21 @@ Required:
 - validation summary
 - known limitations
 
+### Pattern Sheet Composition
+
+Required:
+
+- `PatternDrawingModel` derived from a passed `PatternGraph`
+- pattern-piece views attached to stable panel ids
+- annotation anchors attached to seams, darts, notches, fold lines, grainlines, and panel roles
+- title block with pattern name, garment type, measurements/size, revision, units, seam allowance profile, validation status, and date
+- line-style profile for cut, seam, fold, grain, dart, notch, construction, and annotation lines
+- generated dimensions where useful to a sewer, not every possible measurement
+- collision-checked labels and callouts
+- scale square and page/tile coordinates
+- optional marker/fabric-width sheet
+- optional 3D reference view generated downstream from `PatternGraph`
+
 ### DXF/AAMA/ASTM Conformance
 
 Future required:
@@ -582,6 +601,9 @@ RoundTripReport
 InteropFormatProfile
 ToleranceProfile
 UnitProfile
+PatternDrawingModel
+PatternSheetComposer
+PatternSheetProfile
 FabricRollProfile
 MarkerPolicy
 MarkerPlan
@@ -660,3 +682,5 @@ The 2202.10272 mesh-derived route should target this same contract later:
 - Can we use a public pattern-reference corpus to generate garment-family correctness rules?
 - Which external tool can serve as a DXF import verifier?
 - How do we display validation failures directly on 2D flats and 3D preview?
+- Which dimensions, callouts, title-block fields, and line-style conventions are required for a readable human pattern sheet?
+- Can CAD technical-drawing view/template systems inspire our `PatternDrawingModel` and `PatternSheetComposer` without importing mechanical GD&T complexity?

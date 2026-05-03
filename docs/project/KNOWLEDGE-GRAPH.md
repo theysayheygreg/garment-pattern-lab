@@ -15,6 +15,11 @@ PatternGraph
   -> 3DAssemblyPreview
   -> ValidationReport
   -> PatternGraphRevision
+
+PatternGraph
+  -> PatternDrawingModel
+  -> PatternSheetComposer
+  -> HumanReadablePatternPackage
 ```
 
 The system should infer visual intent, but constrain output through sewing-aware structures.
@@ -152,6 +157,7 @@ Edges:
 
 - `PatternGraph -> SVGExport`
 - `PatternGraph -> PDFExport`
+- `PatternGraph -> PatternDrawingModel`
 - `PatternGraph -> 3DAssemblyPreview`
 - `PatternGraph -> ValidationReport`
 
@@ -444,6 +450,14 @@ This graph now folds in the first broad reference pass:
 
 `GuideSheet` is the maker-facing cut and sew instruction surface.
 
+`PatternDrawingModel` is the semantic drawing package derived from `PatternGraph`; it stores views, dimensions, annotation anchors, labels, title-block metadata, scale proof, page/tile metadata, and validation callouts before SVG/PDF rendering.
+
+`PatternSheetComposer` lays out pattern-piece views, detail views, dimensions, notes, title blocks, scale markers, warnings, and optional 3D reference views onto printable pages.
+
+`PatternSheetProfile` is the garment equivalent of a lightweight drawing standard: line styles, required labels, page sizes, units, title-block fields, scale-proof rules, and annotation conventions.
+
+`HumanReadablePatternPackage` is the v1 output bundle for a sewer or sample room: pattern sheets, tiled PDF, cut sheet, construction guide, validation report, source `PatternGraph`, and optional 3D reference view.
+
 ### Parametric Tooling Layer
 
 `ParametricDesign` is a reusable pattern generator whose output is determined by measurements and options.
@@ -589,6 +603,11 @@ PatternGraph
 
 PatternGraph
   -> GuideSheet
+
+PatternGraph
+  -> PatternDrawingModel
+  -> PatternSheetComposer
+  -> HumanReadablePatternPackage
 
 PatternGraph
   -> GradeRule

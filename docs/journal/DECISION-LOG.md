@@ -131,3 +131,19 @@
 **Why:** The README and architecture overview need to stay readable for future builders and remote visitors. The research trail still matters because deferred lanes can become later product branches, fixtures, or validation checks.
 
 **Door status:** Closed as documentation practice. Open to splitting the history file if the archive grows large.
+
+## 2026-05-03: Human-readable output needs a drawing-composition layer
+
+**Question:** Should prototype 1 treat SVG/PDF export as raw pattern geometry, or as a composed technical document similar to CAD drawing packages?
+
+**Options considered:**
+
+- Export panel paths directly and rely on users to interpret them.
+- Generate a full industrial CAD package immediately.
+- Add a lightweight `PatternDrawingModel` and `PatternSheetComposer` between `PatternGraph` and human-readable SVG/PDF.
+
+**Where it landed:** Add `PatternDrawingModel`, `PatternSheetComposer`, and `PatternSheetProfile` downstream of `PatternGraph`.
+
+**Why:** The craftsperson-facing output needs views, dimensions, annotations, line styles, title-block metadata, scale proof, tiling, validation notes, and readable page layout. CAD-to-technical-drawing workflows are the right analog; CAD-to-CAM is later and not prototype-critical.
+
+**Door status:** Closed as v1 architecture direction. Open for exact sheet schema and visual conventions.
