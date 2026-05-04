@@ -67,6 +67,7 @@ export function buildSvg(patternDoc, readinessDoc, params) {
 }
 
 export function buildCutSheet(patternDoc, params, markerPlan = patternDoc.markerPlan) {
+  const body = patternDoc.bodyMeasurementSet?.measurements ?? {};
   const markerSection = markerPlan
     ? `
 ## Marker Layout
@@ -82,17 +83,46 @@ Pattern: ${patternDoc.title}
 
 Units: millimeters
 
+## Print Scale
+
+- Print at 100% scale; do not fit to page.
+- Measure the 50mm scale square on \`pattern.svg\` before cutting.
+- This v0.1 package is SVG-first; tiled home-print PDF is still missing.
+
+## Body Fixture
+
+| Measurement | Value |
+| --- | ---: |
+| Bust | ${formatMm(body.bust)} |
+| Waist | ${formatMm(body.waist)} |
+| Hip | ${formatMm(body.hip)} |
+| Shoulder width | ${formatMm(body.shoulderWidth)} |
+| Armhole depth | ${formatMm(body.armholeDepth)} |
+
+## Finished Draft Measurements
+
+| Measurement | Value |
+| --- | ---: |
+| Finished length | ${formatMm(patternDoc.patternMeasurements.finishedLength)} |
+| Full hem sweep | ${formatMm(patternDoc.patternMeasurements.fullHemSweep)} |
+| Front shoulder seam | ${formatMm(patternDoc.patternMeasurements.front.shoulder)} |
+| Back shoulder seam | ${formatMm(patternDoc.patternMeasurements.back.shoulder)} |
+| Front side seam | ${formatMm(patternDoc.patternMeasurements.front.side)} |
+| Back side seam | ${formatMm(patternDoc.patternMeasurements.back.side)} |
+
 ## Pieces
 
 | Piece | Cut | Notes |
 | --- | --- | --- |
-| Front half panel | 1 on fold | Dartless loose woven v0.1 draft |
-| Back half panel | 1 on fold | Dartless loose woven v0.1 draft |
+| Front half panel | 1 on fold | Place center front on fabric fold; do not add extra seam allowance at fold. |
+| Back half panel | 1 on fold | Place center back on fabric fold; do not add extra seam allowance at fold. |
 
 ## Allowances
 
 - Seam allowance: ${params.allowances.seam}mm
 - Hem allowance: ${params.allowances.hem}mm
+- Neckline finish: ${params.finishing.neckline}
+- Armhole finish: ${params.finishing.armhole}
 ${markerSection}
 
 ## Known Limits
@@ -102,6 +132,10 @@ ${markerSection}
 - Head entry is not proven.
 - Cut-line offsets are rough for v0.1.
 `;
+}
+
+function formatMm(value) {
+  return `${round(value)}mm`;
 }
 
 export function buildAssembly(patternDoc) {

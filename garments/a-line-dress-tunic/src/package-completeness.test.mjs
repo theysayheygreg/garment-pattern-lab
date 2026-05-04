@@ -67,6 +67,13 @@ for (const spec of requiredPackages) {
   assert.match(sanitySheet, /50mm scale square/);
   assert.match(sanitySheet, /Check head entry/);
   assert.match(sanitySheet, /muslin/);
+
+  const cutSheet = fs.readFileSync(path.join(outputRoot, "package", "cut-sheet.md"), "utf8");
+  assert.match(cutSheet, /Print at 100% scale/);
+  assert.match(cutSheet, /Body Fixture/);
+  assert.match(cutSheet, /Finished Draft Measurements/);
+  assert.match(cutSheet, /do not add extra seam allowance at fold/);
+  assert.match(cutSheet, /tiled home-print PDF is still missing/);
 }
 
 const sketchPattern = readJson(

@@ -25,7 +25,7 @@ export function buildInputProvenance(filePath, bytes, recipe) {
     format,
     recipe: recipe.id,
     originalHash: crypto.createHash("sha256").update(bytes).digest("hex"),
-    importedAt: new Date().toISOString(),
+    importedAt: process.env.GPL_GENERATED_AT ?? new Date().toISOString(),
   };
 }
 

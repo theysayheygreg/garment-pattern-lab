@@ -328,3 +328,8 @@ Sketch-sourced demo package start:
 - Added a deterministic `npm run v0.1:generate:sketch` command that emits `outputs/v0.1-from-sketch/` from the canonical A-line tunic semantic-flat fixture.
 - Added `package/human-sanity-check.md` to generated packages so the review prompt travels beside the pattern, marker, assembly notes, preview, and manifest.
 - Added `npm run check:package-completeness`, which checks the baseline package and sketch-sourced package for the reviewable human files and sketch dev artifacts.
+
+Human cut package tightening:
+
+- Expanded `cut-sheet.md` with print-scale instructions, body fixture measurements, finished draft measurements, fold handling, and finish choices for neckline/armholes.
+- Kept the warning blunt: v0.1 is SVG-first, tiled home-print PDF is still missing, and the first make should be muslin.
