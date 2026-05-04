@@ -31,6 +31,7 @@ Status:
 - [ ] **Phase C semantic interpretation started:** first heuristic A-line interpreter emits trace-space landmark assignments and ambiguity reports for front-only, paired front/back, explicit back-only, and single-side mirrored A-line fixtures. Remaining work: Kiko/real inputs and enough real fixture breadth to close Phase C.
 - [ ] **Phase D scale calibration started:** first calibration wrapper attaches unit profiles through developer override, explicit trace reference, or canonical fallback. Remaining work: decide whether a tiny croquis detector belongs in v0.1 or if explicit/default evidence is sufficient for the Phase E adapter.
 - [ ] **Phase E drafting adapter started:** calibrated interpretation now promotes to a `DraftingRequest` or refuses before the generator when semantic/scale blockers remain. The legacy ugly generator now accepts `--source-sketch` and emits sketch pipeline dev artifacts. Remaining work: promote sketch evidence into the PatternGraph schema itself rather than only the dev artifacts/source block.
+- [ ] **Phase G marker layout started:** package output now includes non-optimized 45 inch `marker.svg` and dev `marker-plan.json`. PDF tiling and marker PDF remain later export work.
 - [ ] Pattern schema concrete JSON shape (closes during Phase E).
 - [x] Phase B tech stack decision concrete: `@neplex/vectorizer`/VTracer for raster tracing, Poppler `pdftocairo` for local vector/raster PDF and PDF-compatible `.ai` conversion, Potrace research-only unless license isolation is intentional.
 

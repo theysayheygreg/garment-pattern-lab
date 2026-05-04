@@ -282,3 +282,10 @@ Sketch-driven v0.1 pipeline wiring:
 - The generator now runs sketch ingest, semantic interpretation, scale calibration, and drafting-request promotion before reusing the existing ugly pattern generator.
 - Added dev artifacts for sketch-driven runs: `editable-trace-layer.json`, `sketch-interpretation.json`, `scale-calibration.json`, and `drafting-request.json`.
 - Added `garments/a-line-dress-tunic/src/pipeline.test.mjs`, which proves an accepted sketch fixture drafts and a blocked semantic fixture refuses before output.
+
+Phase G marker layout start:
+
+- Added `packages/export-core/src/marker-layout/layout.mjs`.
+- Added deterministic non-optimized 45 inch marker layout with sequential front/back panel placement, fixed gutter/margins, total fabric length metrics, and assumptions.
+- Generator now writes `package/marker.svg` and `dev-artifacts/marker-plan.json`.
+- Cut sheet now surfaces marker width/length and replaces the old "fabric layout not checked" note with a more precise non-optimized marker limitation.

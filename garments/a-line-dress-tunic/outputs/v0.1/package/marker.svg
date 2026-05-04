@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1143mm" height="1956.2mm" viewBox="0 0 1143 1956.2">
+  <title>Sleeveless A-line Woven Dress/Tunic v0.1 marker layout</title>
+  <style>
+    .fabric { fill: #fffdf7; stroke: #111827; stroke-width: 1.2; }
+    .panel { fill: rgba(191, 219, 254, 0.45); stroke: #1d4ed8; stroke-width: 1; }
+    .fold { stroke: #dc2626; stroke-width: 0.9; stroke-dasharray: 4 4; }
+    .label { font-family: Helvetica, Arial, sans-serif; font-size: 13px; letter-spacing: 0; fill: #111827; }
+    .caption, .info { font-family: Helvetica, Arial, sans-serif; font-size: 10px; letter-spacing: 0; fill: #374151; }
+  </style>
+  <rect x="0" y="0" width="1143" height="1956.2" class="fabric" />
+  <text x="24" y="28" class="info">45 in fabric width | total length 77.02 in | non-optimized marker</text>
+
+  <g id="marker-front-half">
+    <path d="M 25.4 145.4 L 93.4 15.4 L 203.4 33.4 L 295.4 240.4 L 295.4 275.4 L 320.4 645.4 L 410.4 955.4 L 25.4 955.4 Z" class="panel" />
+    <line x1="25.4" y1="25.4" x2="25.4" y2="965.4" class="fold" />
+    <text x="145.4" y="245.4" class="label">Front half panel</text>
+    <text x="145.4" y="261.4" class="caption">cut on fold</text>
+  </g>
+
+  <g id="marker-back-half">
+    <path d="M 25.4 1035.8 L 93.4 980.8 L 203.4 998.8 L 295.4 1205.8 L 295.4 1240.8 L 320.4 1610.8 L 410.4 1920.8 L 25.4 1920.8 Z" class="panel" />
+    <line x1="25.4" y1="990.8" x2="25.4" y2="1930.8" class="fold" />
+    <text x="145.4" y="1210.8" class="label">Back half panel</text>
+    <text x="145.4" y="1226.8" class="caption">cut on fold</text>
+  </g>
+</svg>

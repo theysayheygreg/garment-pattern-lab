@@ -65,7 +65,16 @@ export function buildSvg(patternDoc, readinessDoc, params) {
 `;
 }
 
-export function buildCutSheet(patternDoc, params) {
+export function buildCutSheet(patternDoc, params, markerPlan = patternDoc.markerPlan) {
+  const markerSection = markerPlan
+    ? `
+## Marker Layout
+
+- Fabric width: ${markerPlan.fabricWidthIn} in (${markerPlan.fabricWidthMm}mm)
+- Estimated fabric length: ${markerPlan.totalFabricLengthIn} in (${markerPlan.totalFabricLengthMm}mm)
+- Layout method: non-optimized sequential marker
+`
+    : "";
   return `# Cut Sheet
 
 Pattern: ${patternDoc.title}
@@ -83,10 +92,11 @@ Units: millimeters
 
 - Seam allowance: ${params.allowances.seam}mm
 - Hem allowance: ${params.allowances.hem}mm
+${markerSection}
 
 ## Known Limits
 
-- Fabric layout and bolt width are not checked.
+- Marker layout is non-optimized; nap, print direction, shrinkage, and fabric defects are not checked.
 - True fit and drape are not checked.
 - Head entry is not proven.
 - Cut-line offsets are rough for v0.1.

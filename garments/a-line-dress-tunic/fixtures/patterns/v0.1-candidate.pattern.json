@@ -400,5 +400,44 @@
     "No closure modeled; neckline/opening must be reviewed for head entry.",
     "Front and back side seams are intentionally matched for the dirty spike.",
     "Seam allowance is simplified with rough cut-line expansion, not robust geometric offsetting."
-  ]
+  ],
+  "markerPlan": {
+    "schemaVersion": "0.1-marker-plan",
+    "fabricWidthMm": 1143,
+    "fabricWidthIn": 45,
+    "totalFabricLengthMm": 1956.2,
+    "totalFabricLengthIn": 77.02,
+    "gutterMm": 25.4,
+    "edgeMarginMm": 25.4,
+    "placements": [
+      {
+        "panelId": "front-half",
+        "role": "front",
+        "x": 25.4,
+        "y": 25.4,
+        "widthMm": 385,
+        "heightMm": 940,
+        "rotation": 0,
+        "onFold": true,
+        "foldEdge": "left"
+      },
+      {
+        "panelId": "back-half",
+        "role": "back",
+        "x": 25.4,
+        "y": 990.8,
+        "widthMm": 385,
+        "heightMm": 940,
+        "rotation": 0,
+        "onFold": true,
+        "foldEdge": "left"
+      }
+    ],
+    "warnings": [],
+    "assumptions": [
+      "Non-optimized sequential marker layout.",
+      "No nap, print direction, shrinkage, or fabric defect handling.",
+      "Panels are not rotated or nested in v0.1."
+    ]
+  }
 }

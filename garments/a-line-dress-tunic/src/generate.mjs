@@ -5,6 +5,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { applyParameterEdit, buildEditSummary, interpretCommand } from "../../../packages/assistant-core/src/commands.mjs";
 import { buildAssembly, buildCutSheet, buildPreview, buildReadinessMd, buildSvg } from "../../../packages/export-core/src/package-builders.mjs";
+import { buildMarkerPlan, buildMarkerSvg } from "../../../packages/export-core/src/marker-layout/layout.mjs";
 import { measureNamedEdges, round } from "../../../packages/pattern-core/src/measurements.mjs";
 import { buildDraftingRequest, projectLegacyGeneratorInputs } from "../../../packages/sketch-intent/src/drafting-adapter/drafting-request.mjs";
 import { ingestSketch } from "../../../packages/sketch-intent/src/raster-to-vector/bridge.mjs";
@@ -214,6 +215,9 @@ const pattern = {
   ],
 };
 
+const markerPlan = buildMarkerPlan(pattern);
+pattern.markerPlan = markerPlan;
+
 const readiness = buildReadiness(pattern);
 
 if (!checkOnly) {
@@ -224,10 +228,12 @@ if (!checkOnly) {
     fs.writeFileSync(path.join(garmentRoot, "fixtures", "validation", "v0.1-readiness.json"), `${JSON.stringify(readiness, null, 2)}\n`);
   }
   fs.writeFileSync(path.join(packageDir, "pattern.svg"), buildSvg(pattern, readiness, params).replace(/[ \t]+$/gm, ""));
-  fs.writeFileSync(path.join(packageDir, "cut-sheet.md"), buildCutSheet(pattern, params));
+  fs.writeFileSync(path.join(packageDir, "cut-sheet.md"), buildCutSheet(pattern, params, markerPlan));
   fs.writeFileSync(path.join(packageDir, "assembly.md"), buildAssembly(pattern));
   fs.writeFileSync(path.join(packageDir, "preview.html"), buildPreview(pattern, readiness));
+  fs.writeFileSync(path.join(packageDir, "marker.svg"), buildMarkerSvg(pattern, markerPlan));
   fs.writeFileSync(path.join(devArtifactsDir, "pattern-graph.json"), `${JSON.stringify(pattern, null, 2)}\n`);
+  fs.writeFileSync(path.join(devArtifactsDir, "marker-plan.json"), `${JSON.stringify(markerPlan, null, 2)}\n`);
   fs.writeFileSync(path.join(devArtifactsDir, "readiness.json"), `${JSON.stringify(readiness, null, 2)}\n`);
   fs.writeFileSync(path.join(devArtifactsDir, "readiness.md"), buildReadinessMd(readiness));
   if (sketchPipeline) {
