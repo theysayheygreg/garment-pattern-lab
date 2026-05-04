@@ -1,8 +1,8 @@
 {
   "project": "garment-pattern-lab",
   "created": "2026-05-03",
-  "status": "v0.1-phase-b-fixture-hardening-started",
-  "currentMilestone": "M0.9-v0.1-vector-ingest-real-fixture-hardening",
+  "status": "v0.1-phase-b-complete",
+  "currentMilestone": "M1.0-v0.1-semantic-interpretation-ready",
   "v01Design": "docs/project/V0.1-DESIGN.md",
   "personas": {
     "directory": "docs/design/personas/",
@@ -63,7 +63,6 @@
     "folderRule": "Reusable product logic belongs in app/ or packages/. First-garment drafting, fixtures, references, and generated packages belong in garments/a-line-dress-tunic/."
   },
   "nextActions": [
-    "Phase-B-real-world-fixture-hardening",
     "Phase-C-semantic-interpretation",
     "Phase-D-scale-calibration",
     "Phase-E-drafting-integration",

@@ -47,7 +47,8 @@ This register tracks dependencies and prior art by whether Garment Pattern Lab s
 | `@neplex/vectorizer` | candidate/build | First runnable raster-to-SVG bridge. | MIT; VTracer-backed Node package with direct Buffer input. Installed for Phase B smoke tests behind `RasterToVectorBridge`. |
 | VTracer / `vtracer-wasm` | candidate | Browser/WASM raster-to-vector implementation. | MIT; likely browser runtime target once the ingest contract stabilizes. |
 | `esm-potrace-wasm` | reference/isolated candidate | Black-line tracing comparison. | GPLv2; useful prior art and possible isolated experiment, but not default commercial-path dependency. |
-| Poppler `pdftocairo` | build/tooling candidate | Best-effort vector PDF / PDF-compatible `.ai` conversion to SVG. | Present locally via Homebrew; useful for Phase B smoke path. Product runtime still needs a portable browser/server story. |
+| Poppler `pdftocairo` | build/tooling candidate | Best-effort vector PDF / PDF-compatible `.ai` conversion to SVG; raster PDF fallback to PNG. | Present locally via Homebrew; useful for Phase B smoke path. Product runtime still needs a portable browser/server story. |
+| macOS `sips` + `cwebp` | tooling | Generated JPG/WEBP smoke fixtures. | Local test fixture generation only; not product runtime dependencies. |
 | SVG passthrough | build | Highest-trust sketch input lane. | Implemented for `.svg`; vector PDF and `.ai` currently convert through Poppler to SVG. |
 
 ## Export And Interop

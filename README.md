@@ -124,9 +124,9 @@ Reference and prior-art tools:
 
 ## Current State
 
-The v0.1 design is locked and ready for implementation. The canonical spec is [`docs/project/V0.1-DESIGN.md`](docs/project/V0.1-DESIGN.md). v0.1 is a one-shot, headless-pipeline-with-thin-UI prototype that takes an image / sketch / vector input and produces a printable PDF pattern for the sleeveless A-line woven tunic, with a Three.js turn/pan viewer and a 45"-fabric marker layout.
+The v0.1 design is locked and implementation is underway. The canonical spec is [`docs/project/V0.1-DESIGN.md`](docs/project/V0.1-DESIGN.md). v0.1 is a one-shot, headless-pipeline-with-thin-UI prototype that takes an image / sketch / vector input and produces a printable PDF pattern for the sleeveless A-line woven tunic, with a Three.js turn/pan viewer and a 45"-fabric marker layout.
 
-A dirty end-to-end v0.1 pipeline already exists with synthetic measurements; the design spec extends it to real image / sketch / vector input via a Potrace + VTracer vectorization bridge, a heuristic semantic interpreter loading per-garment-family priors, and figure-driven imperial scale calibration.
+A dirty end-to-end v0.1 pipeline already exists with synthetic measurements. Phase B is complete: `packages/sketch-intent/` now ingests SVG, SVG primitives, vector PDF, PDF-compatible `.ai`, raster PDF fallback, PNG, JPG, and WEBP into a structured editable trace-layer contract with backend readiness checks. The next implementation lane is Phase C semantic interpretation: turning those trace layers into garment landmarks for the A-line tunic.
 
 Three canonical user personas anchor scope by version (`docs/design/personas/`): Persona 1 (Individual Fashion Designer, v0.1), Persona 2 (Production-Focused Garment Designer, v0.5+), Persona 3 (Manufacturing-Focused Designer, v1+).
 

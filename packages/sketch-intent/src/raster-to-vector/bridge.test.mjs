@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import zlib from "node:zlib";
@@ -49,6 +50,15 @@ assert.equal(hardwareTrace.readiness.status, "ready");
 const tmpDir = path.join("tmp", "sketch-intent");
 fs.mkdirSync(tmpDir, { recursive: true });
 
+const baseRasterFixturePath = path.join(tmpDir, "synthetic-dress.png");
+fs.writeFileSync(baseRasterFixturePath, makeSyntheticDressPng());
+const jpegFixturePath = path.join(tmpDir, "synthetic-dress.jpg");
+const webpFixturePath = path.join(tmpDir, "synthetic-dress.webp");
+const rasterPdfFixturePath = path.join(tmpDir, "synthetic-dress-raster.pdf");
+execFileSync("sips", ["-s", "format", "jpeg", baseRasterFixturePath, "--out", jpegFixturePath], { stdio: "pipe" });
+execFileSync("sips", ["-s", "format", "pdf", baseRasterFixturePath, "--out", rasterPdfFixturePath], { stdio: "pipe" });
+execFileSync("cwebp", ["-quiet", baseRasterFixturePath, "-o", webpFixturePath], { stdio: "pipe" });
+
 for (const recipe of ["clean-technical-flat", "colored-illustration", "pencil-sketch", "scanned-pattern-piece"]) {
   const rasterFixturePath = path.join(tmpDir, `${recipe}.png`);
   fs.writeFileSync(rasterFixturePath, makeSyntheticDressPng({ colored: recipe === "colored-illustration" }));
@@ -63,6 +73,29 @@ for (const recipe of ["clean-technical-flat", "colored-illustration", "pencil-sk
   assert.equal(rasterTrace.unsupported, undefined);
   assert.notEqual(rasterTrace.readiness.status, "blocked");
 }
+
+for (const rasterFixturePath of [jpegFixturePath, webpFixturePath]) {
+  const rasterTrace = ingestSketch(rasterFixturePath, { recipe: "clean-technical-flat" });
+  assert.equal(rasterTrace.kind, "editable-trace-layer");
+  assert.equal(rasterTrace.engine, "vtracer-neplex-vectorizer");
+  assert.ok(["jpg", "webp"].includes(rasterTrace.provenance.format));
+  assert.ok(rasterTrace.traceStats.pathCount > 0);
+  assert.notEqual(rasterTrace.readiness.status, "blocked");
+}
+
+const rasterPdfTrace = ingestSketch(rasterPdfFixturePath, { recipe: "clean-technical-flat" });
+assert.equal(rasterPdfTrace.kind, "editable-trace-layer");
+assert.equal(rasterPdfTrace.engine, "poppler-pdftocairo-png-vtracer");
+assert.equal(rasterPdfTrace.provenance.format, "vector-pdf");
+assert.ok(rasterPdfTrace.traceStats.pathCount > 0);
+assert.notEqual(rasterPdfTrace.readiness.status, "blocked");
+
+const malformedRasterPath = path.join(tmpDir, "malformed.png");
+fs.writeFileSync(malformedRasterPath, "not really an image");
+const malformedRasterTrace = ingestSketch(malformedRasterPath, { recipe: "clean-technical-flat" });
+assert.equal(malformedRasterTrace.kind, "editable-trace-layer");
+assert.equal(malformedRasterTrace.engine, "vtracer-neplex-vectorizer");
+assert.equal(malformedRasterTrace.readiness.status, "blocked");
 
 for (const extension of ["pdf", "ai"]) {
   const vectorFixturePath = path.join(tmpDir, `technical-flat.${extension}`);

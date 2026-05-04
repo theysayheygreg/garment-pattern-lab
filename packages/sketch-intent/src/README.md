@@ -14,4 +14,4 @@ Owns:
 
 This is the bridge from art to pattern intent.
 
-Phase B begins with `raster-to-vector/`: a recipe-driven ingest bridge. The first implemented path is SVG passthrough; raster tracing engines plug into the same contract next.
+Phase B's `raster-to-vector/` bridge is implemented for the v0.1 spike. It ingests SVG, common SVG primitives, vector PDF, PDF-compatible `.ai`, raster PDF fallback, PNG, JPG, and WEBP into the same editable trace-layer contract with backend readiness for fixture work.

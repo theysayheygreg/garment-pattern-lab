@@ -55,8 +55,16 @@ function vectorPassthroughSvg(svg, provenance, recipe) {
 }
 
 function traceRasterToEditableLayer(bytes, provenance, recipe) {
-  const svg = vectorizeSync(bytes, vectorizerConfigForRecipe(recipe));
-  return editableTraceLayerFromSvg(svg, provenance, recipe, "vtracer-neplex-vectorizer");
+  try {
+    const svg = vectorizeSync(bytes, vectorizerConfigForRecipe(recipe));
+    return editableTraceLayerFromSvg(svg, provenance, recipe, "vtracer-neplex-vectorizer");
+  } catch (error) {
+    return unsupportedTraceLayer(
+      provenance,
+      "vtracer-neplex-vectorizer",
+      `${provenance.format} raster tracing failed. Phase B supports clean PNG/JPG/WEBP raster inputs when the vectorizer can decode them. ${error.message}`,
+    );
+  }
 }
 
 function traceVectorDocumentToEditableLayer(filePath, provenance, recipe) {
@@ -64,7 +72,14 @@ function traceVectorDocumentToEditableLayer(filePath, provenance, recipe) {
   const outSvg = path.join(workDir, "converted.svg");
   try {
     execFileSync("pdftocairo", ["-svg", filePath, outSvg], { stdio: "pipe" });
-    return editableTraceLayerFromSvg(fs.readFileSync(outSvg, "utf8"), provenance, recipe, "poppler-pdftocairo-svg");
+    const vectorTrace = editableTraceLayerFromSvg(
+      fs.readFileSync(outSvg, "utf8"),
+      provenance,
+      recipe,
+      "poppler-pdftocairo-svg",
+    );
+    if (vectorTrace.traceStats.pathCount > 0) return vectorTrace;
+    return traceVectorDocumentRasterFallback(filePath, provenance, recipe, workDir);
   } catch (error) {
     return unsupportedTraceLayer(
       provenance,
@@ -73,6 +88,26 @@ function traceVectorDocumentToEditableLayer(filePath, provenance, recipe) {
     );
   } finally {
     fs.rmSync(workDir, { recursive: true, force: true });
+  }
+}
+
+function traceVectorDocumentRasterFallback(filePath, provenance, recipe, workDir) {
+  const outBase = path.join(workDir, "rendered-page");
+  const outPng = `${outBase}.png`;
+  try {
+    execFileSync("pdftocairo", ["-png", "-singlefile", "-r", "144", filePath, outBase], { stdio: "pipe" });
+    const rasterTrace = traceRasterToEditableLayer(fs.readFileSync(outPng), provenance, recipe);
+    return {
+      ...rasterTrace,
+      engine: rasterTrace.unsupported ? rasterTrace.engine : "poppler-pdftocairo-png-vtracer",
+      sourceVectorEngine: "poppler-pdftocairo-svg",
+    };
+  } catch (error) {
+    return unsupportedTraceLayer(
+      provenance,
+      "poppler-pdftocairo-png-vtracer",
+      `${provenance.format} raster-page fallback failed. Phase B supports single-page raster PDFs when Poppler can render the page to PNG. ${error.message}`,
+    );
   }
 }
 

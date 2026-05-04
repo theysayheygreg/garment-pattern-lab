@@ -234,3 +234,10 @@ Phase B fixture hardening:
 - Added backend readiness assessment (`ready`, `review-needed`, `blocked`) for fixture work, including input support, path count, silhouette count, and unclassified-path checks.
 - Added `npm run sketch:report` for local fixture summaries without turning backend readiness into a designer-facing error console.
 - Added `hardware-detail-technical-flat.svg` and circle/ellipse normalization for rings, rivets, buttons, and similar garment details.
+
+Phase B complete:
+
+- Added JPG and WEBP smoke coverage by generating fixtures from the synthetic raster input with `sips` and `cwebp`.
+- Added raster PDF fallback: when Poppler SVG conversion yields no vector paths, render the page to PNG and run the VTracer-backed raster bridge.
+- Added malformed raster coverage so bad image files return a blocked trace-layer payload rather than throwing raw vectorizer errors.
+- Marked Phase B complete in `V0.1-DESIGN.md`, `BUILD-PLAN.md`, and `PROJECT-STATE.json`; next implementation lane is Phase C semantic interpretation.

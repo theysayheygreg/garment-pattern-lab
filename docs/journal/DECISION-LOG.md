@@ -456,8 +456,40 @@ The seed fixture work in V0.1-DESIGN.md Phase E should look like "GarmentCode pl
 - Best-effort ad-hoc parsing. Brittle, hard to support.
 - Use a known library that handles `.ai` correctly. Most `.ai` files (CS2, 2005 onwards) are PDF-compatible and can be parsed via PDF tooling.
 
-**Where it landed:** Use a known library. The recommended path: `.ai` files saved with PDF compatibility (the default since Illustrator CS2) are parsed via `pdfjs-dist` (Mozilla's PDF.js) to extract path geometry, which then flows through the same vector-passthrough lane as `.svg` and vector PDF inputs. Codex evaluates `pdfjs-dist`, `ai2svg`, and similar npm libraries during Phase B and picks the most reliable one. Pre-CS2 `.ai` files (rare) fall back to a clear "couldn't read this format — try saving as SVG or PDF-compatible AI" message.
+**Where it landed:** Use known tooling rather than ad-hoc parsing. The implemented v0.1 path treats `.ai` files saved with PDF compatibility (the default since Illustrator CS2) as PDF-compatible vector documents and converts them through Poppler `pdftocairo` into SVG before feeding the same editable trace-layer classifier as `.svg` and vector PDF inputs. Pre-CS2 `.ai` files (rare) or unsupported edge cases fall back to a blocked trace-layer payload with a clear dev message.
 
 **Why:** Illustrator is where many Persona 1 designers already work (Sam's flow #4 in the example flows is explicitly Procreate→Illustrator vector exports). Punting forces an extra manual step and breaks the "what designers already work in" commitment. The PDF-compatible path is robust because `.ai` files have been PDF-shaped for two decades; the library work is small.
 
-**Door status:** Closed for v0.1 ingestion strategy. Open for: the specific library choice (Codex selects during Phase B), and how to handle edge cases like raster-only `.ai` files or files with embedded fonts.
+**Door status:** Closed for v0.1 ingestion strategy and Phase B implementation. Open for: production runtime portability beyond local Poppler, richer font/text extraction, and real-world `.ai` corpus hardening.
+
+## 2026-05-04: Asymmetric input handling — three layers, family-detection eventually replaces pre-select
+
+**Question:** How does v0.1 handle asymmetric inputs and asymmetric garment topologies, and what does the architecture need to support for future garment families?
+
+**Options considered:**
+
+- Refuse all asymmetric inputs in v0.1 (the spec's previous default). Too blunt — single-side technical flats are extremely common for symmetric garments.
+- Handle every flavor of asymmetry generically in one global handler. Doesn't scale — wrap-dress asymmetry and surplice asymmetry have different geometric implications.
+- Split the problem into three layers: family detection, family-agnostic axis handling, and family-specific feature handling.
+
+**Where it landed:** Three-layer architecture for the interpreter:
+
+- **Family-detection layer (pluggable).** Determines which garment family the input represents. v0.1 hardcodes "always A-line tunic." v0.5+ adds real detection from input characteristics (silhouette shape, panel count, key feature presence). Manual pre-select remains available as a training-mode override, especially for bootstrapping priors when adding a new family for the first time.
+- **Family-agnostic axis layer.** Bilateral-symmetry handling for any symmetric-garment family. Detects vertical center axis from the input; if input is single-sided or slightly asymmetric, mirrors or averages across the axis. Phase C of v0.1 ships this for the A-line tunic; the same code applies to every future symmetric family without modification.
+- **Family-specific feature layer.** Each family's prior file declares `symmetry_axis_required`, `asymmetric_features`, and any custom interpretation rules. Inherently asymmetric garments (wrap dress, surplice front, asymmetric details) are handled by adding rules to their family's prior, not by a generic global handler. Adding a complex family may require multiple asymmetric-feature handlers within that family's prior.
+
+**For v0.1 specifically:**
+
+| Input shape | v0.1 behavior |
+|---|---|
+| Symmetric input, A-line tunic | Direct interpretation |
+| Single-side input (front-only, or right-half-only) of A-line tunic | Detect implied axis, mirror, proceed |
+| Slightly-asymmetric input of A-line tunic (drawing artifact) | Detect axis, take more-confident half or average, proceed with low-confidence assumption flag |
+| Inherently asymmetric garment | Refuse at the **garment-family level** (the family lock excludes wrap dresses, surplice, etc.) — not at the symmetry level |
+
+**Why:** Single-side technical flats are the dominant input format for fashion technical drawing — refusing them would make v0.1 fail on most clean inputs Kiko would supply. Family-agnostic axis handling is reusable across all future symmetric-garment families with no marginal cost. Per-family asymmetric handling means the architecture grows by addition (new family → new prior file with its own rules), not by accumulating special cases in a global handler.
+
+The deeper product commitment: **garment family is detected from input, not pre-selected by user.** A user shouldn't have to tell the system "this is an A-line tunic" before uploading their sketch — the system should figure that out. v0.1 hardcodes one family because we have one to ship; the architecture supports detection growing in over future versions. Pre-select stays as a training-mode tool for operators bootstrapping new family priors.
+
+**Door status:** Closed for v0.1 axis-handling and the three-layer architecture. Open for: the family-detection algorithm itself (research starts when v0.5 needs it), the specific schema for `asymmetric_features` in family prior files (lands when the second family is added), and the training-mode pre-select UX (probably a config flag in v0.1, a real UI in v0.5+).
+
