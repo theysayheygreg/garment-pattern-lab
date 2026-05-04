@@ -90,6 +90,14 @@ for (const spec of requiredPackages) {
 const sketchPattern = readJson(
   path.join(garmentRoot, "outputs", "v0.1-from-sketch", "dev-artifacts", "pattern-graph.json"),
 );
+for (const panel of sketchPattern.panels) {
+  for (const seamPoint of panel.seamLine) {
+    assert(
+      pointIsInsideOrOnPolygon(seamPoint, panel.cutLine),
+      `${panel.id} seam point ${seamPoint.id ?? `${seamPoint.x},${seamPoint.y}`} falls outside cut line`,
+    );
+  }
+}
 assert.equal(
   sketchPattern.source.sourceSketch,
   "packages/sketch-intent/fixtures/a-line-tunic-scale-reference-semantic-flat.svg",
@@ -108,4 +116,35 @@ function assertFile(filePath) {
 
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
+}
+
+function pointIsInsideOrOnPolygon(point, polygon) {
+  if (polygon.some((vertex) => distance(point, vertex) < 0.01)) return true;
+  for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+    if (distanceToSegment(point, polygon[j], polygon[i]) < 0.01) return true;
+  }
+  let inside = false;
+  for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+    const a = polygon[i];
+    const b = polygon[j];
+    const crosses = a.y > point.y !== b.y > point.y;
+    if (crosses) {
+      const xAtY = ((b.x - a.x) * (point.y - a.y)) / (b.y - a.y) + a.x;
+      if (point.x < xAtY) inside = !inside;
+    }
+  }
+  return inside;
+}
+
+function distance(a, b) {
+  return Math.hypot(a.x - b.x, a.y - b.y);
+}
+
+function distanceToSegment(point, a, b) {
+  const dx = b.x - a.x;
+  const dy = b.y - a.y;
+  const lengthSquared = dx * dx + dy * dy;
+  if (lengthSquared === 0) return distance(point, a);
+  const t = Math.max(0, Math.min(1, ((point.x - a.x) * dx + (point.y - a.y) * dy) / lengthSquared));
+  return distance(point, { x: a.x + t * dx, y: a.y + t * dy });
 }

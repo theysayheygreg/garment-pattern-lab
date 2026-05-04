@@ -130,15 +130,7 @@ const makePanel = (kind) => {
 
   const seamAllowance = params.allowances.seam;
   const hemAllowance = params.allowances.hem;
-  const cutLine = seamLine.map((point) => {
-    const isHem = point.id === "hem-side" || point.id === "center-hem";
-    const isFold = point.id === "center-neck" || point.id === "center-hem" || point.x === 0;
-    return {
-      ...(point.id ? { id: `${point.id}-cut` } : {}),
-      x: isFold ? point.x : point.x + seamAllowance,
-      y: point.y + (isHem ? hemAllowance : point.id === "neck-shoulder" || point.id === "shoulder-point" ? -seamAllowance : 0),
-    };
-  });
+  const cutLine = buildApproximateCutLine(seamLine, seamAllowance, hemAllowance);
 
   const edges = [
     { id: `${kind}.fold`, type: "fold", from: "center-hem", to: "center-neck" },
@@ -216,6 +208,47 @@ function sampleCubic(start, controlA, controlB, end, steps) {
       ),
     };
   });
+}
+
+function buildApproximateCutLine(seamLine, seamAllowance, hemAllowance) {
+  const direction = signedArea(seamLine) >= 0 ? 1 : -1;
+  return seamLine.map((point, index) => {
+    const prev = seamLine[(index - 1 + seamLine.length) % seamLine.length];
+    const next = seamLine[(index + 1) % seamLine.length];
+    const isFold = point.id === "center-neck" || point.id === "center-hem" || point.x === 0;
+    const isHem = point.id === "hem-side" || point.id === "center-hem";
+    const outward = averagedOutwardNormal(prev, point, next, direction);
+    const offset = isFold ? 0 : seamAllowance;
+    return {
+      ...(point.id ? { id: `${point.id}-cut` } : {}),
+      x: round(isFold ? 0 : point.x + outward.x * offset),
+      y: round(point.y + outward.y * offset + (isHem ? hemAllowance : 0)),
+    };
+  });
+}
+
+function averagedOutwardNormal(prev, point, next, direction) {
+  const incoming = outwardNormal({ x: point.x - prev.x, y: point.y - prev.y }, direction);
+  const outgoing = outwardNormal({ x: next.x - point.x, y: next.y - point.y }, direction);
+  const x = incoming.x + outgoing.x;
+  const y = incoming.y + outgoing.y;
+  const length = Math.hypot(x, y);
+  if (length < 0.0001) return outgoing;
+  return { x: x / length, y: y / length };
+}
+
+function outwardNormal(edge, direction) {
+  const length = Math.hypot(edge.x, edge.y) || 1;
+  return direction >= 0
+    ? { x: edge.y / length, y: -edge.x / length }
+    : { x: -edge.y / length, y: edge.x / length };
+}
+
+function signedArea(points) {
+  return points.reduce((area, point, index) => {
+    const previous = points[(index - 1 + points.length) % points.length];
+    return area + previous.x * point.y - point.x * previous.y;
+  }, 0) / 2;
 }
 
 const panels = [makePanel("front"), makePanel("back")];

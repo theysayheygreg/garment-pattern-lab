@@ -24,7 +24,7 @@ This is the one-file front door for the v0.1 package. It gathers the garment sha
 | Fit | Loose pullover, dartless v0.1 draft |
 | Closure | None modeled; head entry must be checked |
 | Front/back pieces | Cut 1 each on fold |
-| Fabric marker | 45 in wide, 77.02 in estimated length |
+| Fabric marker | 45 in wide, 77.53 in estimated length |
 
 ## Key Measurements
 

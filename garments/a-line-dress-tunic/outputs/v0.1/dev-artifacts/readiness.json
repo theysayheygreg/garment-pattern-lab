@@ -89,10 +89,10 @@
     {
       "id": "marker.plan",
       "state": "ready",
-      "summary": "Marker layout uses 45 inch width and estimates 77.02 inches of fabric.",
+      "summary": "Marker layout uses 45 inch width and estimates 77.53 inches of fabric.",
       "details": {
         "fabricWidthIn": 45,
-        "totalFabricLengthIn": 77.02,
+        "totalFabricLengthIn": 77.53,
         "warnings": []
       }
     }
@@ -100,7 +100,7 @@
   "instrumentation": {
     "marker": {
       "fabricWidthIn": 45,
-      "totalFabricLengthIn": 77.02,
+      "totalFabricLengthIn": 77.53,
       "warningCount": 0
     },
     "sketchPipeline": null,

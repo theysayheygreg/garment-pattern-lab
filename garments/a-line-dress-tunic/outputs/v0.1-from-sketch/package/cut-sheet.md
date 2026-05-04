@@ -48,7 +48,7 @@ Units: imperial-first. Metric is retained as the internal engine unit and second
 ## Marker Layout
 
 - Fabric width: 45 in (1143mm)
-- Estimated fabric length: 77.02 in (1956.2mm)
+- Estimated fabric length: 77.53 in (1969.17mm)
 - Layout method: non-optimized sequential marker
 
 

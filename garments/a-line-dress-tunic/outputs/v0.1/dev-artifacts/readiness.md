@@ -20,4 +20,4 @@ This is internal readiness instrumentation summarized for package review. It is 
 | known-limitations.fabric-layout | limitation | Fabric layout, bolt width, nap, print direction, and marker efficiency are not checked in v0.1. |
 | known-limitations.fit | limitation | True fit, drape, head entry, and muslin behavior require human review. |
 | known-limitations.geometry | limitation | Cut lines use rough expansion rather than a robust offset kernel. |
-| marker.plan | ready | Marker layout uses 45 inch width and estimates 77.02 inches of fabric. |
+| marker.plan | ready | Marker layout uses 45 inch width and estimates 77.53 inches of fabric. |

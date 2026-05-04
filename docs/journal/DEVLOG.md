@@ -345,3 +345,9 @@ Imperial-first package and curve fidelity pass:
 - Switched human package copy to imperial-first measurements while preserving metric values as secondary/internal references.
 - Added `package/overview.md` as the package front door so preview, pattern SVG, measurements, cut notes, assembly notes, and sanity check are no longer scattered without an entry point.
 - Replaced the blocky v0.1 panel outline anchors with sampled neckline, armhole, and side-seam curves so generated pattern flats and the Three.js preview read less like low-resolution polygon placeholders.
+
+Cut-line containment fix:
+
+- Replaced the rough cut-line allowance expansion with a boundary-normal offset so seam/reference lines stay inside or on the black cut edge.
+- Added package completeness coverage that checks every seam point in the sketch-sourced package sits inside or on its cut polygon.
+- Reloaded the browser preview after regeneration; canvas and scene data were present, no console errors, and the screenshot remained nonblank.

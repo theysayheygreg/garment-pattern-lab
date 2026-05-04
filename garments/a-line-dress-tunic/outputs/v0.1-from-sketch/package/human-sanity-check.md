@@ -31,7 +31,7 @@ This is the package-local review sheet for the dirty v0.1 spike. It is meant for
 ## Marker
 
 - Fabric width: 45 in
-- Estimated fabric length: 77.02 in
+- Estimated fabric length: 77.53 in
 - Marker status: non-optimized v0.1 reference layout, not production nesting.
 
 ## Assumptions To Review
