@@ -17,8 +17,8 @@
     </marker>
   </defs>
   <text x="0" y="-12" class="info">Sleeveless A-line Woven Dress/Tunic v0.1 | imperial-first package | seam allowance: 0.39 in (10mm) | hem allowance: 1.18 in (30mm) | ready-for-human-sanity-check</text>
-  <rect x="0" y="980" width="50.8" height="50.8" class="scale" />
-  <text x="0" y="974" class="caption">2 in scale square (50.8mm)</text>
+  <rect x="0" y="1005" width="25.4" height="25.4" class="scale" />
+  <text x="0" y="999" class="caption">1 in scale square (25.4mm)</text>
 
   <g id="front-half">
     <path d="M 0 120 L -5.44 94.84 L 0.68 73.26 L 8.53 53.82 L 18.15 36.53 L 29.58 21.48 L 42.82 8.75 L 57.82 -1.55 L 76.8 -9.93 L 174.39 10.31 L 182.31 26.85 L 187.99 39.81 L 194.24 53.28 L 200.98 67.15 L 208.08 81.36 L 215.43 95.82 L 222.91 110.46 L 230.4 125.19 L 237.81 139.94 L 245 154.65 L 251.88 169.24 L 258.31 183.65 L 264.21 197.81 L 269.84 213.21 L 269.99 249.64 L 272.62 285.64 L 274.7 322.53 L 276.4 359.73 L 277.93 397.11 L 279.49 434.55 L 281.29 471.94 L 283.53 509.15 L 286.41 546.06 L 290.13 582.56 L 294.57 617.1 L 305.5 639.03 L 316.36 662.6 L 326.49 686.17 L 335.9 709.75 L 344.57 733.35 L 352.52 756.94 L 359.74 780.54 L 366.24 804.16 L 372 827.77 L 377.03 851.39 L 381.33 875.03 L 382.58 936.52 L 0 930 Z" class="cut" />

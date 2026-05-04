@@ -11,7 +11,7 @@ This is the one-file front door for the v0.1 package. It gathers the garment sha
 ## Open First
 
 - `preview.html` — static 3D assembly preview, not cloth simulation.
-- `pattern.svg` — source pattern flats with a 2 in scale square.
+- `pattern.svg` — source pattern flats with a 1 in scale square.
 - `cut-sheet.md` — cutting quantities, body fixture, finished draft measurements, marker summary.
 - `assembly.md` — sewing order and muslin notes.
 - `human-sanity-check.md` — review checklist before cutting anything beyond muslin.

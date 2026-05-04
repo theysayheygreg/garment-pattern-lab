@@ -58,8 +58,8 @@ export function buildSvg(patternDoc, readinessDoc, params) {
     </marker>
   </defs>
   <text x="0" y="-12" class="info">${patternDoc.title} | imperial-first package | seam allowance: ${formatIn(params.allowances.seam)} (${formatMm(params.allowances.seam)}) | hem allowance: ${formatIn(params.allowances.hem)} (${formatMm(params.allowances.hem)}) | ${readinessDoc.overallState}</text>
-  <rect x="0" y="${height - 70}" width="50.8" height="50.8" class="scale" />
-  <text x="0" y="${height - 76}" class="caption">2 in scale square (50.8mm)</text>
+  <rect x="0" y="${height - 45}" width="25.4" height="25.4" class="scale" />
+  <text x="0" y="${height - 51}" class="caption">1 in scale square (25.4mm)</text>
   ${svgPanel(front, params, 0, "front panel")}
   ${svgPanel(back, params, backOffset, "back panel")}
 </svg>
@@ -240,7 +240,7 @@ Units: imperial-first. Metric is retained as the internal engine unit and second
 ## Print Scale
 
 - Print at 100% scale; do not fit to page.
-- Measure the 2 in scale square on \`pattern.svg\` before cutting.
+- Measure the 1 in scale square on \`pattern.svg\` before cutting.
 - This v0.1 package is SVG-first; tiled home-print PDF is still missing.
 
 ## Body Fixture
@@ -284,7 +284,7 @@ ${markerSection}
 - Marker layout is non-optimized; nap, print direction, shrinkage, and fabric defects are not checked.
 - True fit and drape are not checked.
 - Head entry is not proven.
-- Cut-line offsets are rough for v0.1.
+- Seam allowance uses a v0.1 boundary-normal offset; review corner cleanup before sewing beyond muslin.
 `;
 }
 
@@ -413,7 +413,7 @@ This is the package-local review sheet for the dirty v0.1 spike. It is meant for
 
 ## Print And Scale
 
-- [ ] Open \`pattern.svg\` and confirm the 2 in scale square measures 2 in after printing.
+- [ ] Open \`pattern.svg\` and confirm the 1 in scale square measures 1 in after printing.
 - [ ] Confirm the front and back panels print at the same scale.
 - [ ] Confirm labels, grainlines, fold lines, seam lines, cut lines, and notches are visible.
 
@@ -467,7 +467,7 @@ This is the human-facing v0.1 review guide. It is intentionally one document: ga
 
 - \`source-sketch.svg\` — input sketch that produced this package, when available.
 - \`overview.svg\` — Kiko-style overview board showing input, interpreted garment, measurements, callouts, and generated pieces.
-- \`pattern.svg\` — generated pattern flats with a 2 in scale square.
+- \`pattern.svg\` — generated pattern flats with a 1 in scale square.
 - \`preview.html\` — static 3D assembly preview, not cloth simulation.
 - \`guide.md\` — this document.
 
@@ -492,7 +492,7 @@ The marker is a separate sheet: actual fabric layout and consumption on a fabric
 ## Print Scale
 
 - Print \`pattern.svg\` at 100% scale; do not fit to page.
-- Measure the 2 in scale square before cutting.
+- Measure the 1 in scale square before cutting.
 - This v0.1 package is SVG-first; tiled home-print PDF is still missing.
 
 ## Body Fixture
@@ -541,7 +541,7 @@ ${patternDoc.assumptions.map((assumption) => `- ${assumption}`).join("\n")}
 ## Review Checklist
 
 - [ ] Confirm the generated pattern visually matches the source sketch.
-- [ ] Confirm the 2 in scale square measures correctly.
+- [ ] Confirm the 1 in scale square measures correctly.
 - [ ] Confirm labels, grainlines, fold lines, seam lines, cut lines, and notches are visible.
 - [ ] Confirm neckline and armholes look plausible.
 - [ ] Confirm side seams and shoulders appear matchable.
@@ -571,7 +571,7 @@ This is the one-file front door for the v0.1 package. It gathers the garment sha
 ## Open First
 
 - \`preview.html\` — static 3D assembly preview, not cloth simulation.
-- \`pattern.svg\` — source pattern flats with a 2 in scale square.
+- \`pattern.svg\` — source pattern flats with a 1 in scale square.
 - \`cut-sheet.md\` — cutting quantities, body fixture, finished draft measurements, marker summary.
 - \`assembly.md\` — sewing order and muslin notes.
 - \`human-sanity-check.md\` — review checklist before cutting anything beyond muslin.

@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "0.1-reference-benchmark",
+  "id": "bow-back-knit-top-reference",
+  "truthLevel": "pattern-reference",
+  "licenseProfile": "copyrighted-reference-only",
+  "source": {
+    "tutorialUrl": "https://www.scatteredthoughtsofacraftymom.com/bow-back-knit-top-free-pattern/",
+    "localPdfReviewed": "/Users/theysayheygreg/Downloads/Bow-Back-Top-pattern-3-16-final.pdf",
+    "attribution": "Jamie Sanders, Scattered Thoughts of a Crafty Mom",
+    "reviewDate": "2026-05-04"
+  },
+  "garmentFacts": {
+    "garmentFamily": "girls-knit-top",
+    "sizeRange": ["3", "4", "5", "6", "7", "8", "10", "12", "14", "16"],
+    "fabricType": "knit",
+    "fabricWidthIn": 60,
+    "primaryDirectionLabel": "direction-of-stretch",
+    "silhouette": ["loose-top", "below-hip-length", "curved-hem"],
+    "closures": ["back-keyhole", "ribbon-bow-tie"],
+    "pieces": [
+      { "role": "bodice", "label": "bodice front and back", "cut": "cut 1 of each", "fold": true },
+      { "role": "sleeve", "label": "sleeve", "cut": "cut 2", "fold": true, "variants": ["short-sleeve-cut-line", "quarter-sleeve-cut-line", "long-sleeve-option"] },
+      { "role": "facing", "label": "front facing", "cut": "cut 2" },
+      { "role": "facing", "label": "back facing" },
+      { "role": "trim", "label": "ribbon or lightweight tie", "cut": "2 strips" }
+    ],
+    "allowances": {
+      "seamAllowanceIn": 0.25,
+      "hemAllowanceIn": 0.5
+    },
+    "printConventions": [
+      "1-inch-scale-square",
+      "landscape-tiled-pages",
+      "page-numbers",
+      "gray-assembly-boxes",
+      "colored-alignment-circles",
+      "multi-size-color-coded-lines"
+    ]
+  },
+  "modelImplications": [
+    "fabric direction must distinguish woven grainline from knit stretch direction",
+    "closure should become a first-class parameter",
+    "facing pieces should be generated when facing is selected",
+    "optional component variant lines need schema support",
+    "print package needs tile pages, match marks, and one-inch scale proof"
+  ]
+}

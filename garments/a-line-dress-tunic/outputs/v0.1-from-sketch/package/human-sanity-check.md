@@ -10,7 +10,7 @@ This is the package-local review sheet for the dirty v0.1 spike. It is meant for
 
 ## Print And Scale
 
-- [ ] Open `pattern.svg` and confirm the 2 in scale square measures 2 in after printing.
+- [ ] Open `pattern.svg` and confirm the 1 in scale square measures 1 in after printing.
 - [ ] Confirm the front and back panels print at the same scale.
 - [ ] Confirm labels, grainlines, fold lines, seam lines, cut lines, and notches are visible.
 

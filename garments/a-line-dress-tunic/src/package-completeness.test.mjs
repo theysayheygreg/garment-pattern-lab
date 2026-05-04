@@ -73,7 +73,7 @@ for (const spec of requiredPackages) {
   assert(manifest.packageFiles.some((file) => file.path === "package/marker.svg"));
 
   const patternSvg = fs.readFileSync(path.join(outputRoot, "package", "pattern.svg"), "utf8");
-  assert.match(patternSvg, /2 in scale square/);
+  assert.match(patternSvg, /1 in scale square/);
   assert.match(patternSvg, /CUT 1 ON FOLD/);
   assert(patternSvg.split("L ").length > 60, "Expected higher-resolution sampled pattern curves.");
 
@@ -84,7 +84,7 @@ for (const spec of requiredPackages) {
   assert.match(overviewSvg, /Open marker.svg for actual fabric layout/);
 
   const sanitySheet = fs.readFileSync(path.join(outputRoot, "package", "human-sanity-check.md"), "utf8");
-  assert.match(sanitySheet, /2 in scale square/);
+  assert.match(sanitySheet, /1 in scale square/);
   assert.match(sanitySheet, /Check head entry/);
   assert.match(sanitySheet, /muslin/);
 

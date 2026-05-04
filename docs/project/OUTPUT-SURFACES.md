@@ -35,6 +35,14 @@ The overview sheet can be SVG/PDF/HTML, but the interaction model should stay hu
 
 For v0.1, `human-output/.../guide.md` is still the single text companion, and `pattern.svg` is the visual pattern surface. The next packaging step is to compose these into a first real overview sheet inspired by Kiko's board layout.
 
+Reference comparison against the Bow Back Knit Top pattern tightened the sewing-pattern expectations:
+
+- imperial packages should use a 1 inch scale square
+- tiled print sheets need page numbers, alignment marks, and match points
+- each printed piece needs role, cut count, fold state, and fabric direction
+- woven outputs should show grainline; knit outputs should show direction of stretch
+- facing, sleeve, trim, and interfacing pieces need first-class piece roles once generated
+
 ## Marker Sheet
 
 The marker sheet answers a different question: "How do these cut pieces fit on the fabric width?"

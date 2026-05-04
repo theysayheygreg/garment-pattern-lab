@@ -2,6 +2,12 @@
   "id": "a-line-dress-tunic-v0.1-parameters",
   "units": "mm",
   "garmentType": "sleeveless-a-line-woven-dress-tunic",
+  "fabric": {
+    "type": "woven",
+    "widthIn": 45,
+    "primaryDirection": "grainline",
+    "stretchDirection": "not-modeled"
+  },
   "length": 900,
   "neckline": {
     "shape": "scoop",

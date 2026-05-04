@@ -7,7 +7,7 @@ Units: imperial-first. Metric is retained as the internal engine unit and second
 ## Print Scale
 
 - Print at 100% scale; do not fit to page.
-- Measure the 2 in scale square on `pattern.svg` before cutting.
+- Measure the 1 in scale square on `pattern.svg` before cutting.
 - This v0.1 package is SVG-first; tiled home-print PDF is still missing.
 
 ## Body Fixture
@@ -57,4 +57,4 @@ Units: imperial-first. Metric is retained as the internal engine unit and second
 - Marker layout is non-optimized; nap, print direction, shrinkage, and fabric defects are not checked.
 - True fit and drape are not checked.
 - Head entry is not proven.
-- Cut-line offsets are rough for v0.1.
+- Seam allowance uses a v0.1 boundary-normal offset; review corner cleanup before sewing beyond muslin.

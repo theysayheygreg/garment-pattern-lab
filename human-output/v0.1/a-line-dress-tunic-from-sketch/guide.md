@@ -10,7 +10,7 @@ This is the human-facing v0.1 review guide. It is intentionally one document: ga
 
 - `source-sketch.svg` — input sketch that produced this package, when available.
 - `overview.svg` — Kiko-style overview board showing input, interpreted garment, measurements, callouts, and generated pieces.
-- `pattern.svg` — generated pattern flats with a 2 in scale square.
+- `pattern.svg` — generated pattern flats with a 1 in scale square.
 - `preview.html` — static 3D assembly preview, not cloth simulation.
 - `guide.md` — this document.
 
@@ -35,7 +35,7 @@ The marker is a separate sheet: actual fabric layout and consumption on a fabric
 ## Print Scale
 
 - Print `pattern.svg` at 100% scale; do not fit to page.
-- Measure the 2 in scale square before cutting.
+- Measure the 1 in scale square before cutting.
 - This v0.1 package is SVG-first; tiled home-print PDF is still missing.
 
 ## Body Fixture
@@ -91,7 +91,7 @@ The marker is a separate sheet: actual fabric layout and consumption on a fabric
 ## Review Checklist
 
 - [ ] Confirm the generated pattern visually matches the source sketch.
-- [ ] Confirm the 2 in scale square measures correctly.
+- [ ] Confirm the 1 in scale square measures correctly.
 - [ ] Confirm labels, grainlines, fold lines, seam lines, cut lines, and notches are visible.
 - [ ] Confirm neckline and armholes look plausible.
 - [ ] Confirm side seams and shoulders appear matchable.
