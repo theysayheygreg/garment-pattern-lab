@@ -333,3 +333,9 @@ Human cut package tightening:
 
 - Expanded `cut-sheet.md` with print-scale instructions, body fixture measurements, finished draft measurements, fold handling, and finish choices for neckline/armholes.
 - Kept the warning blunt: v0.1 is SVG-first, tiled home-print PDF is still missing, and the first make should be muslin.
+
+Three.js preview browser smoke:
+
+- Served the repo locally on port 8788 and opened `outputs/v0.1-from-sketch/package/preview.html` in the in-app browser.
+- Verified the preview loaded with one Three.js canvas, embedded scene data, the expected heading, and no browser console errors.
+- Captured a screenshot and checked it was nonblank: 1280x720, 75,018 non-background pixels, 49,924 colored pixels.
