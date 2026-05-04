@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "0.1-sketch-input-manifest",
+  "inputId": "a-line-tunic-single-side-semantic-flat",
+  "sourcePath": "packages/sketch-intent/fixtures/a-line-tunic-single-side-semantic-flat.svg",
+  "garmentFamily": "sleeveless-a-line-woven-tunic",
+  "inputLane": "synthetic-fixture",
+  "creator": {
+    "name": "Garment Pattern Lab",
+    "relationship": "synthetic Phase C fixture",
+    "rightsNote": "Original synthetic fixture for internal prototype validation."
+  },
+  "viewRelationship": {
+    "mode": "single-side-symmetric",
+    "frontKnown": true,
+    "backKnown": false,
+    "assignmentEvidence": "Fixture metadata marks front view; missing right-side curves are intentionally mirrored from the left side."
+  },
+  "scaleState": {
+    "status": "default-fallback-required",
+    "evidence": "No body figure, scale bar, or physical measurement reference is present."
+  },
+  "reviewState": {
+    "semanticReview": "reviewed-plausible",
+    "reviewer": "Codex fixture smoke test",
+    "notes": "Expected Phase C status is review-needed because mirrored landmarks are assumptions."
+  },
+  "acceptance": {
+    "minimumPhaseCUse": true,
+    "knownLimitations": [
+      "Synthetic SVG uses explicit semantic path ids and metadata.",
+      "No physical scale is available until Phase D.",
+      "Mirrored side landmarks are useful assumptions, not confirmed designer intent."
+    ]
+  }
+}

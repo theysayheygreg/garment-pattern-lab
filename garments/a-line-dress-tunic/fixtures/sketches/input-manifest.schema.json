@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://garment-pattern-lab.local/schemas/v0.1/sketch-input-manifest.schema.json",
+  "title": "Garment Pattern Lab v0.1 Sketch Input Manifest",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "inputId",
+    "sourcePath",
+    "garmentFamily",
+    "inputLane",
+    "viewRelationship",
+    "scaleState",
+    "reviewState",
+    "acceptance"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "0.1-sketch-input-manifest" },
+    "inputId": { "type": "string" },
+    "sourcePath": { "type": "string" },
+    "garmentFamily": { "const": "sleeveless-a-line-woven-tunic" },
+    "inputLane": {
+      "type": "string",
+      "enum": ["synthetic-fixture", "generated-gpt-image", "human-authored", "web-reference"]
+    },
+    "creator": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "relationship": { "type": "string" },
+        "rightsNote": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "viewRelationship": {
+      "type": "object",
+      "required": ["mode", "frontKnown", "backKnown"],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": ["front-only", "front-back-pair", "back-only", "single-side-symmetric"]
+        },
+        "frontKnown": { "type": "boolean" },
+        "backKnown": { "type": "boolean" },
+        "assignmentEvidence": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "scaleState": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["unknown", "figure-present", "scale-reference-present", "default-fallback-required"]
+        },
+        "evidence": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "reviewState": {
+      "type": "object",
+      "required": ["semanticReview", "reviewer"],
+      "properties": {
+        "semanticReview": {
+          "type": "string",
+          "enum": ["not-reviewed", "reviewed-plausible", "reviewed-needs-work"]
+        },
+        "reviewer": { "type": "string" },
+        "notes": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "acceptance": {
+      "type": "object",
+      "required": ["minimumPhaseCUse", "knownLimitations"],
+      "properties": {
+        "minimumPhaseCUse": { "type": "boolean" },
+        "knownLimitations": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

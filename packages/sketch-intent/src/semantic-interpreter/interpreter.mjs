@@ -102,7 +102,7 @@ export function interpretSketchTrace(trace, options = {}) {
     },
     views: interpretedPanels.map((panel) => panel.viewAssignment),
     landmarks,
-    sketchIntent: buildSketchIntent(slots, prior.family.id),
+    sketchIntent: buildSketchIntent(interpretedPanels, prior.family.id),
     view: primaryPanel?.view ?? options.view ?? "front",
     sourceTrace: {
       schemaVersion: trace.schemaVersion,
@@ -142,7 +142,8 @@ export function interpretSketchTrace(trace, options = {}) {
 
 function interpretPanelContext(context) {
   const derived = deriveBoundaryCandidates(context.silhouette, context.axis, context.view);
-  const candidateSet = [...context.candidates, ...derived];
+  const mirrored = mirrorSingleSideCandidates(context.candidates, context.silhouette, context.axis, context.view);
+  const candidateSet = [...context.candidates, ...derived, ...mirrored];
   const slotConfig = VIEW_SLOT_CONFIG[context.view] ?? VIEW_SLOT_CONFIG.front;
   const slots = {};
   for (const slotId of slotConfig.required) {
@@ -292,6 +293,67 @@ function lineCandidate(id, points, role, sourceSilhouette, view) {
   );
 }
 
+function mirrorSingleSideCandidates(candidates, silhouette, axis, view) {
+  if (!silhouette?.bbox || !axis?.present) return [];
+  const roles = [
+    { key: "shoulder", slotRole: "shoulder" },
+    { key: "armhole", slotRole: "armhole" },
+    { key: "side-seam", slotRole: "side_seam", aliases: ["side"] },
+  ];
+  const mirrored = [];
+
+  for (const role of roles) {
+    const matching = candidates.filter((candidate) => candidate.bbox && candidateRoleMatches(candidate, role));
+    const leftCandidates = matching.filter((candidate) => candidateSide(candidate, axis) === "left");
+    const rightCandidates = matching.filter((candidate) => candidateSide(candidate, axis) === "right");
+    if (leftCandidates.length > 0 && rightCandidates.length === 0) {
+      mirrored.push(...leftCandidates.map((candidate) => mirrorCandidate(candidate, axis, "left", "right", role.slotRole, view)));
+    }
+    if (rightCandidates.length > 0 && leftCandidates.length === 0) {
+      mirrored.push(...rightCandidates.map((candidate) => mirrorCandidate(candidate, axis, "right", "left", role.slotRole, view)));
+    }
+  }
+
+  return mirrored;
+}
+
+function candidateRoleMatches(candidate, role) {
+  const id = candidate.id.toLowerCase();
+  const normalizedRole = String(candidate.sourceAttributes?.role ?? "").replaceAll("_", "-");
+  return [role.key, ...(role.aliases ?? [])].some((alias) => id.includes(alias) || normalizedRole.includes(alias));
+}
+
+function candidateSide(candidate, axis) {
+  if (candidate.bbox.maxX <= axis.x) return "left";
+  if (candidate.bbox.minX >= axis.x) return "right";
+  return "center";
+}
+
+function mirrorCandidate(candidate, axis, fromSide, toSide, role, view) {
+  const points = candidate.points.map((point) => ({ x: round(axis.x * 2 - point.x), y: point.y }));
+  const id = candidate.id.includes(fromSide)
+    ? candidate.id.replaceAll(fromSide, toSide)
+    : `mirrored-${toSide}-${candidate.id}`;
+  return enrichCandidate(
+    {
+      id,
+      element: "mirrored-line",
+      d: pathDataFromPoints(points),
+      bbox: bboxFromPoints(points),
+      closed: candidate.closed,
+      sourceAttributes: {
+        derivedFrom: candidate.id,
+        role,
+        "data-gpl-view": view,
+        "data-gpl-mirror-from": fromSide,
+        "data-gpl-mirror-to": toSide,
+      },
+    },
+    "mirrored-from-axis",
+    "mirrored-from-axis",
+  );
+}
+
 function detectAxis(candidates, silhouette) {
   const bbox = silhouette?.bbox ?? unionBbox(candidates.map((candidate) => candidate.bbox).filter(Boolean));
   const fallbackX = bbox ? (bbox.minX + bbox.maxX) / 2 : 0;
@@ -323,7 +385,7 @@ function detectAxis(candidates, silhouette) {
 }
 
 function assignRequiredSlot(slotId, candidates, silhouette, axis) {
-  const scored = scoreSlot(slotId, candidates, silhouette, axis).sort((a, b) => b.score - a.score);
+  const scored = scoreSlot(slotId, candidatePoolForSlot(slotId, candidates, axis), silhouette, axis).sort((a, b) => compareScoredCandidates(a, b));
   const best = scored[0];
   const hardFloor = 0.3;
   const baseSlot = baseSlotId(slotId);
@@ -331,18 +393,23 @@ function assignRequiredSlot(slotId, candidates, silhouette, axis) {
   if (!best || best.score < hardFloor) {
     return missingSlot(slotId, true, `No plausible ${slotId.replaceAll("_", " ")} curve was found.`);
   }
-  const status = best.score >= threshold ? "assigned" : "assumed";
+  const status = best.candidate.source === "mirrored-from-axis" || best.score < threshold ? "assumed" : "assigned";
   return slotAssignment(slotId, best.candidate, {
     required: true,
     status,
     confidence: best.score,
     ruleScores: best.ruleScores,
-    assumption: status === "assumed" ? `${slotId.replaceAll("_", " ")} is below the ambiguity threshold.` : undefined,
+    assumption:
+      best.candidate.source === "mirrored-from-axis"
+        ? `${slotId.replaceAll("_", " ")} was mirrored across the detected center axis from ${best.candidate.sourceAttributes.derivedFrom}.`
+        : status === "assumed"
+          ? `${slotId.replaceAll("_", " ")} is below the ambiguity threshold.`
+          : undefined,
   });
 }
 
 function assignOptionalSlot(slotId, candidates, silhouette, axis) {
-  const scored = scoreSlot(slotId, candidates, silhouette, axis).sort((a, b) => b.score - a.score);
+  const scored = scoreSlot(slotId, candidatePoolForSlot(slotId, candidates, axis), silhouette, axis).sort((a, b) => compareScoredCandidates(a, b));
   const best = scored[0];
   if (!best || best.score < 0.45) {
     return {
@@ -371,6 +438,45 @@ function scoreSlot(slotId, candidates, silhouette, axis) {
   });
 }
 
+function candidatePoolForSlot(slotId, candidates, axis) {
+  const role = roleForSlot(slotId);
+  const side = sideForSlot(slotId);
+  if (!role || !side) return candidates;
+  const hasMirrored = candidates.some(
+    (candidate) => candidate.source === "mirrored-from-axis" && candidate.sourceAttributes?.role === role && candidateSide(candidate, axis) === side,
+  );
+  if (!hasMirrored) return candidates;
+  return candidates.filter(
+    (candidate) => candidate.source !== "derived-from-silhouette" && (candidate.source !== "mirrored-from-axis" || candidate.sourceAttributes?.role === role),
+  );
+}
+
+function roleForSlot(slotId) {
+  if (slotId.startsWith("shoulder_")) return "shoulder";
+  if (slotId.startsWith("armhole_")) return "armhole";
+  if (slotId.startsWith("side_seam_")) return "side_seam";
+  return null;
+}
+
+function sideForSlot(slotId) {
+  if (slotId.endsWith("_left")) return "left";
+  if (slotId.endsWith("_right")) return "right";
+  return null;
+}
+
+function compareScoredCandidates(a, b) {
+  const scoreDelta = b.score - a.score;
+  if (Math.abs(scoreDelta) > 0.18) return scoreDelta;
+  return sourceRank(b.candidate.source) - sourceRank(a.candidate.source) || scoreDelta;
+}
+
+function sourceRank(source) {
+  if (source === "trace") return 3;
+  if (source === "mirrored-from-axis") return 2;
+  if (source === "derived-from-silhouette") return 1;
+  return 0;
+}
+
 function ruleScoresForSlot(slotId, candidate, silhouette, axis) {
   const rules = [];
   const id = candidate.id.toLowerCase();
@@ -383,6 +489,8 @@ function ruleScoresForSlot(slotId, candidate, silhouette, axis) {
   const add = (id, weight, score, reason) => rules.push({ id, weight, score: clamp01(score), reason });
   const hintScore = (text) => (id.includes(text) ? 1 : 0);
   const derivedScore = (role) => (candidate.sourceAttributes?.role === role ? 0.9 : 0);
+  const mirroredScore = (role) => (candidate.source === "mirrored-from-axis" && candidate.sourceAttributes?.role === role ? 0.82 : 0);
+  const mirroredSideScore = (role, onSide) => (onSide ? mirroredScore(role) : 0);
 
   if (baseSlot === "hem") {
     add("id-or-derived-hem", 0.7, Math.max(hintScore("hem"), derivedScore("hem")), "Prefer explicit or derived hem candidates.");
@@ -400,16 +508,16 @@ function ruleScoresForSlot(slotId, candidate, silhouette, axis) {
     add("id-shoulder-right", 0.85, id.includes("shoulder") && id.includes("right") ? 1 : 0, "Prefer explicit right shoulder labels.");
     add("top-right-short-edge", 0.65, shoulderScore(candidate, panel, axis, "right"), "Right shoulder should be short and high.");
   } else if (slotId === "armhole_left") {
-    add("id-or-derived-armhole-left", 0.8, (candidate.source === "trace" && id.includes("armhole") && left ? 1 : 0) || (derivedScore("armhole") && left ? 0.62 : 0), "Prefer left armhole labels or derived upper-side segment.");
+    add("id-or-derived-armhole-left", 0.8, (candidate.source === "trace" && id.includes("armhole") && left ? 1 : 0) || mirroredSideScore("armhole", left) || (derivedScore("armhole") && left ? 0.62 : 0), "Prefer left armhole labels or derived upper-side segment.");
     add("upper-left-lateral-edge", 0.65, upperSideScore(candidate, panel, axis, "left"), "Armhole should live high on the left side.");
   } else if (slotId === "armhole_right") {
-    add("id-or-derived-armhole-right", 0.8, (candidate.source === "trace" && id.includes("armhole") && right ? 1 : 0) || (derivedScore("armhole") && right ? 0.62 : 0), "Prefer right armhole labels or derived upper-side segment.");
+    add("id-or-derived-armhole-right", 0.8, (candidate.source === "trace" && id.includes("armhole") && right ? 1 : 0) || mirroredSideScore("armhole", right) || (derivedScore("armhole") && right ? 0.62 : 0), "Prefer right armhole labels or derived upper-side segment.");
     add("upper-right-lateral-edge", 0.65, upperSideScore(candidate, panel, axis, "right"), "Armhole should live high on the right side.");
   } else if (slotId === "side_seam_left") {
-    add("id-or-derived-side-left", 0.8, (id.includes("side") && left ? 1 : 0) || (derivedScore("side_seam") && left ? 0.9 : 0), "Prefer left side seam labels or derived lower-side segment.");
+    add("id-or-derived-side-left", 0.8, (id.includes("side") && left ? 1 : 0) || mirroredSideScore("side_seam", left) || (derivedScore("side_seam") && left ? 0.9 : 0), "Prefer left side seam labels or derived lower-side segment.");
     add("left-long-vertical-edge", 0.75, sideSeamScore(candidate, panel, axis, "left"), "Left side seam should be long and lateral.");
   } else if (slotId === "side_seam_right") {
-    add("id-or-derived-side-right", 0.8, (id.includes("side") && right ? 1 : 0) || (derivedScore("side_seam") && right ? 0.9 : 0), "Prefer right side seam labels or derived lower-side segment.");
+    add("id-or-derived-side-right", 0.8, (id.includes("side") && right ? 1 : 0) || mirroredSideScore("side_seam", right) || (derivedScore("side_seam") && right ? 0.9 : 0), "Prefer right side seam labels or derived lower-side segment.");
     add("right-long-vertical-edge", 0.75, sideSeamScore(candidate, panel, axis, "right"), "Right side seam should be long and lateral.");
   } else if (baseSlot.startsWith("dart")) {
     const side = baseSlot.endsWith("left") ? "left" : baseSlot.endsWith("right") ? "right" : null;
@@ -526,23 +634,43 @@ function buildLandmarkList(slots, view) {
   });
 }
 
-function buildSketchIntent(slots, familyId) {
+function buildSketchIntent(interpretedPanels, familyId) {
+  const slotsByView = Object.fromEntries(interpretedPanels.map((panel) => [panel.view, panel.slots]));
+  const frontSlots = slotsByView.front ?? interpretedPanels[0]?.slots ?? {};
+  const backSlots = slotsByView.back ?? {};
+  const highConsequenceDartSlots = [
+    frontSlots.bust_dart_left,
+    frontSlots.bust_dart_right,
+    backSlots.waist_dart_back_left,
+    backSlots.waist_dart_back_right,
+  ].filter(Boolean);
   return {
     promotionState: "interpreted",
     garmentType: familyId,
+    views: interpretedPanels.map((panel) => ({
+      view: panel.view,
+      panelId: panel.panelId,
+      assignmentSource: panel.viewAssignmentSource,
+      confidence: panel.viewAssignmentConfidence,
+      slotStatuses: Object.fromEntries(Object.values(panel.slots).map((slot) => [slot.slotId, slot.status])),
+    })),
     silhouette: { type: "a-line", confidence: 0.78 },
     neckline: {
       shape: "scoop-or-curve",
-      confidence: slots.neckline_front?.confidence ?? 0,
-      from: slots.neckline_front?.curveId ? ["lm.front.neckline"] : [],
+      confidence: frontSlots.neckline_front?.confidence ?? backSlots.neckline_back?.confidence ?? 0,
+      from: [
+        ...(frontSlots.neckline_front?.curveId ? ["lm.front.neckline"] : []),
+        ...(backSlots.neckline_back?.curveId ? ["lm.back.neckline"] : []),
+      ],
     },
     closure: { mode: "pullover-assumed", confidence: 0.52 },
     highConsequenceFeatures: {
       darts: {
-        status:
-          slots.bust_dart_left?.status === "needs-confirmation" || slots.bust_dart_right?.status === "needs-confirmation"
-            ? "requires-review"
-            : "not-detected",
+        status: highConsequenceDartSlots.some((slot) => slot.status === "needs-confirmation") ? "requires-review" : "not-detected",
+        byView: {
+          front: [frontSlots.bust_dart_left, frontSlots.bust_dart_right].filter(Boolean).map((slot) => ({ slotId: slot.slotId, status: slot.status, confidence: slot.confidence })),
+          back: [backSlots.waist_dart_back_left, backSlots.waist_dart_back_right].filter(Boolean).map((slot) => ({ slotId: slot.slotId, status: slot.status, confidence: slot.confidence })),
+        },
       },
     },
   };
@@ -681,6 +809,11 @@ function polylineLength(points) {
   let total = 0;
   for (let i = 1; i < points.length; i += 1) total += distance(points[i - 1], points[i]);
   return total;
+}
+
+function pathDataFromPoints(points) {
+  if (points.length === 0) return "";
+  return points.map((point, index) => `${index === 0 ? "M" : "L"} ${point.x} ${point.y}`).join(" ");
 }
 
 function distance(a, b) {

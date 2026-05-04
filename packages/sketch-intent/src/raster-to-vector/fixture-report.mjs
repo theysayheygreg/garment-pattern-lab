@@ -6,6 +6,7 @@ const DEFAULT_FIXTURES = [
   "packages/sketch-intent/fixtures/hardware-detail-technical-flat.svg",
   "packages/sketch-intent/fixtures/a-line-tunic-semantic-flat.svg",
   "packages/sketch-intent/fixtures/a-line-tunic-front-back-semantic-flat.svg",
+  "packages/sketch-intent/fixtures/a-line-tunic-single-side-semantic-flat.svg",
 ];
 
 const files = process.argv.slice(2);

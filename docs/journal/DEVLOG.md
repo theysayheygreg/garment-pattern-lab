@@ -256,3 +256,9 @@ Phase C front/back hardening:
 - Updated Phase B trace classification so one front panel or paired front/back panel silhouettes are trace-ready.
 - Updated the interpreter so multi-panel traces produce separate `view.front` and `view.back` panel contexts, and back-only calls emit `hem_back`, `neckline_back`, and `center_back` instead of front slots.
 - Added regression checks for paired panels, explicit back interpretation, and side-specific dart review.
+
+Phase C symmetric-input hardening:
+
+- Added `a-line-tunic-single-side-semantic-flat.svg`, a one-sided symmetric front fixture.
+- Added axis-reflected candidate generation for shoulder, armhole, and side-seam curves. Reflected landmarks stay `assumed` and appear in the ambiguity report, preserving the product rule that mirrored intent is useful but not silently confirmed.
+- Updated `SketchIntent` so paired-view interpretations carry per-view slot status and front/back neckline evidence rather than collapsing intent to the primary panel.

@@ -25,8 +25,9 @@ Phase B code:
 - `fixtures/hardware-detail-technical-flat.svg`: SVG fixture for circles/ellipses used as hardware, buttons, rings, rivets, or similar garment details.
 - `fixtures/a-line-tunic-semantic-flat.svg`: Phase C fixture with separate semantic paths for the front neckline, shoulders, armholes, side seams, hem, and center axis.
 - `fixtures/a-line-tunic-front-back-semantic-flat.svg`: Phase C fixture with paired front/back panels and explicit view metadata.
+- `fixtures/a-line-tunic-single-side-semantic-flat.svg`: Phase C fixture for one-sided symmetric inputs where the interpreter mirrors missing side landmarks across the detected center axis.
 - `src/semantic-interpreter/interpreter.mjs`: heuristic A-line v0.1 interpreter that converts Phase B trace layers into a `sketch-interpretation` package with semantic landmark IDs, source curve evidence, coordinate profile, assumptions, and ambiguity report.
-- `src/semantic-interpreter/interpreter.test.mjs`: smoke tests for complete front, paired front/back, back-only, sparse blocked, and dart-side fixtures.
+- `src/semantic-interpreter/interpreter.test.mjs`: smoke tests for complete front, paired front/back, back-only, single-side mirrored, sparse blocked, and dart-side fixtures.
 
 Local tool assumptions:
 

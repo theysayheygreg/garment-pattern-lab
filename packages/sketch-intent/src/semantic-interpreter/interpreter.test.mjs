@@ -63,6 +63,9 @@ assert.equal(pairedInterpretation.landmarkSet.panels.length, 2);
 assert.equal(pairedInterpretation.landmarkSet.slotsByView.front.neckline_front.curveId, "front-neckline");
 assert.equal(pairedInterpretation.landmarkSet.slotsByView.back.neckline_back.curveId, "back-neckline");
 assert.equal(pairedInterpretation.landmarkSet.slotsByView.back.center_back.curveId, "back-center-axis");
+assert.equal(pairedInterpretation.sketchIntent.views.length, 2);
+assert.equal(pairedInterpretation.sketchIntent.views[1].view, "back");
+assert.deepEqual(pairedInterpretation.sketchIntent.neckline.from, ["lm.front.neckline", "lm.back.neckline"]);
 
 const backOnly = interpretSketchTrace(pairedTrace, { prior, view: "back" });
 assert.equal(backOnly.views.length, 1);
@@ -72,6 +75,17 @@ assert.ok(Object.hasOwn(backOnly.landmarkSet.slots, "neckline_back"));
 assert.ok(Object.hasOwn(backOnly.landmarkSet.slots, "center_back"));
 assert.equal(Object.hasOwn(backOnly.landmarkSet.slots, "neckline_front"), false);
 assert.equal(backOnly.landmarks.every((landmark) => landmark.id.startsWith("lm.back.")), true);
+
+const singleSideTrace = ingestSketch("packages/sketch-intent/fixtures/a-line-tunic-single-side-semantic-flat.svg");
+assert.equal(singleSideTrace.readiness.status, "ready");
+const singleSideInterpretation = interpretSketchTrace(singleSideTrace, { prior });
+assert.equal(singleSideInterpretation.ambiguityReport.status, "review-needed");
+assert.equal(singleSideInterpretation.landmarkSet.slots.shoulder_left.status, "assigned");
+assert.equal(singleSideInterpretation.landmarkSet.slots.shoulder_right.status, "assumed");
+assert.equal(singleSideInterpretation.landmarkSet.slots.shoulder_right.source, "mirrored-from-axis");
+assert.equal(singleSideInterpretation.landmarkSet.slots.armhole_right.source, "mirrored-from-axis");
+assert.equal(singleSideInterpretation.landmarkSet.slots.side_seam_right.source, "mirrored-from-axis");
+assert.ok(singleSideInterpretation.ambiguityReport.items.some((item) => item.slotId === "shoulder_right"));
 
 const tmpDir = path.join("tmp", "semantic-interpreter");
 fs.mkdirSync(tmpDir, { recursive: true });
