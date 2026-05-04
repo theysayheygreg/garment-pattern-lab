@@ -12,6 +12,6 @@ Owns:
 
 This package protects the product differentiator: Pattern Lab should not become another mouse-and-keyboard CAD/3D editor.
 
-Current v0.1 code:
+Current dev seed:
 
-- `src/commands.mjs`: narrow task-led parameter edits. The first supported package command is `lengthen hem 100mm`, which changes garment length and regenerates the pattern package.
+- `src/commands.mjs`: narrow task-led parameter edits. The first supported package command is `lengthen hem 100mm`, which changes garment length and regenerates the pattern package. This is kept as a v0.5-style seed; the locked v0.1 spec is one-shot and has no editing surface.

@@ -87,3 +87,18 @@ Product implication:
 | Validation Before Beauty | validation harness, report, export gate |
 | 3D Feedback | Three.js sanity preview after pattern generation |
 | Narrow Services | fabric layout report, later grading/fabric/tech-pack lanes |
+
+## Pillar-To-Persona Mapping
+
+Three canonical personas anchor scope decisions. See `docs/design/personas/` for full definitions. Each pillar lands at a different intensity per persona and per version.
+
+| Pillar | Persona 1 (v0.1) | Persona 2 (v0.5+) | Persona 3 (v1+) |
+| --- | --- | --- | --- |
+| Natural Intent | primary input mode for pattern edits | command palette + dependency propagation language | precise verification commands |
+| PatternGraph Contract | invisible (small slice instantiated) | load-bearing (semantic propagation, variants, grading) | underpins industrial export round-trip |
+| Trace Bridge | sketch / vector / drape-photo ingestion + correction | reuse + dependency tracking across designs | review of upstream interpretation |
+| Validation Before Beauty | "good enough to muslin" threshold | "good enough to send to sample room" threshold | "industrially compliant" threshold |
+| 3D Feedback | sanity check before cutting muslin | fit-validation across variants and sizes | sample-vs-pattern comparison |
+| Narrow Services | none in v0.1 | grading, fabric warnings, marker preview | full marker layout, tech-pack composition, multilingual instructions, DXF/AAMA/ASTM export |
+
+Pillars hold across all three personas; the *expression* of each pillar varies by who's using the product.

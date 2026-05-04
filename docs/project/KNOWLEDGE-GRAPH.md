@@ -695,9 +695,13 @@ Source: `docs/reference/KEW-PRODUCT-VISION.md` (Kiko's founder north-star docume
 
 `KewStudioFamily` is Kiko's named product slice for AI-generated photography, line-plan imagery, ecommerce outputs, and market-facing presentation.
 
-`DrapeToPatternWorkflow` is the workflow that begins with a photo of a physical drape or pinned form and translates it into a technical sketch, measurement analysis, and pattern. It is a third input lane beyond the two already in `INPUT-LANES.md` (generated, human-authored).
+`DrapeToPatternWorkflow` is the workflow that begins with a photo of a physical drape or pinned form and translates it into a technical sketch, measurement analysis, and pattern. It is a *content variant* inside the existing human-authored input lane, paired with raster-to-vector preprocessing — not a third lane.
 
-`DrapePhotoInputLane` is the input-lane primitive for `DrapeToPatternWorkflow`. It shares the downstream contract (`InputProvenance`, `LandmarkSet`, `SketchIntent`, `AmbiguityReport`) with the existing two lanes.
+`RasterToVectorBridge` is the preprocessing step that converts raster inputs (PNG/JPG/scan/photo, including drape photos) into editable vector geometry before semantic interpretation begins. Vector inputs (`.ai`, `.svg`, vector PDF) skip this step.
+
+`SemanticInterpretationSurface` is the part of Pattern Lab that owns interpretation and correction of incoming art: parsing vector curves, vectorizing raster, identifying garment landmarks, tagging semantic features, and letting the user confirm or correct each step. It is not a freeform vector authoring surface; it is a narrow workbench for making interpretation explicit and editable.
+
+`VectorIngestProfile` records which vector formats Pattern Lab accepts as input. Includes `.svg`, vector PDF, and `.ai` (Illustrator) handling because designers already work in those tools. Does not include round-trip export back to those formats.
 
 `GuidedProductIntelligence` is the in-workflow advice surface for questions like how much ease this fabric wants, whether a measurement feels too tight, what a pattern adjustment may imply, or how a construction choice may affect fit and production. It generalizes Orrery design-review finding 13 (fix suggestions in design language) by adding a `why-this-matters` companion.
 
@@ -711,7 +715,9 @@ Source: `docs/reference/KEW-PRODUCT-VISION.md` (Kiko's founder north-star docume
 
 `KewMoatBoundary` is the constraint that the value of the platform is what it knows about a garment that generic software does not.
 
-`KewCompatibilityTarget` records the long-range interop targets: Adobe, Gerber, CLO 3D, Ned Graphics, Lectra, Browzwear, Optitex. These are export targets through the candidate-to-export interop layer, not just competitor benchmarks.
+`KewReplacementTarget` records the systems Kew's long-range vision aims to *replace*, not interoperate with: Optitex, Gerber/AccuMark, CLO 3D, Browzwear, Lectra, Ned Graphics, and the Adobe-anchored stitching of disconnected tools. These are competitor and replacement-aim references, not export round-trip destinations.
+
+`KewIngestSurface` records the upstream tooling Pattern Lab needs to *accept input from* because designers already work there: Illustrator (`.ai`), `.svg`, vector PDF, Procreate raster exports, scans, and photos. Ingest is one-way; Pattern Lab does not export back into these systems.
 
 `MultilingualFactoryInstruction` records the constraint that pattern piece labels, construction notes, callouts, annotations, and technical instructions should support translated text under the English base. Implication for the schema: labels are string keys into a label registry, not hardcoded English.
 
@@ -721,7 +727,7 @@ Source: `docs/reference/KEW-PRODUCT-VISION.md` (Kiko's founder north-star docume
 
 `AvatarToRealGarmentBridge` is Kew's vision of carrying a digital avatar look into a real garment with full pattern and production support. Out of scope for Garment Pattern Lab v1.
 
-`ConfirmedIntentPayload` is the upstream-canvas-to-Pattern-Lab contract: when Kew Canvas / Kew CAD owns the canvas, Garment Pattern Lab receives `SketchIntent`, `LandmarkSet`, `GarmentParameters`, and provenance — not raw vector or canvas state. Resolves the Orrery design-review canvas-question fork in favor of upstream ownership.
+`SketchIntentPromotionState` records the lifecycle of `SketchIntent` inside Pattern Lab: `interpreted` (system has parsed/vectorized/tagged), `user-corrected` (user has reviewed and edited), `confirmed` (user has approved the intent for pattern generation). The interpretation work happens inside Pattern Lab on inputs from many upstream sources; it is not produced by an upstream tool. Replaces the earlier `ConfirmedIntentPayload` framing, which incorrectly implied an upstream-only handoff.
 
 `KewGPLAlignmentPlane` records the strategic position: Garment Pattern Lab is the focused execution slice that proves the engine Kew PD needs underneath. Schema, validation, revision model, and pattern package are designed to be hostable inside Kew without rewrite.
 
@@ -1365,22 +1371,29 @@ KewPDFamily
 ```
 
 ```text
-KewCanvasFamily
-  -> KewCADFamily
-  -> ConfirmedIntentPayload
+KewIngestSurface
+  -> VectorIngestProfile
+  -> RasterToVectorBridge
+  -> SemanticInterpretationSurface
   -> SketchIntent
-  -> LandmarkSet
+  -> SketchIntentPromotionState
   -> GarmentParameters
-  -> KewPDFamily
+  -> PatternGraph
+```
+
+```text
+HumanSketchInput
+  -> RasterToVectorBridge
+  -> SemanticInterpretationSurface
+  -> SketchIntentPromotionState
 ```
 
 ```text
 DrapeToPatternWorkflow
-  -> DrapePhotoInputLane
-  -> InputProvenance
-  -> LandmarkSet
-  -> SketchIntent
-  -> AmbiguityReport
+  -> HumanSketchInput
+  -> RasterToVectorBridge
+  -> SemanticInterpretationSurface
+  -> SketchIntentPromotionState
   -> GarmentParameters
   -> PatternGraph
 ```
@@ -1410,10 +1423,16 @@ AINativeFashionEngine
 ```
 
 ```text
-KewCompatibilityTarget
-  -> InteropFormatProfile
-  -> ExportConformanceReport
-  -> RoundTripReport
+KewReplacementTarget
+  -> CompetitorCapabilityMap
+  -> NarrowValidatedServices
+```
+
+```text
+KewIngestSurface
+  -> VectorIngestProfile
+  -> InputProvenance
+  -> SemanticInterpretationSurface
 ```
 
 ```text
@@ -1463,7 +1482,11 @@ KewUserSpan
 - Onshape-style PDM/PLM/collaboration is a future product architecture reference. Prototype 1 should only preserve revision/provenance hooks, not build enterprise lifecycle workflows.
 - Pattern Lab's MBD analog is `SewingPMI`: manufacturing information embedded in `PatternGraph`, with SVG/PDF/export views generated from it.
 - Garment Pattern Lab is the focused execution slice for `KewPDFamily`. The schema, validation harness, revision model, and pattern package should be designed so they could later host Kew workflows without rewrite, but Garment Pattern Lab does not own `KewCanvasFamily`, `KewCADFamily`, `KewLifecycleFamily`, or `KewStudioFamily` scope.
-- The canvas lives upstream. When Kew or another upstream tool owns the canvas, Garment Pattern Lab receives a `ConfirmedIntentPayload` (`SketchIntent` + `LandmarkSet` + `GarmentParameters` + provenance), not raw vector or canvas state.
+- Pattern Lab owns a narrow `SemanticInterpretationSurface`: it ingests vector (`.ai`, `.svg`, vector PDF) and raster (PNG/JPG/scan/photo, including drape photos via `RasterToVectorBridge`), and lets the user manipulate the *interpreted* version of the input. This is not a freeform vector-authoring tool; freeform path authoring belongs upstream in `KewCADFamily` or in the user's existing tooling.
+- `SketchIntentPromotionState` lifecycle is owned inside Pattern Lab: `interpreted` → `user-corrected` → `confirmed`. The pattern generator only consumes `confirmed` state.
+- `KewReplacementTarget` systems (Optitex, Gerber/AccuMark, CLO, Browzwear, Lectra, Ned Graphics) are *replacement* targets, not round-trip export destinations. Pattern Lab does not aim to export pattern files back into those systems. DXF/AAMA/ASTM remains a separate later export lane for industrial cutting, distinct from interop with replaced systems.
+- `KewIngestSurface` is one-way: Pattern Lab accepts input from upstream tools because designers already work there, but does not export back to them.
+- The prototype goal is sharper than the v1 product promise: produce a pattern from a sketch or image reference that a human like Kiko could actually sew. Everything else is many versions out.
 - Pattern piece labels, construction notes, and callouts are string keys into a label registry, not hardcoded English strings, so `MultilingualFactoryInstruction` is reachable without retrofit.
 
 ## Deep Dive Product Decisions

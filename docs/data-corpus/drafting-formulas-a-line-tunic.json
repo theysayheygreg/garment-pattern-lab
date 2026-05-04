@@ -1,0 +1,330 @@
+{
+  "$schema_version": "0.1.0",
+  "generated": "2026-05-03",
+  "garment_id": "dress.a_line",
+  "variant": "sleeveless_woven_pullover_loose_or_lightly_fitted",
+  "scope": "First-garment drafting formulas for Garment Pattern Lab v0.1: sleeveless A-line woven dress/tunic, front and back panels, neckline + armhole + side flare + optional bust dart. Hybridizes a metric bodice-block tradition (Winifred Aldrich) with FreeSewing Bella's parametric construction and conventional A-line flare practice.",
+  "intended_consumer": "DraftingRuleSet for the v0.1 prototype; produces a PatternGraphCandidate with two main panels.",
+  "units": "centimeters",
+  "coordinate_system": {
+    "origin": "top of high-point-shoulder side, on center front (front panel) or center back (back panel)",
+    "x_axis": "positive toward side seam (away from center)",
+    "y_axis": "positive downward (toward hem)",
+    "panel_left_edge": "x = 0 is the fold edge (CF for front, CB for back) when cut on fold"
+  },
+  "measurement_inputs": {
+    "required": [
+      {"id": "neck_circumference", "label": "Neck circumference", "iso_8559_ref": "neck girth", "typical_range_cm": [32, 44]},
+      {"id": "high_bust", "label": "High bust girth (above bust apex)", "typical_range_cm": [78, 110]},
+      {"id": "bust", "label": "Full bust girth", "typical_range_cm": [80, 130]},
+      {"id": "underbust", "label": "Underbust girth", "typical_range_cm": [68, 110]},
+      {"id": "waist", "label": "Natural waist girth", "typical_range_cm": [60, 110]},
+      {"id": "hip", "label": "Hip girth at fullest", "typical_range_cm": [85, 130]},
+      {"id": "shoulder_to_shoulder", "label": "Across-shoulder, hps to hps over back", "typical_range_cm": [34, 46]},
+      {"id": "shoulder_slope", "label": "Shoulder slope angle from horizontal at HPS", "typical_range_deg": [18, 26]},
+      {"id": "hps_to_bust", "label": "High point shoulder to bust apex (front length to bust)", "typical_range_cm": [22, 32]},
+      {"id": "hps_to_waist_front", "label": "HPS to waist over the front (over the bust)", "typical_range_cm": [38, 48]},
+      {"id": "hps_to_waist_back", "label": "HPS to waist over the back", "typical_range_cm": [38, 46]},
+      {"id": "waist_to_hip", "label": "Waist to hip vertical drop", "typical_range_cm": [18, 24]},
+      {"id": "bust_span", "label": "Bust apex to bust apex (full distance)", "typical_range_cm": [16, 24]},
+      {"id": "back_width", "label": "Across back width at midpoint of armhole", "typical_range_cm": [32, 42]},
+      {"id": "garment_length", "label": "Total length from HPS to hem (controls tunic vs. dress)", "typical_range_cm": [70, 120]}
+    ],
+    "derived_or_optional": [
+      {"id": "armhole_depth", "label": "Vertical from HPS to armhole bottom", "default_formula": "0.5 * hps_to_waist_back + 1.5 (Aldrich-style); or hps_to_waist_back * 0.42 (Bella-style fraction)"},
+      {"id": "neck_width_factor", "label": "Neckline width as fraction of neck circumference", "default": 0.197, "source": "FreeSewing Bella backNeckWidth"},
+      {"id": "neck_drop_back_factor", "label": "Back neck drop as fraction of neck circumference", "default": 0.05, "source": "FreeSewing Bella backNeckCutout"},
+      {"id": "neck_drop_front_factor", "label": "Front neck drop as fraction of neck circumference", "default": 0.20, "source": "FreeSewing Bella collarFactor (default front cutout)"}
+    ]
+  },
+  "design_parameters": {
+    "ease_woven_default_cm": {
+      "bust": 6,
+      "waist": 10,
+      "hip": 6,
+      "armhole_extra_drop": 1.0
+    },
+    "shoulder_width_factor": {
+      "default": 1.0,
+      "range": [0.85, 1.05],
+      "note": "Multiplier on shoulder_to_shoulder; <1.0 for narrowed sleeveless armhole."
+    },
+    "hem_sweep_added_cm": {
+      "default": 20,
+      "range": [10, 40],
+      "note": "Total added sweep at hem above hip width, distributed equally to front and back."
+    },
+    "bust_dart_threshold_cm": {
+      "value": 5,
+      "rule": "If (bust - high_bust) > threshold, include a side bust dart; else dartless front."
+    },
+    "neck_shape_options": ["round", "scoop", "v", "boat"],
+    "armhole_finish_options": ["bias_binding", "facing"],
+    "closure_options": ["pullover", "back_neck_slit_hook_eye", "cb_invisible_zipper", "side_invisible_zipper"]
+  },
+  "back_panel_construction": {
+    "panel_id": "back_body",
+    "cut_mode_default": "on_fold (CB on fold)",
+    "step_order": [
+      {
+        "step": "B0_origin",
+        "point": "cb_neck",
+        "formula": "(0, 0)",
+        "note": "Origin at HPS height, on center back."
+      },
+      {
+        "step": "B1_back_neck_drop",
+        "point": "cb_neck_drop",
+        "formula": "(0, neck_circumference * neck_drop_back_factor)",
+        "default_factor": 0.05,
+        "produces": "lowest point of back neckline at center back"
+      },
+      {
+        "step": "B2_hps",
+        "point": "hps",
+        "formula": "(neck_circumference * neck_width_factor, 0)",
+        "default_factor": 0.197
+      },
+      {
+        "step": "B3_shoulder_endpoint",
+        "point": "shoulder",
+        "formula": "from hps, shift along slope vector at angle = -shoulder_slope (down-right) by length L; L is solved so shoulder.x = (shoulder_to_shoulder * shoulder_width_factor) / 2",
+        "geometry": "L = (shoulder_to_shoulder * shoulder_width_factor / 2 - hps.x) / cos(shoulder_slope); shoulder.y = hps.y + L * sin(shoulder_slope)"
+      },
+      {
+        "step": "B4_armhole_depth",
+        "point": "armhole_bottom",
+        "formula": "x = (high_bust / 4) * (1 + ease_chest_fraction); y = (hps_to_waist_back * 0.42) + ease.armhole_extra_drop",
+        "ease_chest_fraction_default": "ease.bust / bust",
+        "note": "Bella uses hps_to_waist_back * armholeDepth_option; Aldrich uses ~half back length. 0.42 is a defensible blend; expose as a tunable."
+      },
+      {
+        "step": "B5_back_pitch",
+        "point": "armhole_pitch_back",
+        "formula": "(shoulder.x * 0.925, hps_to_waist_back * 0.30)",
+        "factor_source": "FreeSewing Bella acrossBackFactor=0.925, backArmholePitchDepth~0.30",
+        "note": "Reference notch on the armhole curve, halfway down the back armhole."
+      },
+      {
+        "step": "B6_waist_line",
+        "point": "waist_center, waist_side",
+        "formula": "waist_center = (0, hps_to_waist_back); waist_side = ((waist + ease.waist) / 4, hps_to_waist_back)",
+        "note": "Quarter waist plus a quarter of total waist ease, since panel is half-back."
+      },
+      {
+        "step": "B7_hip_line",
+        "point": "hip_side",
+        "formula": "(hip_x = (hip + ease.hip) / 4, hip_y = hps_to_waist_back + waist_to_hip)"
+      },
+      {
+        "step": "B8_hem_line",
+        "point": "hem_side, hem_center",
+        "formula": "hem_center = (0, garment_length); hem_side = (hip_x + hem_sweep_added / 4, garment_length)",
+        "note": "Side seam continues from hip_side at constant outward angle to hem_side, then hem returns straight to hem_center."
+      },
+      {
+        "step": "B9_neckline_curve",
+        "curve_type": "cubic_bezier",
+        "endpoints": ["cb_neck_drop", "hps"],
+        "control_points": [
+          "cp1 = (hps.x * 0.55, cb_neck_drop.y)",
+          "cp2 = (hps.x, cb_neck_drop.y * 0.5)"
+        ],
+        "note": "Concave-up curve, shallow."
+      },
+      {
+        "step": "B10_armhole_curve",
+        "curve_type": "cubic_bezier",
+        "endpoints": ["shoulder", "armhole_bottom"],
+        "via": ["armhole_pitch_back"],
+        "control_points": [
+          "cpA = shoulder shifted toward (armhole_pitch_back) by ~40% of segment length",
+          "cpB_at_pitch = pitch shifted upward by ~40% of (shoulder.y to pitch.y) distance",
+          "cpC_at_pitch_lower = pitch shifted downward by ~40% of (pitch.y to armhole_bottom.y)",
+          "cpD = armhole_bottom shifted toward pitch by ~40%"
+        ],
+        "note": "Two-segment Bezier joined at pitch; smooth tangent at pitch by mirroring control points."
+      },
+      {
+        "step": "B11_side_seam",
+        "curve_type": "polyline_or_smooth_curve",
+        "from_to": "armhole_bottom -> waist_side -> hip_side -> hem_side",
+        "smoothing": "linear segments are acceptable for v0.1; replace with smooth curve in v0.2 to remove visible kink at waist when ease at waist > ease at bust"
+      },
+      {
+        "step": "B12_dart_optional",
+        "condition": "include_back_waist_dart when (high_bust + ease.bust) - (waist + ease.waist) > 8",
+        "geometry": {
+          "dart_center_x": "0.145 * underbust  (FreeSewing backDartLocation factor)",
+          "dart_apex": "(dart_center_x, hps_to_waist_back * 0.46)",
+          "dart_legs_at_waist": "two points at waist line ±(intake/2) from dart_center_x",
+          "intake_default_cm": [1.5, 3.0]
+        }
+      }
+    ]
+  },
+  "front_panel_construction": {
+    "panel_id": "front_body",
+    "cut_mode_default": "on_fold (CF on fold) when no front zip",
+    "shared_with_back": "armhole_depth, hip line and hem position align with the back",
+    "step_order": [
+      {
+        "step": "F0_origin",
+        "point": "cf_neck",
+        "formula": "(0, 0)"
+      },
+      {
+        "step": "F1_front_neck_drop",
+        "point": "cf_neck_drop",
+        "formula": "(0, neck_circumference * neck_drop_front_factor)",
+        "default_factor": 0.20,
+        "options_by_neck_shape": {
+          "round": 0.20,
+          "scoop": 0.30,
+          "v": 0.45,
+          "boat": 0.10
+        }
+      },
+      {
+        "step": "F2_hps",
+        "point": "hps",
+        "formula": "(neck_circumference * neck_width_factor, 0)",
+        "default_factor": 0.205,
+        "note": "Front neck width is conventionally ~0.5-1 cm wider than back: bump factor by 0.008."
+      },
+      {
+        "step": "F3_shoulder_endpoint",
+        "point": "shoulder",
+        "formula": "shoulder.x = (shoulder_to_shoulder * shoulder_width_factor) / 2; shoulder.y solved from front shoulder slope (shoulder_slope * 0.85)",
+        "note": "Front shoulder slope is slightly steeper than back in Bella (factor 1.23 backward, ~0.77 forward equivalent). Practical default: shoulder.y_front = shoulder.y_back * 1.05 (front shoulder sits ~5% lower than back at the side)."
+      },
+      {
+        "step": "F4_armhole_bottom",
+        "point": "armhole_bottom",
+        "formula": "x = (bust / 4) * (1 + ease.bust / bust); y = same as back armhole_bottom.y",
+        "note": "Front uses full-bust, back uses high-bust. Difference becomes the bust dart intake."
+      },
+      {
+        "step": "F5_bust_apex",
+        "point": "bust_apex",
+        "formula": "(bust_span / 2, hps_to_bust)"
+      },
+      {
+        "step": "F6_front_pitch",
+        "point": "armhole_pitch_front",
+        "formula": "(shoulder.x * 0.95, hps_to_waist_front * 0.34)"
+      },
+      {
+        "step": "F7_waist_line",
+        "point": "waist_side",
+        "formula": "((waist + ease.waist) / 4, hps_to_waist_front)"
+      },
+      {
+        "step": "F8_hip_line, F9_hem_line",
+        "formula": "Same as back: hip_x = (hip + ease.hip) / 4; hem_x = hip_x + hem_sweep_added / 4",
+        "y": "hip_y = hps_to_waist_front + waist_to_hip; hem_y = garment_length"
+      },
+      {
+        "step": "F10_neckline_curve",
+        "curve_type": "cubic_bezier",
+        "endpoints": ["cf_neck_drop", "hps"],
+        "control_points_by_neckline": {
+          "round": ["(hps.x * 0.6, cf_neck_drop.y)", "(hps.x, cf_neck_drop.y * 0.5)"],
+          "scoop": ["(hps.x * 0.55, cf_neck_drop.y)", "(hps.x * 1.05, cf_neck_drop.y * 0.55)"],
+          "v": ["(hps.x * 0.3, cf_neck_drop.y * 0.7)", "(hps.x * 0.7, cf_neck_drop.y * 0.2)"],
+          "boat": ["(hps.x * 0.3, cf_neck_drop.y)", "(hps.x * 0.85, cf_neck_drop.y * 0.4)"]
+        }
+      },
+      {
+        "step": "F11_armhole_curve",
+        "curve_type": "cubic_bezier",
+        "endpoints": ["shoulder", "armhole_bottom"],
+        "via": ["armhole_pitch_front"],
+        "note": "Same construction shape as back, but front armhole is slightly deeper at the bottom and slightly more scooped under the arm. Bella uses frontArmholeCurvature ~63%."
+      },
+      {
+        "step": "F12_bust_dart_optional",
+        "condition": "(bust - high_bust) > 5 cm",
+        "geometry": {
+          "dart_orientation": "side seam (rotates intake from armhole-bust-difference into a horizontal dart at side seam)",
+          "dart_apex": "shifted from bust_apex toward side seam by 2.5 cm (avoid pointing at apex)",
+          "dart_intake_cm": "(bust - high_bust) / 2 distributed; one side per quarter panel",
+          "dart_legs_at_side_seam": "centered vertically near (armhole_bottom.y + waist_side.y) / 2",
+          "rotation_method": "Bella's rotation-around-bust-apex sweep: rotate (armhole_bottom, side seam to bust line) about bust_apex by angle alpha until side seam at bust line equals (target front bust - back bust)/2"
+        }
+      },
+      {
+        "step": "F13_side_seam",
+        "from_to": "armhole_bottom -> [bust_dart_top, bust_dart_bottom if dart] -> waist_side -> hip_side -> hem_side"
+      }
+    ]
+  },
+  "validation_rules_for_v0_1": [
+    {
+      "id": "side_seam_length_match",
+      "rule": "len(front_side_seam_minus_dart_intake) == len(back_side_seam) within 0.3 cm",
+      "fix_suggestions": ["adjust hps_to_waist_front", "adjust ease.waist", "adjust dart_intake_cm"]
+    },
+    {
+      "id": "shoulder_seam_length_match",
+      "rule": "len(front_shoulder) == len(back_shoulder) within 0.2 cm",
+      "fix_suggestions": ["recompute shoulder.x with same shoulder_width_factor on both panels"]
+    },
+    {
+      "id": "armhole_perimeter_reasonable",
+      "rule": "front_armhole_perimeter + back_armhole_perimeter is within [0.45 * bust, 0.65 * bust]",
+      "fix_suggestions": ["raise armhole_bottom", "narrow shoulder", "increase armhole_extra_drop"]
+    },
+    {
+      "id": "neck_perimeter_pullover_check",
+      "rule": "if closure == pullover, (front_neckline_perimeter + back_neckline_perimeter) > head_circumference; head_circumference is approximately neck_circumference * 1.65 if not directly measured",
+      "fix_suggestions": ["deepen neckline", "switch closure to back_neck_slit_hook_eye"]
+    },
+    {
+      "id": "hem_sweep_balanced",
+      "rule": "front and back hem widths match within 0.5 cm at corresponding points",
+      "fix_suggestions": ["use same hem_sweep_added/4 on both panels"]
+    },
+    {
+      "id": "dart_apex_distance_from_apex",
+      "rule": "if bust dart present, dart_apex shall be 2-3 cm short of measured bust_apex point",
+      "fix_suggestions": ["dart_apex = bust_apex shifted toward side by 2.5 cm"]
+    }
+  ],
+  "default_seam_allowance_profile_cm": {
+    "neckline": 1.0,
+    "armhole": 1.0,
+    "shoulder_seam": 1.5,
+    "side_seam": 1.5,
+    "hem": 3.0,
+    "fold_edge": 0
+  },
+  "notch_placement_for_v0_1": [
+    {"location": "side_seam at waist_line", "type": "single_front", "double_back": true, "purpose": "side seam balance"},
+    {"location": "side_seam at hip_line", "type": "single", "purpose": "hem control"},
+    {"location": "armhole at pitch", "type": "single_front", "double_back": true, "purpose": "armhole orientation"},
+    {"location": "shoulder at midpoint", "type": "single", "purpose": "shoulder seam alignment when shoulder is curved"},
+    {"location": "neckline at hps", "type": "single", "purpose": "binding/facing alignment"}
+  ],
+  "factor_provenance": [
+    {"factor": "neckWidthBack=0.197", "source": "FreeSewing Bella back.mjs"},
+    {"factor": "backNeckCutout=0.05", "source": "FreeSewing Bella back.mjs"},
+    {"factor": "collarFactor (front neck drop)=0.20", "source": "FreeSewing Bella front-side-dart.mjs default"},
+    {"factor": "acrossBackFactor=0.925", "source": "FreeSewing Bella"},
+    {"factor": "backArmholePitchDepth=0.30", "source": "FreeSewing Bella"},
+    {"factor": "shoulderSlopeBack=1.23 (relative)", "source": "FreeSewing Bella"},
+    {"factor": "frontArmholeCurvature=0.63", "source": "FreeSewing Bella"},
+    {"factor": "bustDartLength=0.90", "source": "FreeSewing Bella"},
+    {"factor": "ease.bust default 6 cm (loose woven sleeveless)", "source": "Hybrid: Aldrich sleeveless block ~2.4 cm tight, +3.6 cm design ease for tunic posture"},
+    {"factor": "ease.waist default 10 cm", "source": "A-line tunic loose at waist; SewGuide A-line method"},
+    {"factor": "ease.hip default 6 cm", "source": "Match bust ease for straight side seam from bust-to-hip; Aldrich"},
+    {"factor": "hem_sweep_added 20 cm default", "source": "SewGuide A-line method; conservative tunic flare"}
+  ],
+  "audit_notes_for_patternmaker_review": [
+    "Mixing Bella factors with Aldrich ease values is intentional but unverified by a sewn muslin. Treat all ease numbers as starting defaults pending fit feedback.",
+    "Front neck width factor bumped 0.008 over back; verify on muslin that hps lands cleanly on the body.",
+    "armhole_depth blend factor 0.42 of hps_to_waist_back is a compromise between Bella's parametric form and Aldrich's half-back-length plus 1.5 cm. Either extreme is defensible; 0.42 is the midpoint.",
+    "Bust dart rotation method rotates the entire side seam segment from armhole_bottom to waist around bust_apex. This is robust but introduces a kink at waist that needs trueing if waist ease is small.",
+    "v0.1 may ship with linear (polyline) side seam between waist/hip/hem; v0.2 should replace with smooth Catmull-Rom or a single Bezier."
+  ]
+}

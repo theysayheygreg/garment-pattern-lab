@@ -1,0 +1,513 @@
+{
+  "$schema_version": "0.1.0",
+  "generated": "2026-05-03",
+  "purpose": "Garment-family-keyed landmark priors for the heuristic semantic curve interpreter. Each family declares the expected landmark slots, anatomical references, expected curve geometry, and discriminating heuristics a rule-based labeler can apply to a vector sketch. Companion to docs/research/semantic-curve-interpretation-soa-2026-05-03.md and docs/data-corpus/garment-families.json (which holds construction priors).",
+  "design_notes": [
+    "This file is the *interpretation* prior. docs/data-corpus/garment-families.json is the *construction* prior. They share landmark vocabulary deliberately.",
+    "Each landmark slot is a named position the interpreter must fill from the input curves. Slots have anatomical references, expected curve type, geometric heuristics, required-vs-optional status, and a confidence policy.",
+    "Heuristics are written as small DSL-like expressions referencing primitives: panel_bbox, vertical_center_axis, curve.tangent_stats, curve.length, curve.endpoints, curve.crosses_axis, neighbor_curves. The interpreter implements the primitives once.",
+    "Confidence policy: every rule emits a [0,1] score. Below the slot's ambiguity_threshold the slot escalates to AmbiguityReport instead of silently filling SketchIntent.",
+    "This file is corpus, not implementation. See `known_implementability_gaps` below for the work that must close before a runtime interpreter can consume this file directly."
+  ],
+  "known_implementability_gaps": [
+    {
+      "id": "rule-bodies-only-defined-once",
+      "description": "Mirror rules are referenced by id on right-side landmarks (e.g. `vertical-curve-right-of-axis`, `endpoint-adjacency-right`, `lateral-arc-top-right`, `between-neckline-and-armhole-right`) but their rule bodies are not defined anywhere in the file. The interpreter must derive each right-side rule from its left counterpart by reflecting across `vertical_center_axis`, OR each right-side rule needs an explicit body added before this file is consumed.",
+      "resolution": "Either (a) add explicit rule bodies for every right-side variant, or (b) introduce a `mirror_of` field that names the left rule and the reflection axis, and have the interpreter generate the right-side rule programmatically. Option (b) is cleaner."
+    },
+    {
+      "id": "rule-strings-are-prose-not-dsl",
+      "description": "Rule descriptions are written in natural language ('select the one with the lowest y-midpoint', 'spans >= 80% of panel_bbox.width'). A runtime interpreter cannot parse those. Either the strings need to be replaced with structured operators a parser can run, or each rule needs to be backed by a named function in the interpreter that matches the rule id.",
+      "resolution": "v0.1 implementation should treat rule ids as keys into a TypeScript function table. The string descriptions are documentation for humans. The function table is the source of truth for the interpreter. This file's role is the prior catalog, not the rule-evaluation engine."
+    },
+    {
+      "id": "labeling-order-dependencies-not-explicit",
+      "description": "Some heuristics reference other already-labeled curves (e.g. `endpoint-adjacency` requires shoulder_*, neckline_*, and side_seam_* to already be labeled before the hem heuristic can use them). The labeling order is a real dependency graph that is not documented in this file. Order matters: independent priors first (axis, bbox, view), then primary boundary curves with strong intrinsic heuristics (hem by lowest-horizontal, shoulder by topmost-short-segment), then dependent curves (armhole between shoulder and side, dart from inside the panel boundary).",
+      "resolution": "Add a `labeling_order` array to each family declaring the dependency-respecting sequence the interpreter follows. Iterate with relaxation: low-confidence early labels can be re-evaluated after later passes."
+    },
+    {
+      "id": "unit-bearing-priors-on-unitless-input",
+      "description": "Length-prior, depth-prior, and ambiguity heuristics use centimetres ('5-15cm', '18-26cm', 'separated by 1-3cm'). The vector input is unitless until the candidate-to-export interop layer's scale-proof step normalises to millimetres. Applying cm priors to raw input fails or produces nonsense.",
+      "resolution": "The interpreter must run the scale-proof step before any unit-bearing heuristic. For sketches without scale evidence, fall back to bbox-relative ratios (e.g. neckline depth as a fraction of panel_bbox.height) instead of absolute cm. Add a `unit_assumption` field per heuristic so the interpreter can skip or substitute when unscaled."
+    },
+    {
+      "id": "axis-absent-fallback",
+      "description": "Many heuristics depend on `vertical_center_axis`. For asymmetric designs (surplice, drape, off-grain) the axis may be absent. The current rules have no defined behaviour for that case beyond 'user must declare cut_on_fold=false explicitly'.",
+      "resolution": "Add a `requires_axis` boolean to each heuristic. When the axis is absent, skip axis-dependent rules and weight the remaining rules higher. Escalate the panel to manual labeling if the residual confidence is below threshold."
+    }
+  ],
+  "primitive_glossary": {
+    "panel_bbox": "Axis-aligned bounding box of the panel boundary cycle.",
+    "vertical_center_axis": "Detected vertical symmetry axis. May be absent if the sketch is asymmetric or only one side is drawn (cut-on-fold).",
+    "horizontal_band_top": "Top 25% of panel_bbox by y.",
+    "horizontal_band_bottom": "Bottom 20% of panel_bbox by y.",
+    "horizontal_band_middle": "Middle 50% of panel_bbox by y.",
+    "tangent_class": "One of: predominantly_horizontal, predominantly_vertical, predominantly_curved, short_straight. Computed from sampled tangent angles.",
+    "boundary_cycle_position": "Position along the closed panel boundary, normalized 0..1, starting at the highest-y point on the vertical center axis and going clockwise.",
+    "endpoint_adjacency": "Shared endpoints with other labeled curves.",
+    "crosses_axis": "Whether the curve crosses the vertical_center_axis.",
+    "view_assignment": "front | back | unknown — declared by the user at upload or inferred when both views are present (front has deeper neckline by default)."
+  },
+  "view_disambiguation_rules": [
+    {
+      "id": "front-back-by-neckline-depth",
+      "description": "When two panels are present and view_assignment is unknown, the panel whose detected neckline reaches lower below its shoulder line is the front. Tolerance 0.5cm.",
+      "confidence_floor": 0.6
+    },
+    {
+      "id": "front-back-by-dart-presence",
+      "description": "If darts are detected on one panel and not the other, the darted panel is more likely the front for woven A-line tunics. Use as tiebreaker only.",
+      "confidence_floor": 0.55
+    },
+    {
+      "id": "front-back-by-explicit-metadata",
+      "description": "If the upload includes view metadata (filename suffix, layer name, corpus index), trust it.",
+      "confidence_floor": 0.95
+    }
+  ],
+  "families": [
+    {
+      "id": "sleeveless-a-line-woven-tunic",
+      "label": "Sleeveless A-line woven tunic (v0.1 target)",
+      "construction_prior_ref": "docs/data-corpus/garment-families.json#families.dress.a_line",
+      "expected_views": ["front", "back"],
+      "expected_panels_per_view": 1,
+      "panel_topology": {
+        "boundary_cycle_clockwise_from_top_center": [
+          "neckline_half",
+          "shoulder",
+          "armhole",
+          "side_seam",
+          "hem_half",
+          "center_axis_or_cf_seam"
+        ],
+        "interior_curves_optional": ["bust_dart_legs", "waist_dart_legs"]
+      },
+      "landmark_slots": [
+        {
+          "id": "hem_front",
+          "applies_to_view": "front",
+          "anatomical_reference": "Bottom edge of the front panel; finished or hemmed garment terminus.",
+          "required": true,
+          "expected_curve_count": 1,
+          "expected_curve_type": "predominantly_horizontal_with_slight_outward_arc",
+          "expected_curve_role": "cut_and_finished_edge",
+          "heuristics": [
+            {
+              "id": "lowest-horizontal-spanning-curve",
+              "rule": "Among curves whose tangent_class is predominantly_horizontal AND whose y-midpoint lies within horizontal_band_bottom AND that span >= 80% of panel_bbox.width, select the one with the lowest y-midpoint.",
+              "weight": 0.7
+            },
+            {
+              "id": "boundary-cycle-position",
+              "rule": "On the boundary cycle, the hem occupies the segment between side_seam_endpoint_left_lower and side_seam_endpoint_right_lower. Curves in that segment are hem candidates.",
+              "weight": 0.6
+            },
+            {
+              "id": "endpoint-adjacency",
+              "rule": "Both endpoints are shared with side_seam curves.",
+              "weight": 0.5
+            }
+          ],
+          "ambiguity_threshold": 0.55,
+          "confidence_policy_if_below_threshold": "Escalate to AmbiguityReport with question: 'Which curve is the hem?' and present the top 3 candidates ranked by combined heuristic score.",
+          "common_failure_modes": [
+            "Hem split into multiple short beziers from rough vectorization — coalesce in CurvePreprocessor before labeling.",
+            "Decorative trim drawn near the hem — distinguish by length: trim is shorter than 30% of bbox.width.",
+            "High-low hem — heuristic 'lowest' fails. Fall back to boundary-cycle-position."
+          ]
+        },
+        {
+          "id": "hem_back",
+          "applies_to_view": "back",
+          "anatomical_reference": "Bottom edge of the back panel.",
+          "required": true,
+          "expected_curve_count": 1,
+          "expected_curve_type": "predominantly_horizontal_with_slight_outward_arc",
+          "expected_curve_role": "cut_and_finished_edge",
+          "heuristics": [
+            {"id": "lowest-horizontal-spanning-curve", "weight": 0.7},
+            {"id": "boundary-cycle-position", "weight": 0.6},
+            {"id": "mirror-of-hem-front", "rule": "If hem_front is found and back panel is present, expect hem_back to have similar length (within 5%) and similar y-position relative to its panel_bbox.", "weight": 0.5}
+          ],
+          "ambiguity_threshold": 0.55,
+          "confidence_policy_if_below_threshold": "Escalate to AmbiguityReport.",
+          "common_failure_modes": ["Same as hem_front."]
+        },
+        {
+          "id": "neckline_front",
+          "applies_to_view": "front",
+          "anatomical_reference": "Cut edge framing the neck on the front panel; finished by binding or facing.",
+          "required": true,
+          "expected_curve_count": 1,
+          "expected_curve_type": "predominantly_curved_concave_downward",
+          "expected_curve_role": "cut_and_finished_edge",
+          "heuristics": [
+            {
+              "id": "topmost-curve-crossing-center-axis",
+              "rule": "Among curves whose y-midpoint lies within horizontal_band_top AND that crosses_axis=true, select the one with the highest y-min (concavity opens downward, so the curve dips below its endpoints).",
+              "weight": 0.75
+            },
+            {
+              "id": "endpoint-adjacency-shoulder",
+              "rule": "Both endpoints are shared with shoulder curves (one left, one right).",
+              "weight": 0.65
+            },
+            {
+              "id": "depth-prior",
+              "rule": "Front neckline depth (lowest point below the shoulder line) typically 5-15cm for crew/scoop. Curves dipping >25cm are likely v-necks or ambiguous design lines.",
+              "weight": 0.4
+            }
+          ],
+          "ambiguity_threshold": 0.6,
+          "confidence_policy_if_below_threshold": "Escalate to AmbiguityReport with question: 'Which curve is the front neckline?' and offer top 2 candidates plus 'none of these'.",
+          "common_failure_modes": [
+            "V-neckline drawn as two straight lines, not a curve — relax tangent_class requirement and allow two adjacent line segments forming a V.",
+            "Decorative neckline trim line drawn parallel just below the actual cut edge — the *outermost* (highest) one is the cut edge."
+          ]
+        },
+        {
+          "id": "neckline_back",
+          "applies_to_view": "back",
+          "anatomical_reference": "Cut edge framing the neck on the back panel.",
+          "required": true,
+          "expected_curve_count": 1,
+          "expected_curve_type": "predominantly_curved_concave_downward_shallow",
+          "expected_curve_role": "cut_and_finished_edge",
+          "heuristics": [
+            {"id": "topmost-curve-crossing-center-axis", "weight": 0.75},
+            {"id": "endpoint-adjacency-shoulder", "weight": 0.65},
+            {
+              "id": "shallower-than-front",
+              "rule": "Back neckline depth typically 1-3cm (shallower than front).",
+              "weight": 0.5
+            }
+          ],
+          "ambiguity_threshold": 0.6,
+          "confidence_policy_if_below_threshold": "Escalate to AmbiguityReport.",
+          "common_failure_modes": [
+            "Pullover-incompatible neck circumference — flag in AmbiguityReport even if labeling is confident."
+          ]
+        },
+        {
+          "id": "shoulder_left",
+          "applies_to_view": "any",
+          "anatomical_reference": "Short edge from neck-shoulder point to shoulder point; sewn to the matching shoulder on the other panel.",
+          "required": true,
+          "expected_curve_count": 1,
+          "expected_curve_type": "short_straight_or_slight_diagonal",
+          "expected_curve_role": "seam_edge",
+          "expected_paired_with": "shoulder_left_on_other_view",
+          "heuristics": [
+            {
+              "id": "between-neckline-and-armhole-left",
+              "rule": "Curve in horizontal_band_top with one endpoint shared with neckline_*.endpoint_left and the other endpoint shared with armhole_*.endpoint_top_left.",
+              "weight": 0.85
+            },
+            {
+              "id": "length-prior",
+              "rule": "Length 8-18cm for adult tunics.",
+              "weight": 0.4
+            }
+          ],
+          "ambiguity_threshold": 0.6,
+          "confidence_policy_if_below_threshold": "Escalate to AmbiguityReport.",
+          "common_failure_modes": ["Strap-style design with very narrow shoulders < 4cm — relax length prior."]
+        },
+        {
+          "id": "shoulder_right",
+          "applies_to_view": "any",
+          "anatomical_reference": "Mirror of shoulder_left.",
+          "required": true,
+          "expected_curve_count": 1,
+          "expected_curve_type": "short_straight_or_slight_diagonal",
+          "expected_curve_role": "seam_edge",
+          "expected_paired_with": "shoulder_right_on_other_view",
+          "heuristics": [
+            {"id": "between-neckline-and-armhole-right", "weight": 0.85},
+            {"id": "mirror-of-shoulder-left", "rule": "Length within 5% of shoulder_left and reflected across vertical_center_axis.", "weight": 0.6}
+          ],
+          "ambiguity_threshold": 0.6,
+          "confidence_policy_if_below_threshold": "Escalate to AmbiguityReport.",
+          "common_failure_modes": ["Asymmetric design — symmetry mirror heuristic fails; rely on between-neckline-and-armhole-right alone."]
+        },
+        {
+          "id": "armhole_left",
+          "applies_to_view": "any",
+          "anatomical_reference": "Cut edge framing the arm hole on the left side of the panel; finished by binding or facing.",
+          "required": true,
+          "expected_curve_count": 1,
+          "expected_curve_type": "predominantly_curved_concave_inward",
+          "expected_curve_role": "cut_and_finished_edge",
+          "heuristics": [
+            {
+              "id": "lateral-arc-top-left",
+              "rule": "Curve in horizontal_band_top whose convex hull lies entirely to the left of vertical_center_axis, opening laterally outward (concave toward axis).",
+              "weight": 0.8
+            },
+            {
+              "id": "endpoint-adjacency",
+              "rule": "Top endpoint shared with shoulder_left.endpoint_outer; bottom endpoint shared with side_seam_left.endpoint_top.",
+              "weight": 0.75
+            },
+            {
+              "id": "depth-prior",
+              "rule": "Armhole depth (vertical drop from shoulder to armhole_bottom) typically 18-26cm for adult tunics.",
+              "weight": 0.4
+            }
+          ],
+          "ambiguity_threshold": 0.6,
+          "confidence_policy_if_below_threshold": "Escalate to AmbiguityReport.",
+          "common_failure_modes": [
+            "Sleeveless with very wide armhole drop straight down — the curve degenerates to a near-vertical edge; relax tangent_class.",
+            "Drop-shoulder or kimono cut — armhole becomes a curve continuous with the shoulder; flag for human confirmation."
+          ]
+        },
+        {
+          "id": "armhole_right",
+          "applies_to_view": "any",
+          "anatomical_reference": "Mirror of armhole_left.",
+          "required": true,
+          "expected_curve_count": 1,
+          "expected_curve_type": "predominantly_curved_concave_inward",
+          "expected_curve_role": "cut_and_finished_edge",
+          "heuristics": [
+            {"id": "lateral-arc-top-right", "weight": 0.8},
+            {"id": "endpoint-adjacency-right", "weight": 0.75},
+            {"id": "mirror-of-armhole-left", "weight": 0.6}
+          ],
+          "ambiguity_threshold": 0.6,
+          "confidence_policy_if_below_threshold": "Escalate to AmbiguityReport.",
+          "common_failure_modes": ["Same as armhole_left."]
+        },
+        {
+          "id": "side_seam_left",
+          "applies_to_view": "any",
+          "anatomical_reference": "Vertical seam from armhole bottom to hem on the left side; sewn to side_seam_left of the other view.",
+          "required": true,
+          "expected_curve_count": 1,
+          "expected_curve_type": "predominantly_vertical_with_outward_taper",
+          "expected_curve_role": "seam_edge",
+          "expected_paired_with": "side_seam_left_on_other_view",
+          "heuristics": [
+            {
+              "id": "vertical-curve-left-of-axis",
+              "rule": "Curve whose tangent_class is predominantly_vertical, lying entirely to the left of vertical_center_axis, spanning horizontal_band_middle from top to bottom of bbox.",
+              "weight": 0.8
+            },
+            {
+              "id": "endpoint-adjacency",
+              "rule": "Top endpoint shared with armhole_left.endpoint_bottom; bottom endpoint shared with hem_*.endpoint_left.",
+              "weight": 0.85
+            },
+            {
+              "id": "a-line-taper-direction",
+              "rule": "For A-line: slight outward taper from waist toward hem (curve drifts left as y increases).",
+              "weight": 0.4
+            }
+          ],
+          "ambiguity_threshold": 0.6,
+          "confidence_policy_if_below_threshold": "Escalate to AmbiguityReport.",
+          "common_failure_modes": [
+            "Princess seam drawn parallel to side seam — distinguish: side seam touches armhole AND hem; princess seam touches armhole/shoulder but ends inside the panel or at an interior style line.",
+            "Asymmetric side seams — symmetry mirror heuristic fails; rely on endpoint-adjacency."
+          ]
+        },
+        {
+          "id": "side_seam_right",
+          "applies_to_view": "any",
+          "anatomical_reference": "Mirror of side_seam_left.",
+          "required": true,
+          "expected_curve_count": 1,
+          "expected_curve_type": "predominantly_vertical_with_outward_taper",
+          "expected_curve_role": "seam_edge",
+          "expected_paired_with": "side_seam_right_on_other_view",
+          "heuristics": [
+            {"id": "vertical-curve-right-of-axis", "weight": 0.8},
+            {"id": "endpoint-adjacency-right", "weight": 0.85},
+            {"id": "mirror-of-side-seam-left", "weight": 0.5}
+          ],
+          "ambiguity_threshold": 0.6,
+          "confidence_policy_if_below_threshold": "Escalate to AmbiguityReport.",
+          "common_failure_modes": ["Same as side_seam_left."]
+        },
+        {
+          "id": "center_front",
+          "applies_to_view": "front",
+          "anatomical_reference": "Vertical axis of front panel symmetry; either a fold (cut-on-fold) or a seam (center-front seam).",
+          "required": true,
+          "expected_curve_count": "0_or_1",
+          "expected_curve_type": "vertical_axis_or_explicit_curve",
+          "expected_curve_role": "fold_or_seam_edge",
+          "heuristics": [
+            {
+              "id": "axis-detection",
+              "rule": "Detected vertical_center_axis is the center_front. If no curve coincides with it, the panel is cut_on_fold.",
+              "weight": 0.95
+            },
+            {
+              "id": "explicit-cf-curve",
+              "rule": "If a vertical curve coincides with vertical_center_axis (within 1mm), it is an explicit center_front seam (cut, not fold).",
+              "weight": 0.9
+            }
+          ],
+          "ambiguity_threshold": 0.7,
+          "confidence_policy_if_below_threshold": "Escalate to AmbiguityReport with question: 'Is the center front cut on fold or has a seam?'",
+          "common_failure_modes": [
+            "Asymmetric design (e.g. surplice front) — vertical_center_axis may not exist; user must declare cut_on_fold=false explicitly."
+          ]
+        },
+        {
+          "id": "center_back",
+          "applies_to_view": "back",
+          "anatomical_reference": "Vertical axis of back panel symmetry; fold, seam, or zipper closure.",
+          "required": true,
+          "expected_curve_count": "0_or_1",
+          "expected_curve_type": "vertical_axis_or_explicit_curve",
+          "expected_curve_role": "fold_or_seam_edge_or_closure",
+          "heuristics": [
+            {"id": "axis-detection", "weight": 0.95},
+            {"id": "explicit-cb-curve", "weight": 0.9},
+            {
+              "id": "closure-indicator-near-axis",
+              "rule": "Short ticks/zigzag/parallel lines along the center_back axis suggest zipper closure; flag for confirmation.",
+              "weight": 0.5
+            }
+          ],
+          "ambiguity_threshold": 0.7,
+          "confidence_policy_if_below_threshold": "Escalate to AmbiguityReport with question: 'Is the center back cut on fold, seamed, or has a closure?'",
+          "common_failure_modes": [
+            "Pullover-incompatible neck circumference + cb_fold detected — flag for confirmation; user may need a closure or a wider neckline."
+          ]
+        },
+        {
+          "id": "bust_dart_left",
+          "applies_to_view": "front",
+          "anatomical_reference": "Wedge-shaped shaping cut from side seam toward bust apex on the front panel; left side.",
+          "required": false,
+          "expected_curve_count": 2,
+          "expected_curve_type": "two_short_straight_legs_meeting_at_apex_inside_panel",
+          "expected_curve_role": "interior_dart_legs",
+          "heuristics": [
+            {
+              "id": "v-shape-from-side-seam",
+              "rule": "Two short straight curves sharing one endpoint inside the panel (apex toward bust line). Other endpoints both lie on side_seam_left, separated by 1-3cm.",
+              "weight": 0.85
+            },
+            {
+              "id": "apex-position",
+              "rule": "Apex lies in horizontal_band_middle (around bust_line, ~25-35% down from top).",
+              "weight": 0.5
+            }
+          ],
+          "ambiguity_threshold": 0.65,
+          "confidence_policy_if_below_threshold": "Escalate to AmbiguityReport with question: 'Are these dart legs or a style line?' Always require user confirmation for darts in v0.1 even when confidence is high — consequence of misclassification (changes the cut) is too high to trust silently.",
+          "common_failure_modes": [
+            "Princess seam mistaken for dart — princess seam runs from shoulder/armhole to waist/hem, dart is short and ends inside panel.",
+            "French dart (diagonal from side seam to apex, longer) — relax length and angle priors."
+          ]
+        },
+        {
+          "id": "bust_dart_right",
+          "applies_to_view": "front",
+          "anatomical_reference": "Mirror of bust_dart_left.",
+          "required": false,
+          "expected_curve_count": 2,
+          "expected_curve_type": "two_short_straight_legs_meeting_at_apex_inside_panel",
+          "expected_curve_role": "interior_dart_legs",
+          "heuristics": [
+            {"id": "v-shape-from-side-seam-right", "weight": 0.85},
+            {"id": "mirror-of-bust-dart-left", "weight": 0.6}
+          ],
+          "ambiguity_threshold": 0.65,
+          "confidence_policy_if_below_threshold": "Escalate to AmbiguityReport. Always require user confirmation for darts in v0.1.",
+          "common_failure_modes": ["Same as bust_dart_left."]
+        },
+        {
+          "id": "waist_dart_back_left",
+          "applies_to_view": "back",
+          "anatomical_reference": "Optional waist-shaping dart on the back panel; left side.",
+          "required": false,
+          "expected_curve_count": 2,
+          "expected_curve_type": "two_short_curves_or_legs_meeting_at_apex_inside_panel",
+          "expected_curve_role": "interior_dart_legs",
+          "heuristics": [
+            {
+              "id": "vertical-spindle-near-waist",
+              "rule": "Two curves sharing one or two apex points (single dart = 1 apex, fish-eye dart = 2 apexes), positioned vertically with midpoint near waist_line, separated by 1-2.5cm at widest.",
+              "weight": 0.8
+            }
+          ],
+          "ambiguity_threshold": 0.65,
+          "confidence_policy_if_below_threshold": "Escalate to AmbiguityReport. Always require user confirmation for darts in v0.1.",
+          "common_failure_modes": ["A-line tunics rarely have back waist darts; presence increases the chance the design is actually a sheath or fitted dress, not A-line."]
+        },
+        {
+          "id": "waist_dart_back_right",
+          "applies_to_view": "back",
+          "anatomical_reference": "Mirror of waist_dart_back_left.",
+          "required": false,
+          "expected_curve_count": 2,
+          "expected_curve_type": "two_short_curves_or_legs_meeting_at_apex_inside_panel",
+          "expected_curve_role": "interior_dart_legs",
+          "heuristics": [
+            {"id": "vertical-spindle-near-waist-right", "weight": 0.8},
+            {"id": "mirror-of-waist-dart-back-left", "weight": 0.6}
+          ],
+          "ambiguity_threshold": 0.65,
+          "confidence_policy_if_below_threshold": "Escalate to AmbiguityReport. Always require user confirmation for darts in v0.1.",
+          "common_failure_modes": ["Same as waist_dart_back_left."]
+        }
+      ],
+      "global_consistency_checks": [
+        {
+          "id": "boundary-cycle-closed",
+          "rule": "After labeling, the boundary_cycle_clockwise_from_top_center curves must form a closed cycle. If not, at least one boundary curve is mislabeled or missing.",
+          "severity": "error",
+          "action_on_fail": "Re-run heuristics with relaxed thresholds; if still failing, escalate the entire panel to manual labeling."
+        },
+        {
+          "id": "seam-pairs-symmetric",
+          "rule": "side_seam_left length on front panel should match side_seam_left length on back panel within 5%. Same for shoulders. Same for armholes.",
+          "severity": "warning",
+          "action_on_fail": "Surface a FixSuggestion in design language: 'Front and back side seams differ by Xcm — likely the side seam taper differs between views. Confirm or adjust.'"
+        },
+        {
+          "id": "neckline-pullover-feasibility",
+          "rule": "If center_back is cut_on_fold AND closure is pullover, neckline_circumference must be >= 60cm (head + shoulders).",
+          "severity": "warning",
+          "action_on_fail": "Surface AmbiguityQuestion: 'Pullover with this neckline may not fit over the head — add closure, deepen neckline, or confirm.'"
+        },
+        {
+          "id": "dart-symmetry",
+          "rule": "If bust_dart_left is present, bust_dart_right must also be present (and vice versa) for symmetric designs.",
+          "severity": "warning",
+          "action_on_fail": "Escalate to AmbiguityReport with explicit asymmetric-design confirmation."
+        }
+      ],
+      "version_stamp_fields": [
+        "interpreter_ruleset_version",
+        "garment_family_prior_hash",
+        "ml_model_version (null for v0.1)",
+        "ambiguity_threshold_overrides"
+      ]
+    }
+  ],
+  "future_families_placeholder": [
+    {
+      "id": "button-down-shirt",
+      "status": "not-yet-defined",
+      "notes": "Will require new landmark slots: collar, collar_stand, placket, sleeve_cap, cuff, button_holes. Different boundary cycle. Not in v0.1 scope; placeholder so the schema is ready when we add a second family."
+    },
+    {
+      "id": "a-line-skirt",
+      "status": "not-yet-defined",
+      "notes": "Single-zone garment: waistband, side_seam_left, side_seam_right, hem, center_front, center_back. No neckline/armhole/shoulder slots. Simpler than the tunic; useful as a second family to validate the prior schema generalizes."
+    },
+    {
+      "id": "fitted-bodice-block",
+      "status": "not-yet-defined",
+      "notes": "Sloper with bust dart, waist dart, full set of body landmarks. Important for grading research."
+    }
+  ]
+}

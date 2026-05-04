@@ -36,7 +36,7 @@ These can later be expressed internally as named product families inside the Kew
 - **Kew Lifecycle** — merchandising, planning, product records, collaboration, sourcing, downstream business workflow.
 - **Kew Studio** — AI-generated photography, line-plan imagery, ecommerce outputs, market-facing presentation.
 
-Garment Pattern Lab maps cleanly into the **Kew PD** slice — pattern development, measurements, fit, 3D sanity preview — with selective overlap into Kew CAD (semantic vector tracing) and Kew Lifecycle (revision history, collaboration hooks).
+Garment Pattern Lab maps cleanly into the **Kew PD** slice — pattern development, measurements, fit, 3D sanity preview. Pattern Lab also owns its own narrow semantic interpretation/correction surface for incoming art (vectorizing raster, tagging landmarks, classifying curves, accepting or correcting the trace), which is *not* the same as Kew CAD's freeform vector-authoring surface. Kew Lifecycle's revision and collaboration hooks influence Pattern Lab's schema design but are not a v1 surface.
 
 ## The Drape-To-Pattern Workflow
 
@@ -49,16 +49,16 @@ photo of physical drape / pinned form
   -> pattern development
 ```
 
-This is a *third* input lane beyond the two already in `INPUT-LANES.md` (GPT Image 2 generated sketches and human-authored sketches/vectors). Many independent designers do not begin with a clean technical sketch — they drape physical fabric on a form or body, photograph the result, and want to translate that into structured intent. Kew explicitly names this as one of the most magical workflows the platform should support.
+Many independent designers do not begin with a clean technical sketch — they drape physical fabric on a form or body, photograph the result, and want to translate that into structured intent. Kew explicitly names this as one of the most magical workflows the platform should support.
 
-Implication for Garment Pattern Lab: the input-lane model should be extended to a third lane (`drape-photo`) even if v1 does not implement it. The shared downstream contract (`InputProvenance`, `LandmarkSet`, `SketchIntent`, `AmbiguityReport`) is already lane-agnostic, so adding the lane is mostly a corpus and ingestion question, not a schema break.
+Implication for Garment Pattern Lab: a drape photo is the same shape as any other raster upload (PNG/JPG/scan/PDF page) — it lives inside the existing human-authored input lane, with a raster-to-vector preprocessing step before semantic interpretation begins. The two-lane model in `INPUT-LANES.md` (generated, human-authored) does not need a third lane to support drape-to-pattern; it needs the vectorization bridge and the interpretation surface to handle photos as well as scanned sketches and uploaded vectors. Worth naming as a supported workflow in `INPUT-LANES.md` because it matches a real designer pattern Kiko cares about.
 
 ## Real-World Compatibility Targets
 
-Kew names these systems as long-term compatibility targets, not day-one replacements:
+Kew names these systems in its vision document. Their role for Pattern Lab is split, not unified:
 
 - Adobe (creative front)
-- Gerber (factory-facing CAD, grading, marker making)
+- Gerber / AccuMark (factory-facing CAD, grading, marker making)
 - CLO 3D (3D garment workflow, fit visualization)
 - Ned Graphics (textile/print)
 - Lectra (PLM, production, industrial apparel workflow)
@@ -67,7 +67,13 @@ Kew names these systems as long-term compatibility targets, not day-one replacem
 
 Marker-making is named as a downstream production function Kew should aim toward while staying creator-friendly up front.
 
-Implication for Garment Pattern Lab: these match the existing competitor analysis (Optitex deep dive, Lectra/Browzwear/CLO references) but they are now also *future export targets* through the candidate-to-export interop layer, not just competitor benchmarks. DXF/AAMA/ASTM remains a later lane; Adobe and CLO interop should be added to the deferred export profile list.
+Implication for Garment Pattern Lab — these are **not** round-trip export targets:
+
+- **Replacement aim** (long-range): Optitex, Gerber/AccuMark, CLO 3D, Browzwear, Lectra, Ned Graphics. Kew's vision is to *be* the one-stop-shop, subsuming these workflows rather than handing patterns back to them. Pattern Lab is the PD-slice execution proof of that vision.
+- **Ingest worth supporting** (because users already work there): Illustrator (`.ai`), `.svg`, vector PDF, raster (PNG/JPG/scan/photo). Designers' existing work already lives in these formats; Pattern Lab needs to accept it. Ingest is one-way.
+- **Round-trip export back into these systems is not a goal.** DXF/AAMA/ASTM remains a separate later export lane for industrial cutting machinery, distinct from interop with the systems Kew is replacing.
+
+This split is reinforced in the Tensions And Forks section below.
 
 ## Intelligence That Improves With Use
 
@@ -134,11 +140,11 @@ These items in Kiko's vision are direct overlaps with current Garment Pattern La
 
 ## What Garment Pattern Lab Is Explicitly Not Building (Kew Scope)
 
-- Creative canvas / moodboard / Canva-like layer.
+- Creative canvas / moodboard / Canva-like ideation layer.
+- Freeform vector authoring (Illustrator-clone path tooling).
 - Surface / print / graphic design tools.
 - Merchandising and Studio (AI photoreal product imagery).
 - PLM / Lifecycle (full collaboration, BOM, factory portal, sourcing workflow).
-- Adobe / Gerber / CLO / Ned Graphics first-party interop.
 - Multi-language factory communication.
 - Footwear, accessories, furniture, interior design.
 - Creator marketplace and library remixing.
@@ -147,23 +153,36 @@ These items in Kiko's vision are direct overlaps with current Garment Pattern La
 
 These belong in Kew's broader product family. Garment Pattern Lab should not absorb them. It should remain the focused execution-oriented pattern slice that maps into Kew PD.
 
+Pattern Lab *does* own a narrow interpretation/correction surface for inputs that come in (vector and raster). That is not the same as building Illustrator. Authoring freeform vector art is out of scope; correcting and labeling the interpretation of incoming art is core.
+
 ## Tensions And Forks This Surfaces
 
-### The Canvas Question (Orrery review finding 4) gets a clearer answer
+### The Canvas Question (Orrery review finding 4) gets a more careful answer
 
-Kiko's vision explicitly wants Illustrator-level vector control eventually, inside Kew Canvas / Kew CAD. Garment Pattern Lab's pillar is "not Illustrator." If Garment Pattern Lab is the Kew PD slice, the canvas problem belongs upstream (Kew Canvas + Kew CAD). Garment Pattern Lab plugs into a *confirmed-intent payload* — `SketchIntent`, `LandmarkSet`, `GarmentParameters` — produced upstream. That is a clean answer to the canvas-vs-not-canvas fork: Pattern Lab does not own the canvas. The canvas lives upstream in Kew or in the user's existing tooling (Procreate, Illustrator, Figma, draped photos).
+Kiko's vision explicitly wants Illustrator-level vector control eventually, inside Kew Canvas / Kew CAD. Garment Pattern Lab's pillar is "not Illustrator." Those two are reconciled by separating two questions that were tangled together in the original review:
+
+1. **Does Pattern Lab let users author freeform vector art from scratch?** No. That is Kew CAD's job, or upstream tools the designer already uses (Illustrator, Procreate, Figma).
+2. **Does Pattern Lab let users manipulate the *interpreted* version of an input?** Yes. Tagging a curve as the armhole, nudging a landmark, accepting or rejecting a trace, correcting the front/back assignment — that semantic-correction surface is core to the product even in the prototype. It is what makes the system trustworthy instead of black-box.
+
+The right framing: Pattern Lab owns a narrow canvas, purpose-built for *interpretation and semantic correction* of whatever vector or raster came in. It accepts `.ai`, `.svg`, vector PDF, raster (PNG/JPG/scan/drape photo), and eventually whatever upstream Kew Canvas / Kew CAD produces. It does not try to compete with Illustrator on freeform path authoring.
+
+The earlier draft of this section used the term "ConfirmedIntentPayload" to describe an upstream-produced handoff. That concept does not match the product. The interpretation work happens inside Pattern Lab, on inputs from many upstream sources, and the user can correct it before pattern generation begins.
 
 ### The natural-language pillar (Orrery review finding 1) gets reinforcement
 
 Kiko's "expert moves fast, novice asks why" framing is the same product gesture as the natural-language pillar. The schema and validation harness should be designed *to be explainable* from day one. Each error, each assumption, each fix suggestion needs a `why` companion suitable for both modes.
 
-### Drape-to-pattern is a missing input lane
+### Drape-to-pattern is a content variant of the human-authored lane, not a third lane
 
-Currently Garment Pattern Lab has two input lanes (generated, human-authored sketch). Kew names a third (drape photo). Add it to `INPUT-LANES.md` as a future lane with the same downstream contract, even if v1 does not implement it.
+A drape photo is the same shape as any other raster upload (PNG/JPG/scan/PDF page) — a raster image that needs vectorization before semantic interpretation. Two lanes remain in `INPUT-LANES.md`: GPT Image 2 generated fixtures, and human-authored uploads. The drape photo is a content variant inside the human-authored lane, paired with a raster-to-vector preprocessing step. The bridge work (`RasterToVectorBridge`, `SemanticInterpretationSurface`) is what unblocks it — not new lane structure.
 
-### Kew's compatibility list adds export targets, not just competitor references
+### Kew's compatibility list is a replacement target, not a round-trip target
 
-Adobe, Gerber, CLO, Ned Graphics, Lectra, Browzwear, Optitex are now also *export targets* through the interop layer, not only studied competitors. The deferred export profile list in `CANDIDATE-TO-EXPORT-INTEROP.md` should grow to include these.
+Kew's vision (and Pattern Lab's, as the PD slice of it) is to *be* the one-stop-shop, not to round-trip back to the systems it is replacing. The compatibility list above splits three ways:
+
+- **Ingest worth supporting** (because users already work there): `.ai`, `.svg`, vector PDF, raster (PNG/JPG/scan/photo). Illustrator-shaped vector inputs are explicitly worth handling. Ingest is one-way.
+- **Replacement targets** (Kew's long-range vision is to subsume these workflows, not interoperate with them): Optitex, Gerber/AccuMark, CLO 3D, Browzwear, Lectra, Ned Graphics. Many versions out.
+- **Round-trip interop is not a goal.** DXF/AAMA/ASTM remains a *separate* later export lane for industrial cutting machinery, not for talking back to the replaced systems.
 
 ### Cross-domain abstraction (furniture, interiors, etc.)
 
@@ -175,7 +194,7 @@ Garment Pattern Lab is execution-oriented; Kew is broader product-market explora
 
 **Garment Pattern Lab is the focused execution slice that proves the engine Kew needs underneath its PD layer.**
 
-If Garment Pattern Lab succeeds, its `PatternGraph` schema, validation harness, and human-readable pattern package become the substrate Kew PD runs on. If Kew succeeds, Garment Pattern Lab's pattern slice has an upstream canvas, a downstream merchandising lane, and a real PLM context to live inside.
+If Garment Pattern Lab succeeds, its `PatternGraph` schema, validation harness, and human-readable pattern package become the substrate Kew PD runs on. If Kew succeeds, Garment Pattern Lab's pattern slice has an upstream canvas, a downstream merchandising lane, and a real one-stop-shop context to live inside.
 
 The two projects can stay distinct in the near term and unify later. Right now Garment Pattern Lab should:
 
@@ -184,11 +203,19 @@ The two projects can stay distinct in the near term and unify later. Right now G
 - design the schema and revision model so it could later host Kew's broader workflows without rewrite
 - avoid scope creep into Canvas, Studio, or Lifecycle territory
 
+### Prototype goal, sharpened
+
+The prototype goal is narrower than the v1 product promise and worth stating in plain language:
+
+**Can we produce a pattern from a sketch or image reference that a human like Kiko could actually sew?**
+
+That is the success bar for v0.1 and the first few iterations after it. Everything else — the canvas surface depth, the assistant loop, the multilingual factory communication, the export targets, the cross-domain abstraction — is many versions out. The prototype proves the spine: image/sketch in, sewable pattern out, judged by a real designer holding the printed result next to a real garment.
+
 ## Open Questions For Future Alignment
 
 - Will Garment Pattern Lab and Kew unify under one codebase, or remain sibling projects with shared substrate?
 - If they unify, does Garment Pattern Lab become Kew PD's open-engine layer, or a separate product family inside Kew?
-- What is the minimum upstream payload Garment Pattern Lab needs from Kew Canvas / Kew CAD to begin pattern work? (Answering this defines the input-lane contract more sharply.)
+- What input formats and metadata does Pattern Lab need to accept so that work from Kew Canvas / Kew CAD (or any other upstream creative tool) hands off cleanly into the interpretation surface? Pattern Lab does its own interpretation work; the question is what raw inputs and optional intent hints make that interpretation faster and more accurate.
 - How should Garment Pattern Lab's schema accommodate Kew Lifecycle's collaboration and revision needs without overbuilding for v1?
 - What is the IP/consent shape for designs that flow Kew → Pattern Lab → factory? (Touches Orrery review finding 18.)
-- When does the drape-photo input lane become a v1.x or v2 priority?
+- When does drape-photo ingestion (the raster-to-vector bridge plus interpretation surface) become a v1.x or v2 priority? It rides on the existing human-authored lane, not a new lane.

@@ -124,20 +124,27 @@ Reference and prior-art tools:
 
 ## Current State
 
-This is a project seed, not an implementation repo yet.
+The v0.1 design is locked and ready for implementation. The canonical spec is [`docs/project/V0.1-DESIGN.md`](docs/project/V0.1-DESIGN.md). v0.1 is a one-shot, headless-pipeline-with-thin-UI prototype that takes an image / sketch / vector input and produces a printable PDF pattern for the sleeveless A-line woven tunic, with a Three.js turn/pan viewer and a 45"-fabric marker layout.
+
+A dirty end-to-end v0.1 pipeline already exists with synthetic measurements; the design spec extends it to real image / sketch / vector input via a Potrace + VTracer vectorization bridge, a heuristic semantic interpreter loading per-garment-family priors, and figure-driven imperial scale calibration.
+
+Three canonical user personas anchor scope by version (`docs/design/personas/`): Persona 1 (Individual Fashion Designer, v0.1), Persona 2 (Production-Focused Garment Designer, v0.5+), Persona 3 (Manufacturing-Focused Designer, v1+).
 
 The initial docs contain:
 
-- Product plan and MVP boundary.
-- Product pillars and prototype build order.
+- v0.1 design spec ([V0.1-DESIGN.md](docs/project/V0.1-DESIGN.md)).
+- Three canonical personas with grounded usage flows.
+- Product plan, pillars, and prototype build order.
 - Roadmap to first prototype.
 - Dependency map.
 - Research queue.
 - Reference bibliography.
 - Notes on why UV unwrapping is not enough by itself.
-- Initial decisions and open questions.
+- Decisions and open questions.
 - Architecture overview, dependency register, and example/corpus needs.
 - Decision log and architecture-history trail for choices that narrow the product direction.
+- Research SOA on vectorization, semantic curve interpretation, garment craft prior art, and bespoke-model opportunities.
+- Structured data corpus (`docs/data-corpus/`) the prototype consumes at runtime.
 
 ## Project Structure
 
@@ -166,6 +173,8 @@ handoffs/        Agent handoff notes
 
 ## Working Docs
 
+- [**v0.1 Design Spec**](docs/project/V0.1-DESIGN.md) — canonical, Codex-ready
+- [Personas](docs/design/personas/README.md) — three canonical users by version
 - [Architecture Overview](docs/project/ARCHITECTURE-OVERVIEW.md)
 - [Product Design Brief](docs/project/PRODUCT-DESIGN.md)
 - [Product Pillars](docs/project/PRODUCT-PILLARS.md)

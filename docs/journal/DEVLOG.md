@@ -189,13 +189,20 @@ Reusable engine extraction:
 Task-led edit spike:
 
 - Added `packages/assistant-core/src/commands.mjs` for narrow natural-language-to-parameter edits.
-- Added `npm run v0.1:edit:lengthen-hem`, which runs `lengthen hem 100mm` and writes a second generated package to `garments/a-line-dress-tunic/outputs/v0.1-length-plus-100/`.
-- The edited output includes `edit-intent.json` and `edit-summary.md` so the command interpretation is visible and reviewable.
+- Added `npm run dev:edit:lengthen-hem`, which runs `lengthen hem 100mm` and writes a second generated package to `garments/a-line-dress-tunic/outputs/v0.1-length-plus-100/`.
+- The edited output includes `dev-artifacts/edit-intent.json` and `dev-artifacts/edit-summary.md` so the command interpretation is visible and reviewable.
 - Expanded `npm run check` to verify both the base package and the task-led edit path.
+- Reclassified this as a dev/v0.5 seed after the v0.1 design lock; the v0.1 acceptance path is one-shot and has no editing surface.
 
 Static app workbench:
 
 - Added `app/src/build-workbench.mjs`.
-- Added `npm run app:build`, which writes `app/dist/workbench.html`.
+- Added `npm run app:build`, which writes `app/dev-artifacts/dev-comparison.html`.
 - The workbench compares the base v0.1 pattern with the lengthened-hem variant, embeds both SVG pattern sheets, shows measured length/seam/readiness fields, and links to the generated previews and edit summary.
 - Smoke checked via local `python3 -m http.server 8787` on `[::1]`; the workbench HTML and both linked pattern SVGs returned successfully.
+
+Phase A foundation cleanup:
+
+- Split generated output directories into `package/` for sewing-facing artifacts and `dev-artifacts/` for readiness, source graph, and edit provenance.
+- Removed the old root-level generated files from `outputs/v0.1/` and `outputs/v0.1-length-plus-100/`.
+- Moved the internal comparison page from `app/dist/workbench.html` to `app/dev-artifacts/dev-comparison.html`.

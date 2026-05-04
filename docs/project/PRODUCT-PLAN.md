@@ -20,18 +20,13 @@ See [Product Design Brief](PRODUCT-DESIGN.md) for the user promise, trust model,
 
 ## User
 
-Primary early user:
+Three canonical personas anchor user-facing scope. Persona definitions are at `docs/design/personas/`; the version-target mapping is the load-bearing scope tool.
 
-- Designer or advanced home sewer who can judge a pattern but wants faster drafting.
-- Small studio operator who needs quick made-to-measure concept patterns.
-- Digital-fashion researcher who wants a bridge from sketch to editable pattern topology.
+- **[Persona 1 — Individual Fashion Designer](../design/personas/persona-1-individual-designer.md)** — v0.1 primary user. Indie designer / advanced home sewer / costume designer wanting reference → pattern → sewable sample.
+- **[Persona 2 — Production-Focused Garment Designer](../design/personas/persona-2-production-designer.md)** — v0.5+ primary user. Studio / brand designer wanting semantic propagation, variants, grading, tech-pack-adjacent output.
+- **[Persona 3 — Manufacturing-Focused Designer](../design/personas/persona-3-manufacturing-designer.md)** — v1+ primary user. Factory liaison / sample-room manager wanting industrial export, marker compliance, multilingual factory instructions.
 
-Secondary future users:
-
-- Costume designers.
-- Made-to-measure brands.
-- Game/film clothing modelers who want physical-pattern semantics.
-- Education tools for patternmaking.
+Adjacent users (costume designers, game/film clothing modelers, made-to-measure brands, patternmaking education) sit alongside these three but don't yet drive scope. They typically map onto Persona 1 or Persona 2 with slight adjustments.
 
 ## Problem
 

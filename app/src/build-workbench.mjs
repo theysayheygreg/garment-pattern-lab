@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const repoRoot = process.cwd();
-const distDir = path.join(repoRoot, "app", "dist");
+const distDir = path.join(repoRoot, "app", "dev-artifacts");
 const packagesToShow = [
   { id: "v0.1", label: "Base v0.1", path: "garments/a-line-dress-tunic/outputs/v0.1" },
   {
@@ -26,9 +26,9 @@ const escapeHtml = (value) =>
     .replaceAll('"', "&quot;");
 
 const packageModels = packagesToShow.map((item) => {
-  const pattern = readJson(path.join(item.path, "pattern.json"));
-  const readiness = readJson(path.join(item.path, "readiness.json"));
-  const edit = readMaybe(path.join(item.path, "edit-intent.json"));
+  const pattern = readJson(path.join(item.path, "dev-artifacts", "pattern-graph.json"));
+  const readiness = readJson(path.join(item.path, "dev-artifacts", "readiness.json"));
+  const edit = readMaybe(path.join(item.path, "dev-artifacts", "edit-intent.json"));
   return { ...item, pattern, readiness, edit: edit ? JSON.parse(edit) : null };
 });
 
@@ -41,9 +41,9 @@ const metricRows = (model) => [
 ];
 
 const packagePanel = (model) => {
-  const svgPath = `../../${model.path}/pattern.svg`;
-  const previewPath = `../../${model.path}/preview.html`;
-  const editSummaryPath = `../../${model.path}/edit-summary.md`;
+  const svgPath = `../../${model.path}/package/pattern.svg`;
+  const previewPath = `../../${model.path}/package/preview.html`;
+  const editSummaryPath = `../../${model.path}/dev-artifacts/edit-summary.md`;
   return `<section class="package" data-package="${model.id}">
     <div class="package-head">
       <div>
@@ -81,7 +81,7 @@ const html = `<!doctype html>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Garment Pattern Lab Workbench</title>
+  <title>Garment Pattern Lab Dev Comparison</title>
   <style>
     :root {
       --bg: #f6f4ef;
@@ -205,10 +205,10 @@ const html = `<!doctype html>
 <body>
   <header>
     <div>
-      <h1>Garment Pattern Lab Workbench</h1>
-      <p>Static inspection surface for the v0.1 A-line dress/tunic package. It compares the base pattern against the first task-led edit so the pipeline is visible without opening each file manually.</p>
+      <h1>Garment Pattern Lab Dev Comparison</h1>
+      <p>Internal inspection surface for the v0.1 A-line dress/tunic package. It compares the base pattern against the first task-led edit so the pipeline is visible without opening each file manually.</p>
     </div>
-    <div class="command">npm run v0.1:edit:lengthen-hem</div>
+    <div class="command">npm run dev:edit:lengthen-hem</div>
   </header>
   <main>
     ${packageModels.map(packagePanel).join("\n")}
@@ -218,5 +218,5 @@ const html = `<!doctype html>
 `;
 
 fs.mkdirSync(distDir, { recursive: true });
-fs.writeFileSync(path.join(distDir, "workbench.html"), html.replace(/[ \t]+$/gm, ""));
-console.log("Built app/dist/workbench.html");
+fs.writeFileSync(path.join(distDir, "dev-comparison.html"), html.replace(/[ \t]+$/gm, ""));
+console.log("Built app/dev-artifacts/dev-comparison.html");

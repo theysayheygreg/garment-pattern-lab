@@ -323,3 +323,93 @@
 **Why:** Traditional CAD, 3D tools, game engines, and IDEs often make users stop at a wall of errors. Even "repair" implies the designer caused damage and the computer is scolding them. That is the wrong product feel. Pattern Lab should behave more like an agentic collaborator: interpret, continue, normalize safe details, and surface only meaningful garment-design choices.
 
 **Door status:** Closed as product interaction direction. Implementation details remain open in validation schema and UI.
+
+## 2026-05-03: Garment language is enforced as the user-surface voice
+
+**Question:** Should garment-design language be a stylistic guideline applied case by case, or a hard requirement, and what is its scope of binding?
+
+**Options considered:**
+
+- Treat it as a stylistic guideline; rely on developer taste to keep messages designer-friendly.
+- Commit it across both engine instrumentation *and* the user surface (an early framing of this decision attempted that and was rejected — it imported the IDE/error-console mental model into the system, contradicting the prior decision that validation is backend instrumentation, not a designer-facing error console).
+- Commit it as a hard requirement on the **user surface only** — the design software the designer actually uses — while leaving engine instrumentation in engineering language because no end user sees it.
+
+**Where it landed:** Garment language is enforced at the user surface only. The user surface is three things:
+
+- **The workbench UI** — labels, controls, callouts, selections, panel naming, every visible string the designer can read.
+- **The assistant collaborator** — prompts, confirmations, ambiguity questions ("I'm assuming X — change?"), edit suggestions, undo/redo descriptions.
+- **The pattern package output** — panel labels, cut counts, construction notes, scale annotations, validation summary phrasing on the printed or exported artifact.
+
+The garment-language commitment binds in those three surfaces. Inside each, it binds in three architectural ways:
+
+- **Schema for user-surface artifacts** — every workbench string, every assistant prompt template, every pattern-package label has a structured phrasing record. Internal ids are for code; phrasings are for users.
+- **Tooling for user-surface artifacts** — linting / tests prevent jargon leaks reaching the user surface. No raw snake_case in workbench labels. No bare error codes in assistant prompts. No `VALIDATION:`-style prefixes in pattern package text. Runs in CI; fails the build.
+- **Corpus for user-surface artifacts** — phrasings live in the data corpus as first-class records: workbench-string templates, assistant prompt templates, ambiguity-question templates, package-label templates, command-verb glossary. Grows over time, model-readable, prepares the multilingual factory-instruction story.
+
+The engine instrumentation underneath — validator findings, helper outputs, candidate state, ML helper confidence scores, debug dumps, candidate-promotion gate state, dev panels — is **not in scope** for this commitment. It's the dev surface. Engineer language is fine there. The translation from engine instrumentation to user surface happens at the boundary, and only for the small subset of engine state that's actually relevant to the user.
+
+**Why:** Pillar 1 (natural intent over CAD operation), Orrery design-review finding 13 (validation should suggest fixes in design language), Kiko's Kew-vision expert/novice continuum, and the prior decision that validation is backend instrumentation all converge here. The original framing of this decision tried to bind voice everywhere and accidentally re-imported the IDE/error-console mental model. The correct framing is two distinct surfaces: dev surface in engineer language, user surface in garment language, with translation at the boundary.
+
+**Door status:** Closed as user-surface voice commitment. Open for: the user-surface phrasing-corpus schema, the linting rule shape (scoped to user-surface artifacts only), and the boundary contract between engine instrumentation and user-surface translation. Worth noting as research-future-work that "encode craft language as a first-class voice on the user surface, with engineering language preserved underneath" is an architectural pattern that would generalize to other craft-shaped domains (mechanical CAD parts, game assets, music production, knitting, woodworking) — but Garment Pattern Lab is for garments, and that generalization is a side effect, not a goal.
+
+## 2026-05-03: PatternGraph is a graph, not an Illustrator layer tree
+
+**Question:** How should `PatternGraph` be topologically organized? Tree (panels with darts/notches/allowances as children), layer tree (Illustrator-shape: presentation-ordered layers, z-order, containment as the only relationship), or graph (first-class typed nodes with multiple semantic edge types)?
+
+**Options considered:**
+
+- **Panel-child tree.** Darts, notches, allowances, markers all live as children of a panel node. Simple at first; awkward when modifiers move (dart transfer, dart rotation), when allowances reference cross-panel state, and when seam pairs need to link edges from different panels.
+- **Illustrator-style layer tree.** Flat layers organized by visual stacking order with containment as the only relationship between nodes. Familiar to designers but wrong-shaped for manufacturing data — a pattern carries semantic relationships (seam pairs across panels, modifier attachment, allowance dependency, derived-from for facings) that presentation-order trees cannot express without breaking.
+- **Graph with first-class typed nodes and semantic edges.** Panels, edges, modifiers (darts, pleats, tucks, notches), allowances, markers (grainlines, fold lines), anchors, and seam pairs are all first-class nodes. Edges between nodes are semantic and typed: `belongs_to`, `attaches_to`, `paired_with`, `derived_from`, `anchors_at`, etc. Cross-panel relationships are first-class edges, not crawls through a tree.
+
+**Where it landed:** Graph, not tree, and explicitly not an Illustrator layer tree.
+
+**Why:** A sewing pattern is a network, not a stack. SeamPair joins two edges on different panels — that relationship is a first-class edge in the graph, not a query over containment. Darts that transfer or rotate are addressable nodes, not panel mutations. Facings derive from their parent panel via a `derived_from` edge, not by being nested inside it. Future operations (grading, variants, comparison, merge) need to reference any node by id without crawling a tree. The Illustrator-layer-tree shape is the explicit anti-pattern: presentation order is not pattern semantics, and bending one to do the other's job produces accidental architecture.
+
+**Door status:** Closed as topological commitment. Open for: the specific node-type catalog (panels, edges, modifiers, markers, allowances, anchors, seam pairs), the specific edge-type catalog (`belongs_to`, `attaches_to`, `paired_with`, `derived_from`, `anchors_at`, etc.), the JSON schema, and the three orthogonal axes that layer onto the graph (state: candidate/promoted; revision: operation-DAG provenance; provenance: source/producer/confidence). The first hand-authored seed fixture should make these choices concrete and live; B1's fixture work (now folded into V0.1-DESIGN.md Phase E) is what closes the open items.
+
+**Reference architectures:**
+
+- **Boundary representation (B-rep) from CAD** is the closest gold-standard analog: Onshape's part topology, SolidWorks, OpenCascade, Fusion 360. Faces / edges / vertices with semantic role and topological adjacency, where topology is *separate from* geometry (a face knows its boundary loop without storing the curve representation; curves live in their own table referenced by id). PatternGraph is a 2D B-rep with garment-specific node types: panels instead of faces, edges instead of edges, anchors instead of vertices, plus modifier / allowance / marker / seam-pair node types layered on. Closest readable code reference: Blender's BMesh / OpenMesh half-edge data structures.
+- **Entity-component-systems (ECS)** — Bevy, Flecs — are *adjacent but not the right fit*. ECS leads with composition; PatternGraph wants constrained, typed topology. ECS systems iterate via component query; PatternGraph queries are graph-walk shaped. ECS would work but pulls in execution-model assumptions we don't need.
+- **GarmentCode** (https://github.com/maria-korosteleva/Garment-Pattern-Generator, arXiv 2306.03642) is the closest **open garment-first** graph-shaped data model. Its `Component / Panel / Edge / Interface / Stitch` quartet maps almost one-to-one onto our sketch. **The decision is to adopt GarmentCode's vocabulary and graph topology, with four explicit extensions:**
+  1. Promote `Allowance` to a first-class node (GarmentCode treats seam allowance as a panel offset operation; we want it queryable per-edge).
+  2. Promote `Anchor` to first-class (notch positions, dart apexes, scale references). GarmentCode mostly uses edge endpoints.
+  3. Add `Modifier` as a first-class node type for darts / pleats / tucks (GarmentCode handles these via panel-level constructs).
+  4. Add explicit ordered `Construction` steps as graph nodes (theirs lives in component composition logic).
+- **Commercial formats** (Optitex .pds, Lectra .iba, Gerber AccuMark, Browzwear .vstitcher, CLO .zprj) are proprietary blobs, partially reverse-engineered, *not useful as a data-model reference*. **DXF/AAMA-292/ASTM-D6673** is the industry *interchange* standard — flat polylines on convention-numbered layers with attributes. Useful as a future *export target* (Persona 3 territory), not as our internal model. It's a presentation format, not a topology.
+
+The seed fixture work in V0.1-DESIGN.md Phase E should look like "GarmentCode plus our four extensions, expressed as the v0.1 sleeveless A-line tunic" rather than inventing the schema from first principles.
+
+## 2026-05-03: Three canonical personas anchor scope by version
+
+**Question:** How should user-facing scope decisions be anchored? "Designers" was too broad — production-focused designers, indie designers, and manufacturing-focused designers have meaningfully different requirements and different version expectations.
+
+**Options considered:**
+
+- One blended "designer" persona covering everyone. Rejected — it had been quietly causing scope drift; v0.1 features kept reaching for production and manufacturing concerns.
+- Two personas (creative vs production). Considered but conflates production design with manufacturing handoff, which are different jobs.
+- Three personas mapped one-to-one to product versions: indie designer (v0.1), production designer (v0.5+), manufacturing designer (v1+).
+
+**Where it landed:** Three personas, each with its own canonical doc under `docs/design/personas/`, each owning a different version target. Persona 1 (Individual Fashion Designer) is the v0.1 primary user; Persona 2 (Production-Focused Garment Designer) is v0.5+; Persona 3 (Manufacturing-Focused Designer) is v1+. Each persona has identity, context, quality bar, what they see and don't see, version target, 8–10 user stories, anti-stories, voice/dialect, and open questions.
+
+**Why:** The three users have meaningfully different requirements (sample-sewable pattern vs semantic-propagation-and-grading vs industrial-export-and-marker-compliance) and meaningfully different mental models (home/indie maker vs studio professional vs factory liaison). Trying to serve all three at v0.1 was producing accidental scope creep. Naming them as canonical scope-defining tools means every feature has a clear owner ("which persona, which version?") and scope discipline becomes a one-question audit.
+
+**Door status:** Closed as scope-defining framework. Open for: persona evolution as the product matures (a user can move between personas over time; Persona 1 may grow into Persona 2 without becoming a different person). Persona docs are canonical; other docs (PRODUCT-DESIGN, PRODUCT-PILLARS, PRODUCT-PLAN, ROADMAP, BUILD-PLAN) reference rather than restate.
+
+
+## 2026-05-03: v0.1 design locked — one-shot pipeline, thin UI, A-line tunic, imperial, 45" marker
+
+**Question:** What is the canonical scope and shape of the v0.1 prototype that Codex will implement?
+
+**Options considered:**
+
+- A full Persona 1 workbench (sketch upload, interactive editing, parameter sliders, export) — too large for v0.1; importing Persona 2 features.
+- A pure headless harness (CLI in, file out, no UI at all) — too thin to demo; misses the 3D-viewer-as-magic-moment.
+- A one-shot pipeline with a single thin-UI page for viewing + export — the chosen middle path.
+
+**Where it landed:** v0.1 is a **one-shot pipeline with a single thin-UI page**. Inputs are image / sketch / vector files (clean inputs only — drape photos and noisy raster deferred to v0.5). The pipeline runs vectorization → semantic interpretation → figure-driven imperial scale calibration → drafting → validation → marker layout (simple non-optimized strip-pack on 45" fabric) → tiled PDF export. The user-facing surface is a single Three.js page rendering panels in static placement around a body proxy, with turn/pan controls and an export button. No editing. No assistant verbs. No manual landmark correction. Garment family is locked to the sleeveless A-line woven tunic. Canonical spec: `docs/project/V0.1-DESIGN.md`.
+
+**Why:** Persona 1's quality bar ("I can hold this printed pattern, cut it, and make a muslin from it") is met by a static one-shot pipeline; Persona 2 features (variants, grading, dependency propagation, editing) are real value but for the wrong version. The thin-UI viewer with turn/pan is the seed of the v1 magic moment without committing to a full workbench. Imperial units throughout because Kiko's audience is US-sewer-shaped. The 45" marker layout matches typical home-sewing fabric purchase patterns; optimization is deferred. Failure mode is best-guess + assumptions surfaced in the package, with hard-failure fallback when even the best guess is below confidence floor — no user-facing correction surface, dev instrumentation handles iteration.
+
+**Door status:** Closed as v0.1 implementation spec. Open for: Codex's implementation choices within the phase contracts (Phases A–J in the design doc), specifically resolving the five `known_implementability_gaps` in the landmark prior file during Phase C; resolving `.ai` ingestion fidelity during Phase B; choosing croquis-matching approach during Phase D. v0.5 and v1 scope decisions are explicitly deferred and remain open.

@@ -45,16 +45,21 @@ The product is a translation surface between three ways designers think:
 
 The important experience is not "watch AI generate a dress." It is the feeling that the system can hold a sketch and make it tangible without hiding the craft decisions.
 
-## Primary User
+## Personas
 
-Primary v1 user:
+Garment Pattern Lab serves three canonical personas, each owning a different version of the product. Personas are scope-defining tools, not marketing avatars; every design decision answers "which persona does this serve, and at which version?"
 
-- fashion designer, indie studio, costume designer, advanced home sewer, or sample-room-adjacent maker
-- comfortable judging a pattern draft
-- not necessarily comfortable drafting every block from scratch
-- wants speed from concept to testable sample
+- **[Persona 1 — Individual Fashion Designer](../design/personas/persona-1-individual-designer.md)** — indie / advanced home sewer / costume designer. **v0.1 primary user.** Wants reference → pattern → sewable sample. Doesn't care about format, doesn't see internals.
+- **[Persona 2 — Production-Focused Garment Designer](../design/personas/persona-2-production-designer.md)** — small studio / brand designer / technical designer. **v0.5+ primary user.** Wants semantic dependency propagation, variants, grading, tech-pack-adjacent output.
+- **[Persona 3 — Manufacturing-Focused Designer](../design/personas/persona-3-manufacturing-designer.md)** — factory liaison / sample-room manager / technical manufacturer. **v1+ primary user.** Wants industrial export (DXF/AAMA/ASTM), marker compliance, multilingual factory instructions, tolerance verification.
 
-They do not want factory CAD first. They want something closer to a patient junior pattern assistant: quick, explicit, editable, and honest about uncertainty.
+The persona files are at `docs/design/personas/` and are canonical. Other docs reference them rather than restating user attributes.
+
+## Primary User For v0.1
+
+Persona 1 — the individual fashion designer. The whole first prototype is built for this user. Persona 2 features (variants, grading, dependency propagation) are designed-in but not built; Persona 3 features (industrial export, marker compliance) are deferred to v1+.
+
+Persona 1 does not want factory CAD first. They want something closer to a patient junior pattern assistant: quick, explicit, editable, and honest about uncertainty. They want a printed pattern they can hold, cut, and sew.
 
 ## Job To Be Done
 

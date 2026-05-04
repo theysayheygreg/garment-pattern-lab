@@ -3,7 +3,7 @@ import fs from "node:fs";
 import { buildReadiness } from "./readiness.mjs";
 
 const pattern = JSON.parse(
-  fs.readFileSync("garments/a-line-dress-tunic/outputs/v0.1/pattern.json", "utf8"),
+  fs.readFileSync("garments/a-line-dress-tunic/outputs/v0.1/dev-artifacts/pattern-graph.json", "utf8"),
 );
 
 const valid = buildReadiness(pattern);

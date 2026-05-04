@@ -1,12 +1,12 @@
 # Build Plan
 
-This is the short operating plan. The full roadmap lives in `ROADMAP.md`.
+This is the short operating plan. The full roadmap lives in `ROADMAP.md`. The canonical v0.1 design lives in [`V0.1-DESIGN.md`](V0.1-DESIGN.md) and is the spec Codex implements against.
 
 ## Current Milestone
 
-**M0: Project Grounding And Product Scaffold**
+**M0.5: v0.1 Design Locked, Implementation Ready**
 
-Goal: make the idea implementation-ready without starting from an under-specified dream.
+Goal: ship a one-shot, headless-pipeline-with-thin-UI prototype that takes Kiko's image / sketch / vector input and produces a printable PDF pattern for the sleeveless A-line woven tunic.
 
 Status:
 
@@ -19,11 +19,17 @@ Status:
 - [x] Research queue.
 - [x] Reference index.
 - [x] Computational Pattern Making paper ingest.
-- [ ] Public-source patternmaking ingestion.
-- [ ] First-garment drafting formulas.
-- [ ] Pattern schema.
-- [ ] Sewing-aware validation checklist.
-- [ ] Tech stack decision.
+- [x] Public-source patternmaking ingestion (FreeSewing factors, Aldrich ease, SewGuide flare).
+- [x] First-garment drafting formulas (`docs/data-corpus/drafting-formulas-a-line-tunic.json`).
+- [x] Pattern schema topology committed (graph, not Illustrator layer tree — see decision log).
+- [x] Sewing-aware validation as backend instrumentation (decided).
+- [x] Garment-language as user-surface voice (decided).
+- [x] Three canonical personas (`docs/design/personas/`).
+- [x] **v0.1 design spec ([`V0.1-DESIGN.md`](V0.1-DESIGN.md))** — canonical, Codex-ready.
+- [x] Phase A foundation cleanup: output packages split into `package/` and `dev-artifacts/`, dev comparison moved to `app/dev-artifacts/dev-comparison.html`.
+- [ ] **v0.1 implementation phases B–J** per the design spec.
+- [ ] Pattern schema concrete JSON shape (closes during Phase E).
+- [ ] Tech stack decision concrete (closes during Phase B with Potrace + VTracer + Three.js + pdf-lib commitments).
 
 ## Product Build Order
 
@@ -54,8 +60,9 @@ Current v0.1 status:
 - [x] One internal readiness report.
 - [x] First reusable `pattern-core`, `validation-core`, and `export-core` modules extracted from the spike.
 - [x] Readiness smoke test for bad units and mismatched seam lengths.
-- [x] First task-led edit package: `lengthen hem 100mm` regenerates `outputs/v0.1-length-plus-100/`.
-- [x] Static app workbench comparing base and edited packages.
+- [x] Dev/v0.5 seed edit package: `lengthen hem 100mm` regenerates `outputs/v0.1-length-plus-100/` for internal comparison only.
+- [x] Internal dev comparison page comparing base and edited packages.
+- [x] Existing generated outputs split into user-facing `package/` and internal `dev-artifacts/`.
 - [ ] One human sanity check.
 
 ### B0: Repo Scaffold And Contracts

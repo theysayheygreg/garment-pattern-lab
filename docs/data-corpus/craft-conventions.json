@@ -1,0 +1,277 @@
+{
+  "$schema_version": "0.1.0",
+  "generated": "2026-05-03",
+  "scope": "Conventions that complement docs/reference/PATTERN-STANDARDS-AND-CONVENTIONS.md. Does not duplicate that file; defines notch types, line types, label phrases, regional sizing variants, and block conventions for the major garment families.",
+  "source": "docs/research/garment-craft-prior-art-2026-05-03.md",
+  "notch_types": [
+    {
+      "id": "single",
+      "label": "Single notch",
+      "drawing": "one short cut perpendicular to cut edge, ~3-5 mm deep",
+      "convention": "Front pattern pieces and front-side seams. The single notch on a back pattern piece is reserved for side seams that meet a front piece's single notch.",
+      "use": "Identify front-of-garment edges, mark a balance point, indicate seam allowance value when placed at corners",
+      "machine_inputs_consumed": "edge position (distance along seam from a known endpoint)",
+      "machine_outputs": "alignment marker between two paired panels"
+    },
+    {
+      "id": "double",
+      "label": "Double notch",
+      "drawing": "two parallel short cuts ~3-5 mm apart",
+      "convention": "Back pattern pieces and back-side seams. Differentiates back from front when panels are otherwise mirror-similar.",
+      "use": "Identify back-of-garment edges, especially on sleeve back vs sleeve front",
+      "machine_inputs_consumed": "edge position",
+      "machine_outputs": "alignment marker between two paired panels"
+    },
+    {
+      "id": "triple",
+      "label": "Triple notch",
+      "drawing": "three parallel short cuts",
+      "convention": "Used sparingly. Sometimes denotes center back on a continuous waistband or sleeve underarm seam to keep orientation unambiguous.",
+      "use": "Disambiguation in patterns with rotational or near-rotational symmetry",
+      "machine_inputs_consumed": "edge position",
+      "machine_outputs": "alignment marker"
+    },
+    {
+      "id": "t_notch",
+      "label": "T-notch",
+      "drawing": "T shape: long perpendicular cut into seam allowance with a short cap inside the seam allowance",
+      "convention": "Indicates seam allowance interior limits. Common in industrial patterns where notches are punched not cut. The cap of the T sits at the seam line, the stem at the cut line.",
+      "use": "Marks both the cut edge alignment and the seam line position simultaneously, useful for fold/pleat lines and dart legs",
+      "machine_inputs_consumed": "edge position, seam allowance width",
+      "machine_outputs": "two-point alignment marker (cut edge + seam line)"
+    },
+    {
+      "id": "balance_mark",
+      "label": "Balance mark",
+      "drawing": "context-dependent; typically a single notch placed at a fit-critical alignment point",
+      "convention": "Used to control ease distribution along curves. The most common cases are the sleeve cap front/back balance, princess seam balance at bust apex, and gathered skirt/bodice balance at center and quarter points.",
+      "use": "Distribute ease along curves where two seams of different lengths must be eased into each other",
+      "machine_inputs_consumed": "edge position on each of two paired curves",
+      "machine_outputs": "paired ease-distribution constraint"
+    },
+    {
+      "id": "drill_hole",
+      "label": "Drill hole / circle / dot",
+      "drawing": "small circle or punched hole inside the panel",
+      "convention": "Marks interior reference points: dart apex, pocket placement, button placement, end of slits.",
+      "use": "Interior point markers, not edge markers",
+      "machine_inputs_consumed": "(x, y) coordinate inside panel",
+      "machine_outputs": "interior reference"
+    }
+  ],
+  "line_types": [
+    {
+      "id": "cut_line",
+      "label": "Cut line",
+      "drawing": "solid bold outer line",
+      "role": "True boundary along which fabric is cut",
+      "geometry_role": "outer polygon of panel"
+    },
+    {
+      "id": "seam_line",
+      "label": "Seam line / stitch line",
+      "drawing": "dashed line offset inward from cut line by seam allowance",
+      "role": "Where stitching occurs; pattern truth for length matching, dart geometry, ease distribution",
+      "geometry_role": "inset polygon of panel by seam allowance"
+    },
+    {
+      "id": "fold_line",
+      "label": "Fold line",
+      "drawing": "dashed or single-line bracket parallel to fold edge with `cut on fold` text",
+      "role": "Edge that is placed on fabric fold, doubling the panel symmetrically",
+      "geometry_role": "edge classified as fold-axis; mirror-reflects panel for layout and validation"
+    },
+    {
+      "id": "grainline",
+      "label": "Grainline",
+      "drawing": "long arrow with arrowheads on both ends, parallel to warp direction",
+      "role": "Fabric warp direction relative to panel; primary directional convention",
+      "geometry_role": "vector orientation of panel for cutting, hang, drape"
+    },
+    {
+      "id": "dart_leg",
+      "label": "Dart leg",
+      "drawing": "two solid lines meeting at dart apex inside or at panel edge",
+      "role": "Boundary of fabric removed by dart fold",
+      "geometry_role": "inward-folded sub-region of panel"
+    },
+    {
+      "id": "dart_apex",
+      "label": "Dart apex",
+      "drawing": "small circle at the inner end of the dart legs",
+      "role": "Endpoint of the dart fold; sewing terminates here",
+      "geometry_role": "interior point, vertex of dart triangle"
+    },
+    {
+      "id": "balance_line",
+      "label": "Balance line / horizontal balance",
+      "drawing": "thin horizontal line labeled `bust line`, `waist line`, `hip line`",
+      "role": "Reference horizontals used for grading, fit checks, validation",
+      "geometry_role": "internal reference line, not a sewing feature"
+    },
+    {
+      "id": "lengthen_shorten_line",
+      "label": "Lengthen/shorten line",
+      "drawing": "two parallel lines across the panel labeled `lengthen or shorten here`",
+      "role": "Designer-facing fit adjustment region",
+      "geometry_role": "internal annotation; geometry-changing operation when applied"
+    },
+    {
+      "id": "internal_feature",
+      "label": "Internal feature line",
+      "drawing": "thin dashed or marked line for pocket placement, pleat fold, tuck, slit, button placement",
+      "role": "Construction-only marking, not a cut or seam",
+      "geometry_role": "interior annotation"
+    },
+    {
+      "id": "buttonhole",
+      "label": "Buttonhole line",
+      "drawing": "small horizontal or vertical line with end caps, sized to button diameter + 3mm",
+      "role": "Buttonhole position and orientation",
+      "geometry_role": "interior annotation with size and orientation"
+    }
+  ],
+  "label_conventions": {
+    "cut_count_phrasing": [
+      {"phrase": "Cut 1 on fold", "meaning": "Cut once with one panel edge placed on a fabric fold; resulting fabric panel is symmetric across the fold edge."},
+      {"phrase": "Cut 1", "meaning": "Cut a single piece, typically asymmetric (e.g. wrap front, single placket)."},
+      {"phrase": "Cut 2 mirrored", "meaning": "Cut twice with fabric folded right-sides together OR pattern flipped, producing left/right pair."},
+      {"phrase": "Cut 2 same", "meaning": "Cut twice in identical orientation; produces two identical pieces (e.g. cuffs, pockets)."},
+      {"phrase": "Cut 4", "meaning": "Cut four; common for collars/cuffs/facings where outer + inner + interfacing pairs are needed."},
+      {"phrase": "Cut 1 main + 1 lining", "meaning": "Cut once in fashion fabric and once in lining."},
+      {"phrase": "Cut 1 + interface", "meaning": "Cut once in fashion fabric and once in fusible interfacing."}
+    ],
+    "fabric_role_terms": ["main", "fashion_fabric", "shell", "lining", "interfacing", "fusing", "interlining", "binding", "facing", "trim", "contrast"],
+    "piece_label_required_fields": [
+      "garment_name",
+      "piece_name",
+      "piece_id",
+      "size_or_measurement_set",
+      "cut_count",
+      "fabric_role",
+      "cut_mode (single|on_fold|mirrored_pair|stack_of_n)",
+      "seam_allowance_state (included|excluded|mixed_by_edge)",
+      "grainline_or_foldline_present",
+      "version_or_revision"
+    ],
+    "annotation_phrasing_recommendations": [
+      "Prefer plain language: 'cut on fold', 'right side', 'wrong side', 'place on fold'",
+      "Avoid acronyms in user-facing labels (CB, CF, HPS) unless paired with full term in pattern key",
+      "When seam allowance varies by edge, label each edge in mm or in directly on the cut line"
+    ]
+  },
+  "regional_sizing": {
+    "primary_standard": "ISO 8559",
+    "us": {
+      "system": "numeric (0, 2, 4, 6, ...) or letter (XS/S/M/L/XL)",
+      "basis": "no single legal standard; brand-driven; ASTM D5585 size tables exist for misses figure types",
+      "reference_size_misses_8_cm": {"bust": 88, "waist": 70, "hip": 94},
+      "notes": "Brand sizing varies wildly. Pattern brands (Vogue, McCall's, Big4) typically run 1-2 sizes smaller than RTW."
+    },
+    "eu": {
+      "system": "numeric (32, 34, 36, 38, ...)",
+      "basis": "EU number ≈ bust circumference in cm minus 76 for women; aligned with EN 13402 / ISO 8559",
+      "reference_size_38_cm": {"bust": 88, "waist": 72, "hip": 96},
+      "notes": "EN 13402 introduced pictograms with bust/hip in cm directly on labels; rarely used at retail."
+    },
+    "uk": {
+      "system": "numeric (8, 10, 12, 14, ...)",
+      "basis": "UK number = US number + 4 conventionally (UK 12 ≈ US 8 ≈ EU 38)",
+      "notes": "Independent pattern designers in the UK often use UK numeric sizing."
+    },
+    "jp": {
+      "system": "numeric (5, 7, 9, 11, 13) with letter+code modifiers",
+      "basis": "JIS L 4005; size code structure: number-figure_letter-height_letter (e.g. 9-A-R)",
+      "reference_size_9_cm": {"bust": 83, "hip": 91, "height": 158},
+      "code_letters": {
+        "figure_letters": {"A": "average bust-to-hip drop ~12cm", "Y": "hip ≤ A by ~4cm", "AB": "hip > A by ~4cm", "B": "hip > A by ~8cm"},
+        "height_letters": {"P": "petite ~150cm", "PP": "shorter petite", "R": "regular ~158cm", "T": "tall ~166cm"}
+      },
+      "notes": "Japanese sizes encode three-axis fit (size, drop, stature) directly into the size code."
+    },
+    "rough_conversion_notes": [
+      "EU = US + ~30 (so US 8 ≈ EU 38)",
+      "UK = US + 4 (so US 8 ≈ UK 12)",
+      "JP ≈ US * 0.85 with offset; e.g. US 4 ≈ JP 9 (roughly five Japanese-numeric units higher than US-numeric)",
+      "When made-to-measure, prefer ISO 8559 measurement vocabulary internally and present whichever regional code the user expects."
+    ]
+  },
+  "block_sloper_conventions": {
+    "definition": "A block (sloper) is a fitted base pattern with wearing ease only, no design ease, no seam allowance, no closure detail. It is the ground truth from which designs are flat-pattern manipulated.",
+    "common_blocks": [
+      {
+        "id": "bodice_block_women",
+        "label": "Women's fitted bodice block",
+        "panels": ["front_bodice", "back_bodice"],
+        "ease_typical_cm": {"bust": [4, 8], "waist": [2, 4]},
+        "darts_typical": ["bust_dart_side", "waist_dart_front", "waist_dart_back", "shoulder_dart_back_optional"],
+        "primary_landmarks": ["hps", "neck_point_cf", "neck_point_cb", "shoulder_point", "armhole_pitch", "armhole_bottom", "bust_apex", "waist", "side_seam"],
+        "freesewing_equivalent": "Bella (Italian-industry-derived)"
+      },
+      {
+        "id": "sleeveless_bodice_block",
+        "label": "Sleeveless bodice block",
+        "derived_from": "bodice_block_women",
+        "modifications": ["raise_armhole_~1cm", "narrow_shoulder_~1.3cm", "scoop_armhole_inward_to_remove_armhole_gap"],
+        "ease_typical_cm": {"bust": [3, 6], "waist": [2, 4]},
+        "notes": "Aldrich's sleeveless block: ~2.36 cm ease across bust, ~5.86 cm ease across upper bust/underarm."
+      },
+      {
+        "id": "skirt_block",
+        "label": "Skirt block",
+        "panels": ["front_skirt", "back_skirt"],
+        "ease_typical_cm": {"waist": [1, 2], "hip": [2, 4]},
+        "darts_typical": ["waist_dart_front_x1_or_x2", "waist_dart_back_x2"],
+        "primary_landmarks": ["waist", "high_hip", "hip", "side_seam", "hem"]
+      },
+      {
+        "id": "trouser_block",
+        "label": "Trouser block",
+        "panels": ["front_leg", "back_leg"],
+        "ease_typical_cm": {"waist": [1, 3], "hip": [4, 8], "thigh": [4, 10]},
+        "primary_landmarks": ["waist", "hip", "crotch_point", "thigh", "knee", "hem"],
+        "key_feature": "front + back crotch curves; back rise typically 3-5 cm taller than front"
+      },
+      {
+        "id": "fitted_sleeve_block",
+        "label": "Fitted (one-piece) sleeve block",
+        "panels": ["sleeve"],
+        "ease_typical_cm": {"bicep": [4, 6], "wrist": [1, 4]},
+        "primary_landmarks": ["sleeve_cap_top", "front_pitch", "back_pitch", "elbow", "wrist"],
+        "key_feature": "sleeve cap height and circumference must match armhole within ease ratio (typically 8-15% ease for woven set-in)"
+      },
+      {
+        "id": "torso_block_or_sloper",
+        "label": "Torso block (combined bodice + skirt to hip)",
+        "panels": ["front", "back"],
+        "ease_typical_cm": {"bust": [4, 8], "waist": [2, 4], "hip": [4, 6]},
+        "key_feature": "used for sheath dresses and as base for many one-piece garments without waist seam"
+      },
+      {
+        "id": "knit_block",
+        "label": "Knit block (T-shirt sloper)",
+        "panels": ["front", "back", "sleeve"],
+        "ease_typical_cm": {"bust": [-2, 4], "waist": [-2, 6], "hip": [-2, 4]},
+        "notes": "Drafted with negative ease to account for fabric stretch. Sleeve cap ease minimal (1-2% or zero)."
+      }
+    ],
+    "regional_block_conventions": [
+      {
+        "tradition": "British (Aldrich)",
+        "characteristics": ["metric system", "explicit ease values stated per zone", "darted bodice block as default", "drafted directly from body measurements"]
+      },
+      {
+        "tradition": "American (Joseph-Armstrong)",
+        "characteristics": ["imperial common", "torso foundation as starting point for many designs", "five-piece basic set: bodice F/B, fitted sleeve, skirt F/B"]
+      },
+      {
+        "tradition": "Italian",
+        "characteristics": ["proportional drafting from bust + height", "relies on bust-to-stature ratios"]
+      },
+      {
+        "tradition": "Japanese (Bunka)",
+        "characteristics": ["proportional system based on bust", "well documented and widely used in JP industry", "tends to produce shorter torso blocks suited to JP body proportions"]
+      }
+    ]
+  }
+}

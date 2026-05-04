@@ -5,11 +5,11 @@
   "type": "module",
   "scripts": {
     "app:build": "node app/src/build-workbench.mjs",
+    "dev:edit:lengthen-hem": "node garments/a-line-dress-tunic/src/generate.mjs --output v0.1-length-plus-100 --command \"lengthen hem 100mm\"",
+    "dev:check:edit": "node garments/a-line-dress-tunic/src/generate.mjs --check --output v0.1-length-plus-100 --command \"lengthen hem 100mm\"",
     "v0.1:generate": "node garments/a-line-dress-tunic/src/generate.mjs",
-    "v0.1:edit:lengthen-hem": "node garments/a-line-dress-tunic/src/generate.mjs --output v0.1-length-plus-100 --command \"lengthen hem 100mm\"",
     "v0.1:check": "node garments/a-line-dress-tunic/src/generate.mjs --check",
-    "v0.1:check:edit": "node garments/a-line-dress-tunic/src/generate.mjs --check --output v0.1-length-plus-100 --command \"lengthen hem 100mm\"",
     "check:core": "node packages/validation-core/src/readiness.test.mjs",
-    "check": "npm run v0.1:check && npm run v0.1:check:edit && npm run check:core"
+    "check": "npm run v0.1:check && npm run dev:check:edit && npm run check:core"
   }
 }

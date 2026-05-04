@@ -18,6 +18,8 @@ const argValue = (name) => {
 const outputName = argValue("--output") ?? "v0.1";
 const sourceCommand = argValue("--command");
 const outputDir = path.join(garmentRoot, "outputs", outputName);
+const packageDir = path.join(outputDir, "package");
+const devArtifactsDir = path.join(outputDir, "dev-artifacts");
 
 const readJson = (relativePath) =>
   JSON.parse(fs.readFileSync(path.join(garmentRoot, relativePath), "utf8"));
@@ -172,21 +174,22 @@ const pattern = {
 const readiness = buildReadiness(pattern);
 
 if (!checkOnly) {
-  fs.mkdirSync(outputDir, { recursive: true });
+  fs.mkdirSync(packageDir, { recursive: true });
+  fs.mkdirSync(devArtifactsDir, { recursive: true });
   if (outputName === "v0.1") {
     fs.writeFileSync(path.join(garmentRoot, "fixtures", "patterns", "v0.1-candidate.pattern.json"), `${JSON.stringify(pattern, null, 2)}\n`);
     fs.writeFileSync(path.join(garmentRoot, "fixtures", "validation", "v0.1-readiness.json"), `${JSON.stringify(readiness, null, 2)}\n`);
   }
-  fs.writeFileSync(path.join(outputDir, "pattern.json"), `${JSON.stringify(pattern, null, 2)}\n`);
-  fs.writeFileSync(path.join(outputDir, "readiness.json"), `${JSON.stringify(readiness, null, 2)}\n`);
-  fs.writeFileSync(path.join(outputDir, "pattern.svg"), buildSvg(pattern, readiness, params).replace(/[ \t]+$/gm, ""));
-  fs.writeFileSync(path.join(outputDir, "cut-sheet.md"), buildCutSheet(pattern, params));
-  fs.writeFileSync(path.join(outputDir, "assembly.md"), buildAssembly(pattern));
-  fs.writeFileSync(path.join(outputDir, "readiness.md"), buildReadinessMd(readiness));
-  fs.writeFileSync(path.join(outputDir, "preview.html"), buildPreview(pattern, readiness));
+  fs.writeFileSync(path.join(packageDir, "pattern.svg"), buildSvg(pattern, readiness, params).replace(/[ \t]+$/gm, ""));
+  fs.writeFileSync(path.join(packageDir, "cut-sheet.md"), buildCutSheet(pattern, params));
+  fs.writeFileSync(path.join(packageDir, "assembly.md"), buildAssembly(pattern));
+  fs.writeFileSync(path.join(packageDir, "preview.html"), buildPreview(pattern, readiness));
+  fs.writeFileSync(path.join(devArtifactsDir, "pattern-graph.json"), `${JSON.stringify(pattern, null, 2)}\n`);
+  fs.writeFileSync(path.join(devArtifactsDir, "readiness.json"), `${JSON.stringify(readiness, null, 2)}\n`);
+  fs.writeFileSync(path.join(devArtifactsDir, "readiness.md"), buildReadinessMd(readiness));
   if (editIntent) {
-    fs.writeFileSync(path.join(outputDir, "edit-intent.json"), `${JSON.stringify(editIntent, null, 2)}\n`);
-    fs.writeFileSync(path.join(outputDir, "edit-summary.md"), buildEditSummary(editIntent));
+    fs.writeFileSync(path.join(devArtifactsDir, "edit-intent.json"), `${JSON.stringify(editIntent, null, 2)}\n`);
+    fs.writeFileSync(path.join(devArtifactsDir, "edit-summary.md"), buildEditSummary(editIntent));
   }
 }
 
