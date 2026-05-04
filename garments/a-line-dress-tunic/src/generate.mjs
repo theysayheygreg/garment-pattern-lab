@@ -6,6 +6,10 @@ import { fileURLToPath } from "node:url";
 import { applyParameterEdit, buildEditSummary, interpretCommand } from "../../../packages/assistant-core/src/commands.mjs";
 import { buildAssembly, buildCutSheet, buildPreview, buildReadinessMd, buildSvg } from "../../../packages/export-core/src/package-builders.mjs";
 import { measureNamedEdges, round } from "../../../packages/pattern-core/src/measurements.mjs";
+import { buildDraftingRequest, projectLegacyGeneratorInputs } from "../../../packages/sketch-intent/src/drafting-adapter/drafting-request.mjs";
+import { ingestSketch } from "../../../packages/sketch-intent/src/raster-to-vector/bridge.mjs";
+import { calibrateScale } from "../../../packages/sketch-intent/src/scale-calibration/calibrator.mjs";
+import { interpretSketchTrace } from "../../../packages/sketch-intent/src/semantic-interpreter/interpreter.mjs";
 import { buildReadiness } from "../../../packages/validation-core/src/readiness.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -17,6 +21,8 @@ const argValue = (name) => {
 };
 const outputName = argValue("--output") ?? "v0.1";
 const sourceCommand = argValue("--command");
+const sourceSketch = argValue("--source-sketch");
+const scaleOverride = argValue("--scale-inches-per-source-unit");
 const outputDir = path.join(garmentRoot, "outputs", outputName);
 const packageDir = path.join(outputDir, "package");
 const devArtifactsDir = path.join(outputDir, "dev-artifacts");
@@ -25,8 +31,37 @@ const readJson = (relativePath) =>
   JSON.parse(fs.readFileSync(path.join(garmentRoot, relativePath), "utf8"));
 
 const body = readJson("fixtures/measurements/v0.1-body.json");
+const canonicalBody = readJson("fixtures/measurements/canonical-misses-8.json");
 let params = readJson("fixtures/parameters/v0.1-parameters.json");
 let editIntent = null;
+let sketchPipeline = null;
+
+if (sourceSketch) {
+  const trace = ingestSketch(path.resolve(process.cwd(), sourceSketch));
+  const interpretation = interpretSketchTrace(trace);
+  const calibratedInterpretation = calibrateScale({
+    trace,
+    interpretation,
+    canonicalBody,
+    override: scaleOverride
+      ? {
+          inchesPerSourceUnit: Number(scaleOverride),
+          reason: "--scale-inches-per-source-unit",
+        }
+      : undefined,
+  });
+  const draftingRequest = buildDraftingRequest({
+    calibratedInterpretation,
+    bodyMeasurementSet: body,
+    baseParameters: params,
+  });
+  if (draftingRequest.promotion.state === "refused") {
+    console.error(`Drafting request refused: ${draftingRequest.promotion.blockers.join(", ")}`);
+    process.exit(1);
+  }
+  params = projectLegacyGeneratorInputs(draftingRequest).garmentParameters;
+  sketchPipeline = { trace, interpretation, calibratedInterpretation, draftingRequest };
+}
 
 if (sourceCommand) {
   const applied = applyParameterEdit(params, interpretCommand(sourceCommand));
@@ -144,6 +179,13 @@ const pattern = {
     generator: "garments/a-line-dress-tunic/src/generate.mjs",
     bodyMeasurementSet: "fixtures/measurements/v0.1-body.json",
     garmentParameters: "fixtures/parameters/v0.1-parameters.json",
+    ...(sourceSketch
+      ? {
+          sourceSketch,
+          draftingRequestState: sketchPipeline.draftingRequest.promotion.state,
+          scaleStatus: sketchPipeline.draftingRequest.scaleProfile?.scaleStatus ?? "missing",
+        }
+      : {}),
     ...(editIntent ? { parameterEdit: editIntent } : {}),
   },
   bodyMeasurementSet: body,
@@ -168,6 +210,7 @@ const pattern = {
     "No closure modeled; neckline/opening must be reviewed for head entry.",
     "Front and back side seams are intentionally matched for the dirty spike.",
     "Seam allowance is simplified with rough cut-line expansion, not robust geometric offsetting.",
+    ...(sketchPipeline?.draftingRequest.promotion.warnings ?? []),
   ],
 };
 
@@ -187,6 +230,12 @@ if (!checkOnly) {
   fs.writeFileSync(path.join(devArtifactsDir, "pattern-graph.json"), `${JSON.stringify(pattern, null, 2)}\n`);
   fs.writeFileSync(path.join(devArtifactsDir, "readiness.json"), `${JSON.stringify(readiness, null, 2)}\n`);
   fs.writeFileSync(path.join(devArtifactsDir, "readiness.md"), buildReadinessMd(readiness));
+  if (sketchPipeline) {
+    fs.writeFileSync(path.join(devArtifactsDir, "editable-trace-layer.json"), `${JSON.stringify(sketchPipeline.trace, null, 2)}\n`);
+    fs.writeFileSync(path.join(devArtifactsDir, "sketch-interpretation.json"), `${JSON.stringify(sketchPipeline.interpretation, null, 2)}\n`);
+    fs.writeFileSync(path.join(devArtifactsDir, "scale-calibration.json"), `${JSON.stringify(sketchPipeline.calibratedInterpretation.scaleCalibration, null, 2)}\n`);
+    fs.writeFileSync(path.join(devArtifactsDir, "drafting-request.json"), `${JSON.stringify(sketchPipeline.draftingRequest, null, 2)}\n`);
+  }
   if (editIntent) {
     fs.writeFileSync(path.join(devArtifactsDir, "edit-intent.json"), `${JSON.stringify(editIntent, null, 2)}\n`);
     fs.writeFileSync(path.join(devArtifactsDir, "edit-summary.md"), buildEditSummary(editIntent));

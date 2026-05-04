@@ -275,3 +275,10 @@ Phase E drafting adapter start:
 - Added `packages/sketch-intent/src/drafting-adapter/drafting-request.mjs`.
 - Added `buildDraftingRequest()`, which promotes calibrated interpretation into a scale-proven drafting request and refuses before generator handoff when scale or required semantic landmarks are missing.
 - Preserved uncertainty: mirrored landmarks and low-confidence/default scale become request warnings and evidence assumptions, not silent drafting facts.
+
+Sketch-driven v0.1 pipeline wiring:
+
+- Added `--source-sketch` support to `garments/a-line-dress-tunic/src/generate.mjs`.
+- The generator now runs sketch ingest, semantic interpretation, scale calibration, and drafting-request promotion before reusing the existing ugly pattern generator.
+- Added dev artifacts for sketch-driven runs: `editable-trace-layer.json`, `sketch-interpretation.json`, `scale-calibration.json`, and `drafting-request.json`.
+- Added `garments/a-line-dress-tunic/src/pipeline.test.mjs`, which proves an accepted sketch fixture drafts and a blocked semantic fixture refuses before output.

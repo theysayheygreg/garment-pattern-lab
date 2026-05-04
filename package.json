@@ -9,6 +9,8 @@
     "dev:check:edit": "node garments/a-line-dress-tunic/src/generate.mjs --check --output v0.1-length-plus-100 --command \"lengthen hem 100mm\"",
     "v0.1:generate": "node garments/a-line-dress-tunic/src/generate.mjs",
     "v0.1:check": "node garments/a-line-dress-tunic/src/generate.mjs --check",
+    "v0.1:check:sketch": "node garments/a-line-dress-tunic/src/generate.mjs --check --output v0.1-from-sketch --source-sketch packages/sketch-intent/fixtures/a-line-tunic-scale-reference-semantic-flat.svg",
+    "v0.1:check:pipeline": "node garments/a-line-dress-tunic/src/pipeline.test.mjs",
     "check:core": "node packages/validation-core/src/readiness.test.mjs",
     "check:sketch": "node packages/sketch-intent/src/raster-to-vector/bridge.test.mjs",
     "check:semantic": "node packages/sketch-intent/src/semantic-interpreter/interpreter.test.mjs",
@@ -17,7 +19,7 @@
     "sketch:report": "node packages/sketch-intent/src/raster-to-vector/fixture-report.mjs",
     "semantic:report": "node packages/sketch-intent/src/semantic-interpreter/interpret-report.mjs",
     "scale:report": "node packages/sketch-intent/src/scale-calibration/scale-report.mjs",
-    "check": "npm run v0.1:check && npm run dev:check:edit && npm run check:core && npm run check:sketch && npm run check:semantic && npm run check:scale && npm run check:drafting"
+    "check": "npm run v0.1:check && npm run v0.1:check:pipeline && npm run dev:check:edit && npm run check:core && npm run check:sketch && npm run check:semantic && npm run check:scale && npm run check:drafting"
   },
   "dependencies": {
     "@neplex/vectorizer": "^0.0.5"
