@@ -34,7 +34,7 @@ Status:
 - [ ] **Phase G marker layout started:** package output now includes non-optimized 45 inch `marker.svg` and dev `marker-plan.json`. PDF tiling and marker PDF remain later export work.
 - [ ] **Phase H package manifest started:** package output now includes `manifest.json` with package/dev artifact inventory, marker summary, assumptions, source provenance, and known missing export formats. Remaining work: tiled PDF.
 - [ ] **Phase I static preview started:** package preview now emits a Three.js static assembly scene from PatternGraph panels, body proxy, and seam-pair guides. Remaining work: browser screenshot/pixel verification if the preview becomes a demo-critical surface.
-- [ ] **Phase J dev instrumentation started:** sketch-driven runs now emit `debug-overlay.html` for labeled curve review and `interpretation-trace.json` for semantic score tables. Remaining work: readiness extension fields and stage timing.
+- [ ] **Phase J dev instrumentation started:** sketch-driven runs now emit `debug-overlay.html` for labeled curve review and `interpretation-trace.json` for semantic score tables. Readiness now includes marker metrics, sketch-pipeline state, and assumption counts. Remaining work: per-stage timing.
 - [ ] Pattern schema concrete JSON shape (closes during Phase E).
 - [x] Phase B tech stack decision concrete: `@neplex/vectorizer`/VTracer for raster tracing, Poppler `pdftocairo` for local vector/raster PDF and PDF-compatible `.ai` conversion, Potrace research-only unless license isolation is intentional.
 

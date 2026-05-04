@@ -1,7 +1,7 @@
 {
   "schemaVersion": "0.1-dirty-spike",
   "patternId": "a-line-dress-tunic-v0.1",
-  "generatedAt": "2026-05-04T18:45:27.145Z",
+  "generatedAt": "2026-05-04T20:28:11.561Z",
   "overallState": "ready-for-human-sanity-check",
   "checks": [
     {
@@ -85,7 +85,26 @@
       "state": "limitation",
       "summary": "Cut lines use rough expansion rather than a robust offset kernel.",
       "details": {}
+    },
+    {
+      "id": "marker.plan",
+      "state": "ready",
+      "summary": "Marker layout uses 45 inch width and estimates 77.02 inches of fabric.",
+      "details": {
+        "fabricWidthIn": 45,
+        "totalFabricLengthIn": 77.02,
+        "warnings": []
+      }
     }
   ],
+  "instrumentation": {
+    "marker": {
+      "fabricWidthIn": 45,
+      "totalFabricLengthIn": 77.02,
+      "warningCount": 0
+    },
+    "sketchPipeline": null,
+    "assumptionCount": 4
+  },
   "designerSummary": "This draft is ready for a human sanity check as a rough first package."
 }

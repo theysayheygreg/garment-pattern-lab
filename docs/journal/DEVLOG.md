@@ -315,3 +315,9 @@ Interpretation trace start:
 - Added Phase J `interpretationTrace` score tables to the semantic interpreter output.
 - Each slot now records selected candidate, selected source, status, confidence, scored candidates, rule scores, and filtered candidates.
 - Sketch-driven generator runs write `dev-artifacts/interpretation-trace.json`; the package manifest lists it for sketch-pipeline outputs.
+
+Readiness instrumentation extension:
+
+- Extended `validation-core` readiness output with backend marker metrics: fabric width, estimated fabric length, marker warnings, and a marker readiness check.
+- Added sketch-pipeline readiness instrumentation for sketch-driven runs, including drafting request state and scale status. This is intentionally engine-facing; it supports generator improvement without becoming a designer-facing error console.
+- Added assumption count instrumentation so readiness reports summarize how much inferred design intent the package is carrying.

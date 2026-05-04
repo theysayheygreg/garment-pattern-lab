@@ -59,6 +59,31 @@ export function buildReadiness(patternDoc) {
     "limitation",
     "Cut lines use rough expansion rather than a robust offset kernel.",
   );
+  if (patternDoc.markerPlan) {
+    add(
+      "marker.plan",
+      patternDoc.markerPlan.warnings?.length ? "designer_choice" : "ready",
+      patternDoc.markerPlan.warnings?.length
+        ? "Marker layout has warnings for human review."
+        : `Marker layout uses ${patternDoc.markerPlan.fabricWidthIn} inch width and estimates ${patternDoc.markerPlan.totalFabricLengthIn} inches of fabric.`,
+      {
+        fabricWidthIn: patternDoc.markerPlan.fabricWidthIn,
+        totalFabricLengthIn: patternDoc.markerPlan.totalFabricLengthIn,
+        warnings: patternDoc.markerPlan.warnings ?? [],
+      },
+    );
+  }
+  if (patternDoc.source?.sourceSketch) {
+    add(
+      "pipeline.drafting-request",
+      patternDoc.source.draftingRequestState === "draftable" ? "ready" : "designer_choice",
+      `Sketch-driven drafting request state: ${patternDoc.source.draftingRequestState}.`,
+      {
+        sourceSketch: patternDoc.source.sourceSketch,
+        scaleStatus: patternDoc.source.scaleStatus,
+      },
+    );
+  }
 
   const hasBlocker = checks.some((check) => check.state === "blocker");
   return {
@@ -67,8 +92,29 @@ export function buildReadiness(patternDoc) {
     generatedAt: new Date().toISOString(),
     overallState: hasBlocker ? "not-ready" : "ready-for-human-sanity-check",
     checks,
+    instrumentation: buildInstrumentation(patternDoc),
     designerSummary: hasBlocker
       ? "This draft needs internal refinement before a human sanity check."
       : "This draft is ready for a human sanity check as a rough first package.",
+  };
+}
+
+function buildInstrumentation(patternDoc) {
+  return {
+    marker: patternDoc.markerPlan
+      ? {
+          fabricWidthIn: patternDoc.markerPlan.fabricWidthIn,
+          totalFabricLengthIn: patternDoc.markerPlan.totalFabricLengthIn,
+          warningCount: patternDoc.markerPlan.warnings?.length ?? 0,
+        }
+      : null,
+    sketchPipeline: patternDoc.source?.sourceSketch
+      ? {
+          sourceSketch: patternDoc.source.sourceSketch,
+          draftingRequestState: patternDoc.source.draftingRequestState,
+          scaleStatus: patternDoc.source.scaleStatus,
+        }
+      : null,
+    assumptionCount: patternDoc.assumptions?.length ?? 0,
   };
 }
