@@ -40,6 +40,15 @@ This register tracks dependencies and prior art by whether Garment Pattern Lab s
 | Graphite crates | unknown | Vector editor architecture and possible Rust geometry. | Needs source audit before relying on it. |
 | Custom `GeometryKernel` API | build | Stable boundary around geometry operations. | Must exist before swapping implementation libraries. |
 
+## Sketch Vectorization
+
+| Item | Status | Role | Notes |
+| --- | --- | --- | --- |
+| `@neplex/vectorizer` | candidate/build | First runnable raster-to-SVG bridge. | MIT; VTracer-backed Node package with direct Buffer input. Installed for Phase B smoke tests behind `RasterToVectorBridge`. |
+| VTracer / `vtracer-wasm` | candidate | Browser/WASM raster-to-vector implementation. | MIT; likely browser runtime target once the ingest contract stabilizes. |
+| `esm-potrace-wasm` | reference/isolated candidate | Black-line tracing comparison. | GPLv2; useful prior art and possible isolated experiment, but not default commercial-path dependency. |
+| SVG passthrough | build | Highest-trust sketch input lane. | Implemented for `.svg`; vector PDF and `.ai` remain Phase B ingest work. |
+
 ## Export And Interop
 
 | Item | Status | Role | Notes |

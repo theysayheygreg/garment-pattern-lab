@@ -1,9 +1,11 @@
 import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
+import { vectorizeSync, ColorMode, Hierarchical, PathSimplifyMode } from "@neplex/vectorizer";
 import { recipeForInput } from "./recipes.mjs";
 
 const VECTOR_FORMATS = new Set(["svg", "vector-pdf", "ai"]);
+const RASTER_FORMATS = new Set(["png", "jpg", "webp"]);
 
 export function detectFormat(filePath) {
   const ext = path.extname(filePath).toLowerCase().replace(".", "");
@@ -48,19 +50,23 @@ export function ingestSketch(filePath, options = {}) {
     };
   }
 
-  return {
-    schemaVersion: "0.1-phase-b",
-    kind: "editable-trace-layer",
-    provenance,
-    engine: recipe.preferredEngine,
-    layers: { silhouette: [], interior: [], annotation: [], unclassified: [] },
-    unsupported: {
-      reason: "Raster tracing engines are the next Phase B step; current bridge records recipe/provenance only.",
-    },
-  };
+  if (RASTER_FORMATS.has(format)) {
+    return traceRasterToEditableLayer(bytes, provenance, recipe);
+  }
+
+  return unsupportedTraceLayer(provenance, recipe.preferredEngine, `Unsupported sketch input format: ${format}.`);
 }
 
 function vectorPassthroughSvg(svg, provenance, recipe) {
+  return editableTraceLayerFromSvg(svg, provenance, recipe, "user-svg-passthrough");
+}
+
+function traceRasterToEditableLayer(bytes, provenance, recipe) {
+  const svg = vectorizeSync(bytes, vectorizerConfigForRecipe(recipe));
+  return editableTraceLayerFromSvg(svg, provenance, recipe, "vtracer-neplex-vectorizer");
+}
+
+function editableTraceLayerFromSvg(svg, provenance, recipe, engine) {
   const paths = [...svg.matchAll(/<path\b([^>]*)>/gi)].map((match, index) => {
     const attrs = parseAttributes(match[1]);
     return {
@@ -76,9 +82,53 @@ function vectorPassthroughSvg(svg, provenance, recipe) {
     schemaVersion: "0.1-phase-b",
     kind: "editable-trace-layer",
     provenance,
-    engine: "user-svg-passthrough",
+    engine,
     recipe: recipe.id,
+    traceStats: {
+      pathCount: paths.length,
+    },
     layers: classifyPaths(paths),
+  };
+}
+
+function unsupportedTraceLayer(provenance, engine, reason) {
+  return {
+    schemaVersion: "0.1-phase-b",
+    kind: "editable-trace-layer",
+    provenance,
+    engine,
+    layers: { silhouette: [], interior: [], annotation: [], unclassified: [] },
+    unsupported: { reason },
+  };
+}
+
+function vectorizerConfigForRecipe(recipe) {
+  const shared = {
+    hierarchical: Hierarchical.Stacked,
+    mode: PathSimplifyMode.Spline,
+    cornerThreshold: 60,
+    lengthThreshold: 4,
+    maxIterations: 6,
+    spliceThreshold: 45,
+    pathPrecision: 2,
+  };
+
+  if (recipe.id === "colored-illustration") {
+    return {
+      ...shared,
+      colorMode: ColorMode.Color,
+      filterSpeckle: 8,
+      colorPrecision: 6,
+      layerDifference: 12,
+    };
+  }
+
+  return {
+    ...shared,
+    colorMode: ColorMode.Binary,
+    filterSpeckle: recipe.id === "pencil-sketch" ? 4 : 0,
+    colorPrecision: 6,
+    layerDifference: 5,
   };
 }
 

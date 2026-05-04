@@ -27,9 +27,9 @@ Status:
 - [x] Three canonical personas (`docs/design/personas/`).
 - [x] **v0.1 design spec ([`V0.1-DESIGN.md`](V0.1-DESIGN.md))** — canonical, Codex-ready.
 - [x] Phase A foundation cleanup: output packages split into `package/` and `dev-artifacts/`, dev comparison moved to `app/dev-artifacts/dev-comparison.html`.
-- [ ] **v0.1 implementation phases B–J** per the design spec. Phase B is started with SVG passthrough and trace-layer smoke tests; raster engines still need to land.
+- [ ] **v0.1 implementation phases B–J** per the design spec. Phase B now has SVG passthrough plus a VTracer-backed raster smoke path; vector PDF / `.ai` ingest and per-recipe fixture coverage remain open.
 - [ ] Pattern schema concrete JSON shape (closes during Phase E).
-- [ ] Tech stack decision concrete (closes during Phase B with Potrace + VTracer + Three.js + pdf-lib commitments).
+- [ ] Tech stack decision concrete (closes during Phase B with VTracer-backed sketch ingest + Three.js + pdf-lib commitments; Potrace remains research-only unless license isolation is intentional).
 
 ## Product Build Order
 

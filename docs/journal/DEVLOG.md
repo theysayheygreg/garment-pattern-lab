@@ -213,3 +213,10 @@ Phase B vector ingest start:
 - Added `packages/sketch-intent/src/raster-to-vector/bridge.mjs` with SVG passthrough, provenance hashing, recipe selection, and deterministic trace-layer buckets.
 - Added `packages/sketch-intent/fixtures/clean-technical-flat.svg` and `bridge.test.mjs`.
 - Wired `npm run check:sketch` into `npm run check`.
+
+Phase B raster smoke path:
+
+- Installed `@neplex/vectorizer` as the first runnable VTracer-backed raster-to-SVG bridge.
+- Updated `RasterToVectorBridge` so `.png`, `.jpg`, and `.webp` inputs produce the same editable trace layer contract as SVG passthrough.
+- Added a generated synthetic PNG smoke fixture to prove raster tracing yields structured path layers.
+- Kept Potrace as research/possible isolated comparison because of GPLv2; the default prototype path is MIT VTracer-backed.
