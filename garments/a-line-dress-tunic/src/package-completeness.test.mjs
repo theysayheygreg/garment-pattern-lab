@@ -9,6 +9,7 @@ const requiredPackages = [
     output: "v0.1",
     packageFiles: [
       "overview.md",
+      "overview.svg",
       "pattern.svg",
       "marker.svg",
       "cut-sheet.md",
@@ -23,6 +24,7 @@ const requiredPackages = [
     output: "v0.1-from-sketch",
     packageFiles: [
       "overview.md",
+      "overview.svg",
       "pattern.svg",
       "marker.svg",
       "cut-sheet.md",
@@ -49,7 +51,7 @@ const requiredPackages = [
 const requiredHumanOutputs = [
   {
     output: "a-line-dress-tunic-from-sketch",
-    files: ["guide.md", "pattern.svg", "preview.html", "source-sketch.svg", "manifest.json"],
+    files: ["guide.md", "overview.svg", "pattern.svg", "preview.html", "source-sketch.svg", "manifest.json"],
   },
 ];
 
@@ -65,6 +67,7 @@ for (const spec of requiredPackages) {
   const manifest = readJson(path.join(outputRoot, "package", "manifest.json"));
   assert.equal(manifest.readiness, "ready-for-human-sanity-check");
   assert(manifest.packageFiles.some((file) => file.path === "package/overview.md"));
+  assert(manifest.packageFiles.some((file) => file.path === "package/overview.svg"));
   assert(manifest.packageFiles.some((file) => file.path === "package/human-sanity-check.md"));
   assert(manifest.packageFiles.some((file) => file.path === "package/pattern.svg"));
   assert(manifest.packageFiles.some((file) => file.path === "package/marker.svg"));
@@ -73,6 +76,12 @@ for (const spec of requiredPackages) {
   assert.match(patternSvg, /2 in scale square/);
   assert.match(patternSvg, /CUT 1 ON FOLD/);
   assert(patternSvg.split("L ").length > 60, "Expected higher-resolution sampled pattern curves.");
+
+  const overviewSvg = fs.readFileSync(path.join(outputRoot, "package", "overview.svg"), "utf8");
+  assert.match(overviewSvg, /Projects/);
+  assert.match(overviewSvg, /SOURCE SKETCH|No source sketch/);
+  assert.match(overviewSvg, /GENERATED PIECES/);
+  assert.match(overviewSvg, /Open marker.svg for actual fabric layout/);
 
   const sanitySheet = fs.readFileSync(path.join(outputRoot, "package", "human-sanity-check.md"), "utf8");
   assert.match(sanitySheet, /2 in scale square/);
@@ -105,6 +114,9 @@ for (const spec of requiredHumanOutputs) {
   assert.match(guide, /pattern overview board/);
   assert.match(guide, /The marker is a separate sheet/);
   assert.match(guide, /Units|Body Fixture|Finished Draft Measurements/);
+  const overviewSvg = fs.readFileSync(path.join(outputRoot, "overview.svg"), "utf8");
+  assert.match(overviewSvg, /SOURCE SKETCH/);
+  assert.match(overviewSvg, /CENTER FRONT \/ FOLD/);
   const sourceSketch = fs.readFileSync(path.join(outputRoot, "source-sketch.svg"), "utf8");
   assert.match(sourceSketch, /<svg/);
 }

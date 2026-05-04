@@ -22,6 +22,11 @@
       "format": "markdown"
     },
     {
+      "path": "package/overview.svg",
+      "role": "designer-pattern-overview-board",
+      "format": "svg"
+    },
+    {
       "path": "package/pattern.svg",
       "role": "printable-pattern-source",
       "format": "svg"

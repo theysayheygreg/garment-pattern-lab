@@ -5,7 +5,7 @@ import path from "node:path";
 import { performance } from "node:perf_hooks";
 import { fileURLToPath } from "node:url";
 import { applyParameterEdit, buildEditSummary, interpretCommand } from "../../../packages/assistant-core/src/commands.mjs";
-import { buildAssembly, buildCutSheet, buildDebugOverlayHtml, buildHumanGuide, buildHumanSanityCheck, buildPackageManifest, buildPackageOverview, buildPreview, buildReadinessMd, buildSvg } from "../../../packages/export-core/src/package-builders.mjs";
+import { buildAssembly, buildCutSheet, buildDebugOverlayHtml, buildHumanGuide, buildHumanSanityCheck, buildOverviewBoard, buildPackageManifest, buildPackageOverview, buildPreview, buildReadinessMd, buildSvg } from "../../../packages/export-core/src/package-builders.mjs";
 import { buildMarkerPlan, buildMarkerSvg } from "../../../packages/export-core/src/marker-layout/layout.mjs";
 import { measureNamedEdges, round } from "../../../packages/pattern-core/src/measurements.mjs";
 import { buildDraftingRequest, projectLegacyGeneratorInputs } from "../../../packages/sketch-intent/src/drafting-adapter/drafting-request.mjs";
@@ -340,6 +340,7 @@ if (!checkOnly) {
     fs.writeFileSync(path.join(garmentRoot, "fixtures", "validation", "v0.1-readiness.json"), `${JSON.stringify(readiness, null, 2)}\n`);
   }
   fs.writeFileSync(path.join(packageDir, "overview.md"), buildPackageOverview(pattern, readiness, markerPlan));
+  fs.writeFileSync(path.join(packageDir, "overview.svg"), buildOverviewBoard(pattern, readiness, markerPlan, { sourceSketchHref: sourceSketch ? "source-sketch.svg" : null }).replace(/[ \t]+$/gm, ""));
   fs.writeFileSync(path.join(packageDir, "pattern.svg"), buildSvg(pattern, readiness, params).replace(/[ \t]+$/gm, ""));
   fs.writeFileSync(path.join(packageDir, "cut-sheet.md"), buildCutSheet(pattern, params, markerPlan));
   fs.writeFileSync(path.join(packageDir, "assembly.md"), buildAssembly(pattern));
@@ -367,6 +368,7 @@ if (!checkOnly) {
 
   fs.mkdirSync(humanOutputDir, { recursive: true });
   fs.writeFileSync(path.join(humanOutputDir, "guide.md"), buildHumanGuide(pattern, readiness, markerPlan));
+  fs.writeFileSync(path.join(humanOutputDir, "overview.svg"), buildOverviewBoard(pattern, readiness, markerPlan, { sourceSketchHref: sourceSketch ? "source-sketch.svg" : null }).replace(/[ \t]+$/gm, ""));
   fs.writeFileSync(path.join(humanOutputDir, "pattern.svg"), buildSvg(pattern, readiness, params).replace(/[ \t]+$/gm, ""));
   fs.writeFileSync(path.join(humanOutputDir, "preview.html"), buildPreview(pattern, readiness));
   if (sourceSketch) fs.copyFileSync(path.resolve(process.cwd(), sourceSketch), path.join(humanOutputDir, "source-sketch.svg"));
@@ -378,6 +380,7 @@ if (!checkOnly) {
       sourcePackage: path.relative(repoRoot, outputDir),
       files: [
         "guide.md",
+        "overview.svg",
         "pattern.svg",
         "preview.html",
         ...(sourceSketch ? ["source-sketch.svg"] : []),

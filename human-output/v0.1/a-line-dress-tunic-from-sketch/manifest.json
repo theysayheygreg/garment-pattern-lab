@@ -4,6 +4,7 @@
   "sourcePackage": "garments/a-line-dress-tunic/outputs/v0.1-from-sketch",
   "files": [
     "guide.md",
+    "overview.svg",
     "pattern.svg",
     "preview.html",
     "source-sketch.svg"

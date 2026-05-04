@@ -66,6 +66,160 @@ export function buildSvg(patternDoc, readinessDoc, params) {
 `;
 }
 
+export function buildOverviewBoard(patternDoc, readinessDoc, markerPlan = patternDoc.markerPlan, options = {}) {
+  const body = patternDoc.bodyMeasurementSet?.measurements ?? {};
+  const params = patternDoc.garmentParameters;
+  const sourceSketchHref = options.sourceSketchHref ?? "source-sketch.svg";
+  const hasSourceSketch = Boolean(options.sourceSketchHref);
+  const front = patternDoc.panels[0];
+  const back = patternDoc.panels[1];
+  const miniFront = transformPanelPath(front.seamLine, { x: 560, y: 825, scale: 0.14 });
+  const miniBack = transformPanelPath(back.seamLine, { x: 690, y: 825, scale: 0.14 });
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <title>${escapeXml(patternDoc.title)} overview board</title>
+  <desc>Kiko-style pattern overview board: source sketch, interpreted garment on croquis, measurement grid, pattern notes, and generated pattern pieces.</desc>
+  <style>
+    .page { fill: #faf8f2; }
+    .rail { fill: rgba(255,255,255,0.84); stroke: #d8d6cf; }
+    .paper { fill: #fffefa; filter: url(#paper-shadow); }
+    .grid-minor { fill: none; stroke: #dde1e4; stroke-width: 1; }
+    .grid-major { fill: none; stroke: #cbd2d8; stroke-width: 1.4; }
+    .body { fill: #d9dcde; opacity: 0.72; }
+    .body-line { fill: none; stroke: #b9bec3; stroke-width: 2; }
+    .garment { fill: rgba(255,255,255,0.18); stroke: #111827; stroke-width: 2.3; }
+    .garment-detail { fill: none; stroke: #111827; stroke-width: 1.1; opacity: 0.72; }
+    .measure { stroke: #ee9bc6; stroke-width: 1.2; opacity: 0.78; }
+    .callout { stroke: #111827; stroke-width: 1.2; fill: none; marker-end: url(#callout-arrow); }
+    .cut-piece { fill: #fffdf7; stroke: #111827; stroke-width: 1.8; }
+    .cut-piece-back { fill: #ecfdf5; stroke: #111827; stroke-width: 1.8; }
+    .piece-fold { stroke: #dc2626; stroke-width: 1.1; stroke-dasharray: 3 5; }
+    .grain { stroke: #047857; stroke-width: 1.4; marker-end: url(#grain-arrow); }
+    .source-card { fill: #ffffff; stroke: #c9ced3; }
+    .thumb-active { fill: none; stroke: #1f2937; stroke-width: 5; }
+    .thumb { fill: #ffffff; stroke: #d6d9dd; }
+    .label { font-family: Helvetica, Arial, sans-serif; font-size: 14px; fill: #111827; font-weight: 700; letter-spacing: 0; }
+    .small { font-family: Helvetica, Arial, sans-serif; font-size: 12px; fill: #374151; letter-spacing: 0; }
+    .tiny { font-family: Helvetica, Arial, sans-serif; font-size: 10px; fill: #4b5563; letter-spacing: 0; }
+    .title { font-family: Georgia, 'Times New Roman', serif; font-size: 48px; fill: #1f2937; letter-spacing: 0; }
+    .sheet-title { font-family: Helvetica, Arial, sans-serif; font-size: 15px; fill: #111827; font-weight: 700; letter-spacing: 0; }
+    .badge-text { font-family: Helvetica, Arial, sans-serif; font-size: 18px; fill: #6b7280; font-weight: 700; letter-spacing: 5px; }
+    .swatch-label { font-family: Helvetica, Arial, sans-serif; font-size: 11px; fill: #111827; letter-spacing: 0; }
+  </style>
+  <defs>
+    <pattern id="board-grid" width="28" height="28" patternUnits="userSpaceOnUse">
+      <path d="M 28 0 L 0 0 0 28" class="grid-minor" />
+    </pattern>
+    <pattern id="board-grid-major" width="140" height="140" patternUnits="userSpaceOnUse">
+      <rect width="140" height="140" fill="url(#board-grid)" />
+      <path d="M 140 0 L 0 0 0 140" class="grid-major" />
+    </pattern>
+    <filter id="paper-shadow" x="-8%" y="-8%" width="116%" height="116%">
+      <feDropShadow dx="0" dy="8" stdDeviation="7" flood-color="#111827" flood-opacity="0.12" />
+    </filter>
+    <marker id="callout-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#111827" />
+    </marker>
+    <marker id="grain-arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#047857" />
+    </marker>
+  </defs>
+
+  <rect width="1600" height="1000" class="page" />
+  <text x="22" y="58" class="title">Projects</text>
+  <rect x="0" y="82" width="1600" height="918" fill="url(#board-grid-major)" />
+  <rect x="0" y="82" width="430" height="918" class="rail" />
+
+  <g id="left-thumbnails">
+    ${thumbnailSheet({ x: 42, y: 118, width: 338, height: 300, sourceSketchHref, hasSourceSketch, active: false, title: "INPUT" })}
+    ${thumbnailOverview({ x: 42, y: 450, width: 338, height: 430, active: true })}
+    <g transform="translate(70 136)">
+      <rect x="0" y="28" width="174" height="56" rx="28" fill="#ffffff" stroke="#d1d5db" stroke-width="2" filter="url(#paper-shadow)" />
+      <text x="28" y="64" class="badge-text">CROQUIS</text>
+    </g>
+  </g>
+
+  <g id="source-reference">
+    <rect x="515" y="125" width="300" height="360" rx="8" class="source-card" />
+    ${
+      hasSourceSketch
+        ? `<image href="${escapeAttr(sourceSketchHref)}" x="540" y="150" width="250" height="300" preserveAspectRatio="xMidYMid meet" />`
+        : `<text x="560" y="300" class="small">No source sketch in this run</text>`
+    }
+    <text x="535" y="518" class="label">SOURCE SKETCH</text>
+    <text x="535" y="540" class="small">Input reference retained beside output</text>
+  </g>
+
+  <g id="nav-dots">
+    <circle cx="890" cy="500" r="34" fill="#ffffff" opacity="0.88" filter="url(#paper-shadow)" />
+    <path d="M 880 480 L 900 500 L 880 520" fill="none" stroke="#4b5563" stroke-width="4" />
+    <circle cx="470" cy="500" r="34" fill="#ffffff" opacity="0.88" filter="url(#paper-shadow)" />
+    <path d="M 480 480 L 460 500 L 480 520" fill="none" stroke="#4b5563" stroke-width="4" />
+  </g>
+
+  <g id="main-overview-sheet">
+    <rect x="980" y="125" width="480" height="765" class="paper" />
+    <rect x="1018" y="160" width="365" height="690" fill="none" stroke="#ef9bc5" stroke-width="1.6" />
+    <line x1="1199" y1="145" x2="1199" y2="875" class="measure" />
+    <line x1="1040" y1="285" x2="1428" y2="285" class="measure" />
+    <line x1="1040" y1="365" x2="1428" y2="365" class="measure" />
+    <line x1="1040" y1="475" x2="1428" y2="475" class="measure" />
+    <line x1="1040" y1="590" x2="1428" y2="590" class="measure" />
+    <line x1="1040" y1="805" x2="1428" y2="805" class="measure" />
+    <line x1="1008" y1="168" x2="1008" y2="804" class="measure" />
+    <line x1="1438" y1="174" x2="1438" y2="804" class="measure" />
+
+    ${bodyReference()}
+    ${aLineGarmentOnBody()}
+    ${pleatLines()}
+    ${callout(1300, 212, 1198, 194, "HEAD REFERENCE")}
+    ${callout(1306, 272, 1212, 286, "FRONT NECK POINT")}
+    ${callout(1290, 344, 1254, 345, "ARMHOLE DEPTH")}
+    ${callout(1320, 430, 1232, 415, `BUST ${formatIn(body.bust)}`)}
+    ${callout(1325, 528, 1228, 526, "A-LINE SIDE SEAM")}
+    ${callout(1325, 642, 1245, 642, `HEM SWEEP ${formatIn(patternDoc.patternMeasurements.fullHemSweep)}`)}
+    ${callout(1090, 760, 1166, 736, `LENGTH ${formatIn(patternDoc.patternMeasurements.finishedLength)}`)}
+    ${callout(1080, 388, 1134, 365, "CENTER FRONT / FOLD")}
+
+    <text x="1000" y="190" class="tiny" transform="rotate(-90 1000 190)">SHOULDER</text>
+    <text x="1000" y="344" class="tiny" transform="rotate(-90 1000 344)">CHEST TO WAIST</text>
+    <text x="1000" y="494" class="tiny" transform="rotate(-90 1000 494)">WAIST TO HIP</text>
+    <text x="1422" y="625" class="tiny" transform="rotate(90 1422 625)">TOTAL HEIGHT / BODY REFERENCE GRID</text>
+
+    <g id="status-and-swatches">
+      <rect x="1000" y="858" width="12" height="12" fill="#ef9bc5" />
+      <text x="1018" y="868" class="swatch-label">MEASUREMENT GRID</text>
+      <rect x="1120" y="858" width="12" height="12" fill="#111827" />
+      <text x="1138" y="868" class="swatch-label">INTERPRETED GARMENT</text>
+      <rect x="1266" y="858" width="12" height="12" fill="#2563eb" />
+      <text x="1284" y="868" class="swatch-label">SEAM LINE</text>
+    </g>
+  </g>
+
+  <g id="notes">
+    <text x="515" y="645" class="label">${escapeXml(patternDoc.title)}</text>
+    <text x="515" y="670" class="small">Readiness: ${escapeXml(readinessDoc.overallState)}</text>
+    <text x="515" y="696" class="small">Seam allowance: ${formatIn(params.allowances.seam)} | Hem allowance: ${formatIn(params.allowances.hem)}</text>
+    <text x="515" y="722" class="small">Marker: ${markerPlan ? `${markerPlan.fabricWidthIn} in fabric / ${markerPlan.totalFabricLengthIn} in length` : "not generated"}</text>
+    <text x="515" y="758" class="small">This overview is for design and pattern review. Open marker.svg for actual fabric layout.</text>
+  </g>
+
+  <g id="generated-pattern-card">
+    <rect x="515" y="778" width="300" height="200" rx="8" class="source-card" />
+    <text x="535" y="805" class="label">GENERATED PIECES</text>
+    <path d="${miniFront}" class="cut-piece" />
+    <path d="${miniBack}" class="cut-piece-back" />
+    <line x1="560" y1="827" x2="560" y2="928" class="piece-fold" />
+    <line x1="690" y1="827" x2="690" y2="928" class="piece-fold" />
+    <line x1="590" y1="850" x2="590" y2="912" class="grain" />
+    <line x1="720" y1="850" x2="720" y2="912" class="grain" />
+    <text x="535" y="960" class="tiny">FRONT/BACK: CUT 1 EACH ON FOLD</text>
+  </g>
+</svg>
+`;
+}
+
 export function buildCutSheet(patternDoc, params, markerPlan = patternDoc.markerPlan) {
   const body = patternDoc.bodyMeasurementSet?.measurements ?? {};
   const markerSection = markerPlan
@@ -144,6 +298,87 @@ function formatIn(value) {
 
 function formatInWithMetric(value) {
   return `${formatIn(value)} (${formatMm(value)})`;
+}
+
+function transformPanelPath(points, { x, y, scale }) {
+  if (!points?.length) return "";
+  const minX = Math.min(...points.map((point) => point.x));
+  const minY = Math.min(...points.map((point) => point.y));
+  return `${points
+    .map((point, index) => {
+      const tx = round(x + (point.x - minX) * scale);
+      const ty = round(y + (point.y - minY) * scale);
+      return `${index === 0 ? "M" : "L"} ${tx} ${ty}`;
+    })
+    .join(" ")} Z`;
+}
+
+function bodyReference() {
+  return `
+    <path class="body" d="M 1198 175 C 1242 175 1276 210 1272 252 C 1268 282 1242 306 1210 312 L 1210 338 C 1272 348 1308 394 1302 466 C 1294 558 1270 640 1250 738 C 1243 780 1233 840 1218 868 L 1180 868 C 1167 840 1158 780 1150 738 C 1130 640 1108 558 1100 466 C 1093 394 1128 348 1188 338 L 1188 312 C 1158 306 1132 282 1128 252 C 1122 210 1156 175 1198 175 Z" />
+    <path class="body-line" d="M 1172 222 C 1184 214 1212 214 1224 222 M 1174 247 C 1188 260 1208 260 1222 247 M 1198 312 L 1198 838 M 1132 364 C 1170 380 1228 380 1266 364 M 1120 475 C 1172 492 1226 492 1280 475 M 1110 590 C 1168 610 1232 610 1290 590" />
+  `;
+}
+
+function aLineGarmentOnBody() {
+  return `
+    <path class="garment" d="M 1148 318 C 1162 296 1235 296 1250 318 L 1272 372 C 1288 470 1310 600 1330 790 L 1068 790 C 1088 600 1110 470 1126 372 Z" />
+    <path class="garment-detail" d="M 1162 318 C 1173 352 1226 352 1238 318" />
+    <path class="garment-detail" d="M 1198 322 L 1198 790" stroke-dasharray="8 8" />
+    <path class="garment-detail" d="M 1126 372 C 1118 418 1112 462 1110 506" />
+    <path class="garment-detail" d="M 1272 372 C 1280 418 1286 462 1288 506" />
+  `;
+}
+
+function pleatLines() {
+  const lines = [];
+  for (let x = 1092; x <= 1308; x += 16) {
+    lines.push(`<path d="M ${x} 342 C ${x - 8} 500 ${x - 14} 645 ${x - 20} 790" stroke="#111827" stroke-width="0.7" opacity="0.42" fill="none" />`);
+  }
+  return lines.join("\n    ");
+}
+
+function callout(textX, textY, targetX, targetY, text) {
+  return `
+    <path d="M ${textX - 12} ${textY + 3} L ${targetX} ${targetY}" class="callout" />
+    <text x="${textX}" y="${textY}" class="tiny">${escapeXml(text)}</text>`;
+}
+
+function thumbnailSheet({ x, y, width, height, sourceSketchHref, hasSourceSketch, active, title }) {
+  return `
+    <g transform="translate(${x} ${y})">
+      <rect width="${width}" height="${height}" class="thumb" />
+      <rect x="18" y="18" width="${width - 36}" height="${height - 36}" fill="#fffefa" stroke="#ef9bc5" />
+      ${
+        hasSourceSketch
+          ? `<image href="${escapeAttr(sourceSketchHref)}" x="40" y="40" width="${width - 80}" height="${height - 96}" preserveAspectRatio="xMidYMid meet" opacity="0.82" />`
+          : `<path d="M ${width * 0.4} 60 C ${width * 0.62} 95 ${width * 0.62} ${height - 55} ${width * 0.4} ${height - 35}" class="body" />`
+      }
+      <text x="24" y="${height - 20}" class="tiny">${escapeXml(title)}</text>
+      ${active ? `<rect width="${width}" height="${height}" class="thumb-active" />` : ""}
+    </g>`;
+}
+
+function thumbnailOverview({ x, y, width, height, active }) {
+  return `
+    <g transform="translate(${x} ${y})">
+      <rect width="${width}" height="${height}" class="thumb" />
+      <rect x="18" y="18" width="${width - 36}" height="${height - 36}" fill="#fffefa" stroke="#ef9bc5" />
+      <path d="M 164 54 C 206 54 236 86 230 130 C 225 162 200 180 184 190 L 214 372 L 112 372 L 144 190 C 124 176 104 154 100 130 C 94 86 124 54 164 54 Z" class="body" />
+      <path d="M 118 128 C 142 106 188 106 210 128 L 228 184 C 240 250 250 306 264 390 L 72 390 C 88 306 98 250 110 184 Z" class="garment" />
+      <line x1="164" y1="78" x2="164" y2="388" class="measure" />
+      <line x1="54" y1="178" x2="286" y2="178" class="measure" />
+      <line x1="54" y1="268" x2="286" y2="268" class="measure" />
+      <text x="24" y="${height - 20}" class="tiny">OVERVIEW / PATTERN</text>
+      ${active ? `<rect width="${width}" height="${height}" class="thumb-active" />` : ""}
+    </g>`;
+}
+
+function escapeXml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
 }
 
 export function buildAssembly(patternDoc) {
@@ -231,6 +466,7 @@ This is the human-facing v0.1 review guide. It is intentionally one document: ga
 ## Files In This Output
 
 - \`source-sketch.svg\` — input sketch that produced this package, when available.
+- \`overview.svg\` — Kiko-style overview board showing input, interpreted garment, measurements, callouts, and generated pieces.
 - \`pattern.svg\` — generated pattern flats with a 2 in scale square.
 - \`preview.html\` — static 3D assembly preview, not cloth simulation.
 - \`guide.md\` — this document.
@@ -239,7 +475,7 @@ This is the human-facing v0.1 review guide. It is intentionally one document: ga
 
 The next human-facing package should open like a pattern overview board: source sketch, interpreted garment, body/croquis measurement context, generated pattern pieces, measurements, and callouts in one visual sheet.
 
-\`pattern.svg\` is the current v0.1 stand-in for that overview sheet. It carries the generated pieces, scale proof, labels, seam allowance, fold lines, grainlines, and key pattern marks. Measurements should keep moving onto the visual sheet as the package matures, not live only in Markdown.
+\`overview.svg\` is the first real v0.1 version of that overview sheet. \`pattern.svg\` remains the cleaner flat pattern source with scale proof, labels, seam allowance, fold lines, grainlines, and key pattern marks.
 
 The marker is a separate sheet: actual fabric layout and consumption on a fabric width. It is kept in developer/package output for this simple two-piece harness, but it becomes a human-facing file again when garments have enough cut components for layout to matter.
 
@@ -600,6 +836,7 @@ export function buildDebugOverlayHtml({ trace, interpretation, calibratedInterpr
 export function buildPackageManifest(patternDoc, readinessDoc, markerPlan, options = {}) {
   const packageFiles = [
     { path: "package/overview.md", role: "package-front-door", format: "markdown" },
+    { path: "package/overview.svg", role: "designer-pattern-overview-board", format: "svg" },
     { path: "package/pattern.svg", role: "printable-pattern-source", format: "svg" },
     { path: "package/marker.svg", role: "fabric-marker-layout", format: "svg" },
     { path: "package/cut-sheet.md", role: "human-cut-instructions", format: "markdown" },

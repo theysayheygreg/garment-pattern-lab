@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <title>Sleeveless A-line Woven Dress/Tunic v0.1-from-sketch overview board</title>
+  <desc>Kiko-style pattern overview board: source sketch, interpreted garment on croquis, measurement grid, pattern notes, and generated pattern pieces.</desc>
+  <style>
+    .page { fill: #faf8f2; }
+    .rail { fill: rgba(255,255,255,0.84); stroke: #d8d6cf; }
+    .paper { fill: #fffefa; filter: url(#paper-shadow); }
+    .grid-minor { fill: none; stroke: #dde1e4; stroke-width: 1; }
+    .grid-major { fill: none; stroke: #cbd2d8; stroke-width: 1.4; }
+    .body { fill: #d9dcde; opacity: 0.72; }
+    .body-line { fill: none; stroke: #b9bec3; stroke-width: 2; }
+    .garment { fill: rgba(255,255,255,0.18); stroke: #111827; stroke-width: 2.3; }
+    .garment-detail { fill: none; stroke: #111827; stroke-width: 1.1; opacity: 0.72; }
+    .measure { stroke: #ee9bc6; stroke-width: 1.2; opacity: 0.78; }
+    .callout { stroke: #111827; stroke-width: 1.2; fill: none; marker-end: url(#callout-arrow); }
+    .cut-piece { fill: #fffdf7; stroke: #111827; stroke-width: 1.8; }
+    .cut-piece-back { fill: #ecfdf5; stroke: #111827; stroke-width: 1.8; }
+    .piece-fold { stroke: #dc2626; stroke-width: 1.1; stroke-dasharray: 3 5; }
+    .grain { stroke: #047857; stroke-width: 1.4; marker-end: url(#grain-arrow); }
+    .source-card { fill: #ffffff; stroke: #c9ced3; }
+    .thumb-active { fill: none; stroke: #1f2937; stroke-width: 5; }
+    .thumb { fill: #ffffff; stroke: #d6d9dd; }
+    .label { font-family: Helvetica, Arial, sans-serif; font-size: 14px; fill: #111827; font-weight: 700; letter-spacing: 0; }
+    .small { font-family: Helvetica, Arial, sans-serif; font-size: 12px; fill: #374151; letter-spacing: 0; }
+    .tiny { font-family: Helvetica, Arial, sans-serif; font-size: 10px; fill: #4b5563; letter-spacing: 0; }
+    .title { font-family: Georgia, 'Times New Roman', serif; font-size: 48px; fill: #1f2937; letter-spacing: 0; }
+    .sheet-title { font-family: Helvetica, Arial, sans-serif; font-size: 15px; fill: #111827; font-weight: 700; letter-spacing: 0; }
+    .badge-text { font-family: Helvetica, Arial, sans-serif; font-size: 18px; fill: #6b7280; font-weight: 700; letter-spacing: 5px; }
+    .swatch-label { font-family: Helvetica, Arial, sans-serif; font-size: 11px; fill: #111827; letter-spacing: 0; }
+  </style>
+  <defs>
+    <pattern id="board-grid" width="28" height="28" patternUnits="userSpaceOnUse">
+      <path d="M 28 0 L 0 0 0 28" class="grid-minor" />
+    </pattern>
+    <pattern id="board-grid-major" width="140" height="140" patternUnits="userSpaceOnUse">
+      <rect width="140" height="140" fill="url(#board-grid)" />
+      <path d="M 140 0 L 0 0 0 140" class="grid-major" />
+    </pattern>
+    <filter id="paper-shadow" x="-8%" y="-8%" width="116%" height="116%">
+      <feDropShadow dx="0" dy="8" stdDeviation="7" flood-color="#111827" flood-opacity="0.12" />
+    </filter>
+    <marker id="callout-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#111827" />
+    </marker>
+    <marker id="grain-arrow" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#047857" />
+    </marker>
+  </defs>
+
+  <rect width="1600" height="1000" class="page" />
+  <text x="22" y="58" class="title">Projects</text>
+  <rect x="0" y="82" width="1600" height="918" fill="url(#board-grid-major)" />
+  <rect x="0" y="82" width="430" height="918" class="rail" />
+
+  <g id="left-thumbnails">
+
+    <g transform="translate(42 118)">
+      <rect width="338" height="300" class="thumb" />
+      <rect x="18" y="18" width="302" height="264" fill="#fffefa" stroke="#ef9bc5" />
+      <image href="source-sketch.svg" x="40" y="40" width="258" height="204" preserveAspectRatio="xMidYMid meet" opacity="0.82" />
+      <text x="24" y="280" class="tiny">INPUT</text>
+
+    </g>
+
+    <g transform="translate(42 450)">
+      <rect width="338" height="430" class="thumb" />
+      <rect x="18" y="18" width="302" height="394" fill="#fffefa" stroke="#ef9bc5" />
+      <path d="M 164 54 C 206 54 236 86 230 130 C 225 162 200 180 184 190 L 214 372 L 112 372 L 144 190 C 124 176 104 154 100 130 C 94 86 124 54 164 54 Z" class="body" />
+      <path d="M 118 128 C 142 106 188 106 210 128 L 228 184 C 240 250 250 306 264 390 L 72 390 C 88 306 98 250 110 184 Z" class="garment" />
+      <line x1="164" y1="78" x2="164" y2="388" class="measure" />
+      <line x1="54" y1="178" x2="286" y2="178" class="measure" />
+      <line x1="54" y1="268" x2="286" y2="268" class="measure" />
+      <text x="24" y="410" class="tiny">OVERVIEW / PATTERN</text>
+      <rect width="338" height="430" class="thumb-active" />
+    </g>
+    <g transform="translate(70 136)">
+      <rect x="0" y="28" width="174" height="56" rx="28" fill="#ffffff" stroke="#d1d5db" stroke-width="2" filter="url(#paper-shadow)" />
+      <text x="28" y="64" class="badge-text">CROQUIS</text>
+    </g>
+  </g>
+
+  <g id="source-reference">
+    <rect x="515" y="125" width="300" height="360" rx="8" class="source-card" />
+    <image href="source-sketch.svg" x="540" y="150" width="250" height="300" preserveAspectRatio="xMidYMid meet" />
+    <text x="535" y="518" class="label">SOURCE SKETCH</text>
+    <text x="535" y="540" class="small">Input reference retained beside output</text>
+  </g>
+
+  <g id="nav-dots">
+    <circle cx="890" cy="500" r="34" fill="#ffffff" opacity="0.88" filter="url(#paper-shadow)" />
+    <path d="M 880 480 L 900 500 L 880 520" fill="none" stroke="#4b5563" stroke-width="4" />
+    <circle cx="470" cy="500" r="34" fill="#ffffff" opacity="0.88" filter="url(#paper-shadow)" />
+    <path d="M 480 480 L 460 500 L 480 520" fill="none" stroke="#4b5563" stroke-width="4" />
+  </g>
+
+  <g id="main-overview-sheet">
+    <rect x="980" y="125" width="480" height="765" class="paper" />
+    <rect x="1018" y="160" width="365" height="690" fill="none" stroke="#ef9bc5" stroke-width="1.6" />
+    <line x1="1199" y1="145" x2="1199" y2="875" class="measure" />
+    <line x1="1040" y1="285" x2="1428" y2="285" class="measure" />
+    <line x1="1040" y1="365" x2="1428" y2="365" class="measure" />
+    <line x1="1040" y1="475" x2="1428" y2="475" class="measure" />
+    <line x1="1040" y1="590" x2="1428" y2="590" class="measure" />
+    <line x1="1040" y1="805" x2="1428" y2="805" class="measure" />
+    <line x1="1008" y1="168" x2="1008" y2="804" class="measure" />
+    <line x1="1438" y1="174" x2="1438" y2="804" class="measure" />
+
+
+    <path class="body" d="M 1198 175 C 1242 175 1276 210 1272 252 C 1268 282 1242 306 1210 312 L 1210 338 C 1272 348 1308 394 1302 466 C 1294 558 1270 640 1250 738 C 1243 780 1233 840 1218 868 L 1180 868 C 1167 840 1158 780 1150 738 C 1130 640 1108 558 1100 466 C 1093 394 1128 348 1188 338 L 1188 312 C 1158 306 1132 282 1128 252 C 1122 210 1156 175 1198 175 Z" />
+    <path class="body-line" d="M 1172 222 C 1184 214 1212 214 1224 222 M 1174 247 C 1188 260 1208 260 1222 247 M 1198 312 L 1198 838 M 1132 364 C 1170 380 1228 380 1266 364 M 1120 475 C 1172 492 1226 492 1280 475 M 1110 590 C 1168 610 1232 610 1290 590" />
+
+
+    <path class="garment" d="M 1148 318 C 1162 296 1235 296 1250 318 L 1272 372 C 1288 470 1310 600 1330 790 L 1068 790 C 1088 600 1110 470 1126 372 Z" />
+    <path class="garment-detail" d="M 1162 318 C 1173 352 1226 352 1238 318" />
+    <path class="garment-detail" d="M 1198 322 L 1198 790" stroke-dasharray="8 8" />
+    <path class="garment-detail" d="M 1126 372 C 1118 418 1112 462 1110 506" />
+    <path class="garment-detail" d="M 1272 372 C 1280 418 1286 462 1288 506" />
+
+    <path d="M 1092 342 C 1084 500 1078 645 1072 790" stroke="#111827" stroke-width="0.7" opacity="0.42" fill="none" />
+    <path d="M 1108 342 C 1100 500 1094 645 1088 790" stroke="#111827" stroke-width="0.7" opacity="0.42" fill="none" />
+    <path d="M 1124 342 C 1116 500 1110 645 1104 790" stroke="#111827" stroke-width="0.7" opacity="0.42" fill="none" />
+    <path d="M 1140 342 C 1132 500 1126 645 1120 790" stroke="#111827" stroke-width="0.7" opacity="0.42" fill="none" />
+    <path d="M 1156 342 C 1148 500 1142 645 1136 790" stroke="#111827" stroke-width="0.7" opacity="0.42" fill="none" />
+    <path d="M 1172 342 C 1164 500 1158 645 1152 790" stroke="#111827" stroke-width="0.7" opacity="0.42" fill="none" />
+    <path d="M 1188 342 C 1180 500 1174 645 1168 790" stroke="#111827" stroke-width="0.7" opacity="0.42" fill="none" />
+    <path d="M 1204 342 C 1196 500 1190 645 1184 790" stroke="#111827" stroke-width="0.7" opacity="0.42" fill="none" />
+    <path d="M 1220 342 C 1212 500 1206 645 1200 790" stroke="#111827" stroke-width="0.7" opacity="0.42" fill="none" />
+    <path d="M 1236 342 C 1228 500 1222 645 1216 790" stroke="#111827" stroke-width="0.7" opacity="0.42" fill="none" />
+    <path d="M 1252 342 C 1244 500 1238 645 1232 790" stroke="#111827" stroke-width="0.7" opacity="0.42" fill="none" />
+    <path d="M 1268 342 C 1260 500 1254 645 1248 790" stroke="#111827" stroke-width="0.7" opacity="0.42" fill="none" />
+    <path d="M 1284 342 C 1276 500 1270 645 1264 790" stroke="#111827" stroke-width="0.7" opacity="0.42" fill="none" />
+    <path d="M 1300 342 C 1292 500 1286 645 1280 790" stroke="#111827" stroke-width="0.7" opacity="0.42" fill="none" />
+
+    <path d="M 1288 215 L 1198 194" class="callout" />
+    <text x="1300" y="212" class="tiny">HEAD REFERENCE</text>
+
+    <path d="M 1294 275 L 1212 286" class="callout" />
+    <text x="1306" y="272" class="tiny">FRONT NECK POINT</text>
+
+    <path d="M 1278 347 L 1254 345" class="callout" />
+    <text x="1290" y="344" class="tiny">ARMHOLE DEPTH</text>
+
+    <path d="M 1308 433 L 1232 415" class="callout" />
+    <text x="1320" y="430" class="tiny">BUST 36.22 in</text>
+
+    <path d="M 1313 531 L 1228 526" class="callout" />
+    <text x="1325" y="528" class="tiny">A-LINE SIDE SEAM</text>
+
+    <path d="M 1313 645 L 1245 642" class="callout" />
+    <text x="1325" y="642" class="tiny">HEM SWEEP 59.06 in</text>
+
+    <path d="M 1078 763 L 1166 736" class="callout" />
+    <text x="1090" y="760" class="tiny">LENGTH 35.43 in</text>
+
+    <path d="M 1068 391 L 1134 365" class="callout" />
+    <text x="1080" y="388" class="tiny">CENTER FRONT / FOLD</text>
+
+    <text x="1000" y="190" class="tiny" transform="rotate(-90 1000 190)">SHOULDER</text>
+    <text x="1000" y="344" class="tiny" transform="rotate(-90 1000 344)">CHEST TO WAIST</text>
+    <text x="1000" y="494" class="tiny" transform="rotate(-90 1000 494)">WAIST TO HIP</text>
+    <text x="1422" y="625" class="tiny" transform="rotate(90 1422 625)">TOTAL HEIGHT / BODY REFERENCE GRID</text>
+
+    <g id="status-and-swatches">
+      <rect x="1000" y="858" width="12" height="12" fill="#ef9bc5" />
+      <text x="1018" y="868" class="swatch-label">MEASUREMENT GRID</text>
+      <rect x="1120" y="858" width="12" height="12" fill="#111827" />
+      <text x="1138" y="868" class="swatch-label">INTERPRETED GARMENT</text>
+      <rect x="1266" y="858" width="12" height="12" fill="#2563eb" />
+      <text x="1284" y="868" class="swatch-label">SEAM LINE</text>
+    </g>
+  </g>
+
+  <g id="notes">
+    <text x="515" y="645" class="label">Sleeveless A-line Woven Dress/Tunic v0.1-from-sketch</text>
+    <text x="515" y="670" class="small">Readiness: ready-for-human-sanity-check</text>
+    <text x="515" y="696" class="small">Seam allowance: 0.39 in | Hem allowance: 1.18 in</text>
+    <text x="515" y="722" class="small">Marker: 45 in fabric / 77.53 in length</text>
+    <text x="515" y="758" class="small">This overview is for design and pattern review. Open marker.svg for actual fabric layout.</text>
+  </g>
+
+  <g id="generated-pattern-card">
+    <rect x="515" y="778" width="300" height="200" rx="8" class="source-card" />
+    <text x="535" y="805" class="label">GENERATED PIECES</text>
+    <path d="M 560 841.8 L 560.6 838.6 L 561.42 835.71 L 562.46 833.14 L 563.71 830.88 L 565.19 828.94 L 566.88 827.31 L 568.79 826 L 570.92 825 L 583.52 827.52 L 584.23 829.3 L 585.04 831.15 L 585.93 833.06 L 586.88 835.02 L 587.88 837.02 L 588.91 839.05 L 589.96 841.1 L 591.01 843.16 L 592.04 845.21 L 593.04 847.26 L 593.99 849.28 L 594.88 851.27 L 595.69 853.21 L 596.4 855.1 L 596.4 860 L 596.77 865.08 L 597.06 870.23 L 597.3 875.42 L 597.51 880.65 L 597.73 885.9 L 597.98 891.15 L 598.3 896.38 L 598.7 901.57 L 599.23 906.72 L 599.9 911.8 L 601.51 915.07 L 603.01 918.33 L 604.42 921.6 L 605.72 924.87 L 606.92 928.13 L 608.02 931.4 L 609.02 934.67 L 609.92 937.93 L 610.72 941.2 L 611.41 944.47 L 612.01 947.73 L 612.5 951 L 560 951 Z" class="cut-piece" />
+    <path d="M 690 831.3 L 690.6 830.1 L 691.42 829.02 L 692.46 828.05 L 693.71 827.21 L 695.19 826.48 L 696.88 825.87 L 698.79 825.37 L 700.92 825 L 713.52 827.52 L 714.23 829.3 L 715.04 831.15 L 715.93 833.06 L 716.88 835.02 L 717.88 837.02 L 718.91 839.05 L 719.96 841.1 L 721.01 843.16 L 722.04 845.21 L 723.04 847.26 L 723.99 849.28 L 724.88 851.27 L 725.69 853.21 L 726.4 855.1 L 726.4 860 L 726.77 865.08 L 727.06 870.23 L 727.3 875.42 L 727.51 880.65 L 727.73 885.9 L 727.98 891.15 L 728.3 896.38 L 728.7 901.57 L 729.23 906.72 L 729.9 911.8 L 731.51 915.07 L 733.01 918.33 L 734.42 921.6 L 735.72 924.87 L 736.92 928.13 L 738.02 931.4 L 739.02 934.67 L 739.92 937.93 L 740.72 941.2 L 741.41 944.47 L 742.01 947.73 L 742.5 951 L 690 951 Z" class="cut-piece-back" />
+    <line x1="560" y1="827" x2="560" y2="928" class="piece-fold" />
+    <line x1="690" y1="827" x2="690" y2="928" class="piece-fold" />
+    <line x1="590" y1="850" x2="590" y2="912" class="grain" />
+    <line x1="720" y1="850" x2="720" y2="912" class="grain" />
+    <text x="535" y="960" class="tiny">FRONT/BACK: CUT 1 EACH ON FOLD</text>
+  </g>
+</svg>
