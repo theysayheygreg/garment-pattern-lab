@@ -1,0 +1,18 @@
+{
+  "id": "lengthen-hem",
+  "sourceCommand": "lengthen hem 100mm",
+  "summary": "Lengthen the garment hem by 100mm.",
+  "operations": [
+    {
+      "op": "increment",
+      "path": [
+        "length"
+      ],
+      "value": 100,
+      "units": "mm",
+      "before": 900,
+      "after": 1000
+    }
+  ],
+  "status": "applied-to-parameters"
+}

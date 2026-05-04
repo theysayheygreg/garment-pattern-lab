@@ -3,20 +3,34 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { applyParameterEdit, buildEditSummary, interpretCommand } from "../../../packages/assistant-core/src/commands.mjs";
 import { buildAssembly, buildCutSheet, buildPreview, buildReadinessMd, buildSvg } from "../../../packages/export-core/src/package-builders.mjs";
 import { measureNamedEdges, round } from "../../../packages/pattern-core/src/measurements.mjs";
 import { buildReadiness } from "../../../packages/validation-core/src/readiness.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const garmentRoot = path.resolve(__dirname, "..");
-const outputDir = path.join(garmentRoot, "outputs", "v0.1");
 const checkOnly = process.argv.includes("--check");
+const argValue = (name) => {
+  const index = process.argv.indexOf(name);
+  return index === -1 ? null : process.argv[index + 1];
+};
+const outputName = argValue("--output") ?? "v0.1";
+const sourceCommand = argValue("--command");
+const outputDir = path.join(garmentRoot, "outputs", outputName);
 
 const readJson = (relativePath) =>
   JSON.parse(fs.readFileSync(path.join(garmentRoot, relativePath), "utf8"));
 
 const body = readJson("fixtures/measurements/v0.1-body.json");
-const params = readJson("fixtures/parameters/v0.1-parameters.json");
+let params = readJson("fixtures/parameters/v0.1-parameters.json");
+let editIntent = null;
+
+if (sourceCommand) {
+  const applied = applyParameterEdit(params, interpretCommand(sourceCommand));
+  params = applied.params;
+  editIntent = applied.intent;
+}
 
 const makePanel = (kind) => {
   const bustQuarter = (body.measurements.bust + params.ease.bust) / 4;
@@ -117,14 +131,18 @@ const seamPairs = [
 
 const pattern = {
   schemaVersion: "0.1-dirty-spike",
-  id: "a-line-dress-tunic-v0.1",
-  title: "Sleeveless A-line Woven Dress/Tunic v0.1",
+  id: outputName === "v0.1" ? "a-line-dress-tunic-v0.1" : `a-line-dress-tunic-${outputName}`,
+  title:
+    outputName === "v0.1"
+      ? "Sleeveless A-line Woven Dress/Tunic v0.1"
+      : `Sleeveless A-line Woven Dress/Tunic ${outputName}`,
   status: "candidate",
   units: "mm",
   source: {
     generator: "garments/a-line-dress-tunic/src/generate.mjs",
     bodyMeasurementSet: "fixtures/measurements/v0.1-body.json",
     garmentParameters: "fixtures/parameters/v0.1-parameters.json",
+    ...(editIntent ? { parameterEdit: editIntent } : {}),
   },
   bodyMeasurementSet: body,
   garmentParameters: params,
@@ -155,8 +173,10 @@ const readiness = buildReadiness(pattern);
 
 if (!checkOnly) {
   fs.mkdirSync(outputDir, { recursive: true });
-  fs.writeFileSync(path.join(garmentRoot, "fixtures", "patterns", "v0.1-candidate.pattern.json"), `${JSON.stringify(pattern, null, 2)}\n`);
-  fs.writeFileSync(path.join(garmentRoot, "fixtures", "validation", "v0.1-readiness.json"), `${JSON.stringify(readiness, null, 2)}\n`);
+  if (outputName === "v0.1") {
+    fs.writeFileSync(path.join(garmentRoot, "fixtures", "patterns", "v0.1-candidate.pattern.json"), `${JSON.stringify(pattern, null, 2)}\n`);
+    fs.writeFileSync(path.join(garmentRoot, "fixtures", "validation", "v0.1-readiness.json"), `${JSON.stringify(readiness, null, 2)}\n`);
+  }
   fs.writeFileSync(path.join(outputDir, "pattern.json"), `${JSON.stringify(pattern, null, 2)}\n`);
   fs.writeFileSync(path.join(outputDir, "readiness.json"), `${JSON.stringify(readiness, null, 2)}\n`);
   fs.writeFileSync(path.join(outputDir, "pattern.svg"), buildSvg(pattern, readiness, params).replace(/[ \t]+$/gm, ""));
@@ -164,6 +184,10 @@ if (!checkOnly) {
   fs.writeFileSync(path.join(outputDir, "assembly.md"), buildAssembly(pattern));
   fs.writeFileSync(path.join(outputDir, "readiness.md"), buildReadinessMd(readiness));
   fs.writeFileSync(path.join(outputDir, "preview.html"), buildPreview(pattern, readiness));
+  if (editIntent) {
+    fs.writeFileSync(path.join(outputDir, "edit-intent.json"), `${JSON.stringify(editIntent, null, 2)}\n`);
+    fs.writeFileSync(path.join(outputDir, "edit-summary.md"), buildEditSummary(editIntent));
+  }
 }
 
 if (readiness.overallState !== "ready-for-human-sanity-check") {

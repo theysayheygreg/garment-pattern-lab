@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sleeveless A-line Woven Dress/Tunic v0.1-length-plus-100 Preview</title>
+  <style>
+    body { margin: 0; font-family: Helvetica, Arial, sans-serif; background: #f8fafc; color: #111827; }
+    main { display: grid; grid-template-columns: 1fr 320px; min-height: 100vh; }
+    section { display: grid; place-items: center; padding: 32px; }
+    aside { border-left: 1px solid #d1d5db; padding: 24px; background: #ffffff; }
+    svg { width: min(76vw, 760px); height: auto; }
+    .body { fill: #e5e7eb; stroke: #9ca3af; }
+    .panel { fill: rgba(96, 165, 250, 0.28); stroke: #1d4ed8; stroke-width: 2; }
+    .back { fill: rgba(16, 185, 129, 0.22); stroke: #047857; }
+    .seam { stroke: #111827; stroke-width: 1.5; stroke-dasharray: 5 5; }
+    h1 { font-size: 18px; margin: 0 0 12px; }
+    p, li { font-size: 14px; line-height: 1.45; }
+  </style>
+</head>
+<body>
+  <main>
+    <section>
+      <svg viewBox="0 0 720 720" role="img" aria-label="Static rough garment preview">
+        <ellipse cx="360" cy="112" rx="36" ry="46" class="body" />
+        <path d="M 320 160 C 300 230 300 380 270 650 L 450 650 C 420 380 420 230 400 160 Z" class="body" />
+        <path d="M 302 164 L 418 164 L 468 650 L 252 650 Z" class="panel" />
+        <path d="M 318 176 L 402 176 L 444 628 L 276 628 Z" class="panel back" />
+        <line x1="302" y1="164" x2="252" y2="650" class="seam" />
+        <line x1="418" y1="164" x2="468" y2="650" class="seam" />
+      </svg>
+    </section>
+    <aside>
+      <h1>Sleeveless A-line Woven Dress/Tunic v0.1-length-plus-100</h1>
+      <p><strong>Preview status:</strong> read-only static sanity view.</p>
+      <p><strong>Readiness:</strong> ready-for-human-sanity-check</p>
+      <p>This preview shows orientation and rough silhouette only. It does not simulate cloth or prove fit.</p>
+      <ul>
+        <li>Front/back panels are represented as simple translucent shells.</li>
+        <li>Side seams are indicated by dashed lines.</li>
+        <li>PatternGraph remains the source of truth.</li>
+      </ul>
+    </aside>
+  </main>
+</body>
+</html>

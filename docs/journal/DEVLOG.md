@@ -185,3 +185,10 @@ Reusable engine extraction:
 - Moved readiness instrumentation into `packages/validation-core/src/readiness.mjs`.
 - Moved SVG/Markdown/preview builders into `packages/export-core/src/package-builders.mjs`.
 - Added `packages/validation-core/src/readiness.test.mjs` and expanded `npm run check` so the dirty spike now has a small package-level guardrail.
+
+Task-led edit spike:
+
+- Added `packages/assistant-core/src/commands.mjs` for narrow natural-language-to-parameter edits.
+- Added `npm run v0.1:edit:lengthen-hem`, which runs `lengthen hem 100mm` and writes a second generated package to `garments/a-line-dress-tunic/outputs/v0.1-length-plus-100/`.
+- The edited output includes `edit-intent.json` and `edit-summary.md` so the command interpretation is visible and reviewable.
+- Expanded `npm run check` to verify both the base package and the task-led edit path.

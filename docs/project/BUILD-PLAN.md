@@ -54,6 +54,7 @@ Current v0.1 status:
 - [x] One internal readiness report.
 - [x] First reusable `pattern-core`, `validation-core`, and `export-core` modules extracted from the spike.
 - [x] Readiness smoke test for bad units and mismatched seam lengths.
+- [x] First task-led edit package: `lengthen hem 100mm` regenerates `outputs/v0.1-length-plus-100/`.
 - [ ] One human sanity check.
 
 ### B0: Repo Scaffold And Contracts
