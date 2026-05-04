@@ -1099,7 +1099,7 @@
     "Dartless loose woven fit for v0.1.",
     "No closure modeled; neckline/opening must be reviewed for head entry.",
     "Front and back side seams are intentionally matched for the dirty spike.",
-    "Seam allowance is simplified with rough cut-line expansion, not robust geometric offsetting."
+    "Seam allowance uses a v0.1 boundary-normal offset; review corner cleanup before sewing beyond muslin."
   ],
   "markerPlan": {
     "schemaVersion": "0.1-marker-plan",

@@ -196,6 +196,8 @@ The v1 human-readable package is for fashion designers, patternmakers, and peopl
 
 The CAD-to-technical-drawing research is useful as background because it shows how model geometry becomes printable instructions. The live product language should stay sewing-first: pattern pieces, grainlines, notches, fold lines, seam allowance, cut quantities, fabric notes, print scale, and construction steps.
 
+The main designer-facing package surface is the pattern overview sheet, not the marker. Kiko's project-canvas reference is the useful target: source sketch or reference, body/croquis grid, interpreted garment drawing, measurements, callouts, and pattern pieces arranged as one review board. The marker is the fabric layout sheet: piece placement on fabric width, grain direction, fold assumptions, and consumption. Keep these surfaces distinct in the export architecture.
+
 Add this downstream architecture component:
 
 ```text
@@ -205,7 +207,9 @@ PatternGraph
   -> HumanReadablePatternPackage
 ```
 
-`PatternPackageModel` should attach labels, sewing notes, and only useful dimensions to stable `PatternGraph` ids such as panels, seams, darts, grainlines, fold lines, and notches. `PatternPackageComposer` should own pattern-sheet layout, tiling, scale markers, cut sheets, construction notes, validation callouts, and SVG/PDF export.
+`PatternPackageModel` should attach labels, sewing notes, source references, body/croquis references, and only useful dimensions to stable `PatternGraph` ids such as panels, seams, darts, grainlines, fold lines, and notches. `PatternPackageComposer` should own overview-sheet layout, pattern-sheet layout, marker layout, tiling, scale markers, cut sheets, construction notes, validation callouts, and SVG/PDF export.
+
+See [Output Surfaces](OUTPUT-SURFACES.md) for the current output contract.
 
 ## Designer Editing Lane
 

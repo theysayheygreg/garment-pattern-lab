@@ -201,6 +201,16 @@ Good v1 delight:
 - comparing the sketch silhouette with a simple 3D preview
 - exporting a package that a sewing-literate person can critique
 
+## Output Experience
+
+Kiko's project-canvas reference is the right anchor for the main output: a visual board where the source image, body/croquis context, interpreted sketch, pattern pieces, measurements, landmarks, and callouts live together.
+
+The designer-facing first surface should be a **pattern overview sheet**. It should look closer to an annotated fashion/pattern board than a folder of separate files. The user should see input -> interpretation -> pattern in one place, with enough measurements and notes on the sheet to critique the draft.
+
+The **marker sheet** is separate. It is the actual fabric layout: fabric width, grain direction, fold assumptions, piece placements, and estimated consumption. It becomes important for multi-piece garments, but it should not be confused with the overview/pattern review surface.
+
+The detailed output model lives in [Output Surfaces](OUTPUT-SURFACES.md).
+
 ## Product Metric
 
 The core metric is pattern usefulness, not model autonomy.

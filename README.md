@@ -61,15 +61,17 @@ Why this garment:
 
 Prototype 1 outputs a human-readable pattern package:
 
-- SVG pattern sheets.
+- Pattern overview sheet: source sketch, interpreted garment, pattern pieces, measurements, and callouts in one designer-facing review board.
+- SVG/PDF pattern sheets.
 - Tiled PDF or print-ready package.
-- Cut sheet.
+- Marker sheet for actual fabric layout and consumption.
+- Cut notes.
 - Assembly instructions.
 - Validation report.
 - Source `PatternGraph` JSON.
 - Simple 3D preview.
 
-Industry-standard and machine-readable outputs are a later export lane: DXF/AAMA/ASTM, cutter-ready marker files, CAD round trips, and factory metadata. They should build on the same `PatternGraph`, but they do not define prototype 1 success.
+The pattern overview and marker are separate surfaces. The overview is what a fashion designer reviews first; the marker is the fabric layout sheet. Industry-standard and machine-readable outputs are a later export lane: DXF/AAMA/ASTM, cutter-ready files, CAD round trips, and factory metadata. They should build on the same `PatternGraph`, but they do not define prototype 1 success.
 
 ## Main V1 Pipeline
 
@@ -133,6 +135,7 @@ Three canonical user personas anchor scope by version (`docs/design/personas/`):
 The initial docs contain:
 
 - v0.1 design spec ([V0.1-DESIGN.md](docs/project/V0.1-DESIGN.md)).
+- Human output surfaces ([OUTPUT-SURFACES.md](docs/project/OUTPUT-SURFACES.md)).
 - Three canonical personas with grounded usage flows.
 - Product plan, pillars, and prototype build order.
 - Roadmap to first prototype.

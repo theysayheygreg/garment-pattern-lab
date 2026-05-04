@@ -13,7 +13,13 @@ This is the human-facing v0.1 review guide. It is intentionally one document: ga
 - `preview.html` — static 3D assembly preview, not cloth simulation.
 - `guide.md` — this document.
 
-The marker file is kept in developer/package output for now. It becomes human-facing again when we move to garments with many pieces where marker layout is a real review object.
+## Visual Output Model
+
+The next human-facing package should open like a pattern overview board: source sketch, interpreted garment, body/croquis measurement context, generated pattern pieces, measurements, and callouts in one visual sheet.
+
+`pattern.svg` is the current v0.1 stand-in for that overview sheet. It carries the generated pieces, scale proof, labels, seam allowance, fold lines, grainlines, and key pattern marks. Measurements should keep moving onto the visual sheet as the package matures, not live only in Markdown.
+
+The marker is a separate sheet: actual fabric layout and consumption on a fabric width. It is kept in developer/package output for this simple two-piece harness, but it becomes a human-facing file again when garments have enough cut components for layout to matter.
 
 ## Garment Snapshot
 
@@ -79,7 +85,7 @@ The marker file is kept in developer/package output for now. It becomes human-fa
 - Dartless loose woven fit for v0.1.
 - No closure modeled; neckline/opening must be reviewed for head entry.
 - Front and back side seams are intentionally matched for the dirty spike.
-- Seam allowance is simplified with rough cut-line expansion, not robust geometric offsetting.
+- Seam allowance uses a v0.1 boundary-normal offset; review corner cleanup before sewing beyond muslin.
 
 ## Review Checklist
 

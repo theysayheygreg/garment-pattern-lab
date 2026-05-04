@@ -102,7 +102,8 @@ for (const spec of requiredHumanOutputs) {
   const guide = fs.readFileSync(path.join(outputRoot, "guide.md"), "utf8");
   assert.match(guide, /This is the human-facing v0.1 review guide/);
   assert.match(guide, /Source sketch:/);
-  assert.match(guide, /The marker file is kept in developer\/package output for now/);
+  assert.match(guide, /pattern overview board/);
+  assert.match(guide, /The marker is a separate sheet/);
   assert.match(guide, /Units|Body Fixture|Finished Draft Measurements/);
   const sourceSketch = fs.readFileSync(path.join(outputRoot, "source-sketch.svg"), "utf8");
   assert.match(sourceSketch, /<svg/);
