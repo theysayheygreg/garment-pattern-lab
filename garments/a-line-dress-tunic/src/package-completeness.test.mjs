@@ -8,6 +8,7 @@ const requiredPackages = [
   {
     output: "v0.1",
     packageFiles: [
+      "overview.md",
       "pattern.svg",
       "marker.svg",
       "cut-sheet.md",
@@ -21,6 +22,7 @@ const requiredPackages = [
   {
     output: "v0.1-from-sketch",
     packageFiles: [
+      "overview.md",
       "pattern.svg",
       "marker.svg",
       "cut-sheet.md",
@@ -55,16 +57,18 @@ for (const spec of requiredPackages) {
 
   const manifest = readJson(path.join(outputRoot, "package", "manifest.json"));
   assert.equal(manifest.readiness, "ready-for-human-sanity-check");
+  assert(manifest.packageFiles.some((file) => file.path === "package/overview.md"));
   assert(manifest.packageFiles.some((file) => file.path === "package/human-sanity-check.md"));
   assert(manifest.packageFiles.some((file) => file.path === "package/pattern.svg"));
   assert(manifest.packageFiles.some((file) => file.path === "package/marker.svg"));
 
   const patternSvg = fs.readFileSync(path.join(outputRoot, "package", "pattern.svg"), "utf8");
-  assert.match(patternSvg, /50mm scale square/);
+  assert.match(patternSvg, /2 in scale square/);
   assert.match(patternSvg, /CUT 1 ON FOLD/);
+  assert(patternSvg.split("L ").length > 60, "Expected higher-resolution sampled pattern curves.");
 
   const sanitySheet = fs.readFileSync(path.join(outputRoot, "package", "human-sanity-check.md"), "utf8");
-  assert.match(sanitySheet, /50mm scale square/);
+  assert.match(sanitySheet, /2 in scale square/);
   assert.match(sanitySheet, /Check head entry/);
   assert.match(sanitySheet, /muslin/);
 
@@ -74,6 +78,13 @@ for (const spec of requiredPackages) {
   assert.match(cutSheet, /Finished Draft Measurements/);
   assert.match(cutSheet, /do not add extra seam allowance at fold/);
   assert.match(cutSheet, /tiled home-print PDF is still missing/);
+  assert.match(cutSheet, /Units: imperial-first/);
+  assert.match(cutSheet, /in \(/);
+
+  const overview = fs.readFileSync(path.join(outputRoot, "package", "overview.md"), "utf8");
+  assert.match(overview, /one-file front door/);
+  assert.match(overview, /Garment Snapshot/);
+  assert.match(overview, /Shape Fidelity Note/);
 }
 
 const sketchPattern = readJson(

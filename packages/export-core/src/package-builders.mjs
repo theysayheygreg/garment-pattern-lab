@@ -57,9 +57,9 @@ export function buildSvg(patternDoc, readinessDoc, params) {
       <path d="M 0 0 L 8 4 L 0 8 z" fill="#047857" />
     </marker>
   </defs>
-  <text x="0" y="-12" class="info">${patternDoc.title} | units: mm | seam allowance: ${params.allowances.seam}mm | hem allowance: ${params.allowances.hem}mm | ${readinessDoc.overallState}</text>
-  <rect x="0" y="${height - 70}" width="50" height="50" class="scale" />
-  <text x="0" y="${height - 76}" class="caption">50mm scale square</text>
+  <text x="0" y="-12" class="info">${patternDoc.title} | imperial-first package | seam allowance: ${formatIn(params.allowances.seam)} (${formatMm(params.allowances.seam)}) | hem allowance: ${formatIn(params.allowances.hem)} (${formatMm(params.allowances.hem)}) | ${readinessDoc.overallState}</text>
+  <rect x="0" y="${height - 70}" width="50.8" height="50.8" class="scale" />
+  <text x="0" y="${height - 76}" class="caption">2 in scale square (50.8mm)</text>
   ${svgPanel(front, params, 0, "front panel")}
   ${svgPanel(back, params, backOffset, "back panel")}
 </svg>
@@ -81,34 +81,34 @@ export function buildCutSheet(patternDoc, params, markerPlan = patternDoc.marker
 
 Pattern: ${patternDoc.title}
 
-Units: millimeters
+Units: imperial-first. Metric is retained as the internal engine unit and secondary reference.
 
 ## Print Scale
 
 - Print at 100% scale; do not fit to page.
-- Measure the 50mm scale square on \`pattern.svg\` before cutting.
+- Measure the 2 in scale square on \`pattern.svg\` before cutting.
 - This v0.1 package is SVG-first; tiled home-print PDF is still missing.
 
 ## Body Fixture
 
 | Measurement | Value |
 | --- | ---: |
-| Bust | ${formatMm(body.bust)} |
-| Waist | ${formatMm(body.waist)} |
-| Hip | ${formatMm(body.hip)} |
-| Shoulder width | ${formatMm(body.shoulderWidth)} |
-| Armhole depth | ${formatMm(body.armholeDepth)} |
+| Bust | ${formatInWithMetric(body.bust)} |
+| Waist | ${formatInWithMetric(body.waist)} |
+| Hip | ${formatInWithMetric(body.hip)} |
+| Shoulder width | ${formatInWithMetric(body.shoulderWidth)} |
+| Armhole depth | ${formatInWithMetric(body.armholeDepth)} |
 
 ## Finished Draft Measurements
 
 | Measurement | Value |
 | --- | ---: |
-| Finished length | ${formatMm(patternDoc.patternMeasurements.finishedLength)} |
-| Full hem sweep | ${formatMm(patternDoc.patternMeasurements.fullHemSweep)} |
-| Front shoulder seam | ${formatMm(patternDoc.patternMeasurements.front.shoulder)} |
-| Back shoulder seam | ${formatMm(patternDoc.patternMeasurements.back.shoulder)} |
-| Front side seam | ${formatMm(patternDoc.patternMeasurements.front.side)} |
-| Back side seam | ${formatMm(patternDoc.patternMeasurements.back.side)} |
+| Finished length | ${formatInWithMetric(patternDoc.patternMeasurements.finishedLength)} |
+| Full hem sweep | ${formatInWithMetric(patternDoc.patternMeasurements.fullHemSweep)} |
+| Front shoulder seam | ${formatInWithMetric(patternDoc.patternMeasurements.front.shoulder)} |
+| Back shoulder seam | ${formatInWithMetric(patternDoc.patternMeasurements.back.shoulder)} |
+| Front side seam | ${formatInWithMetric(patternDoc.patternMeasurements.front.side)} |
+| Back side seam | ${formatInWithMetric(patternDoc.patternMeasurements.back.side)} |
 
 ## Pieces
 
@@ -119,8 +119,8 @@ Units: millimeters
 
 ## Allowances
 
-- Seam allowance: ${params.allowances.seam}mm
-- Hem allowance: ${params.allowances.hem}mm
+- Seam allowance: ${formatInWithMetric(params.allowances.seam)}
+- Hem allowance: ${formatInWithMetric(params.allowances.hem)}
 - Neckline finish: ${params.finishing.neckline}
 - Armhole finish: ${params.finishing.armhole}
 ${markerSection}
@@ -136,6 +136,14 @@ ${markerSection}
 
 function formatMm(value) {
   return `${round(value)}mm`;
+}
+
+function formatIn(value) {
+  return `${round((value ?? 0) / 25.4)} in`;
+}
+
+function formatInWithMetric(value) {
+  return `${formatIn(value)} (${formatMm(value)})`;
 }
 
 export function buildAssembly(patternDoc) {
@@ -170,7 +178,7 @@ This is the package-local review sheet for the dirty v0.1 spike. It is meant for
 
 ## Print And Scale
 
-- [ ] Open \`pattern.svg\` and confirm the 50mm scale square measures 50mm after printing.
+- [ ] Open \`pattern.svg\` and confirm the 2 in scale square measures 2 in after printing.
 - [ ] Confirm the front and back panels print at the same scale.
 - [ ] Confirm labels, grainlines, fold lines, seam lines, cut lines, and notches are visible.
 
@@ -183,7 +191,7 @@ This is the package-local review sheet for the dirty v0.1 spike. It is meant for
 
 ## Sewing Review
 
-- [ ] Confirm seam allowance (${patternDoc.garmentParameters.allowances.seam}mm) and hem allowance (${patternDoc.garmentParameters.allowances.hem}mm) are acceptable for the muslin.
+- [ ] Confirm seam allowance (${formatInWithMetric(patternDoc.garmentParameters.allowances.seam)}) and hem allowance (${formatInWithMetric(patternDoc.garmentParameters.allowances.hem)}) are acceptable for the muslin.
 - [ ] Decide binding vs facing for neckline and armholes.
 - [ ] Check head entry before finishing the neckline; no closure is modeled.
 - [ ] Record any required patternmaker changes before a second draft.
@@ -206,6 +214,57 @@ ${patternDoc.assumptions.map((assumption) => `- ${assumption}`).join("\n")}
 
 Reviewer notes:
 
+`;
+}
+
+export function buildPackageOverview(patternDoc, readinessDoc, markerPlan = patternDoc.markerPlan) {
+  const sourceSketch = patternDoc.source?.sourceSketch ?? "measurement + parameter fixture";
+  return `# Package Overview
+
+Pattern: ${patternDoc.title}
+
+Readiness: ${readinessDoc.overallState}
+
+Source: ${sourceSketch}
+
+This is the one-file front door for the v0.1 package. It gathers the garment shape, measurements, preview, cutting notes, and review path so the package does not feel scattered across artifacts.
+
+## Open First
+
+- \`preview.html\` — static 3D assembly preview, not cloth simulation.
+- \`pattern.svg\` — source pattern flats with a 2 in scale square.
+- \`cut-sheet.md\` — cutting quantities, body fixture, finished draft measurements, marker summary.
+- \`assembly.md\` — sewing order and muslin notes.
+- \`human-sanity-check.md\` — review checklist before cutting anything beyond muslin.
+
+## Garment Snapshot
+
+| Field | Value |
+| --- | --- |
+| Garment | Sleeveless A-line woven dress/tunic |
+| Fit | Loose pullover, dartless v0.1 draft |
+| Closure | None modeled; head entry must be checked |
+| Front/back pieces | Cut 1 each on fold |
+| Fabric marker | ${markerPlan ? `${markerPlan.fabricWidthIn} in wide, ${markerPlan.totalFabricLengthIn} in estimated length` : "not generated"} |
+
+## Key Measurements
+
+| Measurement | Value |
+| --- | ---: |
+| Body bust | ${formatInWithMetric(patternDoc.bodyMeasurementSet.measurements.bust)} |
+| Body hip | ${formatInWithMetric(patternDoc.bodyMeasurementSet.measurements.hip)} |
+| Finished length | ${formatInWithMetric(patternDoc.patternMeasurements.finishedLength)} |
+| Full hem sweep | ${formatInWithMetric(patternDoc.patternMeasurements.fullHemSweep)} |
+| Seam allowance | ${formatInWithMetric(patternDoc.garmentParameters.allowances.seam)} |
+| Hem allowance | ${formatInWithMetric(patternDoc.garmentParameters.allowances.hem)} |
+
+## Shape Fidelity Note
+
+v0.1 now samples neckline, armhole, and side-seam curves instead of drawing a few chunky polygon anchors. It is still a rough generated draft, not a production pattern or fit-proven garment.
+
+## Review Gate
+
+Do not treat this package as fashion-fabric-ready. Print or inspect at scale, review the curve quality and head entry, then record the result in \`human-sanity-check.md\`.
 `;
 }
 
@@ -437,6 +496,7 @@ export function buildDebugOverlayHtml({ trace, interpretation, calibratedInterpr
 
 export function buildPackageManifest(patternDoc, readinessDoc, markerPlan, options = {}) {
   const packageFiles = [
+    { path: "package/overview.md", role: "package-front-door", format: "markdown" },
     { path: "package/pattern.svg", role: "printable-pattern-source", format: "svg" },
     { path: "package/marker.svg", role: "fabric-marker-layout", format: "svg" },
     { path: "package/cut-sheet.md", role: "human-cut-instructions", format: "markdown" },

@@ -38,6 +38,11 @@
   },
   "packageFiles": [
     {
+      "path": "package/overview.md",
+      "role": "package-front-door",
+      "format": "markdown"
+    },
+    {
       "path": "package/pattern.svg",
       "role": "printable-pattern-source",
       "format": "svg"

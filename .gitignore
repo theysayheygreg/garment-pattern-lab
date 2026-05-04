@@ -1,3 +1,4 @@
 tmp/
 external/
 node_modules/
+.DS_Store

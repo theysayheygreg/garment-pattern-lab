@@ -5,7 +5,7 @@ import path from "node:path";
 import { performance } from "node:perf_hooks";
 import { fileURLToPath } from "node:url";
 import { applyParameterEdit, buildEditSummary, interpretCommand } from "../../../packages/assistant-core/src/commands.mjs";
-import { buildAssembly, buildCutSheet, buildDebugOverlayHtml, buildHumanSanityCheck, buildPackageManifest, buildPreview, buildReadinessMd, buildSvg } from "../../../packages/export-core/src/package-builders.mjs";
+import { buildAssembly, buildCutSheet, buildDebugOverlayHtml, buildHumanSanityCheck, buildPackageManifest, buildPackageOverview, buildPreview, buildReadinessMd, buildSvg } from "../../../packages/export-core/src/package-builders.mjs";
 import { buildMarkerPlan, buildMarkerSvg } from "../../../packages/export-core/src/marker-layout/layout.mjs";
 import { measureNamedEdges, round } from "../../../packages/pattern-core/src/measurements.mjs";
 import { buildDraftingRequest, projectLegacyGeneratorInputs } from "../../../packages/sketch-intent/src/drafting-adapter/drafting-request.mjs";
@@ -96,29 +96,49 @@ const makePanel = (kind) => {
   const sideAtHip = hipQuarter;
   const sideAtBust = bustQuarter;
 
+  const centerNeck = { id: "center-neck", x: 0, y: neckDepth };
+  const neckShoulder = { id: "neck-shoulder", x: neckWidth, y: 0 };
+  const shoulderPoint = { id: "shoulder-point", x: shoulderOuter, y: params.shoulder.drop };
+  const armholeBottom = { id: "armhole-bottom", x: sideAtBust, y: armholeY };
+  const bustSide = { id: "bust-side", x: sideAtBust, y: bustY };
+  const hipSide = { id: "hip-side", x: sideAtHip, y: hipY };
+  const hemSide = { id: "hem-side", x: sideAtHem, y: hemY };
+  const centerHem = { id: "center-hem", x: 0, y: hemY };
+
   const seamLine = [
-    { id: "center-neck", x: 0, y: neckDepth },
-    { id: "neck-shoulder", x: neckWidth, y: 0 },
-    { id: "shoulder-point", x: shoulderOuter, y: params.shoulder.drop },
-    { id: "armhole-bottom", x: sideAtBust, y: armholeY },
-    { id: "bust-side", x: sideAtBust, y: bustY },
-    { id: "hip-side", x: sideAtHip, y: hipY },
-    { id: "hem-side", x: sideAtHem, y: hemY },
-    { id: "center-hem", x: 0, y: hemY },
+    centerNeck,
+    ...sampleQuadratic(centerNeck, { x: neckWidth * 0.18, y: neckDepth * 0.2 }, neckShoulder, 8),
+    shoulderPoint,
+    ...sampleCubic(
+      shoulderPoint,
+      { x: shoulderOuter + 22, y: params.shoulder.drop + 58 },
+      { x: sideAtBust - 22, y: armholeY - 62 },
+      armholeBottom,
+      14,
+    ),
+    bustSide,
+    ...sampleCubic(
+      bustSide,
+      { x: sideAtBust + 10, y: bustY + 120 },
+      { x: sideAtHip - 18, y: hipY - 120 },
+      hipSide,
+      10,
+    ),
+    ...sampleQuadratic(hipSide, { x: (sideAtHip + sideAtHem) / 2 + 26, y: (hipY + hemY) / 2 }, hemSide, 12),
+    centerHem,
   ];
 
   const seamAllowance = params.allowances.seam;
   const hemAllowance = params.allowances.hem;
-  const cutLine = [
-    { x: 0, y: neckDepth },
-    { x: Math.max(0, neckWidth - seamAllowance), y: -seamAllowance },
-    { x: shoulderOuter + seamAllowance, y: params.shoulder.drop - seamAllowance },
-    { x: sideAtBust + seamAllowance, y: armholeY },
-    { x: sideAtBust + seamAllowance, y: bustY },
-    { x: sideAtHip + seamAllowance, y: hipY },
-    { x: sideAtHem + seamAllowance, y: hemY + hemAllowance },
-    { x: 0, y: hemY + hemAllowance },
-  ];
+  const cutLine = seamLine.map((point) => {
+    const isHem = point.id === "hem-side" || point.id === "center-hem";
+    const isFold = point.id === "center-neck" || point.id === "center-hem" || point.x === 0;
+    return {
+      ...(point.id ? { id: `${point.id}-cut` } : {}),
+      x: isFold ? point.x : point.x + seamAllowance,
+      y: point.y + (isHem ? hemAllowance : point.id === "neck-shoulder" || point.id === "shoulder-point" ? -seamAllowance : 0),
+    };
+  });
 
   const edges = [
     { id: `${kind}.fold`, type: "fold", from: "center-hem", to: "center-neck" },
@@ -130,8 +150,11 @@ const makePanel = (kind) => {
   ];
 
   const edgePoints = {
-    [`${kind}.shoulder`]: [seamLine[1], seamLine[2]],
-    [`${kind}.side`]: [seamLine[3], seamLine[4], seamLine[5], seamLine[6]],
+    [`${kind}.shoulder`]: [neckShoulder, shoulderPoint],
+    [`${kind}.side`]: seamLine.slice(
+      seamLine.findIndex((point) => point.id === "armhole-bottom"),
+      seamLine.findIndex((point) => point.id === "hem-side") + 1,
+    ),
   };
 
   return {
@@ -162,6 +185,38 @@ const makePanel = (kind) => {
     ],
   };
 };
+
+function sampleQuadratic(start, control, end, steps) {
+  return Array.from({ length: steps }, (_, index) => {
+    const t = (index + 1) / steps;
+    return {
+      ...(index === steps - 1 && end.id ? { id: end.id } : {}),
+      x: round((1 - t) ** 2 * start.x + 2 * (1 - t) * t * control.x + t ** 2 * end.x),
+      y: round((1 - t) ** 2 * start.y + 2 * (1 - t) * t * control.y + t ** 2 * end.y),
+    };
+  });
+}
+
+function sampleCubic(start, controlA, controlB, end, steps) {
+  return Array.from({ length: steps }, (_, index) => {
+    const t = (index + 1) / steps;
+    return {
+      ...(index === steps - 1 && end.id ? { id: end.id } : {}),
+      x: round(
+        (1 - t) ** 3 * start.x
+          + 3 * (1 - t) ** 2 * t * controlA.x
+          + 3 * (1 - t) * t ** 2 * controlB.x
+          + t ** 3 * end.x,
+      ),
+      y: round(
+        (1 - t) ** 3 * start.y
+          + 3 * (1 - t) ** 2 * t * controlA.y
+          + 3 * (1 - t) * t ** 2 * controlB.y
+          + t ** 3 * end.y,
+      ),
+    };
+  });
+}
 
 const panels = [makePanel("front"), makePanel("back")];
 
@@ -240,6 +295,7 @@ if (!checkOnly) {
     fs.writeFileSync(path.join(garmentRoot, "fixtures", "patterns", "v0.1-candidate.pattern.json"), `${JSON.stringify(pattern, null, 2)}\n`);
     fs.writeFileSync(path.join(garmentRoot, "fixtures", "validation", "v0.1-readiness.json"), `${JSON.stringify(readiness, null, 2)}\n`);
   }
+  fs.writeFileSync(path.join(packageDir, "overview.md"), buildPackageOverview(pattern, readiness, markerPlan));
   fs.writeFileSync(path.join(packageDir, "pattern.svg"), buildSvg(pattern, readiness, params).replace(/[ \t]+$/gm, ""));
   fs.writeFileSync(path.join(packageDir, "cut-sheet.md"), buildCutSheet(pattern, params, markerPlan));
   fs.writeFileSync(path.join(packageDir, "assembly.md"), buildAssembly(pattern));

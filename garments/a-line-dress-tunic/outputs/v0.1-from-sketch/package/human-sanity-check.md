@@ -10,7 +10,7 @@ This is the package-local review sheet for the dirty v0.1 spike. It is meant for
 
 ## Print And Scale
 
-- [ ] Open `pattern.svg` and confirm the 50mm scale square measures 50mm after printing.
+- [ ] Open `pattern.svg` and confirm the 2 in scale square measures 2 in after printing.
 - [ ] Confirm the front and back panels print at the same scale.
 - [ ] Confirm labels, grainlines, fold lines, seam lines, cut lines, and notches are visible.
 
@@ -23,7 +23,7 @@ This is the package-local review sheet for the dirty v0.1 spike. It is meant for
 
 ## Sewing Review
 
-- [ ] Confirm seam allowance (10mm) and hem allowance (30mm) are acceptable for the muslin.
+- [ ] Confirm seam allowance (0.39 in (10mm)) and hem allowance (1.18 in (30mm)) are acceptable for the muslin.
 - [ ] Decide binding vs facing for neckline and armholes.
 - [ ] Check head entry before finishing the neckline; no closure is modeled.
 - [ ] Record any required patternmaker changes before a second draft.

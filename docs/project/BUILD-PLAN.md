@@ -36,6 +36,7 @@ Status:
 - [x] **Phase I static preview complete enough for v0.1:** package preview emits a Three.js static assembly scene from PatternGraph panels, body proxy, and seam-pair guides. Browser smoke on `outputs/v0.1-from-sketch/package/preview.html` confirmed one canvas, scene data, no console errors, and nonblank screenshot pixels.
 - [x] **Phase J dev instrumentation complete enough for v0.1:** sketch-driven runs now emit `debug-overlay.html` for labeled curve review and `interpretation-trace.json` for semantic score tables. Readiness now includes marker metrics, sketch-pipeline state, assumption counts, and sketch-stage timings.
 - [x] **Sketch-sourced v0.1 demo package started:** `npm run v0.1:generate:sketch` emits a committed `outputs/v0.1-from-sketch/` package from the canonical semantic-flat fixture, including package-local human sanity sheet and sketch dev artifacts.
+- [x] **Human package readability pass:** generated packages are now imperial-first, include `overview.md` as a package front door, and use sampled curves for neckline, armhole, and side seam geometry instead of chunky polygon anchors.
 - [ ] Pattern schema concrete JSON shape (closes during Phase E).
 - [x] Phase B tech stack decision concrete: `@neplex/vectorizer`/VTracer for raster tracing, Poppler `pdftocairo` for local vector/raster PDF and PDF-compatible `.ai` conversion, Potrace research-only unless license isolation is intentional.
 

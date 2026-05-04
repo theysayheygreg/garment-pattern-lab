@@ -62,8 +62,8 @@
       "state": "ready",
       "summary": "side-seams match within 5mm.",
       "details": {
-        "aLength": 699.95,
-        "bLength": 699.95,
+        "aLength": 701.47,
+        "bLength": 701.47,
         "delta": 0,
         "tolerance": 5
       }

@@ -339,3 +339,9 @@ Three.js preview browser smoke:
 - Served the repo locally on port 8788 and opened `outputs/v0.1-from-sketch/package/preview.html` in the in-app browser.
 - Verified the preview loaded with one Three.js canvas, embedded scene data, the expected heading, and no browser console errors.
 - Captured a screenshot and checked it was nonblank: 1280x720, 75,018 non-background pixels, 49,924 colored pixels.
+
+Imperial-first package and curve fidelity pass:
+
+- Switched human package copy to imperial-first measurements while preserving metric values as secondary/internal references.
+- Added `package/overview.md` as the package front door so preview, pattern SVG, measurements, cut notes, assembly notes, and sanity check are no longer scattered without an entry point.
+- Replaced the blocky v0.1 panel outline anchors with sampled neckline, armhole, and side-seam curves so generated pattern flats and the Three.js preview read less like low-resolution polygon placeholders.
