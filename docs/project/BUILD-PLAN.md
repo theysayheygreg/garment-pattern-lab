@@ -37,6 +37,8 @@ Status:
 - [x] **Phase J dev instrumentation complete enough for v0.1:** sketch-driven runs now emit `debug-overlay.html` for labeled curve review and `interpretation-trace.json` for semantic score tables. Readiness now includes marker metrics, sketch-pipeline state, assumption counts, and sketch-stage timings.
 - [x] **Sketch-sourced v0.1 demo package started:** `npm run v0.1:generate:sketch` emits a committed `outputs/v0.1-from-sketch/` package from the canonical semantic-flat fixture, including package-local human sanity sheet and sketch dev artifacts.
 - [x] **Human package readability pass:** generated packages are now imperial-first, include `overview.md` as a package front door, and use sampled curves for neckline, armhole, and side seam geometry instead of chunky polygon anchors.
+- [x] **Human-output lane started:** v0.1 sketch output now has a separate `human-output/v0.1/a-line-dress-tunic-from-sketch/` folder with one guide, pattern SVG, preview, source sketch, and manifest.
+- [x] **Verbose garment benchmark scaffolds started:** classic woven shirt, camp shirt, tank with facing, shift dress with darts, and sleeveless top with facing now exist as benchmark input/output scaffolds.
 - [ ] Pattern schema concrete JSON shape (closes during Phase E).
 - [x] Phase B tech stack decision concrete: `@neplex/vectorizer`/VTracer for raster tracing, Poppler `pdftocairo` for local vector/raster PDF and PDF-compatible `.ai` conversion, Potrace research-only unless license isolation is intentional.
 

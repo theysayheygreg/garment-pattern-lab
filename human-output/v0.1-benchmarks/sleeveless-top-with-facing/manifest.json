@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "0.1-benchmark-scaffold",
+  "garment": "sleeveless-top-with-facing",
+  "name": "Sleeveless Top With Facing",
+  "files": [
+    "guide.md",
+    "source-sketch.svg"
+  ],
+  "status": "benchmark-input-scaffold"
+}

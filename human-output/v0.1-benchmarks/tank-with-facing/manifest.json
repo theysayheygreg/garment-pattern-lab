@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "0.1-benchmark-scaffold",
+  "garment": "tank-with-facing",
+  "name": "Tank With Facing",
+  "files": [
+    "guide.md",
+    "source-sketch.svg"
+  ],
+  "status": "benchmark-input-scaffold"
+}

@@ -9,6 +9,7 @@
     "dev:check:edit": "node garments/a-line-dress-tunic/src/generate.mjs --check --output v0.1-length-plus-100 --command \"lengthen hem 100mm\"",
     "v0.1:generate": "node garments/a-line-dress-tunic/src/generate.mjs",
     "v0.1:generate:sketch": "GPL_STABLE_TIMINGS=1 GPL_GENERATED_AT=2026-05-04T20:33:55.216Z node garments/a-line-dress-tunic/src/generate.mjs --output v0.1-from-sketch --source-sketch packages/sketch-intent/fixtures/a-line-tunic-scale-reference-semantic-flat.svg",
+    "benchmarks:scaffold": "node scripts/scaffold-benchmark-garments.mjs",
     "v0.1:check": "node garments/a-line-dress-tunic/src/generate.mjs --check",
     "v0.1:check:sketch": "node garments/a-line-dress-tunic/src/generate.mjs --check --output v0.1-from-sketch --source-sketch packages/sketch-intent/fixtures/a-line-tunic-scale-reference-semantic-flat.svg",
     "v0.1:check:pipeline": "node garments/a-line-dress-tunic/src/pipeline.test.mjs",

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="11in" height="8.5in" viewBox="0 0 1000 850">
+  <title>Sleeveless Top With Facing</title>
+  <style>
+    path, rect { fill: #fffdf7; stroke: #111827; stroke-width: 4; }
+    [data-gpl-role="detail"], [data-gpl-role="facing"], [data-gpl-role="dart"] { fill: none; stroke: #2563eb; stroke-dasharray: 10 8; }
+    text { font-family: Helvetica, Arial, sans-serif; font-size: 24px; letter-spacing: 0; fill: #111827; }
+  </style>
+  <text x="45" y="55">Sleeveless Top With Facing</text>
+
+    <path id="front" data-gpl-role="panel" d="M 260 120 C 310 155 390 155 440 120 L 505 210 C 455 270 455 365 480 470 L 220 470 C 245 365 245 270 195 210 Z" />
+    <path id="back" data-gpl-role="panel" d="M 610 125 C 670 168 740 168 800 125 L 855 215 C 815 285 820 380 845 470 L 565 470 C 590 380 595 285 555 215 Z" />
+    <path id="front-facing" data-gpl-role="facing" d="M 270 135 C 318 175 382 175 430 135 L 462 190 C 410 225 290 225 238 190 Z" />
+    <path id="back-facing" data-gpl-role="facing" d="M 622 140 C 678 182 732 182 788 140 L 820 195 C 765 230 645 230 590 195 Z" />
+    <text x="305" y="500">FRONT</text>
+    <text x="660" y="500">BACK</text>
+    <text x="275" y="252">FRONT FACING</text>
+    <text x="620" y="252">BACK FACING</text>
+  
+</svg>

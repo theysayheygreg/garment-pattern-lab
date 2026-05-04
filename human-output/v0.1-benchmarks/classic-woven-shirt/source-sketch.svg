@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="11in" height="8.5in" viewBox="0 0 1000 850">
+  <title>Classic Woven Shirt</title>
+  <style>
+    path, rect { fill: #fffdf7; stroke: #111827; stroke-width: 4; }
+    [data-gpl-role="detail"], [data-gpl-role="facing"], [data-gpl-role="dart"] { fill: none; stroke: #2563eb; stroke-dasharray: 10 8; }
+    text { font-family: Helvetica, Arial, sans-serif; font-size: 24px; letter-spacing: 0; fill: #111827; }
+  </style>
+  <text x="45" y="55">Classic Woven Shirt</text>
+
+    <path id="front-left" data-gpl-role="panel" d="M 170 160 L 265 145 L 320 220 L 315 520 L 155 520 L 145 220 Z" />
+    <path id="front-right" data-gpl-role="panel" d="M 335 145 L 430 160 L 455 220 L 445 520 L 285 520 L 280 220 Z" />
+    <path id="back" data-gpl-role="panel" d="M 555 145 L 735 145 L 780 230 L 760 520 L 530 520 L 510 230 Z" />
+    <path id="sleeve" data-gpl-role="panel" d="M 165 600 C 235 565 345 565 410 600 L 380 910 L 195 910 Z" />
+    <path id="collar" data-gpl-role="detail" d="M 300 90 C 345 65 410 65 455 90 L 430 130 C 390 112 365 112 325 130 Z" />
+    <rect id="placket" data-gpl-role="detail" x="307" y="190" width="20" height="330" />
+    <rect id="pocket" data-gpl-role="detail" x="365" y="285" width="58" height="66" />
+    <text x="178" y="548">FRONT LEFT</text>
+    <text x="326" y="548">FRONT RIGHT</text>
+    <text x="595" y="548">BACK</text>
+    <text x="240" y="940">LONG SLEEVE</text>
+  
+</svg>

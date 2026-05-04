@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "0.1-benchmark-scaffold",
+  "garment": "shift-dress-with-darts",
+  "name": "Shift Dress With Darts",
+  "files": [
+    "guide.md",
+    "source-sketch.svg"
+  ],
+  "status": "benchmark-input-scaffold"
+}

@@ -351,3 +351,10 @@ Cut-line containment fix:
 - Replaced the rough cut-line allowance expansion with a boundary-normal offset so seam/reference lines stay inside or on the black cut edge.
 - Added package completeness coverage that checks every seam point in the sketch-sourced package sits inside or on its cut polygon.
 - Reloaded the browser preview after regeneration; canvas and scene data were present, no console errors, and the screenshot remained nonblank.
+
+Human-output lane and benchmark scaffolds:
+
+- Added a separate `human-output/` lane. The A-line sketch package now writes a reviewer-facing folder at `human-output/v0.1/a-line-dress-tunic-from-sketch/` with one `guide.md`, `pattern.svg`, `preview.html`, `source-sketch.svg`, and a tiny manifest.
+- Copied the actual source sketch into both the generated package and human-output folder so reviewers can compare input to output without hunting through fixtures.
+- Added five benchmark garment scaffolds to move future review away from the too-simple two-panel A-line: classic woven shirt, camp shirt, tank with facing, shift dress with darts, and sleeveless top with facing.
+- Each benchmark has a garment folder with a source sketch and benchmark plan plus a matching human-output guide/source-sketch scaffold.

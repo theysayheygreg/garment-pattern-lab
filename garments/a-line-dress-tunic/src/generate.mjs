@@ -5,7 +5,7 @@ import path from "node:path";
 import { performance } from "node:perf_hooks";
 import { fileURLToPath } from "node:url";
 import { applyParameterEdit, buildEditSummary, interpretCommand } from "../../../packages/assistant-core/src/commands.mjs";
-import { buildAssembly, buildCutSheet, buildDebugOverlayHtml, buildHumanSanityCheck, buildPackageManifest, buildPackageOverview, buildPreview, buildReadinessMd, buildSvg } from "../../../packages/export-core/src/package-builders.mjs";
+import { buildAssembly, buildCutSheet, buildDebugOverlayHtml, buildHumanGuide, buildHumanSanityCheck, buildPackageManifest, buildPackageOverview, buildPreview, buildReadinessMd, buildSvg } from "../../../packages/export-core/src/package-builders.mjs";
 import { buildMarkerPlan, buildMarkerSvg } from "../../../packages/export-core/src/marker-layout/layout.mjs";
 import { measureNamedEdges, round } from "../../../packages/pattern-core/src/measurements.mjs";
 import { buildDraftingRequest, projectLegacyGeneratorInputs } from "../../../packages/sketch-intent/src/drafting-adapter/drafting-request.mjs";
@@ -28,6 +28,17 @@ const scaleOverride = argValue("--scale-inches-per-source-unit");
 const outputDir = path.join(garmentRoot, "outputs", outputName);
 const packageDir = path.join(outputDir, "package");
 const devArtifactsDir = path.join(outputDir, "dev-artifacts");
+const repoRoot = path.resolve(garmentRoot, "..", "..");
+const humanOutputDir = path.join(
+  repoRoot,
+  "human-output",
+  "v0.1",
+  outputName === "v0.1"
+    ? "a-line-dress-tunic"
+    : outputName === "v0.1-from-sketch"
+      ? "a-line-dress-tunic-from-sketch"
+      : outputName,
+);
 
 const readJson = (relativePath) =>
   JSON.parse(fs.readFileSync(path.join(garmentRoot, relativePath), "utf8"));
@@ -335,7 +346,8 @@ if (!checkOnly) {
   fs.writeFileSync(path.join(packageDir, "human-sanity-check.md"), buildHumanSanityCheck(pattern, readiness, markerPlan));
   fs.writeFileSync(path.join(packageDir, "preview.html"), buildPreview(pattern, readiness));
   fs.writeFileSync(path.join(packageDir, "marker.svg"), buildMarkerSvg(pattern, markerPlan));
-  fs.writeFileSync(path.join(packageDir, "manifest.json"), `${JSON.stringify(buildPackageManifest(pattern, readiness, markerPlan, { hasSketchPipeline: Boolean(sketchPipeline) }), null, 2)}\n`);
+  if (sourceSketch) fs.copyFileSync(path.resolve(process.cwd(), sourceSketch), path.join(packageDir, "source-sketch.svg"));
+  fs.writeFileSync(path.join(packageDir, "manifest.json"), `${JSON.stringify(buildPackageManifest(pattern, readiness, markerPlan, { hasSketchPipeline: Boolean(sketchPipeline), sourceSketch }), null, 2)}\n`);
   fs.writeFileSync(path.join(devArtifactsDir, "pattern-graph.json"), `${JSON.stringify(pattern, null, 2)}\n`);
   fs.writeFileSync(path.join(devArtifactsDir, "marker-plan.json"), `${JSON.stringify(markerPlan, null, 2)}\n`);
   fs.writeFileSync(path.join(devArtifactsDir, "readiness.json"), `${JSON.stringify(readiness, null, 2)}\n`);
@@ -352,6 +364,26 @@ if (!checkOnly) {
     fs.writeFileSync(path.join(devArtifactsDir, "edit-intent.json"), `${JSON.stringify(editIntent, null, 2)}\n`);
     fs.writeFileSync(path.join(devArtifactsDir, "edit-summary.md"), buildEditSummary(editIntent));
   }
+
+  fs.mkdirSync(humanOutputDir, { recursive: true });
+  fs.writeFileSync(path.join(humanOutputDir, "guide.md"), buildHumanGuide(pattern, readiness, markerPlan));
+  fs.writeFileSync(path.join(humanOutputDir, "pattern.svg"), buildSvg(pattern, readiness, params).replace(/[ \t]+$/gm, ""));
+  fs.writeFileSync(path.join(humanOutputDir, "preview.html"), buildPreview(pattern, readiness));
+  if (sourceSketch) fs.copyFileSync(path.resolve(process.cwd(), sourceSketch), path.join(humanOutputDir, "source-sketch.svg"));
+  fs.writeFileSync(
+    path.join(humanOutputDir, "manifest.json"),
+    `${JSON.stringify({
+      schemaVersion: "0.1-human-output",
+      title: pattern.title,
+      sourcePackage: path.relative(repoRoot, outputDir),
+      files: [
+        "guide.md",
+        "pattern.svg",
+        "preview.html",
+        ...(sourceSketch ? ["source-sketch.svg"] : []),
+      ],
+    }, null, 2)}\n`,
+  );
 }
 
 if (readiness.overallState !== "ready-for-human-sanity-check") {

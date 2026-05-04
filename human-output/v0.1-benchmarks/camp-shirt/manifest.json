@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "0.1-benchmark-scaffold",
+  "garment": "camp-shirt",
+  "name": "Camp Shirt",
+  "files": [
+    "guide.md",
+    "source-sketch.svg"
+  ],
+  "status": "benchmark-input-scaffold"
+}

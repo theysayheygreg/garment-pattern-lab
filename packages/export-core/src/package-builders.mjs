@@ -217,6 +217,103 @@ Reviewer notes:
 `;
 }
 
+export function buildHumanGuide(patternDoc, readinessDoc, markerPlan = patternDoc.markerPlan) {
+  const body = patternDoc.bodyMeasurementSet?.measurements ?? {};
+  const sourceSketch = patternDoc.source?.sourceSketch ?? "measurement + parameter fixture";
+  return `# ${patternDoc.title}
+
+Readiness: ${readinessDoc.overallState}
+
+Source sketch: ${sourceSketch}
+
+This is the human-facing v0.1 review guide. It is intentionally one document: garment snapshot, measurements, cut notes, sewing order, assumptions, and sanity-check prompts are here instead of spread across separate Markdown files.
+
+## Files In This Output
+
+- \`source-sketch.svg\` — input sketch that produced this package, when available.
+- \`pattern.svg\` — generated pattern flats with a 2 in scale square.
+- \`preview.html\` — static 3D assembly preview, not cloth simulation.
+- \`guide.md\` — this document.
+
+The marker file is kept in developer/package output for now. It becomes human-facing again when we move to garments with many pieces where marker layout is a real review object.
+
+## Garment Snapshot
+
+| Field | Value |
+| --- | --- |
+| Garment | Sleeveless A-line woven dress/tunic |
+| Fit | Loose pullover, dartless v0.1 draft |
+| Closure | None modeled; head entry must be checked |
+| Front/back pieces | Cut 1 each on fold |
+| Fabric marker | ${markerPlan ? `${markerPlan.fabricWidthIn} in wide, ${markerPlan.totalFabricLengthIn} in estimated length` : "not generated"} |
+
+## Print Scale
+
+- Print \`pattern.svg\` at 100% scale; do not fit to page.
+- Measure the 2 in scale square before cutting.
+- This v0.1 package is SVG-first; tiled home-print PDF is still missing.
+
+## Body Fixture
+
+| Measurement | Value |
+| --- | ---: |
+| Bust | ${formatInWithMetric(body.bust)} |
+| Waist | ${formatInWithMetric(body.waist)} |
+| Hip | ${formatInWithMetric(body.hip)} |
+| Shoulder width | ${formatInWithMetric(body.shoulderWidth)} |
+| Armhole depth | ${formatInWithMetric(body.armholeDepth)} |
+
+## Finished Draft Measurements
+
+| Measurement | Value |
+| --- | ---: |
+| Finished length | ${formatInWithMetric(patternDoc.patternMeasurements.finishedLength)} |
+| Full hem sweep | ${formatInWithMetric(patternDoc.patternMeasurements.fullHemSweep)} |
+| Front shoulder seam | ${formatInWithMetric(patternDoc.patternMeasurements.front.shoulder)} |
+| Back shoulder seam | ${formatInWithMetric(patternDoc.patternMeasurements.back.shoulder)} |
+| Front side seam | ${formatInWithMetric(patternDoc.patternMeasurements.front.side)} |
+| Back side seam | ${formatInWithMetric(patternDoc.patternMeasurements.back.side)} |
+
+## Pieces
+
+| Piece | Cut | Notes |
+| --- | --- | --- |
+| Front half panel | 1 on fold | Place center front on fabric fold; do not add extra seam allowance at fold. |
+| Back half panel | 1 on fold | Place center back on fabric fold; do not add extra seam allowance at fold. |
+
+## Allowances And Finishes
+
+- Seam allowance: ${formatInWithMetric(patternDoc.garmentParameters.allowances.seam)}
+- Hem allowance: ${formatInWithMetric(patternDoc.garmentParameters.allowances.hem)}
+- Neckline finish: ${patternDoc.garmentParameters.finishing.neckline}
+- Armhole finish: ${patternDoc.garmentParameters.finishing.armhole}
+
+## Assembly
+
+${patternDoc.construction.map((step, index) => `${index + 1}. ${step}`).join("\n")}
+
+## Assumptions
+
+${patternDoc.assumptions.map((assumption) => `- ${assumption}`).join("\n")}
+
+## Review Checklist
+
+- [ ] Confirm the generated pattern visually matches the source sketch.
+- [ ] Confirm the 2 in scale square measures correctly.
+- [ ] Confirm labels, grainlines, fold lines, seam lines, cut lines, and notches are visible.
+- [ ] Confirm neckline and armholes look plausible.
+- [ ] Confirm side seams and shoulders appear matchable.
+- [ ] Confirm head entry before finishing the neckline; no closure is modeled.
+- [ ] Record whether this passes for paper/muslin sanity check, needs another generated draft, or needs patternmaker intervention.
+
+## Known Limits
+
+- True fit and drape are not checked.
+- The preview is a static assembly view, not a garment simulation.
+- This A-line two-panel garment is now a smoke-test harness, not the main benchmark for product quality.
+`;
+}
+
 export function buildPackageOverview(patternDoc, readinessDoc, markerPlan = patternDoc.markerPlan) {
   const sourceSketch = patternDoc.source?.sourceSketch ?? "measurement + parameter fixture";
   return `# Package Overview
@@ -503,6 +600,7 @@ export function buildPackageManifest(patternDoc, readinessDoc, markerPlan, optio
     { path: "package/assembly.md", role: "human-sewing-instructions", format: "markdown" },
     { path: "package/human-sanity-check.md", role: "human-review-checklist", format: "markdown" },
     { path: "package/preview.html", role: "static-layout-preview", format: "html" },
+    ...(options.sourceSketch ? [{ path: "package/source-sketch.svg", role: "source-sketch", format: "svg" }] : []),
   ];
   const devFiles = [
     { path: "dev-artifacts/pattern-graph.json", role: "pattern-graph-candidate", format: "json" },

@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "0.1-human-output",
+  "title": "Sleeveless A-line Woven Dress/Tunic v0.1-from-sketch",
+  "sourcePackage": "garments/a-line-dress-tunic/outputs/v0.1-from-sketch",
+  "files": [
+    "guide.md",
+    "pattern.svg",
+    "preview.html",
+    "source-sketch.svg"
+  ]
+}

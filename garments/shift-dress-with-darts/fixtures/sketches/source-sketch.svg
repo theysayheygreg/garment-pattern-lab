@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="11in" height="8.5in" viewBox="0 0 1000 850">
+  <title>Shift Dress With Darts</title>
+  <style>
+    path, rect { fill: #fffdf7; stroke: #111827; stroke-width: 4; }
+    [data-gpl-role="detail"], [data-gpl-role="facing"], [data-gpl-role="dart"] { fill: none; stroke: #2563eb; stroke-dasharray: 10 8; }
+    text { font-family: Helvetica, Arial, sans-serif; font-size: 24px; letter-spacing: 0; fill: #111827; }
+  </style>
+  <text x="45" y="55">Shift Dress With Darts</text>
+
+    <path id="front" data-gpl-role="panel" d="M 245 115 C 300 150 380 150 435 115 L 490 205 C 445 300 458 550 470 770 L 215 770 C 227 550 240 300 195 205 Z" />
+    <path id="back" data-gpl-role="panel" d="M 610 120 C 665 150 740 150 795 120 L 845 210 C 812 330 825 565 835 770 L 570 770 C 580 565 592 330 560 210 Z" />
+    <path id="front-dart-left" data-gpl-role="dart" d="M 285 360 L 320 250 L 350 360" />
+    <path id="front-dart-right" data-gpl-role="dart" d="M 355 360 L 385 250 L 420 360" />
+    <path id="front-facing" data-gpl-role="facing" d="M 260 130 C 310 168 370 168 420 130 L 452 190 C 395 225 285 225 228 190 Z" />
+    <path id="back-facing" data-gpl-role="facing" d="M 625 135 C 675 168 730 168 780 135 L 810 192 C 755 225 650 225 595 192 Z" />
+    <text x="305" y="805">FRONT WITH DARTS</text>
+    <text x="660" y="805">BACK</text>
+  
+</svg>

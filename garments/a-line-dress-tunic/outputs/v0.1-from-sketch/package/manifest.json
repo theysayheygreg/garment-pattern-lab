@@ -71,6 +71,11 @@
       "path": "package/preview.html",
       "role": "static-layout-preview",
       "format": "html"
+    },
+    {
+      "path": "package/source-sketch.svg",
+      "role": "source-sketch",
+      "format": "svg"
     }
   ],
   "devFiles": [

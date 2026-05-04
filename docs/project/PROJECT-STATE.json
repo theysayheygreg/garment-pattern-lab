@@ -2,7 +2,7 @@
   "project": "garment-pattern-lab",
   "created": "2026-05-03",
   "status": "v0.1-phase-c-started",
-  "currentMilestone": "M1.13-v0.1-imperial-overview-curves",
+  "currentMilestone": "M1.14-v0.1-human-output-and-benchmarks",
   "v01Design": "docs/project/V0.1-DESIGN.md",
   "personas": {
     "directory": "docs/design/personas/",

@@ -46,6 +46,13 @@ const requiredPackages = [
   },
 ];
 
+const requiredHumanOutputs = [
+  {
+    output: "a-line-dress-tunic-from-sketch",
+    files: ["guide.md", "pattern.svg", "preview.html", "source-sketch.svg", "manifest.json"],
+  },
+];
+
 for (const spec of requiredPackages) {
   const outputRoot = path.join(garmentRoot, "outputs", spec.output);
   for (const file of spec.packageFiles) {
@@ -85,6 +92,20 @@ for (const spec of requiredPackages) {
   assert.match(overview, /one-file front door/);
   assert.match(overview, /Garment Snapshot/);
   assert.match(overview, /Shape Fidelity Note/);
+}
+
+for (const spec of requiredHumanOutputs) {
+  const outputRoot = path.resolve("human-output", "v0.1", spec.output);
+  for (const file of spec.files) {
+    assertFile(path.join(outputRoot, file));
+  }
+  const guide = fs.readFileSync(path.join(outputRoot, "guide.md"), "utf8");
+  assert.match(guide, /This is the human-facing v0.1 review guide/);
+  assert.match(guide, /Source sketch:/);
+  assert.match(guide, /The marker file is kept in developer\/package output for now/);
+  assert.match(guide, /Units|Body Fixture|Finished Draft Measurements/);
+  const sourceSketch = fs.readFileSync(path.join(outputRoot, "source-sketch.svg"), "utf8");
+  assert.match(sourceSketch, /<svg/);
 }
 
 const sketchPattern = readJson(

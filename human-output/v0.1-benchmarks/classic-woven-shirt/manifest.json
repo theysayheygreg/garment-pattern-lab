@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "0.1-benchmark-scaffold",
+  "garment": "classic-woven-shirt",
+  "name": "Classic Woven Shirt",
+  "files": [
+    "guide.md",
+    "source-sketch.svg"
+  ],
+  "status": "benchmark-input-scaffold"
+}
