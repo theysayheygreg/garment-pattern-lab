@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "0.1-phase-d-scale-calibration",
+  "kind": "scale-calibration",
+  "unitProfile": {
+    "sourceUnits": "svg-user-unit",
+    "outputUnits": "in",
+    "inchesPerSourceUnit": 0.11,
+    "mmPerSourceUnit": 2.794,
+    "scaleStatus": "calibrated",
+    "confidence": 0.82
+  },
+  "evidence": {
+    "source": "figure-detected",
+    "sourceRef": "figure-height-reference",
+    "measuredSourceSpan": 600,
+    "assumedPhysicalSpanIn": 66,
+    "notes": [
+      "Explicit source reference found in the trace; no generic croquis detector used yet."
+    ]
+  },
+  "warnings": []
+}

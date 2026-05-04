@@ -5,7 +5,7 @@ import path from "node:path";
 import { performance } from "node:perf_hooks";
 import { fileURLToPath } from "node:url";
 import { applyParameterEdit, buildEditSummary, interpretCommand } from "../../../packages/assistant-core/src/commands.mjs";
-import { buildAssembly, buildCutSheet, buildDebugOverlayHtml, buildPackageManifest, buildPreview, buildReadinessMd, buildSvg } from "../../../packages/export-core/src/package-builders.mjs";
+import { buildAssembly, buildCutSheet, buildDebugOverlayHtml, buildHumanSanityCheck, buildPackageManifest, buildPreview, buildReadinessMd, buildSvg } from "../../../packages/export-core/src/package-builders.mjs";
 import { buildMarkerPlan, buildMarkerSvg } from "../../../packages/export-core/src/marker-layout/layout.mjs";
 import { measureNamedEdges, round } from "../../../packages/pattern-core/src/measurements.mjs";
 import { buildDraftingRequest, projectLegacyGeneratorInputs } from "../../../packages/sketch-intent/src/drafting-adapter/drafting-request.mjs";
@@ -38,11 +38,12 @@ let params = readJson("fixtures/parameters/v0.1-parameters.json");
 let editIntent = null;
 let sketchPipeline = null;
 const stageTimings = [];
+const stableTimings = process.env.GPL_STABLE_TIMINGS === "1";
 
 const timeStage = (id, run) => {
   const startedAt = performance.now();
   const result = run();
-  const durationMs = Math.round((performance.now() - startedAt) * 100) / 100;
+  const durationMs = stableTimings ? 0 : Math.round((performance.now() - startedAt) * 100) / 100;
   stageTimings.push({ id, durationMs });
   return result;
 };
@@ -230,6 +231,7 @@ const markerPlan = buildMarkerPlan(pattern);
 pattern.markerPlan = markerPlan;
 
 const readiness = buildReadiness(pattern);
+if (process.env.GPL_GENERATED_AT) readiness.generatedAt = process.env.GPL_GENERATED_AT;
 
 if (!checkOnly) {
   fs.mkdirSync(packageDir, { recursive: true });
@@ -241,6 +243,7 @@ if (!checkOnly) {
   fs.writeFileSync(path.join(packageDir, "pattern.svg"), buildSvg(pattern, readiness, params).replace(/[ \t]+$/gm, ""));
   fs.writeFileSync(path.join(packageDir, "cut-sheet.md"), buildCutSheet(pattern, params, markerPlan));
   fs.writeFileSync(path.join(packageDir, "assembly.md"), buildAssembly(pattern));
+  fs.writeFileSync(path.join(packageDir, "human-sanity-check.md"), buildHumanSanityCheck(pattern, readiness, markerPlan));
   fs.writeFileSync(path.join(packageDir, "preview.html"), buildPreview(pattern, readiness));
   fs.writeFileSync(path.join(packageDir, "marker.svg"), buildMarkerSvg(pattern, markerPlan));
   fs.writeFileSync(path.join(packageDir, "manifest.json"), `${JSON.stringify(buildPackageManifest(pattern, readiness, markerPlan, { hasSketchPipeline: Boolean(sketchPipeline) }), null, 2)}\n`);

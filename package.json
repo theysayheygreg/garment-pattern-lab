@@ -8,6 +8,7 @@
     "dev:edit:lengthen-hem": "node garments/a-line-dress-tunic/src/generate.mjs --output v0.1-length-plus-100 --command \"lengthen hem 100mm\"",
     "dev:check:edit": "node garments/a-line-dress-tunic/src/generate.mjs --check --output v0.1-length-plus-100 --command \"lengthen hem 100mm\"",
     "v0.1:generate": "node garments/a-line-dress-tunic/src/generate.mjs",
+    "v0.1:generate:sketch": "GPL_STABLE_TIMINGS=1 GPL_GENERATED_AT=2026-05-04T20:33:55.216Z node garments/a-line-dress-tunic/src/generate.mjs --output v0.1-from-sketch --source-sketch packages/sketch-intent/fixtures/a-line-tunic-scale-reference-semantic-flat.svg",
     "v0.1:check": "node garments/a-line-dress-tunic/src/generate.mjs --check",
     "v0.1:check:sketch": "node garments/a-line-dress-tunic/src/generate.mjs --check --output v0.1-from-sketch --source-sketch packages/sketch-intent/fixtures/a-line-tunic-scale-reference-semantic-flat.svg",
     "v0.1:check:pipeline": "node garments/a-line-dress-tunic/src/pipeline.test.mjs",
@@ -15,6 +16,7 @@
     "check:debug-overlay": "node packages/export-core/src/debug-overlay.test.mjs",
     "check:export": "node packages/export-core/src/marker-layout/layout.test.mjs",
     "check:package-manifest": "node packages/export-core/src/package-manifest.test.mjs",
+    "check:package-completeness": "node garments/a-line-dress-tunic/src/package-completeness.test.mjs",
     "check:preview-3d": "node packages/preview-3d/src/static-assembly-scene.test.mjs && node packages/export-core/src/preview-html.test.mjs",
     "check:sketch": "node packages/sketch-intent/src/raster-to-vector/bridge.test.mjs",
     "check:semantic": "node packages/sketch-intent/src/semantic-interpreter/interpreter.test.mjs",
@@ -23,7 +25,7 @@
     "sketch:report": "node packages/sketch-intent/src/raster-to-vector/fixture-report.mjs",
     "semantic:report": "node packages/sketch-intent/src/semantic-interpreter/interpret-report.mjs",
     "scale:report": "node packages/sketch-intent/src/scale-calibration/scale-report.mjs",
-    "check": "npm run v0.1:check && npm run v0.1:check:pipeline && npm run dev:check:edit && npm run check:core && npm run check:export && npm run check:debug-overlay && npm run check:package-manifest && npm run check:preview-3d && npm run check:sketch && npm run check:semantic && npm run check:scale && npm run check:drafting"
+    "check": "npm run v0.1:check && npm run v0.1:check:pipeline && npm run dev:check:edit && npm run check:core && npm run check:export && npm run check:debug-overlay && npm run check:package-manifest && npm run check:package-completeness && npm run check:preview-3d && npm run check:sketch && npm run check:semantic && npm run check:scale && npm run check:drafting"
   },
   "dependencies": {
     "@neplex/vectorizer": "^0.0.5"

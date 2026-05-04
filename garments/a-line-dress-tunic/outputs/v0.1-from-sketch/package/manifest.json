@@ -1,14 +1,35 @@
 {
   "schemaVersion": "0.1-package-manifest",
-  "patternId": "a-line-dress-tunic-v0.1",
-  "title": "Sleeveless A-line Woven Dress/Tunic v0.1",
-  "generatedAt": "2026-05-04T20:23:31.613Z",
+  "patternId": "a-line-dress-tunic-v0.1-from-sketch",
+  "title": "Sleeveless A-line Woven Dress/Tunic v0.1-from-sketch",
+  "generatedAt": "2026-05-04T20:33:55.216Z",
   "readiness": "ready-for-human-sanity-check",
   "units": "mm",
   "source": {
     "generator": "garments/a-line-dress-tunic/src/generate.mjs",
     "bodyMeasurementSet": "fixtures/measurements/v0.1-body.json",
-    "garmentParameters": "fixtures/parameters/v0.1-parameters.json"
+    "garmentParameters": "fixtures/parameters/v0.1-parameters.json",
+    "sourceSketch": "packages/sketch-intent/fixtures/a-line-tunic-scale-reference-semantic-flat.svg",
+    "draftingRequestState": "draftable",
+    "scaleStatus": "calibrated",
+    "stageTimings": [
+      {
+        "id": "sketch.ingest",
+        "durationMs": 0
+      },
+      {
+        "id": "sketch.interpret",
+        "durationMs": 0
+      },
+      {
+        "id": "sketch.scale-calibrate",
+        "durationMs": 0
+      },
+      {
+        "id": "sketch.drafting-request",
+        "durationMs": 0
+      }
+    ]
   },
   "marker": {
     "fabricWidthIn": 45,
@@ -67,6 +88,36 @@
       "path": "dev-artifacts/marker-plan.json",
       "role": "marker-plan",
       "format": "json"
+    },
+    {
+      "path": "dev-artifacts/editable-trace-layer.json",
+      "role": "trace-layer",
+      "format": "json"
+    },
+    {
+      "path": "dev-artifacts/sketch-interpretation.json",
+      "role": "semantic-interpretation",
+      "format": "json"
+    },
+    {
+      "path": "dev-artifacts/interpretation-trace.json",
+      "role": "semantic-score-tables",
+      "format": "json"
+    },
+    {
+      "path": "dev-artifacts/scale-calibration.json",
+      "role": "scale-calibration",
+      "format": "json"
+    },
+    {
+      "path": "dev-artifacts/drafting-request.json",
+      "role": "drafting-request",
+      "format": "json"
+    },
+    {
+      "path": "dev-artifacts/debug-overlay.html",
+      "role": "labeled-curve-debug-overlay",
+      "format": "html"
     }
   ],
   "assumptions": [

@@ -109,9 +109,69 @@ export function buildAssembly(patternDoc) {
 
 ${patternDoc.construction.map((step, i) => `${i + 1}. ${step}`).join("\n")}
 
+## Muslin Notes
+
+- Make this first in inexpensive woven muslin or comparable test fabric.
+- Do not cut fashion fabric from this v0.1 package without a human pattern review.
+- Use bias binding or a facing for neckline and armholes; v0.1 does not choose that construction detail for you.
+- Check head entry before finishing the neckline because no closure is modeled.
+
 ## Assumptions
 
 ${patternDoc.assumptions.map((assumption) => `- ${assumption}`).join("\n")}
+`;
+}
+
+export function buildHumanSanityCheck(patternDoc, readinessDoc, markerPlan = patternDoc.markerPlan) {
+  const sourceSketch = patternDoc.source?.sourceSketch ?? "none; generated from measurement and parameter fixtures";
+  return `# Human Sanity Check
+
+Pattern: ${patternDoc.title}
+
+Readiness: ${readinessDoc.overallState}
+
+Source sketch: ${sourceSketch}
+
+This is the package-local review sheet for the dirty v0.1 spike. It is meant for a sewing-literate human before cutting anything beyond muslin.
+
+## Print And Scale
+
+- [ ] Open \`pattern.svg\` and confirm the 50mm scale square measures 50mm after printing.
+- [ ] Confirm the front and back panels print at the same scale.
+- [ ] Confirm labels, grainlines, fold lines, seam lines, cut lines, and notches are visible.
+
+## Pattern Shape
+
+- [ ] Confirm the front and back look like a sleeveless A-line woven dress/tunic.
+- [ ] Confirm the neckline and armholes look plausible for the design.
+- [ ] Confirm side seams and shoulders appear matchable.
+- [ ] Confirm hem sweep and finished length match the intended silhouette.
+
+## Sewing Review
+
+- [ ] Confirm seam allowance (${patternDoc.garmentParameters.allowances.seam}mm) and hem allowance (${patternDoc.garmentParameters.allowances.hem}mm) are acceptable for the muslin.
+- [ ] Decide binding vs facing for neckline and armholes.
+- [ ] Check head entry before finishing the neckline; no closure is modeled.
+- [ ] Record any required patternmaker changes before a second draft.
+
+## Marker
+
+- Fabric width: ${markerPlan?.fabricWidthIn ?? "unknown"} in
+- Estimated fabric length: ${markerPlan?.totalFabricLengthIn ?? "unknown"} in
+- Marker status: non-optimized v0.1 reference layout, not production nesting.
+
+## Assumptions To Review
+
+${patternDoc.assumptions.map((assumption) => `- ${assumption}`).join("\n")}
+
+## Result
+
+- [ ] Pass for paper/muslin sanity check
+- [ ] Needs another generated draft before printing
+- [ ] Needs patternmaker intervention
+
+Reviewer notes:
+
 `;
 }
 
@@ -347,6 +407,7 @@ export function buildPackageManifest(patternDoc, readinessDoc, markerPlan, optio
     { path: "package/marker.svg", role: "fabric-marker-layout", format: "svg" },
     { path: "package/cut-sheet.md", role: "human-cut-instructions", format: "markdown" },
     { path: "package/assembly.md", role: "human-sewing-instructions", format: "markdown" },
+    { path: "package/human-sanity-check.md", role: "human-review-checklist", format: "markdown" },
     { path: "package/preview.html", role: "static-layout-preview", format: "html" },
   ];
   const devFiles = [

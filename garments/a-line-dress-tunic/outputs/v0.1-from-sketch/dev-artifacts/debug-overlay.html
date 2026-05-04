@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sketch Debug Overlay</title>
+  <style>
+    body { margin: 0; font-family: Helvetica, Arial, sans-serif; color: #111827; background: #f8fafc; }
+    main { display: grid; grid-template-columns: minmax(0, 1fr) 380px; min-height: 100vh; }
+    section { padding: 24px; overflow: auto; }
+    aside { border-left: 1px solid #d1d5db; background: #fff; padding: 20px; overflow: auto; }
+    svg { width: 100%; min-width: 520px; background: #fffdf7; border: 1px solid #d1d5db; }
+    .curve { fill: none; stroke-width: 4; opacity: 0.62; }
+    .silhouette { stroke: #111827; opacity: 0.8; }
+    .assigned { stroke: #2563eb; }
+    .assumed, .needs-confirmation { stroke: #d97706; stroke-dasharray: 10 8; }
+    .missing { stroke: #dc2626; }
+    .not-present { stroke: #9ca3af; opacity: 0.25; }
+    .annotation { stroke: #7c3aed; stroke-dasharray: 4 6; }
+    h1 { font-size: 18px; margin: 0 0 12px; }
+    h2 { font-size: 14px; margin: 24px 0 8px; }
+    p, li, td, th { font-size: 12px; line-height: 1.4; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border-bottom: 1px solid #e5e7eb; padding: 6px 4px; text-align: left; vertical-align: top; }
+    code { background: #f3f4f6; padding: 1px 4px; border-radius: 3px; }
+  </style>
+</head>
+<body>
+  <main>
+    <section>
+      <svg viewBox="10 30 520 670" role="img" aria-label="Labeled sketch curves">
+        <path id="overlay-front-panel-silhouette" d="M 146 70 C 158 82 178 90 215 90 C 252 90 272 82 284 70 L 322 108 C 340 205 358 380 390 670 L 40 670 C 72 380 90 205 108 108 Z" class="curve silhouette silhouette"><title>silhouette: front-panel-silhouette</title></path>
+        <path id="overlay-front-neckline" d="M 160 76 C 176 134 254 134 270 76" class="curve assigned interior"><title>neckline_front 89%</title></path>
+        <path id="overlay-front-left-shoulder" d="M 108 108 L 146 70" class="curve assigned interior"><title>shoulder_left 78%</title></path>
+        <path id="overlay-front-right-shoulder" d="M 284 70 L 322 108" class="curve assigned interior"><title>shoulder_right 78%</title></path>
+        <path id="overlay-front-left-armhole" d="M 108 108 C 96 158 88 204 86 252" class="curve assigned interior"><title>armhole_left 82%</title></path>
+        <path id="overlay-front-right-armhole" d="M 322 108 C 334 158 342 204 344 252" class="curve assigned interior"><title>armhole_right 82%</title></path>
+        <path id="overlay-front-left-side-seam" d="M 86 252 C 78 374 62 522 40 670" class="curve assigned interior"><title>side_seam_left 83%</title></path>
+        <path id="overlay-front-right-side-seam" d="M 344 252 C 352 374 368 522 390 670" class="curve assigned interior"><title>side_seam_right 83%</title></path>
+        <path id="overlay-front-hem" d="M 40 670 L 390 670" class="curve assigned interior"><title>hem_front 100%</title></path>
+        <path id="overlay-front-center-axis" d="M 215 98 L 215 670" class="curve assigned interior"><title>center_front 100%</title></path>
+        <path id="overlay-figure-height-reference" d="M 500 60 L 500 660" class="curve annotation annotation"><title>annotation: figure-height-reference</title></path>
+      </svg>
+    </section>
+    <aside>
+      <h1>Sketch Debug Overlay</h1>
+      <p><strong>Trace:</strong> ready</p>
+      <p><strong>Interpretation:</strong> ready</p>
+      <p><strong>Drafting:</strong> draftable</p>
+      <p><strong>Readiness:</strong> ready-for-human-sanity-check</p>
+
+      <h2>Scale</h2>
+      <p><strong>Status:</strong> calibrated (82%)</p>
+      <p><strong>Evidence:</strong> figure-detected <code>figure-height-reference</code></p>
+
+      <h2>Landmarks</h2>
+      <table>
+        <thead><tr><th>Slot</th><th>Status</th><th>Conf.</th><th>Curve</th></tr></thead>
+        <tbody><tr><td>hem_front</td><td>assigned</td><td>100%</td><td>front-hem</td></tr>
+<tr><td>neckline_front</td><td>assigned</td><td>89%</td><td>front-neckline</td></tr>
+<tr><td>shoulder_left</td><td>assigned</td><td>78%</td><td>front-left-shoulder</td></tr>
+<tr><td>shoulder_right</td><td>assigned</td><td>78%</td><td>front-right-shoulder</td></tr>
+<tr><td>armhole_left</td><td>assigned</td><td>82%</td><td>front-left-armhole</td></tr>
+<tr><td>armhole_right</td><td>assigned</td><td>82%</td><td>front-right-armhole</td></tr>
+<tr><td>side_seam_left</td><td>assigned</td><td>83%</td><td>front-left-side-seam</td></tr>
+<tr><td>side_seam_right</td><td>assigned</td><td>83%</td><td>front-right-side-seam</td></tr>
+<tr><td>center_front</td><td>assigned</td><td>100%</td><td>front-center-axis</td></tr>
+<tr><td>bust_dart_left</td><td>not-present</td><td>82%</td><td></td></tr>
+<tr><td>bust_dart_right</td><td>not-present</td><td>82%</td><td></td></tr></tbody>
+      </table>
+
+      <h2>Assumptions</h2>
+      <ul><li>bust_dart_left: No dart-like feature was detected in the v0.1 trace.</li>
+<li>bust_dart_right: No dart-like feature was detected in the v0.1 trace.</li></ul>
+    </aside>
+  </main>
+</body>
+</html>

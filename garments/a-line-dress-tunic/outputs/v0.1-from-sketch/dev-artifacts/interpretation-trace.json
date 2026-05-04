@@ -1,0 +1,3806 @@
+{
+  "schemaVersion": "0.1-phase-j-interpretation-trace",
+  "panels": [
+    {
+      "panelId": "panel.front.0",
+      "view": "front",
+      "scoreTables": [
+        {
+          "slotId": "hem_front",
+          "selectedCandidateId": "front-hem",
+          "selectedSource": "trace",
+          "status": "assigned",
+          "confidence": 1,
+          "candidates": [
+            {
+              "candidateId": "front-hem",
+              "source": "trace",
+              "layer": "interior",
+              "score": 1,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-hem",
+                  "weight": 0.7,
+                  "score": 1,
+                  "reason": "Prefer explicit or derived hem candidates."
+                },
+                {
+                  "id": "lowest-horizontal-spanning-curve",
+                  "weight": 0.7,
+                  "score": 1,
+                  "reason": "Hem should be low, wide, and horizontal."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-hem",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 1,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-hem",
+                  "weight": 0.7,
+                  "score": 1,
+                  "reason": "Prefer explicit or derived hem candidates."
+                },
+                {
+                  "id": "lowest-horizontal-spanning-curve",
+                  "weight": 0.7,
+                  "score": 1,
+                  "reason": "Hem should be low, wide, and horizontal."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-panel-silhouette",
+              "source": "trace",
+              "layer": "silhouette",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-hem",
+                  "weight": 0.7,
+                  "score": 0,
+                  "reason": "Prefer explicit or derived hem candidates."
+                },
+                {
+                  "id": "lowest-horizontal-spanning-curve",
+                  "weight": 0.7,
+                  "score": 0,
+                  "reason": "Hem should be low, wide, and horizontal."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-neckline",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-hem",
+                  "weight": 0.7,
+                  "score": 0,
+                  "reason": "Prefer explicit or derived hem candidates."
+                },
+                {
+                  "id": "lowest-horizontal-spanning-curve",
+                  "weight": 0.7,
+                  "score": 0,
+                  "reason": "Hem should be low, wide, and horizontal."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-left-shoulder",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-hem",
+                  "weight": 0.7,
+                  "score": 0,
+                  "reason": "Prefer explicit or derived hem candidates."
+                },
+                {
+                  "id": "lowest-horizontal-spanning-curve",
+                  "weight": 0.7,
+                  "score": 0,
+                  "reason": "Hem should be low, wide, and horizontal."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-right-shoulder",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-hem",
+                  "weight": 0.7,
+                  "score": 0,
+                  "reason": "Prefer explicit or derived hem candidates."
+                },
+                {
+                  "id": "lowest-horizontal-spanning-curve",
+                  "weight": 0.7,
+                  "score": 0,
+                  "reason": "Hem should be low, wide, and horizontal."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-left-armhole",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-hem",
+                  "weight": 0.7,
+                  "score": 0,
+                  "reason": "Prefer explicit or derived hem candidates."
+                },
+                {
+                  "id": "lowest-horizontal-spanning-curve",
+                  "weight": 0.7,
+                  "score": 0,
+                  "reason": "Hem should be low, wide, and horizontal."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-right-armhole",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-hem",
+                  "weight": 0.7,
+                  "score": 0,
+                  "reason": "Prefer explicit or derived hem candidates."
+                },
+                {
+                  "id": "lowest-horizontal-spanning-curve",
+                  "weight": 0.7,
+                  "score": 0,
+                  "reason": "Hem should be low, wide, and horizontal."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-left-side-seam",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-hem",
+                  "weight": 0.7,
+                  "score": 0,
+                  "reason": "Prefer explicit or derived hem candidates."
+                },
+                {
+                  "id": "lowest-horizontal-spanning-curve",
+                  "weight": 0.7,
+                  "score": 0,
+                  "reason": "Hem should be low, wide, and horizontal."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-right-side-seam",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-hem",
+                  "weight": 0.7,
+                  "score": 0,
+                  "reason": "Prefer explicit or derived hem candidates."
+                },
+                {
+                  "id": "lowest-horizontal-spanning-curve",
+                  "weight": 0.7,
+                  "score": 0,
+                  "reason": "Hem should be low, wide, and horizontal."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-center-axis",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-hem",
+                  "weight": 0.7,
+                  "score": 0,
+                  "reason": "Prefer explicit or derived hem candidates."
+                },
+                {
+                  "id": "lowest-horizontal-spanning-curve",
+                  "weight": 0.7,
+                  "score": 0,
+                  "reason": "Hem should be low, wide, and horizontal."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-armhole-left",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-hem",
+                  "weight": 0.7,
+                  "score": 0,
+                  "reason": "Prefer explicit or derived hem candidates."
+                },
+                {
+                  "id": "lowest-horizontal-spanning-curve",
+                  "weight": 0.7,
+                  "score": 0,
+                  "reason": "Hem should be low, wide, and horizontal."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-armhole-right",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-hem",
+                  "weight": 0.7,
+                  "score": 0,
+                  "reason": "Prefer explicit or derived hem candidates."
+                },
+                {
+                  "id": "lowest-horizontal-spanning-curve",
+                  "weight": 0.7,
+                  "score": 0,
+                  "reason": "Hem should be low, wide, and horizontal."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-side-seam-left",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-hem",
+                  "weight": 0.7,
+                  "score": 0,
+                  "reason": "Prefer explicit or derived hem candidates."
+                },
+                {
+                  "id": "lowest-horizontal-spanning-curve",
+                  "weight": 0.7,
+                  "score": 0,
+                  "reason": "Hem should be low, wide, and horizontal."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-side-seam-right",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-hem",
+                  "weight": 0.7,
+                  "score": 0,
+                  "reason": "Prefer explicit or derived hem candidates."
+                },
+                {
+                  "id": "lowest-horizontal-spanning-curve",
+                  "weight": 0.7,
+                  "score": 0,
+                  "reason": "Hem should be low, wide, and horizontal."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-center-axis",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-hem",
+                  "weight": 0.7,
+                  "score": 0,
+                  "reason": "Prefer explicit or derived hem candidates."
+                },
+                {
+                  "id": "lowest-horizontal-spanning-curve",
+                  "weight": 0.7,
+                  "score": 0,
+                  "reason": "Hem should be low, wide, and horizontal."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "slotId": "neckline_front",
+          "selectedCandidateId": "front-neckline",
+          "selectedSource": "trace",
+          "status": "assigned",
+          "confidence": 0.892,
+          "candidates": [
+            {
+              "candidateId": "front-neckline",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0.892,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-neckline",
+                  "weight": 0.75,
+                  "score": 1,
+                  "reason": "Prefer explicit neckline labels."
+                },
+                {
+                  "id": "top-center-open-curve",
+                  "weight": 0.65,
+                  "score": 0.7666666666666666,
+                  "reason": "Neckline should sit near the top and cross the center axis."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-panel-silhouette",
+              "source": "trace",
+              "layer": "silhouette",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-neckline",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Prefer explicit neckline labels."
+                },
+                {
+                  "id": "top-center-open-curve",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Neckline should sit near the top and cross the center axis."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-left-shoulder",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-neckline",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Prefer explicit neckline labels."
+                },
+                {
+                  "id": "top-center-open-curve",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Neckline should sit near the top and cross the center axis."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-right-shoulder",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-neckline",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Prefer explicit neckline labels."
+                },
+                {
+                  "id": "top-center-open-curve",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Neckline should sit near the top and cross the center axis."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-left-armhole",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-neckline",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Prefer explicit neckline labels."
+                },
+                {
+                  "id": "top-center-open-curve",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Neckline should sit near the top and cross the center axis."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-right-armhole",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-neckline",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Prefer explicit neckline labels."
+                },
+                {
+                  "id": "top-center-open-curve",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Neckline should sit near the top and cross the center axis."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-left-side-seam",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-neckline",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Prefer explicit neckline labels."
+                },
+                {
+                  "id": "top-center-open-curve",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Neckline should sit near the top and cross the center axis."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-right-side-seam",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-neckline",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Prefer explicit neckline labels."
+                },
+                {
+                  "id": "top-center-open-curve",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Neckline should sit near the top and cross the center axis."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-hem",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-neckline",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Prefer explicit neckline labels."
+                },
+                {
+                  "id": "top-center-open-curve",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Neckline should sit near the top and cross the center axis."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-center-axis",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-neckline",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Prefer explicit neckline labels."
+                },
+                {
+                  "id": "top-center-open-curve",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Neckline should sit near the top and cross the center axis."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-hem",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-neckline",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Prefer explicit neckline labels."
+                },
+                {
+                  "id": "top-center-open-curve",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Neckline should sit near the top and cross the center axis."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-armhole-left",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-neckline",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Prefer explicit neckline labels."
+                },
+                {
+                  "id": "top-center-open-curve",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Neckline should sit near the top and cross the center axis."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-armhole-right",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-neckline",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Prefer explicit neckline labels."
+                },
+                {
+                  "id": "top-center-open-curve",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Neckline should sit near the top and cross the center axis."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-side-seam-left",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-neckline",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Prefer explicit neckline labels."
+                },
+                {
+                  "id": "top-center-open-curve",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Neckline should sit near the top and cross the center axis."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-side-seam-right",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-neckline",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Prefer explicit neckline labels."
+                },
+                {
+                  "id": "top-center-open-curve",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Neckline should sit near the top and cross the center axis."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-center-axis",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-neckline",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Prefer explicit neckline labels."
+                },
+                {
+                  "id": "top-center-open-curve",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Neckline should sit near the top and cross the center axis."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "slotId": "shoulder_left",
+          "selectedCandidateId": "front-left-shoulder",
+          "selectedSource": "trace",
+          "status": "assigned",
+          "confidence": 0.778,
+          "candidates": [
+            {
+              "candidateId": "front-left-shoulder",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0.778,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-shoulder-left",
+                  "weight": 0.85,
+                  "score": 1,
+                  "reason": "Prefer explicit left shoulder labels."
+                },
+                {
+                  "id": "top-left-short-edge",
+                  "weight": 0.65,
+                  "score": 0.48818937742687984,
+                  "reason": "Left shoulder should be short and high."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-panel-silhouette",
+              "source": "trace",
+              "layer": "silhouette",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-shoulder-left",
+                  "weight": 0.85,
+                  "score": 0,
+                  "reason": "Prefer explicit left shoulder labels."
+                },
+                {
+                  "id": "top-left-short-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Left shoulder should be short and high."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-neckline",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-shoulder-left",
+                  "weight": 0.85,
+                  "score": 0,
+                  "reason": "Prefer explicit left shoulder labels."
+                },
+                {
+                  "id": "top-left-short-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Left shoulder should be short and high."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-right-shoulder",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-shoulder-left",
+                  "weight": 0.85,
+                  "score": 0,
+                  "reason": "Prefer explicit left shoulder labels."
+                },
+                {
+                  "id": "top-left-short-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Left shoulder should be short and high."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-left-armhole",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-shoulder-left",
+                  "weight": 0.85,
+                  "score": 0,
+                  "reason": "Prefer explicit left shoulder labels."
+                },
+                {
+                  "id": "top-left-short-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Left shoulder should be short and high."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-right-armhole",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-shoulder-left",
+                  "weight": 0.85,
+                  "score": 0,
+                  "reason": "Prefer explicit left shoulder labels."
+                },
+                {
+                  "id": "top-left-short-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Left shoulder should be short and high."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-left-side-seam",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-shoulder-left",
+                  "weight": 0.85,
+                  "score": 0,
+                  "reason": "Prefer explicit left shoulder labels."
+                },
+                {
+                  "id": "top-left-short-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Left shoulder should be short and high."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-right-side-seam",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-shoulder-left",
+                  "weight": 0.85,
+                  "score": 0,
+                  "reason": "Prefer explicit left shoulder labels."
+                },
+                {
+                  "id": "top-left-short-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Left shoulder should be short and high."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-hem",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-shoulder-left",
+                  "weight": 0.85,
+                  "score": 0,
+                  "reason": "Prefer explicit left shoulder labels."
+                },
+                {
+                  "id": "top-left-short-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Left shoulder should be short and high."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-center-axis",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-shoulder-left",
+                  "weight": 0.85,
+                  "score": 0,
+                  "reason": "Prefer explicit left shoulder labels."
+                },
+                {
+                  "id": "top-left-short-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Left shoulder should be short and high."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-hem",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-shoulder-left",
+                  "weight": 0.85,
+                  "score": 0,
+                  "reason": "Prefer explicit left shoulder labels."
+                },
+                {
+                  "id": "top-left-short-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Left shoulder should be short and high."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-armhole-left",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-shoulder-left",
+                  "weight": 0.85,
+                  "score": 0,
+                  "reason": "Prefer explicit left shoulder labels."
+                },
+                {
+                  "id": "top-left-short-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Left shoulder should be short and high."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-armhole-right",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-shoulder-left",
+                  "weight": 0.85,
+                  "score": 0,
+                  "reason": "Prefer explicit left shoulder labels."
+                },
+                {
+                  "id": "top-left-short-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Left shoulder should be short and high."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-side-seam-left",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-shoulder-left",
+                  "weight": 0.85,
+                  "score": 0,
+                  "reason": "Prefer explicit left shoulder labels."
+                },
+                {
+                  "id": "top-left-short-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Left shoulder should be short and high."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-side-seam-right",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-shoulder-left",
+                  "weight": 0.85,
+                  "score": 0,
+                  "reason": "Prefer explicit left shoulder labels."
+                },
+                {
+                  "id": "top-left-short-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Left shoulder should be short and high."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-center-axis",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-shoulder-left",
+                  "weight": 0.85,
+                  "score": 0,
+                  "reason": "Prefer explicit left shoulder labels."
+                },
+                {
+                  "id": "top-left-short-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Left shoulder should be short and high."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "slotId": "shoulder_right",
+          "selectedCandidateId": "front-right-shoulder",
+          "selectedSource": "trace",
+          "status": "assigned",
+          "confidence": 0.778,
+          "candidates": [
+            {
+              "candidateId": "front-right-shoulder",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0.778,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-shoulder-right",
+                  "weight": 0.85,
+                  "score": 1,
+                  "reason": "Prefer explicit right shoulder labels."
+                },
+                {
+                  "id": "top-right-short-edge",
+                  "weight": 0.65,
+                  "score": 0.48818937742687984,
+                  "reason": "Right shoulder should be short and high."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-panel-silhouette",
+              "source": "trace",
+              "layer": "silhouette",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-shoulder-right",
+                  "weight": 0.85,
+                  "score": 0,
+                  "reason": "Prefer explicit right shoulder labels."
+                },
+                {
+                  "id": "top-right-short-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Right shoulder should be short and high."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-neckline",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-shoulder-right",
+                  "weight": 0.85,
+                  "score": 0,
+                  "reason": "Prefer explicit right shoulder labels."
+                },
+                {
+                  "id": "top-right-short-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Right shoulder should be short and high."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-left-shoulder",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-shoulder-right",
+                  "weight": 0.85,
+                  "score": 0,
+                  "reason": "Prefer explicit right shoulder labels."
+                },
+                {
+                  "id": "top-right-short-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Right shoulder should be short and high."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-left-armhole",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-shoulder-right",
+                  "weight": 0.85,
+                  "score": 0,
+                  "reason": "Prefer explicit right shoulder labels."
+                },
+                {
+                  "id": "top-right-short-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Right shoulder should be short and high."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-right-armhole",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-shoulder-right",
+                  "weight": 0.85,
+                  "score": 0,
+                  "reason": "Prefer explicit right shoulder labels."
+                },
+                {
+                  "id": "top-right-short-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Right shoulder should be short and high."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-left-side-seam",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-shoulder-right",
+                  "weight": 0.85,
+                  "score": 0,
+                  "reason": "Prefer explicit right shoulder labels."
+                },
+                {
+                  "id": "top-right-short-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Right shoulder should be short and high."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-right-side-seam",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-shoulder-right",
+                  "weight": 0.85,
+                  "score": 0,
+                  "reason": "Prefer explicit right shoulder labels."
+                },
+                {
+                  "id": "top-right-short-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Right shoulder should be short and high."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-hem",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-shoulder-right",
+                  "weight": 0.85,
+                  "score": 0,
+                  "reason": "Prefer explicit right shoulder labels."
+                },
+                {
+                  "id": "top-right-short-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Right shoulder should be short and high."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-center-axis",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-shoulder-right",
+                  "weight": 0.85,
+                  "score": 0,
+                  "reason": "Prefer explicit right shoulder labels."
+                },
+                {
+                  "id": "top-right-short-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Right shoulder should be short and high."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-hem",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-shoulder-right",
+                  "weight": 0.85,
+                  "score": 0,
+                  "reason": "Prefer explicit right shoulder labels."
+                },
+                {
+                  "id": "top-right-short-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Right shoulder should be short and high."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-armhole-left",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-shoulder-right",
+                  "weight": 0.85,
+                  "score": 0,
+                  "reason": "Prefer explicit right shoulder labels."
+                },
+                {
+                  "id": "top-right-short-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Right shoulder should be short and high."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-armhole-right",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-shoulder-right",
+                  "weight": 0.85,
+                  "score": 0,
+                  "reason": "Prefer explicit right shoulder labels."
+                },
+                {
+                  "id": "top-right-short-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Right shoulder should be short and high."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-side-seam-left",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-shoulder-right",
+                  "weight": 0.85,
+                  "score": 0,
+                  "reason": "Prefer explicit right shoulder labels."
+                },
+                {
+                  "id": "top-right-short-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Right shoulder should be short and high."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-side-seam-right",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-shoulder-right",
+                  "weight": 0.85,
+                  "score": 0,
+                  "reason": "Prefer explicit right shoulder labels."
+                },
+                {
+                  "id": "top-right-short-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Right shoulder should be short and high."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-center-axis",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-shoulder-right",
+                  "weight": 0.85,
+                  "score": 0,
+                  "reason": "Prefer explicit right shoulder labels."
+                },
+                {
+                  "id": "top-right-short-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Right shoulder should be short and high."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "slotId": "armhole_left",
+          "selectedCandidateId": "front-left-armhole",
+          "selectedSource": "trace",
+          "status": "assigned",
+          "confidence": 0.817,
+          "candidates": [
+            {
+              "candidateId": "front-left-armhole",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0.817,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-armhole-left",
+                  "weight": 0.8,
+                  "score": 1,
+                  "reason": "Prefer left armhole labels or derived upper-side segment."
+                },
+                {
+                  "id": "upper-left-lateral-edge",
+                  "weight": 0.65,
+                  "score": 0.5925925925925926,
+                  "reason": "Armhole should live high on the left side."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-armhole-left",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0.681,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-armhole-left",
+                  "weight": 0.8,
+                  "score": 0.62,
+                  "reason": "Prefer left armhole labels or derived upper-side segment."
+                },
+                {
+                  "id": "upper-left-lateral-edge",
+                  "weight": 0.65,
+                  "score": 0.7555555555555555,
+                  "reason": "Armhole should live high on the left side."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-left-shoulder",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0.417,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-armhole-left",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer left armhole labels or derived upper-side segment."
+                },
+                {
+                  "id": "upper-left-lateral-edge",
+                  "weight": 0.65,
+                  "score": 0.9296296296296296,
+                  "reason": "Armhole should live high on the left side."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-panel-silhouette",
+              "source": "trace",
+              "layer": "silhouette",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-armhole-left",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer left armhole labels or derived upper-side segment."
+                },
+                {
+                  "id": "upper-left-lateral-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Armhole should live high on the left side."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-neckline",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-armhole-left",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer left armhole labels or derived upper-side segment."
+                },
+                {
+                  "id": "upper-left-lateral-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Armhole should live high on the left side."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-right-shoulder",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-armhole-left",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer left armhole labels or derived upper-side segment."
+                },
+                {
+                  "id": "upper-left-lateral-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Armhole should live high on the left side."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-right-armhole",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-armhole-left",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer left armhole labels or derived upper-side segment."
+                },
+                {
+                  "id": "upper-left-lateral-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Armhole should live high on the left side."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-left-side-seam",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-armhole-left",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer left armhole labels or derived upper-side segment."
+                },
+                {
+                  "id": "upper-left-lateral-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Armhole should live high on the left side."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-right-side-seam",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-armhole-left",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer left armhole labels or derived upper-side segment."
+                },
+                {
+                  "id": "upper-left-lateral-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Armhole should live high on the left side."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-hem",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-armhole-left",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer left armhole labels or derived upper-side segment."
+                },
+                {
+                  "id": "upper-left-lateral-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Armhole should live high on the left side."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-center-axis",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-armhole-left",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer left armhole labels or derived upper-side segment."
+                },
+                {
+                  "id": "upper-left-lateral-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Armhole should live high on the left side."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-hem",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-armhole-left",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer left armhole labels or derived upper-side segment."
+                },
+                {
+                  "id": "upper-left-lateral-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Armhole should live high on the left side."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-armhole-right",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-armhole-left",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer left armhole labels or derived upper-side segment."
+                },
+                {
+                  "id": "upper-left-lateral-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Armhole should live high on the left side."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-side-seam-left",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-armhole-left",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer left armhole labels or derived upper-side segment."
+                },
+                {
+                  "id": "upper-left-lateral-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Armhole should live high on the left side."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-side-seam-right",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-armhole-left",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer left armhole labels or derived upper-side segment."
+                },
+                {
+                  "id": "upper-left-lateral-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Armhole should live high on the left side."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-center-axis",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-armhole-left",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer left armhole labels or derived upper-side segment."
+                },
+                {
+                  "id": "upper-left-lateral-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Armhole should live high on the left side."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "slotId": "armhole_right",
+          "selectedCandidateId": "front-right-armhole",
+          "selectedSource": "trace",
+          "status": "assigned",
+          "confidence": 0.817,
+          "candidates": [
+            {
+              "candidateId": "front-right-armhole",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0.817,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-armhole-right",
+                  "weight": 0.8,
+                  "score": 1,
+                  "reason": "Prefer right armhole labels or derived upper-side segment."
+                },
+                {
+                  "id": "upper-right-lateral-edge",
+                  "weight": 0.65,
+                  "score": 0.5925925925925926,
+                  "reason": "Armhole should live high on the right side."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-armhole-right",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0.681,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-armhole-right",
+                  "weight": 0.8,
+                  "score": 0.62,
+                  "reason": "Prefer right armhole labels or derived upper-side segment."
+                },
+                {
+                  "id": "upper-right-lateral-edge",
+                  "weight": 0.65,
+                  "score": 0.7555555555555555,
+                  "reason": "Armhole should live high on the right side."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-right-shoulder",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0.417,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-armhole-right",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer right armhole labels or derived upper-side segment."
+                },
+                {
+                  "id": "upper-right-lateral-edge",
+                  "weight": 0.65,
+                  "score": 0.9296296296296296,
+                  "reason": "Armhole should live high on the right side."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-panel-silhouette",
+              "source": "trace",
+              "layer": "silhouette",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-armhole-right",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer right armhole labels or derived upper-side segment."
+                },
+                {
+                  "id": "upper-right-lateral-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Armhole should live high on the right side."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-neckline",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-armhole-right",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer right armhole labels or derived upper-side segment."
+                },
+                {
+                  "id": "upper-right-lateral-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Armhole should live high on the right side."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-left-shoulder",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-armhole-right",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer right armhole labels or derived upper-side segment."
+                },
+                {
+                  "id": "upper-right-lateral-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Armhole should live high on the right side."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-left-armhole",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-armhole-right",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer right armhole labels or derived upper-side segment."
+                },
+                {
+                  "id": "upper-right-lateral-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Armhole should live high on the right side."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-left-side-seam",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-armhole-right",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer right armhole labels or derived upper-side segment."
+                },
+                {
+                  "id": "upper-right-lateral-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Armhole should live high on the right side."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-right-side-seam",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-armhole-right",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer right armhole labels or derived upper-side segment."
+                },
+                {
+                  "id": "upper-right-lateral-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Armhole should live high on the right side."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-hem",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-armhole-right",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer right armhole labels or derived upper-side segment."
+                },
+                {
+                  "id": "upper-right-lateral-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Armhole should live high on the right side."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-center-axis",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-armhole-right",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer right armhole labels or derived upper-side segment."
+                },
+                {
+                  "id": "upper-right-lateral-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Armhole should live high on the right side."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-hem",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-armhole-right",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer right armhole labels or derived upper-side segment."
+                },
+                {
+                  "id": "upper-right-lateral-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Armhole should live high on the right side."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-armhole-left",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-armhole-right",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer right armhole labels or derived upper-side segment."
+                },
+                {
+                  "id": "upper-right-lateral-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Armhole should live high on the right side."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-side-seam-left",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-armhole-right",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer right armhole labels or derived upper-side segment."
+                },
+                {
+                  "id": "upper-right-lateral-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Armhole should live high on the right side."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-side-seam-right",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-armhole-right",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer right armhole labels or derived upper-side segment."
+                },
+                {
+                  "id": "upper-right-lateral-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Armhole should live high on the right side."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-center-axis",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-armhole-right",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer right armhole labels or derived upper-side segment."
+                },
+                {
+                  "id": "upper-right-lateral-edge",
+                  "weight": 0.65,
+                  "score": 0,
+                  "reason": "Armhole should live high on the right side."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "slotId": "side_seam_left",
+          "selectedCandidateId": "front-left-side-seam",
+          "selectedSource": "trace",
+          "status": "assigned",
+          "confidence": 0.831,
+          "candidates": [
+            {
+              "candidateId": "front-left-side-seam",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0.831,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-side-left",
+                  "weight": 0.8,
+                  "score": 1,
+                  "reason": "Prefer left side seam labels or derived lower-side segment."
+                },
+                {
+                  "id": "left-long-vertical-edge",
+                  "weight": 0.75,
+                  "score": 0.6516666666666666,
+                  "reason": "Left side seam should be long and lateral."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-side-seam-left",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0.811,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-side-left",
+                  "weight": 0.8,
+                  "score": 1,
+                  "reason": "Prefer left side seam labels or derived lower-side segment."
+                },
+                {
+                  "id": "left-long-vertical-edge",
+                  "weight": 0.75,
+                  "score": 0.61,
+                  "reason": "Left side seam should be long and lateral."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-center-axis",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0.253,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-side-left",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer left side seam labels or derived lower-side segment."
+                },
+                {
+                  "id": "left-long-vertical-edge",
+                  "weight": 0.75,
+                  "score": 0.5233333333333333,
+                  "reason": "Left side seam should be long and lateral."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-center-axis",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0.242,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-side-left",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer left side seam labels or derived lower-side segment."
+                },
+                {
+                  "id": "left-long-vertical-edge",
+                  "weight": 0.75,
+                  "score": 0.5,
+                  "reason": "Left side seam should be long and lateral."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-left-armhole",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0.048,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-side-left",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer left side seam labels or derived lower-side segment."
+                },
+                {
+                  "id": "left-long-vertical-edge",
+                  "weight": 0.75,
+                  "score": 0.09923898467341495,
+                  "reason": "Left side seam should be long and lateral."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-left-shoulder",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0.003,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-side-left",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer left side seam labels or derived lower-side segment."
+                },
+                {
+                  "id": "left-long-vertical-edge",
+                  "weight": 0.75,
+                  "score": 0.006302853037243054,
+                  "reason": "Left side seam should be long and lateral."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-panel-silhouette",
+              "source": "trace",
+              "layer": "silhouette",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-side-left",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer left side seam labels or derived lower-side segment."
+                },
+                {
+                  "id": "left-long-vertical-edge",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Left side seam should be long and lateral."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-neckline",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-side-left",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer left side seam labels or derived lower-side segment."
+                },
+                {
+                  "id": "left-long-vertical-edge",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Left side seam should be long and lateral."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-right-shoulder",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-side-left",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer left side seam labels or derived lower-side segment."
+                },
+                {
+                  "id": "left-long-vertical-edge",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Left side seam should be long and lateral."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-right-armhole",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-side-left",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer left side seam labels or derived lower-side segment."
+                },
+                {
+                  "id": "left-long-vertical-edge",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Left side seam should be long and lateral."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-right-side-seam",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-side-left",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer left side seam labels or derived lower-side segment."
+                },
+                {
+                  "id": "left-long-vertical-edge",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Left side seam should be long and lateral."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-hem",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-side-left",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer left side seam labels or derived lower-side segment."
+                },
+                {
+                  "id": "left-long-vertical-edge",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Left side seam should be long and lateral."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-armhole-left",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0.026,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-side-left",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer left side seam labels or derived lower-side segment."
+                },
+                {
+                  "id": "left-long-vertical-edge",
+                  "weight": 0.75,
+                  "score": 0.05461056177461298,
+                  "reason": "Left side seam should be long and lateral."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-hem",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-side-left",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer left side seam labels or derived lower-side segment."
+                },
+                {
+                  "id": "left-long-vertical-edge",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Left side seam should be long and lateral."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-armhole-right",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-side-left",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer left side seam labels or derived lower-side segment."
+                },
+                {
+                  "id": "left-long-vertical-edge",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Left side seam should be long and lateral."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-side-seam-right",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-side-left",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer left side seam labels or derived lower-side segment."
+                },
+                {
+                  "id": "left-long-vertical-edge",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Left side seam should be long and lateral."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "slotId": "side_seam_right",
+          "selectedCandidateId": "front-right-side-seam",
+          "selectedSource": "trace",
+          "status": "assigned",
+          "confidence": 0.831,
+          "candidates": [
+            {
+              "candidateId": "front-right-side-seam",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0.831,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-side-right",
+                  "weight": 0.8,
+                  "score": 1,
+                  "reason": "Prefer right side seam labels or derived lower-side segment."
+                },
+                {
+                  "id": "right-long-vertical-edge",
+                  "weight": 0.75,
+                  "score": 0.6516666666666666,
+                  "reason": "Right side seam should be long and lateral."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-side-seam-right",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0.811,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-side-right",
+                  "weight": 0.8,
+                  "score": 1,
+                  "reason": "Prefer right side seam labels or derived lower-side segment."
+                },
+                {
+                  "id": "right-long-vertical-edge",
+                  "weight": 0.75,
+                  "score": 0.61,
+                  "reason": "Right side seam should be long and lateral."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-center-axis",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0.253,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-side-right",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer right side seam labels or derived lower-side segment."
+                },
+                {
+                  "id": "right-long-vertical-edge",
+                  "weight": 0.75,
+                  "score": 0.5233333333333333,
+                  "reason": "Right side seam should be long and lateral."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-center-axis",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0.242,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-side-right",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer right side seam labels or derived lower-side segment."
+                },
+                {
+                  "id": "right-long-vertical-edge",
+                  "weight": 0.75,
+                  "score": 0.5,
+                  "reason": "Right side seam should be long and lateral."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-right-armhole",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0.048,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-side-right",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer right side seam labels or derived lower-side segment."
+                },
+                {
+                  "id": "right-long-vertical-edge",
+                  "weight": 0.75,
+                  "score": 0.09923898467341495,
+                  "reason": "Right side seam should be long and lateral."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-right-shoulder",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0.003,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-side-right",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer right side seam labels or derived lower-side segment."
+                },
+                {
+                  "id": "right-long-vertical-edge",
+                  "weight": 0.75,
+                  "score": 0.006302853037243054,
+                  "reason": "Right side seam should be long and lateral."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-panel-silhouette",
+              "source": "trace",
+              "layer": "silhouette",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-side-right",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer right side seam labels or derived lower-side segment."
+                },
+                {
+                  "id": "right-long-vertical-edge",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Right side seam should be long and lateral."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-neckline",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-side-right",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer right side seam labels or derived lower-side segment."
+                },
+                {
+                  "id": "right-long-vertical-edge",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Right side seam should be long and lateral."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-left-shoulder",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-side-right",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer right side seam labels or derived lower-side segment."
+                },
+                {
+                  "id": "right-long-vertical-edge",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Right side seam should be long and lateral."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-left-armhole",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-side-right",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer right side seam labels or derived lower-side segment."
+                },
+                {
+                  "id": "right-long-vertical-edge",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Right side seam should be long and lateral."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-left-side-seam",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-side-right",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer right side seam labels or derived lower-side segment."
+                },
+                {
+                  "id": "right-long-vertical-edge",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Right side seam should be long and lateral."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-hem",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-side-right",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer right side seam labels or derived lower-side segment."
+                },
+                {
+                  "id": "right-long-vertical-edge",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Right side seam should be long and lateral."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-armhole-right",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0.026,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-side-right",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer right side seam labels or derived lower-side segment."
+                },
+                {
+                  "id": "right-long-vertical-edge",
+                  "weight": 0.75,
+                  "score": 0.05461056177461298,
+                  "reason": "Right side seam should be long and lateral."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-hem",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-side-right",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer right side seam labels or derived lower-side segment."
+                },
+                {
+                  "id": "right-long-vertical-edge",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Right side seam should be long and lateral."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-armhole-left",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-side-right",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer right side seam labels or derived lower-side segment."
+                },
+                {
+                  "id": "right-long-vertical-edge",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Right side seam should be long and lateral."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-side-seam-left",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-side-right",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer right side seam labels or derived lower-side segment."
+                },
+                {
+                  "id": "right-long-vertical-edge",
+                  "weight": 0.75,
+                  "score": 0,
+                  "reason": "Right side seam should be long and lateral."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "slotId": "center_front",
+          "selectedCandidateId": "front-center-axis",
+          "selectedSource": "trace",
+          "status": "assigned",
+          "confidence": 1,
+          "candidates": [
+            {
+              "candidateId": "front-center-axis",
+              "source": "trace",
+              "layer": "interior",
+              "score": 1,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-center",
+                  "weight": 0.95,
+                  "score": 1,
+                  "reason": "Prefer explicit or derived center axis."
+                },
+                {
+                  "id": "vertical-on-axis",
+                  "weight": 0.9,
+                  "score": 1,
+                  "reason": "Center front should be vertical and near the symmetry axis."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-center-axis",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 1,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-center",
+                  "weight": 0.95,
+                  "score": 1,
+                  "reason": "Prefer explicit or derived center axis."
+                },
+                {
+                  "id": "vertical-on-axis",
+                  "weight": 0.9,
+                  "score": 1,
+                  "reason": "Center front should be vertical and near the symmetry axis."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-panel-silhouette",
+              "source": "trace",
+              "layer": "silhouette",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-center",
+                  "weight": 0.95,
+                  "score": 0,
+                  "reason": "Prefer explicit or derived center axis."
+                },
+                {
+                  "id": "vertical-on-axis",
+                  "weight": 0.9,
+                  "score": 0,
+                  "reason": "Center front should be vertical and near the symmetry axis."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-neckline",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-center",
+                  "weight": 0.95,
+                  "score": 0,
+                  "reason": "Prefer explicit or derived center axis."
+                },
+                {
+                  "id": "vertical-on-axis",
+                  "weight": 0.9,
+                  "score": 0,
+                  "reason": "Center front should be vertical and near the symmetry axis."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-left-shoulder",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-center",
+                  "weight": 0.95,
+                  "score": 0,
+                  "reason": "Prefer explicit or derived center axis."
+                },
+                {
+                  "id": "vertical-on-axis",
+                  "weight": 0.9,
+                  "score": 0,
+                  "reason": "Center front should be vertical and near the symmetry axis."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-right-shoulder",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-center",
+                  "weight": 0.95,
+                  "score": 0,
+                  "reason": "Prefer explicit or derived center axis."
+                },
+                {
+                  "id": "vertical-on-axis",
+                  "weight": 0.9,
+                  "score": 0,
+                  "reason": "Center front should be vertical and near the symmetry axis."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-left-armhole",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-center",
+                  "weight": 0.95,
+                  "score": 0,
+                  "reason": "Prefer explicit or derived center axis."
+                },
+                {
+                  "id": "vertical-on-axis",
+                  "weight": 0.9,
+                  "score": 0,
+                  "reason": "Center front should be vertical and near the symmetry axis."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-right-armhole",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-center",
+                  "weight": 0.95,
+                  "score": 0,
+                  "reason": "Prefer explicit or derived center axis."
+                },
+                {
+                  "id": "vertical-on-axis",
+                  "weight": 0.9,
+                  "score": 0,
+                  "reason": "Center front should be vertical and near the symmetry axis."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-left-side-seam",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-center",
+                  "weight": 0.95,
+                  "score": 0,
+                  "reason": "Prefer explicit or derived center axis."
+                },
+                {
+                  "id": "vertical-on-axis",
+                  "weight": 0.9,
+                  "score": 0,
+                  "reason": "Center front should be vertical and near the symmetry axis."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-right-side-seam",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-center",
+                  "weight": 0.95,
+                  "score": 0,
+                  "reason": "Prefer explicit or derived center axis."
+                },
+                {
+                  "id": "vertical-on-axis",
+                  "weight": 0.9,
+                  "score": 0,
+                  "reason": "Center front should be vertical and near the symmetry axis."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-hem",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-center",
+                  "weight": 0.95,
+                  "score": 0,
+                  "reason": "Prefer explicit or derived center axis."
+                },
+                {
+                  "id": "vertical-on-axis",
+                  "weight": 0.9,
+                  "score": 0,
+                  "reason": "Center front should be vertical and near the symmetry axis."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-hem",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-center",
+                  "weight": 0.95,
+                  "score": 0,
+                  "reason": "Prefer explicit or derived center axis."
+                },
+                {
+                  "id": "vertical-on-axis",
+                  "weight": 0.9,
+                  "score": 0,
+                  "reason": "Center front should be vertical and near the symmetry axis."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-armhole-left",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-center",
+                  "weight": 0.95,
+                  "score": 0,
+                  "reason": "Prefer explicit or derived center axis."
+                },
+                {
+                  "id": "vertical-on-axis",
+                  "weight": 0.9,
+                  "score": 0,
+                  "reason": "Center front should be vertical and near the symmetry axis."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-armhole-right",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-center",
+                  "weight": 0.95,
+                  "score": 0,
+                  "reason": "Prefer explicit or derived center axis."
+                },
+                {
+                  "id": "vertical-on-axis",
+                  "weight": 0.9,
+                  "score": 0,
+                  "reason": "Center front should be vertical and near the symmetry axis."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-side-seam-left",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-center",
+                  "weight": 0.95,
+                  "score": 0,
+                  "reason": "Prefer explicit or derived center axis."
+                },
+                {
+                  "id": "vertical-on-axis",
+                  "weight": 0.9,
+                  "score": 0,
+                  "reason": "Center front should be vertical and near the symmetry axis."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-side-seam-right",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-or-derived-center",
+                  "weight": 0.95,
+                  "score": 0,
+                  "reason": "Prefer explicit or derived center axis."
+                },
+                {
+                  "id": "vertical-on-axis",
+                  "weight": 0.9,
+                  "score": 0,
+                  "reason": "Center front should be vertical and near the symmetry axis."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "slotId": "bust_dart_left",
+          "selectedCandidateId": null,
+          "selectedSource": null,
+          "status": "not-present",
+          "confidence": 0.82,
+          "candidates": [
+            {
+              "candidateId": "front-left-shoulder",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0.117,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-dart-side",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer explicit dart labels on the matching side."
+                },
+                {
+                  "id": "short-interior-line",
+                  "weight": 0.4,
+                  "score": 0.35,
+                  "reason": "Dart candidates are short interior marks."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-panel-silhouette",
+              "source": "trace",
+              "layer": "silhouette",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-dart-side",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer explicit dart labels on the matching side."
+                },
+                {
+                  "id": "short-interior-line",
+                  "weight": 0.4,
+                  "score": 0,
+                  "reason": "Dart candidates are short interior marks."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-neckline",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-dart-side",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer explicit dart labels on the matching side."
+                },
+                {
+                  "id": "short-interior-line",
+                  "weight": 0.4,
+                  "score": 0,
+                  "reason": "Dart candidates are short interior marks."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-right-shoulder",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-dart-side",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer explicit dart labels on the matching side."
+                },
+                {
+                  "id": "short-interior-line",
+                  "weight": 0.4,
+                  "score": 0,
+                  "reason": "Dart candidates are short interior marks."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-left-armhole",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-dart-side",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer explicit dart labels on the matching side."
+                },
+                {
+                  "id": "short-interior-line",
+                  "weight": 0.4,
+                  "score": 0,
+                  "reason": "Dart candidates are short interior marks."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-right-armhole",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-dart-side",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer explicit dart labels on the matching side."
+                },
+                {
+                  "id": "short-interior-line",
+                  "weight": 0.4,
+                  "score": 0,
+                  "reason": "Dart candidates are short interior marks."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-left-side-seam",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-dart-side",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer explicit dart labels on the matching side."
+                },
+                {
+                  "id": "short-interior-line",
+                  "weight": 0.4,
+                  "score": 0,
+                  "reason": "Dart candidates are short interior marks."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-right-side-seam",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-dart-side",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer explicit dart labels on the matching side."
+                },
+                {
+                  "id": "short-interior-line",
+                  "weight": 0.4,
+                  "score": 0,
+                  "reason": "Dart candidates are short interior marks."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-hem",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-dart-side",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer explicit dart labels on the matching side."
+                },
+                {
+                  "id": "short-interior-line",
+                  "weight": 0.4,
+                  "score": 0,
+                  "reason": "Dart candidates are short interior marks."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-center-axis",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-dart-side",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer explicit dart labels on the matching side."
+                },
+                {
+                  "id": "short-interior-line",
+                  "weight": 0.4,
+                  "score": 0,
+                  "reason": "Dart candidates are short interior marks."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-hem",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-dart-side",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer explicit dart labels on the matching side."
+                },
+                {
+                  "id": "short-interior-line",
+                  "weight": 0.4,
+                  "score": 0,
+                  "reason": "Dart candidates are short interior marks."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-armhole-left",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-dart-side",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer explicit dart labels on the matching side."
+                },
+                {
+                  "id": "short-interior-line",
+                  "weight": 0.4,
+                  "score": 0,
+                  "reason": "Dart candidates are short interior marks."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-armhole-right",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-dart-side",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer explicit dart labels on the matching side."
+                },
+                {
+                  "id": "short-interior-line",
+                  "weight": 0.4,
+                  "score": 0,
+                  "reason": "Dart candidates are short interior marks."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-side-seam-left",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-dart-side",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer explicit dart labels on the matching side."
+                },
+                {
+                  "id": "short-interior-line",
+                  "weight": 0.4,
+                  "score": 0,
+                  "reason": "Dart candidates are short interior marks."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-side-seam-right",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-dart-side",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer explicit dart labels on the matching side."
+                },
+                {
+                  "id": "short-interior-line",
+                  "weight": 0.4,
+                  "score": 0,
+                  "reason": "Dart candidates are short interior marks."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-center-axis",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-dart-side",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer explicit dart labels on the matching side."
+                },
+                {
+                  "id": "short-interior-line",
+                  "weight": 0.4,
+                  "score": 0,
+                  "reason": "Dart candidates are short interior marks."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "slotId": "bust_dart_right",
+          "selectedCandidateId": null,
+          "selectedSource": null,
+          "status": "not-present",
+          "confidence": 0.82,
+          "candidates": [
+            {
+              "candidateId": "front-right-shoulder",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0.117,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-dart-side",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer explicit dart labels on the matching side."
+                },
+                {
+                  "id": "short-interior-line",
+                  "weight": 0.4,
+                  "score": 0.35,
+                  "reason": "Dart candidates are short interior marks."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-panel-silhouette",
+              "source": "trace",
+              "layer": "silhouette",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-dart-side",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer explicit dart labels on the matching side."
+                },
+                {
+                  "id": "short-interior-line",
+                  "weight": 0.4,
+                  "score": 0,
+                  "reason": "Dart candidates are short interior marks."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-neckline",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-dart-side",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer explicit dart labels on the matching side."
+                },
+                {
+                  "id": "short-interior-line",
+                  "weight": 0.4,
+                  "score": 0,
+                  "reason": "Dart candidates are short interior marks."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-left-shoulder",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-dart-side",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer explicit dart labels on the matching side."
+                },
+                {
+                  "id": "short-interior-line",
+                  "weight": 0.4,
+                  "score": 0,
+                  "reason": "Dart candidates are short interior marks."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-left-armhole",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-dart-side",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer explicit dart labels on the matching side."
+                },
+                {
+                  "id": "short-interior-line",
+                  "weight": 0.4,
+                  "score": 0,
+                  "reason": "Dart candidates are short interior marks."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-right-armhole",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-dart-side",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer explicit dart labels on the matching side."
+                },
+                {
+                  "id": "short-interior-line",
+                  "weight": 0.4,
+                  "score": 0,
+                  "reason": "Dart candidates are short interior marks."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-left-side-seam",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-dart-side",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer explicit dart labels on the matching side."
+                },
+                {
+                  "id": "short-interior-line",
+                  "weight": 0.4,
+                  "score": 0,
+                  "reason": "Dart candidates are short interior marks."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-right-side-seam",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-dart-side",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer explicit dart labels on the matching side."
+                },
+                {
+                  "id": "short-interior-line",
+                  "weight": 0.4,
+                  "score": 0,
+                  "reason": "Dart candidates are short interior marks."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-hem",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-dart-side",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer explicit dart labels on the matching side."
+                },
+                {
+                  "id": "short-interior-line",
+                  "weight": 0.4,
+                  "score": 0,
+                  "reason": "Dart candidates are short interior marks."
+                }
+              ]
+            },
+            {
+              "candidateId": "front-center-axis",
+              "source": "trace",
+              "layer": "interior",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-dart-side",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer explicit dart labels on the matching side."
+                },
+                {
+                  "id": "short-interior-line",
+                  "weight": 0.4,
+                  "score": 0,
+                  "reason": "Dart candidates are short interior marks."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-hem",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-dart-side",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer explicit dart labels on the matching side."
+                },
+                {
+                  "id": "short-interior-line",
+                  "weight": 0.4,
+                  "score": 0,
+                  "reason": "Dart candidates are short interior marks."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-armhole-left",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-dart-side",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer explicit dart labels on the matching side."
+                },
+                {
+                  "id": "short-interior-line",
+                  "weight": 0.4,
+                  "score": 0,
+                  "reason": "Dart candidates are short interior marks."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-armhole-right",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-dart-side",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer explicit dart labels on the matching side."
+                },
+                {
+                  "id": "short-interior-line",
+                  "weight": 0.4,
+                  "score": 0,
+                  "reason": "Dart candidates are short interior marks."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-side-seam-left",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-dart-side",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer explicit dart labels on the matching side."
+                },
+                {
+                  "id": "short-interior-line",
+                  "weight": 0.4,
+                  "score": 0,
+                  "reason": "Dart candidates are short interior marks."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-side-seam-right",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-dart-side",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer explicit dart labels on the matching side."
+                },
+                {
+                  "id": "short-interior-line",
+                  "weight": 0.4,
+                  "score": 0,
+                  "reason": "Dart candidates are short interior marks."
+                }
+              ]
+            },
+            {
+              "candidateId": "derived-front-center-axis",
+              "source": "derived-from-silhouette",
+              "layer": "derived",
+              "score": 0,
+              "consideration": "scored",
+              "ruleScores": [
+                {
+                  "id": "id-dart-side",
+                  "weight": 0.8,
+                  "score": 0,
+                  "reason": "Prefer explicit dart labels on the matching side."
+                },
+                {
+                  "id": "short-interior-line",
+                  "weight": 0.4,
+                  "score": 0,
+                  "reason": "Dart candidates are short interior marks."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

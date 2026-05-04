@@ -1,0 +1,141 @@
+{
+  "schemaVersion": "0.1-dirty-spike",
+  "patternId": "a-line-dress-tunic-v0.1-from-sketch",
+  "generatedAt": "2026-05-04T20:33:55.216Z",
+  "overallState": "ready-for-human-sanity-check",
+  "checks": [
+    {
+      "id": "units.mm",
+      "state": "ready",
+      "summary": "Pattern uses canonical millimeters.",
+      "details": {}
+    },
+    {
+      "id": "front-half.closed",
+      "state": "ready",
+      "summary": "Front half panel has closed seam and cut line point sets.",
+      "details": {}
+    },
+    {
+      "id": "front-half.grainline",
+      "state": "ready",
+      "summary": "Front half panel includes a grainline parallel to the fold.",
+      "details": {}
+    },
+    {
+      "id": "front-half.label",
+      "state": "ready",
+      "summary": "Front half panel includes cut label information.",
+      "details": {}
+    },
+    {
+      "id": "back-half.closed",
+      "state": "ready",
+      "summary": "Back half panel has closed seam and cut line point sets.",
+      "details": {}
+    },
+    {
+      "id": "back-half.grainline",
+      "state": "ready",
+      "summary": "Back half panel includes a grainline parallel to the fold.",
+      "details": {}
+    },
+    {
+      "id": "back-half.label",
+      "state": "ready",
+      "summary": "Back half panel includes cut label information.",
+      "details": {}
+    },
+    {
+      "id": "shoulder-seams.length",
+      "state": "ready",
+      "summary": "shoulder-seams match within 5mm.",
+      "details": {
+        "aLength": 91.78,
+        "bLength": 91.78,
+        "delta": 0,
+        "tolerance": 5
+      }
+    },
+    {
+      "id": "side-seams.length",
+      "state": "ready",
+      "summary": "side-seams match within 5mm.",
+      "details": {
+        "aLength": 699.95,
+        "bLength": 699.95,
+        "delta": 0,
+        "tolerance": 5
+      }
+    },
+    {
+      "id": "known-limitations.fabric-layout",
+      "state": "limitation",
+      "summary": "Fabric layout, bolt width, nap, print direction, and marker efficiency are not checked in v0.1.",
+      "details": {}
+    },
+    {
+      "id": "known-limitations.fit",
+      "state": "limitation",
+      "summary": "True fit, drape, head entry, and muslin behavior require human review.",
+      "details": {}
+    },
+    {
+      "id": "known-limitations.geometry",
+      "state": "limitation",
+      "summary": "Cut lines use rough expansion rather than a robust offset kernel.",
+      "details": {}
+    },
+    {
+      "id": "marker.plan",
+      "state": "ready",
+      "summary": "Marker layout uses 45 inch width and estimates 77.02 inches of fabric.",
+      "details": {
+        "fabricWidthIn": 45,
+        "totalFabricLengthIn": 77.02,
+        "warnings": []
+      }
+    },
+    {
+      "id": "pipeline.drafting-request",
+      "state": "ready",
+      "summary": "Sketch-driven drafting request state: draftable.",
+      "details": {
+        "sourceSketch": "packages/sketch-intent/fixtures/a-line-tunic-scale-reference-semantic-flat.svg",
+        "scaleStatus": "calibrated"
+      }
+    }
+  ],
+  "instrumentation": {
+    "marker": {
+      "fabricWidthIn": 45,
+      "totalFabricLengthIn": 77.02,
+      "warningCount": 0
+    },
+    "sketchPipeline": {
+      "sourceSketch": "packages/sketch-intent/fixtures/a-line-tunic-scale-reference-semantic-flat.svg",
+      "draftingRequestState": "draftable",
+      "scaleStatus": "calibrated",
+      "stageTimings": [
+        {
+          "id": "sketch.ingest",
+          "durationMs": 0
+        },
+        {
+          "id": "sketch.interpret",
+          "durationMs": 0
+        },
+        {
+          "id": "sketch.scale-calibrate",
+          "durationMs": 0
+        },
+        {
+          "id": "sketch.drafting-request",
+          "durationMs": 0
+        }
+      ]
+    },
+    "assumptionCount": 4
+  },
+  "designerSummary": "This draft is ready for a human sanity check as a rough first package."
+}

@@ -35,6 +35,7 @@ Status:
 - [ ] **Phase H package manifest started:** package output now includes `manifest.json` with package/dev artifact inventory, marker summary, assumptions, source provenance, and known missing export formats. Remaining work: tiled PDF.
 - [ ] **Phase I static preview started:** package preview now emits a Three.js static assembly scene from PatternGraph panels, body proxy, and seam-pair guides. Remaining work: browser screenshot/pixel verification if the preview becomes a demo-critical surface.
 - [x] **Phase J dev instrumentation complete enough for v0.1:** sketch-driven runs now emit `debug-overlay.html` for labeled curve review and `interpretation-trace.json` for semantic score tables. Readiness now includes marker metrics, sketch-pipeline state, assumption counts, and sketch-stage timings.
+- [x] **Sketch-sourced v0.1 demo package started:** `npm run v0.1:generate:sketch` emits a committed `outputs/v0.1-from-sketch/` package from the canonical semantic-flat fixture, including package-local human sanity sheet and sketch dev artifacts.
 - [ ] Pattern schema concrete JSON shape (closes during Phase E).
 - [x] Phase B tech stack decision concrete: `@neplex/vectorizer`/VTracer for raster tracing, Poppler `pdftocairo` for local vector/raster PDF and PDF-compatible `.ai` conversion, Potrace research-only unless license isolation is intentional.
 

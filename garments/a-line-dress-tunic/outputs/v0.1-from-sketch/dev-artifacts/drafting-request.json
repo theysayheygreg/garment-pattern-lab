@@ -1,0 +1,231 @@
+{
+  "schemaVersion": "0.1-phase-e-drafting-request",
+  "garmentFamily": "sleeveless-a-line-woven-tunic",
+  "units": "mm",
+  "source": {
+    "traceHash": "6dc3d0079ed4d8fb12c26b61566b562b90f99406e0166cd1a0dab742eb7631c8",
+    "priorHash": "418152787c613ee6659e5c00feea89c25c92ae9eeaa787e4a0dc54de6bdb9b0d",
+    "scaleProfileId": "figure-height-reference"
+  },
+  "scaleProfile": {
+    "canonicalUnit": "mm",
+    "sourceUnit": "svg-user-unit",
+    "sourceToMm": 2.794,
+    "confidence": 0.82,
+    "evidenceType": "figure-detected",
+    "scaleStatus": "calibrated"
+  },
+  "bodyMeasurementSet": {
+    "id": "synthetic-body-v0.1",
+    "units": "mm",
+    "source": "synthetic prototype fixture",
+    "measurements": {
+      "height": 1680,
+      "bust": 920,
+      "waist": 760,
+      "hip": 980,
+      "shoulderWidth": 380,
+      "shoulderSlope": 18,
+      "frontWaistLength": 430,
+      "backWaistLength": 410,
+      "armholeDepth": 215,
+      "hipDepth": 620
+    }
+  },
+  "designParameters": {
+    "id": "a-line-dress-tunic-v0.1-parameters",
+    "units": "mm",
+    "garmentType": "sleeveless-a-line-woven-dress-tunic",
+    "length": 900,
+    "neckline": {
+      "shape": "scoop",
+      "width": 78,
+      "frontDepth": 120,
+      "backDepth": 45
+    },
+    "shoulder": {
+      "coverage": 78,
+      "drop": 18,
+      "neckToShoulderInset": 22
+    },
+    "armhole": {
+      "depth": 215,
+      "shape": "simple-sleeveless"
+    },
+    "ease": {
+      "bust": 120,
+      "waist": 180,
+      "hip": 160
+    },
+    "silhouette": {
+      "hemSweep": 1500,
+      "sideShape": "a-line"
+    },
+    "darts": {
+      "mode": "dartless"
+    },
+    "closure": {
+      "mode": "none-modeled",
+      "assumption": "loose pullover; head entry not proven"
+    },
+    "allowances": {
+      "seam": 10,
+      "hem": 30
+    },
+    "finishing": {
+      "neckline": "bias-binding-or-facing",
+      "armhole": "bias-binding-or-facing"
+    },
+    "validation": {
+      "seamLengthTolerance": 5
+    },
+    "sourceDesignEvidence": {
+      "neckline": {
+        "front": {
+          "slotId": "neckline_front",
+          "status": "assigned",
+          "confidence": 0.892,
+          "source": "trace",
+          "curveId": "front-neckline"
+        },
+        "back": null
+      },
+      "hem": {
+        "front": {
+          "slotId": "hem_front",
+          "status": "assigned",
+          "confidence": 1,
+          "source": "trace",
+          "curveId": "front-hem"
+        },
+        "back": null
+      },
+      "mirroredAssumptions": []
+    }
+  },
+  "evidence": {
+    "landmarksUsed": [
+      {
+        "slot": "hem_front",
+        "view": "front",
+        "status": "assigned",
+        "confidence": 1,
+        "sourceCurveIds": [
+          "front-hem"
+        ]
+      },
+      {
+        "slot": "neckline_front",
+        "view": "front",
+        "status": "assigned",
+        "confidence": 0.892,
+        "sourceCurveIds": [
+          "front-neckline"
+        ]
+      },
+      {
+        "slot": "shoulder_left",
+        "view": "front",
+        "status": "assigned",
+        "confidence": 0.778,
+        "sourceCurveIds": [
+          "front-left-shoulder"
+        ]
+      },
+      {
+        "slot": "shoulder_right",
+        "view": "front",
+        "status": "assigned",
+        "confidence": 0.778,
+        "sourceCurveIds": [
+          "front-right-shoulder"
+        ]
+      },
+      {
+        "slot": "armhole_left",
+        "view": "front",
+        "status": "assigned",
+        "confidence": 0.817,
+        "sourceCurveIds": [
+          "front-left-armhole"
+        ]
+      },
+      {
+        "slot": "armhole_right",
+        "view": "front",
+        "status": "assigned",
+        "confidence": 0.817,
+        "sourceCurveIds": [
+          "front-right-armhole"
+        ]
+      },
+      {
+        "slot": "side_seam_left",
+        "view": "front",
+        "status": "assigned",
+        "confidence": 0.831,
+        "sourceCurveIds": [
+          "front-left-side-seam"
+        ]
+      },
+      {
+        "slot": "side_seam_right",
+        "view": "front",
+        "status": "assigned",
+        "confidence": 0.831,
+        "sourceCurveIds": [
+          "front-right-side-seam"
+        ]
+      },
+      {
+        "slot": "center_front",
+        "view": "front",
+        "status": "assigned",
+        "confidence": 1,
+        "sourceCurveIds": [
+          "front-center-axis"
+        ]
+      },
+      {
+        "slot": "bust_dart_left",
+        "view": "front",
+        "status": "not-present",
+        "confidence": 0.82,
+        "sourceCurveIds": []
+      },
+      {
+        "slot": "bust_dart_right",
+        "view": "front",
+        "status": "not-present",
+        "confidence": 0.82,
+        "sourceCurveIds": []
+      }
+    ],
+    "assumptions": [
+      {
+        "landmarkId": "lm.front.bust-dart-left",
+        "slot": "bust_dart_left",
+        "view": "front",
+        "id": "assume.front.bust_dart_left",
+        "severity": "soft",
+        "message": "No dart-like feature was detected in the v0.1 trace.",
+        "machineReason": "not-present"
+      },
+      {
+        "landmarkId": "lm.front.bust-dart-right",
+        "slot": "bust_dart_right",
+        "view": "front",
+        "id": "assume.front.bust_dart_right",
+        "severity": "soft",
+        "message": "No dart-like feature was detected in the v0.1 trace.",
+        "machineReason": "not-present"
+      }
+    ],
+    "ambiguityItems": []
+  },
+  "promotion": {
+    "state": "draftable",
+    "blockers": [],
+    "warnings": []
+  }
+}

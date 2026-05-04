@@ -322,3 +322,9 @@ Readiness instrumentation extension:
 - Added sketch-pipeline readiness instrumentation for sketch-driven runs, including drafting request state and scale status. This is intentionally engine-facing; it supports generator improvement without becoming a designer-facing error console.
 - Added assumption count instrumentation so readiness reports summarize how much inferred design intent the package is carrying.
 - Added per-stage timing for sketch-driven runs: ingest, interpretation, scale calibration, and drafting-request promotion. Timings are attached only to sketch-driven readiness instrumentation so the baseline generated fixture does not churn on every run.
+
+Sketch-sourced demo package start:
+
+- Added a deterministic `npm run v0.1:generate:sketch` command that emits `outputs/v0.1-from-sketch/` from the canonical A-line tunic semantic-flat fixture.
+- Added `package/human-sanity-check.md` to generated packages so the review prompt travels beside the pattern, marker, assembly notes, preview, and manifest.
+- Added `npm run check:package-completeness`, which checks the baseline package and sketch-sourced package for the reviewable human files and sketch dev artifacts.
