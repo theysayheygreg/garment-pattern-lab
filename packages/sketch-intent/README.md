@@ -31,6 +31,7 @@ Phase B code:
 - `src/semantic-interpreter/interpreter.test.mjs`: smoke tests for complete front, paired front/back, back-only, single-side mirrored, sparse blocked, and dart-side fixtures.
 - `src/scale-calibration/calibrator.mjs`: Phase D scale wrapper that attaches a unit profile through dev override, explicit trace reference, or canonical low-confidence fallback.
 - `src/scale-calibration/scale-report.mjs`: Phase D report CLI for inspecting calibration evidence, warnings, and scaled panel bounds.
+- `src/drafting-adapter/drafting-request.mjs`: Phase E adapter boundary that promotes calibrated interpretation into a `DraftingRequest` or refuses before the generator when semantic/scale blockers remain.
 
 Local tool assumptions:
 

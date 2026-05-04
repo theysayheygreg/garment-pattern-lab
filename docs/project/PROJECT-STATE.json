@@ -2,7 +2,7 @@
   "project": "garment-pattern-lab",
   "created": "2026-05-03",
   "status": "v0.1-phase-c-started",
-  "currentMilestone": "M1.2-v0.1-scale-calibration-start",
+  "currentMilestone": "M1.3-v0.1-drafting-request-adapter-start",
   "v01Design": "docs/project/V0.1-DESIGN.md",
   "personas": {
     "directory": "docs/design/personas/",

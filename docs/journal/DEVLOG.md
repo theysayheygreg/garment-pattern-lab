@@ -269,3 +269,9 @@ Phase D scale calibration start:
 - Added `calibrateScale({ trace, interpretation, canonicalBody, override })`, which returns a wrapper around the Phase C interpretation with `scaleCalibration`, updated `coordinateProfile`, `landmarkSet.unitProfile`, and scaled panel bounds.
 - Supported three v0.1 evidence modes: developer override, explicit trace reference, and low-confidence canonical fallback.
 - Added `a-line-tunic-scale-reference-semantic-flat.svg`, `canonical-misses-8.json`, `npm run check:scale`, and `npm run scale:report`.
+
+Phase E drafting adapter start:
+
+- Added `packages/sketch-intent/src/drafting-adapter/drafting-request.mjs`.
+- Added `buildDraftingRequest()`, which promotes calibrated interpretation into a scale-proven drafting request and refuses before generator handoff when scale or required semantic landmarks are missing.
+- Preserved uncertainty: mirrored landmarks and low-confidence/default scale become request warnings and evidence assumptions, not silent drafting facts.

@@ -13,10 +13,11 @@
     "check:sketch": "node packages/sketch-intent/src/raster-to-vector/bridge.test.mjs",
     "check:semantic": "node packages/sketch-intent/src/semantic-interpreter/interpreter.test.mjs",
     "check:scale": "node packages/sketch-intent/src/scale-calibration/calibrator.test.mjs",
+    "check:drafting": "node packages/sketch-intent/src/drafting-adapter/drafting-request.test.mjs",
     "sketch:report": "node packages/sketch-intent/src/raster-to-vector/fixture-report.mjs",
     "semantic:report": "node packages/sketch-intent/src/semantic-interpreter/interpret-report.mjs",
     "scale:report": "node packages/sketch-intent/src/scale-calibration/scale-report.mjs",
-    "check": "npm run v0.1:check && npm run dev:check:edit && npm run check:core && npm run check:sketch && npm run check:semantic && npm run check:scale"
+    "check": "npm run v0.1:check && npm run dev:check:edit && npm run check:core && npm run check:sketch && npm run check:semantic && npm run check:scale && npm run check:drafting"
   },
   "dependencies": {
     "@neplex/vectorizer": "^0.0.5"
