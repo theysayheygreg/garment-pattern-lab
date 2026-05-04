@@ -204,7 +204,7 @@ function parseAttributes(source) {
 
 function extractTracePaths(svg) {
   const paths = [];
-  for (const match of svg.matchAll(/<(path|polygon|polyline|line|rect)\b([^>]*)>/gi)) {
+  for (const match of svg.matchAll(/<(path|polygon|polyline|line|rect|circle|ellipse)\b([^>]*)>/gi)) {
     const element = match[1].toLowerCase();
     const attrs = parseAttributes(match[2]);
     const d = pathDataForElement(element, attrs);
@@ -219,6 +219,8 @@ function pathDataForElement(element, attrs) {
   if (element === "polygon" || element === "polyline") return pointListToPath(attrs.points ?? "", element === "polygon");
   if (element === "line") return lineToPath(attrs);
   if (element === "rect") return rectToPath(attrs);
+  if (element === "circle") return ellipseToPath(attrs, numberAttr(attrs, "r"), numberAttr(attrs, "r"));
+  if (element === "ellipse") return ellipseToPath(attrs, numberAttr(attrs, "rx"), numberAttr(attrs, "ry"));
   return "";
 }
 
@@ -251,10 +253,26 @@ function rectToPath(attrs) {
   return `M ${x} ${y} L ${x + width} ${y} L ${x + width} ${y + height} L ${x} ${y + height} Z`;
 }
 
+function ellipseToPath(attrs, rx, ry) {
+  const cx = numberAttr(attrs, "cx") ?? 0;
+  const cy = numberAttr(attrs, "cy") ?? 0;
+  if (rx === null || ry === null || rx <= 0 || ry <= 0) return "";
+  const points = [];
+  for (let i = 0; i < 16; i += 1) {
+    const angle = (Math.PI * 2 * i) / 16;
+    points.push([round(cx + Math.cos(angle) * rx), round(cy + Math.sin(angle) * ry)]);
+  }
+  return `${points.map(([x, y], index) => `${index === 0 ? "M" : "L"} ${x} ${y}`).join(" ")} Z`;
+}
+
 function numberAttr(attrs, key) {
   if (attrs[key] === undefined) return null;
   const value = Number(attrs[key]);
   return Number.isFinite(value) ? value : null;
+}
+
+function round(value) {
+  return Math.round(value * 1000) / 1000;
 }
 
 function roughPathBounds(d) {

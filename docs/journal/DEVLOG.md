@@ -233,3 +233,4 @@ Phase B fixture hardening:
 - Updated the bridge to normalize those primitives into path-like trace records before layer classification.
 - Added backend readiness assessment (`ready`, `review-needed`, `blocked`) for fixture work, including input support, path count, silhouette count, and unclassified-path checks.
 - Added `npm run sketch:report` for local fixture summaries without turning backend readiness into a designer-facing error console.
+- Added `hardware-detail-technical-flat.svg` and circle/ellipse normalization for rings, rivets, buttons, and similar garment details.

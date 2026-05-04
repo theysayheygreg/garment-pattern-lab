@@ -35,6 +35,17 @@ assert.equal(primitiveTrace.layers.annotation.length, 0);
 assert.ok(primitiveTrace.layers.unclassified.some((candidate) => candidate.id === "scale-reference-box"));
 assert.equal(primitiveTrace.readiness.status, "review-needed");
 
+const hardwareTrace = ingestSketch("packages/sketch-intent/fixtures/hardware-detail-technical-flat.svg");
+assert.equal(hardwareTrace.kind, "editable-trace-layer");
+assert.equal(hardwareTrace.engine, "user-svg-passthrough");
+assert.equal(hardwareTrace.traceStats.pathCount, 6);
+assert.equal(hardwareTrace.layers.silhouette[0].id, "body-silhouette");
+assert.ok(hardwareTrace.layers.interior.some((candidate) => candidate.id === "front-hardware-ring"));
+assert.ok(hardwareTrace.layers.interior.some((candidate) => candidate.id === "left-strap-rivet"));
+assert.ok(hardwareTrace.layers.interior.some((candidate) => candidate.id === "right-strap-rivet"));
+assert.equal(hardwareTrace.layers.annotation.length, 1);
+assert.equal(hardwareTrace.readiness.status, "ready");
+
 const tmpDir = path.join("tmp", "sketch-intent");
 fs.mkdirSync(tmpDir, { recursive: true });
 

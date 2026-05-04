@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 360">
+  <path id="body-silhouette" d="M 94 48 L 146 48 L 170 320 L 70 320 Z" fill="none" stroke="#111" />
+  <path id="neckline" d="M 100 50 C 110 76 130 76 140 50" fill="none" stroke="#111" />
+  <ellipse id="front-hardware-ring" cx="120" cy="92" rx="16" ry="22" fill="none" stroke="#c99b38" />
+  <circle id="left-strap-rivet" cx="108" cy="56" r="4" fill="none" stroke="#c99b38" />
+  <circle id="right-strap-rivet" cx="132" cy="56" r="4" fill="none" stroke="#c99b38" />
+  <line id="callout-line" x1="136" y1="98" x2="205" y2="132" stroke="#333" />
+</svg>

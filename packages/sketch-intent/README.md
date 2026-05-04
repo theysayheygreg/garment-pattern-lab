@@ -22,6 +22,7 @@ Current Phase B code:
 - `src/raster-to-vector/fixture-report.mjs`: local fixture report CLI for checking readiness, path counts, and layer counts across selected sketch inputs.
 - `src/raster-to-vector/bridge.test.mjs`: smoke tests using `fixtures/clean-technical-flat.svg`, generated synthetic PNG fixtures for every recipe, and generated vector PDF / `.ai` fixtures.
 - `fixtures/primitive-export-technical-flat.svg`: SVG export hardening fixture using common vector primitives (`polygon`, `polyline`, `line`, `rect`) rather than only `<path>`.
+- `fixtures/hardware-detail-technical-flat.svg`: SVG fixture for circles/ellipses used as hardware, buttons, rings, rivets, or similar garment details.
 
 Useful commands:
 
