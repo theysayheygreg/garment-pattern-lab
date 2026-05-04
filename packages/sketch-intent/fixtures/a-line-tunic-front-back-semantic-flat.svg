@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="720" viewBox="0 0 860 720">
+  <title>Semantic A-line tunic front and back technical flat</title>
+  <desc>
+    Phase C fixture for paired sleeveless A-line tunic handling. Front and back
+    panels are drawn as separate closed silhouettes with explicit semantic paths
+    for neckline, shoulders, armholes, side seams, hems, and center axes.
+  </desc>
+
+  <g id="front-panel" fill="none" stroke="#111111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path
+      id="front-panel-silhouette"
+      data-gpl-role="silhouette"
+      data-gpl-view="front"
+      data-gpl-garment="a-line-tunic"
+      d="M 146 70 C 158 82 178 90 215 90 C 252 90 272 82 284 70 L 322 108 C 340 205 358 380 390 670 L 40 670 C 72 380 90 205 108 108 Z"
+    />
+
+    <path
+      id="front-neckline"
+      data-gpl-role="neckline"
+      data-gpl-view="front"
+      d="M 160 76 C 176 134 254 134 270 76"
+    />
+    <path
+      id="front-left-shoulder"
+      data-gpl-role="shoulder"
+      data-gpl-view="front"
+      d="M 108 108 L 146 70"
+    />
+    <path
+      id="front-right-shoulder"
+      data-gpl-role="shoulder"
+      data-gpl-view="front"
+      d="M 284 70 L 322 108"
+    />
+    <path
+      id="front-left-armhole"
+      data-gpl-role="armhole"
+      data-gpl-view="front"
+      d="M 108 108 C 96 158 88 204 86 252"
+    />
+    <path
+      id="front-right-armhole"
+      data-gpl-role="armhole"
+      data-gpl-view="front"
+      d="M 322 108 C 334 158 342 204 344 252"
+    />
+    <path
+      id="front-left-side-seam"
+      data-gpl-role="side-seam"
+      data-gpl-view="front"
+      d="M 86 252 C 78 374 62 522 40 670"
+    />
+    <path
+      id="front-right-side-seam"
+      data-gpl-role="side-seam"
+      data-gpl-view="front"
+      d="M 344 252 C 352 374 368 522 390 670"
+    />
+    <line
+      id="front-hem"
+      data-gpl-role="hem"
+      data-gpl-view="front"
+      x1="40"
+      y1="670"
+      x2="390"
+      y2="670"
+    />
+    <line
+      id="front-center-axis"
+      data-gpl-role="center-axis"
+      data-gpl-view="front"
+      x1="215"
+      y1="98"
+      x2="215"
+      y2="670"
+      stroke="#4f6070"
+      stroke-width="2"
+      stroke-dasharray="10 10"
+    />
+  </g>
+
+  <g id="back-panel" fill="none" stroke="#111111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path
+      id="back-panel-silhouette"
+      data-gpl-role="silhouette"
+      data-gpl-view="back"
+      data-gpl-garment="a-line-tunic"
+      d="M 576 72 C 590 82 610 88 645 88 C 680 88 700 82 714 72 L 752 108 C 770 205 788 380 820 670 L 470 670 C 502 380 520 205 538 108 Z"
+    />
+
+    <path
+      id="back-neckline"
+      data-gpl-role="neckline"
+      data-gpl-view="back"
+      d="M 590 78 C 604 106 686 106 700 78"
+    />
+    <path
+      id="back-left-shoulder"
+      data-gpl-role="shoulder"
+      data-gpl-view="back"
+      d="M 538 108 L 576 72"
+    />
+    <path
+      id="back-right-shoulder"
+      data-gpl-role="shoulder"
+      data-gpl-view="back"
+      d="M 714 72 L 752 108"
+    />
+    <path
+      id="back-left-armhole"
+      data-gpl-role="armhole"
+      data-gpl-view="back"
+      d="M 538 108 C 526 158 518 204 516 252"
+    />
+    <path
+      id="back-right-armhole"
+      data-gpl-role="armhole"
+      data-gpl-view="back"
+      d="M 752 108 C 764 158 772 204 774 252"
+    />
+    <path
+      id="back-left-side-seam"
+      data-gpl-role="side-seam"
+      data-gpl-view="back"
+      d="M 516 252 C 508 374 492 522 470 670"
+    />
+    <path
+      id="back-right-side-seam"
+      data-gpl-role="side-seam"
+      data-gpl-view="back"
+      d="M 774 252 C 782 374 798 522 820 670"
+    />
+    <line
+      id="back-hem"
+      data-gpl-role="hem"
+      data-gpl-view="back"
+      x1="470"
+      y1="670"
+      x2="820"
+      y2="670"
+    />
+    <line
+      id="back-center-axis"
+      data-gpl-role="center-axis"
+      data-gpl-view="back"
+      x1="645"
+      y1="98"
+      x2="645"
+      y2="670"
+      stroke="#4f6070"
+      stroke-width="2"
+      stroke-dasharray="10 10"
+    />
+  </g>
+</svg>

@@ -169,12 +169,12 @@ export function assessTraceLayer(trace) {
 
   const silhouetteCount = trace.layers?.silhouette?.length ?? 0;
   checks.push(
-    silhouetteCount === 1
-      ? { id: "silhouette-found", status: "ready", message: "One candidate silhouette found." }
+    silhouetteCount === 1 || silhouetteCount === 2
+      ? { id: "silhouette-found", status: "ready", message: `${silhouetteCount} candidate panel silhouette(s) found.` }
       : {
           id: "silhouette-found",
-          status: "review-needed",
-          message: `${silhouetteCount} candidate silhouettes found; Phase B expects one main garment outline.`,
+          status: silhouetteCount === 0 ? "blocked" : "review-needed",
+          message: `${silhouetteCount} candidate silhouettes found; Phase B expects one front panel or paired front/back panels.`,
         },
   );
 
@@ -330,14 +330,14 @@ function roughPathBounds(d) {
 
 function classifyPaths(paths) {
   const closed = paths.filter((path) => path.closed && path.bbox);
-  const silhouette = closed.sort((a, b) => b.bbox.area - a.bbox.area).slice(0, 1);
+  const explicitSilhouettes = closed.filter((path) => path.sourceAttributes?.["data-gpl-role"] === "silhouette");
+  const silhouette = explicitSilhouettes.length > 0 ? explicitSilhouettes : closed.sort((a, b) => b.bbox.area - a.bbox.area).slice(0, 1);
   const silhouetteIds = new Set(silhouette.map((path) => path.id));
-  const silhouetteBox = silhouette[0]?.bbox;
 
   const layers = { silhouette, interior: [], annotation: [], unclassified: [] };
   for (const candidate of paths) {
     if (silhouetteIds.has(candidate.id)) continue;
-    if (silhouetteBox && candidate.bbox && inside(candidate.bbox, silhouetteBox)) {
+    if (candidate.bbox && silhouette.some((panel) => inside(candidate.bbox, panel.bbox))) {
       layers.interior.push(candidate);
     } else if (!candidate.closed) {
       layers.annotation.push(candidate);

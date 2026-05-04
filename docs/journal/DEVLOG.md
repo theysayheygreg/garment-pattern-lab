@@ -249,3 +249,10 @@ Phase C semantic interpretation start:
 - Added a heuristic A-line v0.1 interpreter over Phase B trace layers. It emits a `sketch-interpretation` package with stable semantic landmark IDs, source curve evidence, trace-space coordinate profile, confidence, assumptions, and ambiguity report.
 - Kept Phase C honest about scale: physical scale is unknown and unit-bearing priors stay disabled until Phase D.
 - Added `npm run check:semantic` and wired it into `npm run check`.
+
+Phase C front/back hardening:
+
+- Added `a-line-tunic-front-back-semantic-flat.svg`, a paired front/back fixture with explicit `data-gpl-view` metadata.
+- Updated Phase B trace classification so one front panel or paired front/back panel silhouettes are trace-ready.
+- Updated the interpreter so multi-panel traces produce separate `view.front` and `view.back` panel contexts, and back-only calls emit `hem_back`, `neckline_back`, and `center_back` instead of front slots.
+- Added regression checks for paired panels, explicit back interpretation, and side-specific dart review.

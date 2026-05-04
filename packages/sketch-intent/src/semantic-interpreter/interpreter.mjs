@@ -3,18 +3,36 @@ import crypto from "node:crypto";
 
 const DEFAULT_PRIOR_PATH = "docs/data-corpus/garment-family-landmark-priors.json";
 const FAMILY_ID = "sleeveless-a-line-woven-tunic";
-const REQUIRED_FRONT_SLOTS = [
-  "hem_front",
-  "neckline_front",
-  "shoulder_left",
-  "shoulder_right",
-  "armhole_left",
-  "armhole_right",
-  "side_seam_left",
-  "side_seam_right",
-  "center_front",
-];
-const OPTIONAL_FRONT_SLOTS = ["bust_dart_left", "bust_dart_right"];
+const VIEW_SLOT_CONFIG = {
+  front: {
+    required: [
+      "hem_front",
+      "neckline_front",
+      "shoulder_left",
+      "shoulder_right",
+      "armhole_left",
+      "armhole_right",
+      "side_seam_left",
+      "side_seam_right",
+      "center_front",
+    ],
+    optional: ["bust_dart_left", "bust_dart_right"],
+  },
+  back: {
+    required: [
+      "hem_back",
+      "neckline_back",
+      "shoulder_left",
+      "shoulder_right",
+      "armhole_left",
+      "armhole_right",
+      "side_seam_left",
+      "side_seam_right",
+      "center_back",
+    ],
+    optional: ["waist_dart_back_left", "waist_dart_back_right"],
+  },
+};
 
 export function loadLandmarkPrior(priorPath = DEFAULT_PRIOR_PATH, familyId = FAMILY_ID) {
   const priorBytes = fs.readFileSync(priorPath);
@@ -47,23 +65,13 @@ export function loadLandmarkPrior(priorPath = DEFAULT_PRIOR_PATH, familyId = FAM
 
 export function interpretSketchTrace(trace, options = {}) {
   const prior = options.prior ?? loadLandmarkPrior(options.priorPath, options.familyId ?? FAMILY_ID);
-  const view = options.view ?? "front";
   const candidates = buildCurveCandidates(trace);
-  const silhouette = candidates.find((candidate) => candidate.layer === "silhouette");
-  const axis = detectAxis(candidates, silhouette);
-  const derived = deriveBoundaryCandidates(silhouette, axis);
-  const candidateSet = [...candidates, ...derived];
-
-  const slots = {};
-  for (const slotId of REQUIRED_FRONT_SLOTS) {
-    slots[slotId] = assignRequiredSlot(slotId, candidateSet, silhouette, axis);
-  }
-  for (const slotId of OPTIONAL_FRONT_SLOTS) {
-    slots[slotId] = assignOptionalSlot(slotId, candidateSet, silhouette, axis);
-  }
-
-  const ambiguityReport = buildAmbiguityReport(slots, trace, prior);
-  const landmarks = buildLandmarkList(slots, view);
+  const panelContexts = buildPanelContexts(candidates, options.view);
+  const interpretedPanels = panelContexts.map((context) => interpretPanelContext(context));
+  const primaryPanel = interpretedPanels[0] ?? null;
+  const slots = primaryPanel?.slots ?? {};
+  const ambiguityReport = buildAmbiguityReport(interpretedPanels, trace, prior);
+  const landmarks = interpretedPanels.flatMap((panel) => panel.landmarks);
   return {
     schemaVersion: "0.1-phase-c",
     kind: "sketch-interpretation",
@@ -92,18 +100,10 @@ export function interpretSketchTrace(trace, options = {}) {
         note: "Phase B preserves source coordinates; Phase D owns physical scale calibration.",
       },
     },
-    views: [
-      {
-        id: `view.${view}`,
-        role: view,
-        panelCandidateId: "panel.front.0",
-        confidence: view === "front" ? 0.9 : 0.5,
-        assignmentSource: options.view ? "caller" : "v0.1-default",
-      },
-    ],
+    views: interpretedPanels.map((panel) => panel.viewAssignment),
     landmarks,
     sketchIntent: buildSketchIntent(slots, prior.family.id),
-    view,
+    view: primaryPanel?.view ?? options.view ?? "front",
     sourceTrace: {
       schemaVersion: trace.schemaVersion,
       format: trace.provenance?.format,
@@ -119,24 +119,50 @@ export function interpretSketchTrace(trace, options = {}) {
       labelingOrder: prior.labelingOrder,
       unitPolicy: "unitless-bbox-ratios-until-phase-d-scale-calibration",
     },
-    axis,
+    axis: primaryPanel?.axis ?? null,
     landmarkSet: {
       schemaVersion: "0.1-phase-c-landmark-set",
       familyId: prior.family.id,
       unitProfile: { unit: "svg-user-unit", scaleStatus: "unscaled" },
-      view,
-      panels: [
-        {
-          panelId: "panel.front.0",
-          view,
-          bbox: silhouette?.bbox ?? null,
-          verticalCenterAxis: axis,
-          landmarkIds: landmarks.map((landmark) => landmark.id),
-        },
-      ],
+      view: primaryPanel?.view ?? options.view ?? "front",
+      panels: interpretedPanels.map((panel) => ({
+        panelId: panel.panelId,
+        view: panel.view,
+        bbox: panel.silhouette?.bbox ?? null,
+        verticalCenterAxis: panel.axis,
+        landmarkIds: panel.landmarks.map((landmark) => landmark.id),
+        slots: panel.slots,
+      })),
       slots,
+      slotsByView: Object.fromEntries(interpretedPanels.map((panel) => [panel.view, panel.slots])),
     },
     ambiguityReport,
+  };
+}
+
+function interpretPanelContext(context) {
+  const derived = deriveBoundaryCandidates(context.silhouette, context.axis, context.view);
+  const candidateSet = [...context.candidates, ...derived];
+  const slotConfig = VIEW_SLOT_CONFIG[context.view] ?? VIEW_SLOT_CONFIG.front;
+  const slots = {};
+  for (const slotId of slotConfig.required) {
+    slots[slotId] = assignRequiredSlot(slotId, candidateSet, context.silhouette, context.axis);
+  }
+  for (const slotId of slotConfig.optional) {
+    slots[slotId] = assignOptionalSlot(slotId, candidateSet, context.silhouette, context.axis);
+  }
+  const landmarks = buildLandmarkList(slots, context.view);
+  return {
+    ...context,
+    landmarks,
+    slots,
+    viewAssignment: {
+      id: `view.${context.view}`,
+      role: context.view,
+      panelCandidateId: context.panelId,
+      confidence: context.viewAssignmentConfidence,
+      assignmentSource: context.viewAssignmentSource,
+    },
   };
 }
 
@@ -144,6 +170,66 @@ function buildCurveCandidates(trace) {
   return Object.entries(trace.layers ?? {}).flatMap(([layer, paths]) =>
     paths.map((path) => enrichCandidate(path, layer, "trace")),
   );
+}
+
+function buildPanelContexts(candidates, requestedView) {
+  const silhouettes = candidates
+    .filter((candidate) => candidate.layer === "silhouette")
+    .sort((a, b) => midX(a.bbox) - midX(b.bbox));
+  if (silhouettes.length === 0) {
+    const axis = detectAxis(candidates, null);
+    return [
+      {
+        panelId: `panel.${requestedView ?? "front"}.0`,
+        view: requestedView ?? "front",
+        viewAssignmentConfidence: requestedView ? 0.9 : 0.35,
+        viewAssignmentSource: requestedView ? "caller" : "fallback-no-silhouette",
+        silhouette: null,
+        axis,
+        candidates,
+      },
+    ];
+  }
+
+  return silhouettes
+    .map((silhouette, index) => {
+      const view = viewForSilhouette(silhouette, index, silhouettes.length, requestedView);
+      const panelCandidates = candidates.filter(
+        (candidate) =>
+          candidate.id === silhouette.id ||
+          candidate.sourceAttributes?.["data-gpl-view"] === view ||
+          (candidate.layer !== "silhouette" &&
+            candidate.bbox &&
+            silhouette.bbox &&
+            inside(candidate.bbox, silhouette.bbox) &&
+            !candidate.sourceAttributes?.["data-gpl-view"]),
+      );
+      const axis = detectAxis(panelCandidates, silhouette);
+      return {
+        panelId: `panel.${view}.${index}`,
+        view,
+        viewAssignmentConfidence: silhouette.sourceAttributes?.["data-gpl-view"] ? 0.96 : requestedView ? 0.9 : silhouettes.length === 1 ? 0.72 : 0.62,
+        viewAssignmentSource: silhouette.sourceAttributes?.["data-gpl-view"]
+          ? "source-metadata"
+          : requestedView
+            ? "caller"
+            : silhouettes.length === 1
+              ? "v0.1-default"
+              : "left-to-right-front-back-default",
+        silhouette,
+        axis,
+        candidates: panelCandidates,
+      };
+    })
+    .filter((context) => !requestedView || context.view === requestedView);
+}
+
+function viewForSilhouette(silhouette, index, count, requestedView) {
+  const explicit = silhouette.sourceAttributes?.["data-gpl-view"];
+  if (explicit === "front" || explicit === "back") return explicit;
+  if (requestedView && count === 1) return requestedView;
+  if (count === 1) return "front";
+  return index === 0 ? "front" : "back";
 }
 
 function enrichCandidate(path, layer, source) {
@@ -167,7 +253,7 @@ function enrichCandidate(path, layer, source) {
   };
 }
 
-function deriveBoundaryCandidates(silhouette, axis) {
+function deriveBoundaryCandidates(silhouette, axis, view = "front") {
   if (!silhouette?.closed || silhouette.points.length < 4 || !silhouette.bbox) return [];
   const ordered = uniqueClosingPoint(silhouette.points);
   if (ordered.length < 4) return [];
@@ -182,16 +268,16 @@ function deriveBoundaryCandidates(silhouette, axis) {
   const centerX = axis.x;
 
   return [
-    lineCandidate("derived-hem-front", [bottomLeft, bottomRight], "hem", silhouette),
-    lineCandidate("derived-armhole-left", [topLeft, leftArmholeBottom], "armhole", silhouette),
-    lineCandidate("derived-armhole-right", [topRight, rightArmholeBottom], "armhole", silhouette),
-    lineCandidate("derived-side-seam-left", [leftArmholeBottom, bottomLeft], "side_seam", silhouette),
-    lineCandidate("derived-side-seam-right", [rightArmholeBottom, bottomRight], "side_seam", silhouette),
-    lineCandidate("derived-center-front-axis", [{ x: centerX, y: topLeft.y }, { x: centerX, y: bottomLeft.y }], "center", silhouette),
+    lineCandidate(`derived-${view}-hem`, [bottomLeft, bottomRight], "hem", silhouette, view),
+    lineCandidate(`derived-${view}-armhole-left`, [topLeft, leftArmholeBottom], "armhole", silhouette, view),
+    lineCandidate(`derived-${view}-armhole-right`, [topRight, rightArmholeBottom], "armhole", silhouette, view),
+    lineCandidate(`derived-${view}-side-seam-left`, [leftArmholeBottom, bottomLeft], "side_seam", silhouette, view),
+    lineCandidate(`derived-${view}-side-seam-right`, [rightArmholeBottom, bottomRight], "side_seam", silhouette, view),
+    lineCandidate(`derived-${view}-center-axis`, [{ x: centerX, y: topLeft.y }, { x: centerX, y: bottomLeft.y }], "center", silhouette, view),
   ];
 }
 
-function lineCandidate(id, points, role, sourceSilhouette) {
+function lineCandidate(id, points, role, sourceSilhouette, view) {
   return enrichCandidate(
     {
       id,
@@ -199,7 +285,7 @@ function lineCandidate(id, points, role, sourceSilhouette) {
       d: `M ${points[0].x} ${points[0].y} L ${points[1].x} ${points[1].y}`,
       bbox: bboxFromPoints(points),
       closed: false,
-      sourceAttributes: { derivedFrom: sourceSilhouette.id, role },
+      sourceAttributes: { derivedFrom: sourceSilhouette.id, role, "data-gpl-view": view },
     },
     "derived",
     "derived-from-silhouette",
@@ -240,7 +326,8 @@ function assignRequiredSlot(slotId, candidates, silhouette, axis) {
   const scored = scoreSlot(slotId, candidates, silhouette, axis).sort((a, b) => b.score - a.score);
   const best = scored[0];
   const hardFloor = 0.3;
-  const threshold = slotId === "center_front" ? 0.7 : slotId === "hem_front" ? 0.55 : 0.6;
+  const baseSlot = baseSlotId(slotId);
+  const threshold = baseSlot === "center" ? 0.7 : baseSlot === "hem" ? 0.55 : 0.6;
   if (!best || best.score < hardFloor) {
     return missingSlot(slotId, true, `No plausible ${slotId.replaceAll("_", " ")} curve was found.`);
   }
@@ -287,6 +374,7 @@ function scoreSlot(slotId, candidates, silhouette, axis) {
 function ruleScoresForSlot(slotId, candidate, silhouette, axis) {
   const rules = [];
   const id = candidate.id.toLowerCase();
+  const baseSlot = baseSlotId(slotId);
   const bbox = candidate.bbox;
   const panel = silhouette?.bbox;
   const left = panel && bbox ? midX(bbox) < axis.x : false;
@@ -296,13 +384,13 @@ function ruleScoresForSlot(slotId, candidate, silhouette, axis) {
   const hintScore = (text) => (id.includes(text) ? 1 : 0);
   const derivedScore = (role) => (candidate.sourceAttributes?.role === role ? 0.9 : 0);
 
-  if (slotId === "hem_front") {
+  if (baseSlot === "hem") {
     add("id-or-derived-hem", 0.7, Math.max(hintScore("hem"), derivedScore("hem")), "Prefer explicit or derived hem candidates.");
     add("lowest-horizontal-spanning-curve", 0.7, horizontalBottomScore(candidate, panel), "Hem should be low, wide, and horizontal.");
-  } else if (slotId === "neckline_front") {
+  } else if (baseSlot === "neckline") {
     add("id-neckline", 0.75, hintScore("neckline"), "Prefer explicit neckline labels.");
     add("top-center-open-curve", 0.65, topCenterOpenScore(candidate, panel, axis), "Neckline should sit near the top and cross the center axis.");
-  } else if (slotId === "center_front") {
+  } else if (baseSlot === "center") {
     add("id-or-derived-center", 0.95, Math.max(hintScore("center"), derivedScore("center")), "Prefer explicit or derived center axis.");
     add("vertical-on-axis", 0.9, verticalAxisScore(candidate, panel, axis), "Center front should be vertical and near the symmetry axis.");
   } else if (slotId === "shoulder_left") {
@@ -323,12 +411,23 @@ function ruleScoresForSlot(slotId, candidate, silhouette, axis) {
   } else if (slotId === "side_seam_right") {
     add("id-or-derived-side-right", 0.8, (id.includes("side") && right ? 1 : 0) || (derivedScore("side_seam") && right ? 0.9 : 0), "Prefer right side seam labels or derived lower-side segment.");
     add("right-long-vertical-edge", 0.75, sideSeamScore(candidate, panel, axis, "right"), "Right side seam should be long and lateral.");
-  } else if (slotId === "bust_dart_left" || slotId === "bust_dart_right") {
-    add("id-dart", 0.8, hintScore("dart"), "Prefer explicit dart labels.");
-    add("short-interior-line", 0.4, candidate.layer === "interior" && candidate.shape.length < height(panel) * 0.25 ? 0.5 : 0, "Dart candidates are short interior marks.");
+  } else if (baseSlot.startsWith("dart")) {
+    const side = baseSlot.endsWith("left") ? "left" : baseSlot.endsWith("right") ? "right" : null;
+    const onSide = side === "left" ? left : side === "right" ? right : true;
+    add("id-dart-side", 0.8, hintScore("dart") && onSide ? 0.7 : 0, "Prefer explicit dart labels on the matching side.");
+    add("short-interior-line", 0.4, candidate.layer === "interior" && onSide && candidate.shape.length < height(panel) * 0.18 ? 0.35 : 0, "Dart candidates are short interior marks.");
   }
 
   return rules;
+}
+
+function baseSlotId(slotId) {
+  if (slotId === "hem_front" || slotId === "hem_back") return "hem";
+  if (slotId === "neckline_front" || slotId === "neckline_back") return "neckline";
+  if (slotId === "center_front" || slotId === "center_back") return "center";
+  if (slotId.startsWith("bust_dart")) return slotId.replace("bust_dart_", "dart_");
+  if (slotId.startsWith("waist_dart_back")) return slotId.replace("waist_dart_back_", "dart_");
+  return slotId;
 }
 
 function slotAssignment(slotId, candidate, options) {
@@ -358,16 +457,29 @@ function missingSlot(slotId, required, message) {
   };
 }
 
-function buildAmbiguityReport(slots, trace, prior) {
-  const questions = Object.values(slots)
-    .filter((slot) => ["missing", "assumed", "needs-confirmation"].includes(slot.status))
-    .map((slot) => ({
-      slotId: slot.slotId,
-      severity: slot.required && slot.status === "missing" ? "blocker" : "review",
-      prompt: promptForSlot(slot),
-      currentStatus: slot.status,
-      confidence: slot.confidence,
-    }));
+function buildAmbiguityReport(interpretedPanels, trace, prior) {
+  const questions = interpretedPanels.flatMap((panel) =>
+    Object.values(panel.slots)
+      .filter((slot) => ["missing", "assumed", "needs-confirmation"].includes(slot.status))
+      .map((slot) => ({
+        slotId: slot.slotId,
+        view: panel.view,
+        severity: slot.required && slot.status === "missing" ? "blocker" : "review",
+        prompt: promptForSlot(slot),
+        currentStatus: slot.status,
+        confidence: slot.confidence,
+      })),
+  );
+  if (trace.readiness?.status === "review-needed" && interpretedPanels.length <= 1) {
+    questions.push({
+      slotId: "trace-readiness",
+      view: interpretedPanels[0]?.view ?? "unknown",
+      severity: "review",
+      prompt: "The trace layer needs review before semantic interpretation is trusted.",
+      currentStatus: trace.readiness.status,
+      confidence: 0.5,
+    });
+  }
   const hasBlocker = questions.some((question) => question.severity === "blocker");
   return {
     schemaVersion: "0.1-phase-c-ambiguity-report",
@@ -559,6 +671,10 @@ function midY(box) {
 
 function normalizedY(box, panel) {
   return (midY(box) - panel.minY) / height(panel);
+}
+
+function inside(inner, outer) {
+  return inner.minX >= outer.minX && inner.maxX <= outer.maxX && inner.minY >= outer.minY && inner.maxY <= outer.maxY;
 }
 
 function polylineLength(points) {
