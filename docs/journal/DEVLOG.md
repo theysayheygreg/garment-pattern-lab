@@ -262,3 +262,10 @@ Phase C symmetric-input hardening:
 - Added `a-line-tunic-single-side-semantic-flat.svg`, a one-sided symmetric front fixture.
 - Added axis-reflected candidate generation for shoulder, armhole, and side-seam curves. Reflected landmarks stay `assumed` and appear in the ambiguity report, preserving the product rule that mirrored intent is useful but not silently confirmed.
 - Updated `SketchIntent` so paired-view interpretations carry per-view slot status and front/back neckline evidence rather than collapsing intent to the primary panel.
+
+Phase D scale calibration start:
+
+- Added `packages/sketch-intent/src/scale-calibration/calibrator.mjs`.
+- Added `calibrateScale({ trace, interpretation, canonicalBody, override })`, which returns a wrapper around the Phase C interpretation with `scaleCalibration`, updated `coordinateProfile`, `landmarkSet.unitProfile`, and scaled panel bounds.
+- Supported three v0.1 evidence modes: developer override, explicit trace reference, and low-confidence canonical fallback.
+- Added `a-line-tunic-scale-reference-semantic-flat.svg`, `canonical-misses-8.json`, `npm run check:scale`, and `npm run scale:report`.

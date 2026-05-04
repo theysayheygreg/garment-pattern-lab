@@ -1,0 +1,17 @@
+{
+  "id": "canonical-misses-8-v0.1",
+  "units": "mm",
+  "source": "v0.1 canonical fallback derived from the existing synthetic body fixture; replace with sourced ASTM/table values before production use",
+  "measurements": {
+    "height": 1676.4,
+    "bust": 920,
+    "waist": 760,
+    "hip": 980,
+    "shoulderWidth": 380,
+    "shoulderSlope": 18,
+    "frontWaistLength": 430,
+    "backWaistLength": 410,
+    "armholeDepth": 215,
+    "hipDepth": 620
+  }
+}

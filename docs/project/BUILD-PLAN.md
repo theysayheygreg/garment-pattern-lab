@@ -29,7 +29,7 @@ Status:
 - [x] Phase A foundation cleanup: output packages split into `package/` and `dev-artifacts/`, dev comparison moved to `app/dev-artifacts/dev-comparison.html`.
 - [x] **Phase B vectorization lane complete:** SVG passthrough including common SVG primitives, best-effort vector PDF / PDF-compatible `.ai` conversion, raster PDF fallback, VTracer-backed PNG/JPG/WEBP tracing, synthetic smoke coverage for every recipe, blocked-shape failures, and a fixture readiness report.
 - [ ] **Phase C semantic interpretation started:** first heuristic A-line interpreter emits trace-space landmark assignments and ambiguity reports for front-only, paired front/back, explicit back-only, and single-side mirrored A-line fixtures. Remaining work: Kiko/real inputs and enough real fixture breadth to close Phase C.
-- [ ] **v0.1 implementation phases D–J** per the design spec. Next after Phase C is scale calibration.
+- [ ] **Phase D scale calibration started:** first calibration wrapper attaches unit profiles through developer override, explicit trace reference, or canonical fallback. Remaining work: decide whether a tiny croquis detector belongs in v0.1 or if explicit/default evidence is sufficient for the Phase E adapter.
 - [ ] Pattern schema concrete JSON shape (closes during Phase E).
 - [x] Phase B tech stack decision concrete: `@neplex/vectorizer`/VTracer for raster tracing, Poppler `pdftocairo` for local vector/raster PDF and PDF-compatible `.ai` conversion, Potrace research-only unless license isolation is intentional.
 

@@ -26,8 +26,11 @@ Phase B code:
 - `fixtures/a-line-tunic-semantic-flat.svg`: Phase C fixture with separate semantic paths for the front neckline, shoulders, armholes, side seams, hem, and center axis.
 - `fixtures/a-line-tunic-front-back-semantic-flat.svg`: Phase C fixture with paired front/back panels and explicit view metadata.
 - `fixtures/a-line-tunic-single-side-semantic-flat.svg`: Phase C fixture for one-sided symmetric inputs where the interpreter mirrors missing side landmarks across the detected center axis.
+- `fixtures/a-line-tunic-scale-reference-semantic-flat.svg`: Phase D fixture with an explicit source-space height reference for scale calibration.
 - `src/semantic-interpreter/interpreter.mjs`: heuristic A-line v0.1 interpreter that converts Phase B trace layers into a `sketch-interpretation` package with semantic landmark IDs, source curve evidence, coordinate profile, assumptions, and ambiguity report.
 - `src/semantic-interpreter/interpreter.test.mjs`: smoke tests for complete front, paired front/back, back-only, single-side mirrored, sparse blocked, and dart-side fixtures.
+- `src/scale-calibration/calibrator.mjs`: Phase D scale wrapper that attaches a unit profile through dev override, explicit trace reference, or canonical low-confidence fallback.
+- `src/scale-calibration/scale-report.mjs`: Phase D report CLI for inspecting calibration evidence, warnings, and scaled panel bounds.
 
 Local tool assumptions:
 
