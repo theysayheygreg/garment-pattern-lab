@@ -226,3 +226,10 @@ Phase B vector document smoke path:
 - Added best-effort vector PDF and PDF-compatible `.ai` ingest through Poppler `pdftocairo`, converting documents to SVG before using the same trace-layer classifier.
 - Expanded `bridge.test.mjs` to generate synthetic fixtures for every raster recipe plus vector PDF and `.ai`.
 - Remaining Phase B hardening is real-world fixture behavior, not contract wiring.
+
+Phase B fixture hardening:
+
+- Added `primitive-export-technical-flat.svg` to cover common SVG export primitives (`polygon`, `polyline`, `line`, `rect`) instead of only hand-authored `<path>` data.
+- Updated the bridge to normalize those primitives into path-like trace records before layer classification.
+- Added backend readiness assessment (`ready`, `review-needed`, `blocked`) for fixture work, including input support, path count, silhouette count, and unclassified-path checks.
+- Added `npm run sketch:report` for local fixture summaries without turning backend readiness into a designer-facing error console.

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 360">
+  <polygon id="body-silhouette" points="92,48 148,48 168,320 72,320" fill="none" stroke="#111" />
+  <polyline id="front-neckline" points="100,52 120,72 140,52" fill="none" stroke="#111" />
+  <line id="center-front" x1="120" y1="74" x2="120" y2="316" stroke="#111" />
+  <line id="left-armhole" x1="92" y1="48" x2="80" y2="116" stroke="#111" />
+  <line id="right-armhole" x1="148" y1="48" x2="160" y2="116" stroke="#111" />
+  <rect id="scale-reference-box" x="18" y="18" width="24" height="24" fill="none" stroke="#777" />
+</svg>

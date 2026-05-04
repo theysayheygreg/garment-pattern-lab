@@ -77,18 +77,20 @@ function traceVectorDocumentToEditableLayer(filePath, provenance, recipe) {
 }
 
 function editableTraceLayerFromSvg(svg, provenance, recipe, engine) {
-  const paths = [...svg.matchAll(/<path\b([^>]*)>/gi)].map((match, index) => {
-    const attrs = parseAttributes(match[1]);
+  const paths = extractTracePaths(svg).map((tracePath, index) => {
+    const attrs = tracePath.sourceAttributes;
     return {
       id: attrs.id ?? `path-${index + 1}`,
-      d: attrs.d ?? "",
+      element: tracePath.element,
+      d: tracePath.d,
       sourceAttributes: attrs,
-      bbox: roughPathBounds(attrs.d ?? ""),
-      closed: /\bZ\b/i.test(attrs.d ?? ""),
+      bbox: roughPathBounds(tracePath.d),
+      closed: /\bZ\b/i.test(tracePath.d),
     };
   });
+  const layers = classifyPaths(paths);
 
-  return {
+  const trace = {
     schemaVersion: "0.1-phase-b",
     kind: "editable-trace-layer",
     provenance,
@@ -96,13 +98,15 @@ function editableTraceLayerFromSvg(svg, provenance, recipe, engine) {
     recipe: recipe.id,
     traceStats: {
       pathCount: paths.length,
+      layerCounts: Object.fromEntries(Object.entries(layers).map(([layer, layerPaths]) => [layer, layerPaths.length])),
     },
-    layers: classifyPaths(paths),
+    layers,
   };
+  return { ...trace, readiness: assessTraceLayer(trace) };
 }
 
 function unsupportedTraceLayer(provenance, engine, reason) {
-  return {
+  const trace = {
     schemaVersion: "0.1-phase-b",
     kind: "editable-trace-layer",
     provenance,
@@ -110,6 +114,53 @@ function unsupportedTraceLayer(provenance, engine, reason) {
     layers: { silhouette: [], interior: [], annotation: [], unclassified: [] },
     unsupported: { reason },
   };
+  return { ...trace, readiness: assessTraceLayer(trace) };
+}
+
+export function assessTraceLayer(trace) {
+  const checks = [];
+  if (trace.unsupported) {
+    checks.push({ id: "input-supported", status: "blocked", message: trace.unsupported.reason });
+  } else {
+    checks.push({ id: "input-supported", status: "ready", message: "Input produced an editable trace layer." });
+  }
+
+  const pathCount = trace.traceStats?.pathCount ?? 0;
+  checks.push(
+    pathCount > 0
+      ? { id: "paths-found", status: "ready", message: `${pathCount} trace path(s) found.` }
+      : { id: "paths-found", status: "blocked", message: "No trace paths were found." },
+  );
+
+  const silhouetteCount = trace.layers?.silhouette?.length ?? 0;
+  checks.push(
+    silhouetteCount === 1
+      ? { id: "silhouette-found", status: "ready", message: "One candidate silhouette found." }
+      : {
+          id: "silhouette-found",
+          status: "review-needed",
+          message: `${silhouetteCount} candidate silhouettes found; Phase B expects one main garment outline.`,
+        },
+  );
+
+  const unclassifiedCount = trace.layers?.unclassified?.length ?? 0;
+  checks.push(
+    unclassifiedCount === 0
+      ? { id: "unclassified-paths", status: "ready", message: "No unclassified closed paths remain." }
+      : {
+          id: "unclassified-paths",
+          status: "review-needed",
+          message: `${unclassifiedCount} closed path(s) need review before semantic interpretation.`,
+        },
+  );
+
+  const status = checks.some((check) => check.status === "blocked")
+    ? "blocked"
+    : checks.some((check) => check.status === "review-needed")
+      ? "review-needed"
+      : "ready";
+
+  return { status, checks };
 }
 
 function vectorizerConfigForRecipe(recipe) {
@@ -144,8 +195,66 @@ function vectorizerConfigForRecipe(recipe) {
 
 function parseAttributes(source) {
   return Object.fromEntries(
-    [...source.matchAll(/([:\w-]+)\s*=\s*"([^"]*)"/g)].map((match) => [match[1], match[2]]),
+    [...source.matchAll(/([:\w-]+)\s*=\s*(?:"([^"]*)"|'([^']*)')/g)].map((match) => [
+      match[1],
+      match[2] ?? match[3] ?? "",
+    ]),
   );
+}
+
+function extractTracePaths(svg) {
+  const paths = [];
+  for (const match of svg.matchAll(/<(path|polygon|polyline|line|rect)\b([^>]*)>/gi)) {
+    const element = match[1].toLowerCase();
+    const attrs = parseAttributes(match[2]);
+    const d = pathDataForElement(element, attrs);
+    if (!d) continue;
+    paths.push({ element, d, sourceAttributes: attrs });
+  }
+  return paths;
+}
+
+function pathDataForElement(element, attrs) {
+  if (element === "path") return attrs.d ?? "";
+  if (element === "polygon" || element === "polyline") return pointListToPath(attrs.points ?? "", element === "polygon");
+  if (element === "line") return lineToPath(attrs);
+  if (element === "rect") return rectToPath(attrs);
+  return "";
+}
+
+function pointListToPath(pointsSource, closed) {
+  const points = [...pointsSource.matchAll(/-?\d+(?:\.\d+)?/g)].map((match) => Number(match[0]));
+  if (points.length < 4) return "";
+  const commands = [`M ${points[0]} ${points[1]}`];
+  for (let i = 2; i < points.length - 1; i += 2) {
+    commands.push(`L ${points[i]} ${points[i + 1]}`);
+  }
+  if (closed) commands.push("Z");
+  return commands.join(" ");
+}
+
+function lineToPath(attrs) {
+  const x1 = numberAttr(attrs, "x1");
+  const y1 = numberAttr(attrs, "y1");
+  const x2 = numberAttr(attrs, "x2");
+  const y2 = numberAttr(attrs, "y2");
+  if ([x1, y1, x2, y2].some((value) => value === null)) return "";
+  return `M ${x1} ${y1} L ${x2} ${y2}`;
+}
+
+function rectToPath(attrs) {
+  const x = numberAttr(attrs, "x") ?? 0;
+  const y = numberAttr(attrs, "y") ?? 0;
+  const width = numberAttr(attrs, "width");
+  const height = numberAttr(attrs, "height");
+  if (width === null || height === null || width <= 0 || height <= 0) return "";
+  return `M ${x} ${y} L ${x + width} ${y} L ${x + width} ${y + height} L ${x} ${y + height} Z`;
+}
+
+function numberAttr(attrs, key) {
+  if (attrs[key] === undefined) return null;
+  const value = Number(attrs[key]);
+  return Number.isFinite(value) ? value : null;
 }
 
 function roughPathBounds(d) {

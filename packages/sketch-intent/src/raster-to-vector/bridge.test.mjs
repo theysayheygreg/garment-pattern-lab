@@ -22,6 +22,18 @@ assert.equal(trace.layers.silhouette.length, 1);
 assert.equal(trace.layers.silhouette[0].id, "outer-silhouette");
 assert.equal(trace.layers.interior.length, 2);
 assert.equal(trace.layers.annotation.length, 1);
+assert.equal(trace.readiness.status, "ready");
+
+const primitiveTrace = ingestSketch("packages/sketch-intent/fixtures/primitive-export-technical-flat.svg");
+assert.equal(primitiveTrace.kind, "editable-trace-layer");
+assert.equal(primitiveTrace.engine, "user-svg-passthrough");
+assert.equal(primitiveTrace.traceStats.pathCount, 6);
+assert.equal(primitiveTrace.traceStats.layerCounts.silhouette, 1);
+assert.equal(primitiveTrace.layers.silhouette[0].id, "body-silhouette");
+assert.equal(primitiveTrace.layers.interior.length, 4);
+assert.equal(primitiveTrace.layers.annotation.length, 0);
+assert.ok(primitiveTrace.layers.unclassified.some((candidate) => candidate.id === "scale-reference-box"));
+assert.equal(primitiveTrace.readiness.status, "review-needed");
 
 const tmpDir = path.join("tmp", "sketch-intent");
 fs.mkdirSync(tmpDir, { recursive: true });
@@ -38,6 +50,7 @@ for (const recipe of ["clean-technical-flat", "colored-illustration", "pencil-sk
   assert.ok(rasterTrace.traceStats.pathCount > 0);
   assert.ok(totalPathCount(rasterTrace.layers) > 0);
   assert.equal(rasterTrace.unsupported, undefined);
+  assert.notEqual(rasterTrace.readiness.status, "blocked");
 }
 
 for (const extension of ["pdf", "ai"]) {
@@ -52,7 +65,14 @@ for (const extension of ["pdf", "ai"]) {
   assert.ok(vectorTrace.traceStats.pathCount > 0);
   assert.equal(vectorTrace.layers.silhouette.length, 1);
   assert.equal(vectorTrace.unsupported, undefined);
+  assert.equal(vectorTrace.readiness.status, "ready");
 }
+
+const unsupportedFixturePath = path.join(tmpDir, "notes.txt");
+fs.writeFileSync(unsupportedFixturePath, "not a sketch");
+const unsupportedTrace = ingestSketch(unsupportedFixturePath);
+assert.equal(unsupportedTrace.kind, "editable-trace-layer");
+assert.equal(unsupportedTrace.readiness.status, "blocked");
 
 console.log("sketch-intent raster-to-vector bridge smoke tests passed");
 

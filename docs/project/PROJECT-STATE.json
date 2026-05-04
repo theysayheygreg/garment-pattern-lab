@@ -1,7 +1,7 @@
 {
   "project": "garment-pattern-lab",
   "created": "2026-05-03",
-  "status": "v0.1-phase-b-synthetic-smoke-covered",
+  "status": "v0.1-phase-b-fixture-hardening-started",
   "currentMilestone": "M0.9-v0.1-vector-ingest-real-fixture-hardening",
   "v01Design": "docs/project/V0.1-DESIGN.md",
   "personas": {
