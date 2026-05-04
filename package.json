@@ -1,0 +1,10 @@
+{
+  "name": "garment-pattern-lab",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "v0.1:generate": "node garments/a-line-dress-tunic/src/generate.mjs",
+    "check": "node garments/a-line-dress-tunic/src/generate.mjs --check"
+  }
+}

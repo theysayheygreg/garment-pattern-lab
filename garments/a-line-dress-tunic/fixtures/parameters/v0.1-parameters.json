@@ -1,0 +1,48 @@
+{
+  "id": "a-line-dress-tunic-v0.1-parameters",
+  "units": "mm",
+  "garmentType": "sleeveless-a-line-woven-dress-tunic",
+  "length": 900,
+  "neckline": {
+    "shape": "scoop",
+    "width": 78,
+    "frontDepth": 120,
+    "backDepth": 45
+  },
+  "shoulder": {
+    "coverage": 78,
+    "drop": 18,
+    "neckToShoulderInset": 22
+  },
+  "armhole": {
+    "depth": 215,
+    "shape": "simple-sleeveless"
+  },
+  "ease": {
+    "bust": 120,
+    "waist": 180,
+    "hip": 160
+  },
+  "silhouette": {
+    "hemSweep": 1500,
+    "sideShape": "a-line"
+  },
+  "darts": {
+    "mode": "dartless"
+  },
+  "closure": {
+    "mode": "none-modeled",
+    "assumption": "loose pullover; head entry not proven"
+  },
+  "allowances": {
+    "seam": 10,
+    "hem": 30
+  },
+  "finishing": {
+    "neckline": "bias-binding-or-facing",
+    "armhole": "bias-binding-or-facing"
+  },
+  "validation": {
+    "seamLengthTolerance": 5
+  }
+}

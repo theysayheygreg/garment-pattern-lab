@@ -10,6 +10,18 @@
   "productPillars": "docs/project/PRODUCT-PILLARS.md",
   "prototypeBuildOrder": "docs/project/PROTOTYPE-BUILD-ORDER.md",
   "v01SpikePlan": "docs/project/V0.1-SPIKE-PLAN.md",
+  "v01SpikeOutput": {
+    "status": "generated-ready-for-human-sanity-check",
+    "command": "npm run v0.1:generate",
+    "checkCommand": "npm run check",
+    "generator": "garments/a-line-dress-tunic/src/generate.mjs",
+    "bodyFixture": "garments/a-line-dress-tunic/fixtures/measurements/v0.1-body.json",
+    "parameterFixture": "garments/a-line-dress-tunic/fixtures/parameters/v0.1-parameters.json",
+    "patternCandidate": "garments/a-line-dress-tunic/fixtures/patterns/v0.1-candidate.pattern.json",
+    "readinessFixture": "garments/a-line-dress-tunic/fixtures/validation/v0.1-readiness.json",
+    "outputPackage": "garments/a-line-dress-tunic/outputs/v0.1/",
+    "humanSanityCheck": "docs/research/v0.1-human-sanity-check.md"
+  },
   "adjacentProductContext": "docs/reference/KEW-COMPETITOR-SHORTLIST.md",
   "adjacentProductDeepDive": "docs/reference/KEW-COMPETITOR-DEEP-DIVE.md",
   "adjacentProductSampleImageAnalysis": "docs/reference/KEW-SAMPLE-IMAGE-ANALYSIS.md",
@@ -43,12 +55,6 @@
     "folderRule": "Reusable product logic belongs in app/ or packages/. First-garment drafting, fixtures, references, and generated packages belong in garments/a-line-dress-tunic/."
   },
   "nextActions": [
-    "v0.1-create-one-measurement-fixture",
-    "v0.1-create-one-parameter-fixture",
-    "v0.1-build-ugly-first-garment-generator",
-    "v0.1-export-one-svg-package",
-    "v0.1-create-static-preview",
-    "v0.1-write-readiness-report",
     "v0.1-capture-human-sanity-check",
     "B1-hand-author-valid-PatternGraph-seed",
     "B1-hand-author-invalid-pattern-fixtures",

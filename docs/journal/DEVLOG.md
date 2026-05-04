@@ -171,3 +171,10 @@ Orrery response and v0.1 setup:
 - Added `docs/research/codex-orrery-response-2026-05-03.md` with Codex's opinionated response to all 18 Orrery review findings.
 - Added `docs/project/V0.1-SPIKE-PLAN.md` as the immediate build plan: one garment, one measurement set, one ugly generator, one SVG package, one static preview, one readiness report, one human sanity check.
 - Updated roadmap/build plan/prototype build order so the dirty spike comes before polishing the clean B0-B10 architecture.
+
+V0.1 dirty spike:
+
+- Added a dependency-free Node generator at `garments/a-line-dress-tunic/src/generate.mjs`.
+- Added synthetic body and garment-parameter fixtures for one sleeveless A-line woven dress/tunic.
+- Generated the first rough `PatternGraphCandidate`, readiness JSON/MD, SVG pattern sheet, cut sheet, assembly notes, source pattern JSON, and static preview HTML under `garments/a-line-dress-tunic/outputs/v0.1/`.
+- Added `docs/research/v0.1-human-sanity-check.md` as the next human review checkpoint.

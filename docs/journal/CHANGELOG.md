@@ -59,3 +59,4 @@
 - Added Orrery design review (`docs/research/orrery-design-review-2026-05-03.md`) covering product direction, lower-level design, and roadmap with 18 structural findings before implementation begins. Two findings already aligned with Greg: candidate-promotion gate as a state machine, and v0.1 as a dirty end-to-end spike on one verifiable garment.
 - Clarified validation product direction: backend interpretation/readiness instrumentation, not an IDE/game-engine/3D-tool error console or user-blaming repair flow.
 - Added Codex response to the Orrery review and a v0.1 dirty end-to-end spike plan as the next implementation move.
+- Added the first v0.1 dirty end-to-end package: synthetic measurements, garment parameters, ugly generator, PatternGraph candidate, readiness report, SVG pattern, cut sheet, assembly notes, static preview, and human sanity-check scaffold.

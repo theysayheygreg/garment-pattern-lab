@@ -1,0 +1,404 @@
+{
+  "schemaVersion": "0.1-dirty-spike",
+  "id": "a-line-dress-tunic-v0.1",
+  "title": "Sleeveless A-line Woven Dress/Tunic v0.1",
+  "status": "candidate",
+  "units": "mm",
+  "source": {
+    "generator": "garments/a-line-dress-tunic/src/generate.mjs",
+    "bodyMeasurementSet": "fixtures/measurements/v0.1-body.json",
+    "garmentParameters": "fixtures/parameters/v0.1-parameters.json"
+  },
+  "bodyMeasurementSet": {
+    "id": "synthetic-body-v0.1",
+    "units": "mm",
+    "source": "synthetic prototype fixture",
+    "measurements": {
+      "height": 1680,
+      "bust": 920,
+      "waist": 760,
+      "hip": 980,
+      "shoulderWidth": 380,
+      "shoulderSlope": 18,
+      "frontWaistLength": 430,
+      "backWaistLength": 410,
+      "armholeDepth": 215,
+      "hipDepth": 620
+    }
+  },
+  "garmentParameters": {
+    "id": "a-line-dress-tunic-v0.1-parameters",
+    "units": "mm",
+    "garmentType": "sleeveless-a-line-woven-dress-tunic",
+    "length": 900,
+    "neckline": {
+      "shape": "scoop",
+      "width": 78,
+      "frontDepth": 120,
+      "backDepth": 45
+    },
+    "shoulder": {
+      "coverage": 78,
+      "drop": 18,
+      "neckToShoulderInset": 22
+    },
+    "armhole": {
+      "depth": 215,
+      "shape": "simple-sleeveless"
+    },
+    "ease": {
+      "bust": 120,
+      "waist": 180,
+      "hip": 160
+    },
+    "silhouette": {
+      "hemSweep": 1500,
+      "sideShape": "a-line"
+    },
+    "darts": {
+      "mode": "dartless"
+    },
+    "closure": {
+      "mode": "none-modeled",
+      "assumption": "loose pullover; head entry not proven"
+    },
+    "allowances": {
+      "seam": 10,
+      "hem": 30
+    },
+    "finishing": {
+      "neckline": "bias-binding-or-facing",
+      "armhole": "bias-binding-or-facing"
+    },
+    "validation": {
+      "seamLengthTolerance": 5
+    }
+  },
+  "patternMeasurements": {
+    "front": {
+      "shoulder": 91.78,
+      "side": 699.95
+    },
+    "back": {
+      "shoulder": 91.78,
+      "side": 699.95
+    },
+    "fullHemSweep": 1500,
+    "finishedLength": 900
+  },
+  "panels": [
+    {
+      "id": "front-half",
+      "name": "Front half panel",
+      "role": "front",
+      "cut": {
+        "count": 1,
+        "onFold": true
+      },
+      "seamLine": [
+        {
+          "id": "center-neck",
+          "x": 0,
+          "y": 120
+        },
+        {
+          "id": "neck-shoulder",
+          "x": 78,
+          "y": 0
+        },
+        {
+          "id": "shoulder-point",
+          "x": 168,
+          "y": 18
+        },
+        {
+          "id": "armhole-bottom",
+          "x": 260,
+          "y": 215
+        },
+        {
+          "id": "bust-side",
+          "x": 260,
+          "y": 250
+        },
+        {
+          "id": "hip-side",
+          "x": 285,
+          "y": 620
+        },
+        {
+          "id": "hem-side",
+          "x": 375,
+          "y": 900
+        },
+        {
+          "id": "center-hem",
+          "x": 0,
+          "y": 900
+        }
+      ],
+      "cutLine": [
+        {
+          "x": 0,
+          "y": 120
+        },
+        {
+          "x": 68,
+          "y": -10
+        },
+        {
+          "x": 178,
+          "y": 8
+        },
+        {
+          "x": 270,
+          "y": 215
+        },
+        {
+          "x": 270,
+          "y": 250
+        },
+        {
+          "x": 295,
+          "y": 620
+        },
+        {
+          "x": 385,
+          "y": 930
+        },
+        {
+          "x": 0,
+          "y": 930
+        }
+      ],
+      "edges": [
+        {
+          "id": "front.fold",
+          "type": "fold",
+          "from": "center-hem",
+          "to": "center-neck"
+        },
+        {
+          "id": "front.neckline",
+          "type": "finished",
+          "from": "center-neck",
+          "to": "neck-shoulder"
+        },
+        {
+          "id": "front.shoulder",
+          "type": "seam",
+          "from": "neck-shoulder",
+          "to": "shoulder-point"
+        },
+        {
+          "id": "front.armhole",
+          "type": "finished",
+          "from": "shoulder-point",
+          "to": "armhole-bottom"
+        },
+        {
+          "id": "front.side",
+          "type": "seam",
+          "from": "armhole-bottom",
+          "to": "hem-side"
+        },
+        {
+          "id": "front.hem",
+          "type": "finished",
+          "from": "hem-side",
+          "to": "center-hem"
+        }
+      ],
+      "edgeMeasurements": {
+        "shoulder": 91.78,
+        "side": 699.95
+      },
+      "grainline": {
+        "id": "front.grainline",
+        "x": 90,
+        "y1": 120,
+        "y2": 780,
+        "direction": "parallel-to-center-fold"
+      },
+      "labels": [
+        {
+          "text": "FRONT - CUT 1 ON FOLD",
+          "x": 110,
+          "y": 432
+        }
+      ]
+    },
+    {
+      "id": "back-half",
+      "name": "Back half panel",
+      "role": "back",
+      "cut": {
+        "count": 1,
+        "onFold": true
+      },
+      "seamLine": [
+        {
+          "id": "center-neck",
+          "x": 0,
+          "y": 45
+        },
+        {
+          "id": "neck-shoulder",
+          "x": 78,
+          "y": 0
+        },
+        {
+          "id": "shoulder-point",
+          "x": 168,
+          "y": 18
+        },
+        {
+          "id": "armhole-bottom",
+          "x": 260,
+          "y": 215
+        },
+        {
+          "id": "bust-side",
+          "x": 260,
+          "y": 250
+        },
+        {
+          "id": "hip-side",
+          "x": 285,
+          "y": 620
+        },
+        {
+          "id": "hem-side",
+          "x": 375,
+          "y": 900
+        },
+        {
+          "id": "center-hem",
+          "x": 0,
+          "y": 900
+        }
+      ],
+      "cutLine": [
+        {
+          "x": 0,
+          "y": 45
+        },
+        {
+          "x": 68,
+          "y": -10
+        },
+        {
+          "x": 178,
+          "y": 8
+        },
+        {
+          "x": 270,
+          "y": 215
+        },
+        {
+          "x": 270,
+          "y": 250
+        },
+        {
+          "x": 295,
+          "y": 620
+        },
+        {
+          "x": 385,
+          "y": 930
+        },
+        {
+          "x": 0,
+          "y": 930
+        }
+      ],
+      "edges": [
+        {
+          "id": "back.fold",
+          "type": "fold",
+          "from": "center-hem",
+          "to": "center-neck"
+        },
+        {
+          "id": "back.neckline",
+          "type": "finished",
+          "from": "center-neck",
+          "to": "neck-shoulder"
+        },
+        {
+          "id": "back.shoulder",
+          "type": "seam",
+          "from": "neck-shoulder",
+          "to": "shoulder-point"
+        },
+        {
+          "id": "back.armhole",
+          "type": "finished",
+          "from": "shoulder-point",
+          "to": "armhole-bottom"
+        },
+        {
+          "id": "back.side",
+          "type": "seam",
+          "from": "armhole-bottom",
+          "to": "hem-side"
+        },
+        {
+          "id": "back.hem",
+          "type": "finished",
+          "from": "hem-side",
+          "to": "center-hem"
+        }
+      ],
+      "edgeMeasurements": {
+        "shoulder": 91.78,
+        "side": 699.95
+      },
+      "grainline": {
+        "id": "back.grainline",
+        "x": 90,
+        "y1": 120,
+        "y2": 780,
+        "direction": "parallel-to-center-fold"
+      },
+      "labels": [
+        {
+          "text": "BACK - CUT 1 ON FOLD",
+          "x": 110,
+          "y": 432
+        }
+      ]
+    }
+  ],
+  "seamPairs": [
+    {
+      "id": "shoulder-seams",
+      "edges": [
+        "front.shoulder",
+        "back.shoulder"
+      ],
+      "tolerance": 5
+    },
+    {
+      "id": "side-seams",
+      "edges": [
+        "front.side",
+        "back.side"
+      ],
+      "tolerance": 5
+    }
+  ],
+  "construction": [
+    "Cut front and back half panels on fold.",
+    "Finish neckline and armholes with bias binding or facing.",
+    "Join shoulder seams.",
+    "Join side seams.",
+    "Turn hem allowance and stitch."
+  ],
+  "assumptions": [
+    "Dartless loose woven fit for v0.1.",
+    "No closure modeled; neckline/opening must be reviewed for head entry.",
+    "Front and back side seams are intentionally matched for the dirty spike.",
+    "Seam allowance is simplified with rough cut-line expansion, not robust geometric offsetting."
+  ]
+}

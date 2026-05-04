@@ -1,0 +1,17 @@
+{
+  "id": "synthetic-body-v0.1",
+  "units": "mm",
+  "source": "synthetic prototype fixture",
+  "measurements": {
+    "height": 1680,
+    "bust": 920,
+    "waist": 760,
+    "hip": 980,
+    "shoulderWidth": 380,
+    "shoulderSlope": 18,
+    "frontWaistLength": 430,
+    "backWaistLength": 410,
+    "armholeDepth": 215,
+    "hipDepth": 620
+  }
+}

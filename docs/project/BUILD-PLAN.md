@@ -43,6 +43,17 @@ one human sanity check
 
 Canonical next-step plan: [V0.1 Dirty End-To-End Spike Plan](V0.1-SPIKE-PLAN.md)
 
+Current v0.1 status:
+
+- [x] One synthetic measurement fixture.
+- [x] One garment parameter fixture.
+- [x] One ugly dependency-free generator.
+- [x] One generated `PatternGraphCandidate`.
+- [x] One SVG package.
+- [x] One static preview.
+- [x] One internal readiness report.
+- [ ] One human sanity check.
+
 ### B0: Repo Scaffold And Contracts
 
 Status: in progress.
