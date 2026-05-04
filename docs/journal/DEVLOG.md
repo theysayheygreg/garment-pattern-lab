@@ -192,3 +192,10 @@ Task-led edit spike:
 - Added `npm run v0.1:edit:lengthen-hem`, which runs `lengthen hem 100mm` and writes a second generated package to `garments/a-line-dress-tunic/outputs/v0.1-length-plus-100/`.
 - The edited output includes `edit-intent.json` and `edit-summary.md` so the command interpretation is visible and reviewable.
 - Expanded `npm run check` to verify both the base package and the task-led edit path.
+
+Static app workbench:
+
+- Added `app/src/build-workbench.mjs`.
+- Added `npm run app:build`, which writes `app/dist/workbench.html`.
+- The workbench compares the base v0.1 pattern with the lengthened-hem variant, embeds both SVG pattern sheets, shows measured length/seam/readiness fields, and links to the generated previews and edit summary.
+- Smoke checked via local `python3 -m http.server 8787` on `[::1]`; the workbench HTML and both linked pattern SVGs returned successfully.

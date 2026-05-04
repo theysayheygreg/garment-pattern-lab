@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "app:build": "node app/src/build-workbench.mjs",
     "v0.1:generate": "node garments/a-line-dress-tunic/src/generate.mjs",
     "v0.1:edit:lengthen-hem": "node garments/a-line-dress-tunic/src/generate.mjs --output v0.1-length-plus-100 --command \"lengthen hem 100mm\"",
     "v0.1:check": "node garments/a-line-dress-tunic/src/generate.mjs --check",
