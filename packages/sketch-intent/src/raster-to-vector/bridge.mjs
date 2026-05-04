@@ -1,5 +1,7 @@
 import crypto from "node:crypto";
+import { execFileSync } from "node:child_process";
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import { vectorizeSync, ColorMode, Hierarchical, PathSimplifyMode } from "@neplex/vectorizer";
 import { recipeForInput } from "./recipes.mjs";
@@ -38,16 +40,7 @@ export function ingestSketch(filePath, options = {}) {
   }
 
   if (VECTOR_FORMATS.has(format)) {
-    return {
-      schemaVersion: "0.1-phase-b",
-      kind: "editable-trace-layer",
-      provenance,
-      engine: "vector-passthrough",
-      layers: { silhouette: [], interior: [], annotation: [], unclassified: [] },
-      unsupported: {
-        reason: `${format} passthrough is declared in the v0.1 contract but not implemented in the smoke bridge yet.`,
-      },
-    };
+    return traceVectorDocumentToEditableLayer(filePath, provenance, recipe);
   }
 
   if (RASTER_FORMATS.has(format)) {
@@ -64,6 +57,23 @@ function vectorPassthroughSvg(svg, provenance, recipe) {
 function traceRasterToEditableLayer(bytes, provenance, recipe) {
   const svg = vectorizeSync(bytes, vectorizerConfigForRecipe(recipe));
   return editableTraceLayerFromSvg(svg, provenance, recipe, "vtracer-neplex-vectorizer");
+}
+
+function traceVectorDocumentToEditableLayer(filePath, provenance, recipe) {
+  const workDir = fs.mkdtempSync(path.join(os.tmpdir(), "gpl-vector-doc-"));
+  const outSvg = path.join(workDir, "converted.svg");
+  try {
+    execFileSync("pdftocairo", ["-svg", filePath, outSvg], { stdio: "pipe" });
+    return editableTraceLayerFromSvg(fs.readFileSync(outSvg, "utf8"), provenance, recipe, "poppler-pdftocairo-svg");
+  } catch (error) {
+    return unsupportedTraceLayer(
+      provenance,
+      "poppler-pdftocairo-svg",
+      `${provenance.format} conversion failed. Phase B supports PDF-compatible vector files when Poppler/pdftocairo can convert them to SVG. ${error.message}`,
+    );
+  } finally {
+    fs.rmSync(workDir, { recursive: true, force: true });
+  }
 }
 
 function editableTraceLayerFromSvg(svg, provenance, recipe, engine) {

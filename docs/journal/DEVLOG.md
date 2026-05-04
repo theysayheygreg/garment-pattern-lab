@@ -220,3 +220,9 @@ Phase B raster smoke path:
 - Updated `RasterToVectorBridge` so `.png`, `.jpg`, and `.webp` inputs produce the same editable trace layer contract as SVG passthrough.
 - Added a generated synthetic PNG smoke fixture to prove raster tracing yields structured path layers.
 - Kept Potrace as research/possible isolated comparison because of GPLv2; the default prototype path is MIT VTracer-backed.
+
+Phase B vector document smoke path:
+
+- Added best-effort vector PDF and PDF-compatible `.ai` ingest through Poppler `pdftocairo`, converting documents to SVG before using the same trace-layer classifier.
+- Expanded `bridge.test.mjs` to generate synthetic fixtures for every raster recipe plus vector PDF and `.ai`.
+- Remaining Phase B hardening is real-world fixture behavior, not contract wiring.
