@@ -52,6 +52,8 @@ Current v0.1 status:
 - [x] One SVG package.
 - [x] One static preview.
 - [x] One internal readiness report.
+- [x] First reusable `pattern-core`, `validation-core`, and `export-core` modules extracted from the spike.
+- [x] Readiness smoke test for bad units and mismatched seam lengths.
 - [ ] One human sanity check.
 
 ### B0: Repo Scaffold And Contracts

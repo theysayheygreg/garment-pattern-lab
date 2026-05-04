@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "v0.1:generate": "node garments/a-line-dress-tunic/src/generate.mjs",
-    "check": "node garments/a-line-dress-tunic/src/generate.mjs --check"
+    "v0.1:check": "node garments/a-line-dress-tunic/src/generate.mjs --check",
+    "check:core": "node packages/validation-core/src/readiness.test.mjs",
+    "check": "npm run v0.1:check && npm run check:core"
   }
 }

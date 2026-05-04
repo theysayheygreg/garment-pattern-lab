@@ -13,3 +13,7 @@ Owns:
 - later interop profiles for DXF/AAMA/ASTM
 
 V1 prioritizes a package a person can print, cut, review, and sew from.
+
+Current v0.1 code:
+
+- `src/package-builders.mjs`: SVG, cut sheet, assembly notes, readiness Markdown, and static preview builders.

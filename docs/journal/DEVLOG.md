@@ -178,3 +178,10 @@ V0.1 dirty spike:
 - Added synthetic body and garment-parameter fixtures for one sleeveless A-line woven dress/tunic.
 - Generated the first rough `PatternGraphCandidate`, readiness JSON/MD, SVG pattern sheet, cut sheet, assembly notes, source pattern JSON, and static preview HTML under `garments/a-line-dress-tunic/outputs/v0.1/`.
 - Added `docs/research/v0.1-human-sanity-check.md` as the next human review checkpoint.
+
+Reusable engine extraction:
+
+- Moved measurement helpers into `packages/pattern-core/src/measurements.mjs`.
+- Moved readiness instrumentation into `packages/validation-core/src/readiness.mjs`.
+- Moved SVG/Markdown/preview builders into `packages/export-core/src/package-builders.mjs`.
+- Added `packages/validation-core/src/readiness.test.mjs` and expanded `npm run check` so the dirty spike now has a small package-level guardrail.
