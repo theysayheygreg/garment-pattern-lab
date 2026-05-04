@@ -113,6 +113,7 @@ function buildInstrumentation(patternDoc) {
           sourceSketch: patternDoc.source.sourceSketch,
           draftingRequestState: patternDoc.source.draftingRequestState,
           scaleStatus: patternDoc.source.scaleStatus,
+          stageTimings: patternDoc.source.stageTimings ?? [],
         }
       : null,
     assumptionCount: patternDoc.assumptions?.length ?? 0,

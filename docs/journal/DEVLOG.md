@@ -321,3 +321,4 @@ Readiness instrumentation extension:
 - Extended `validation-core` readiness output with backend marker metrics: fabric width, estimated fabric length, marker warnings, and a marker readiness check.
 - Added sketch-pipeline readiness instrumentation for sketch-driven runs, including drafting request state and scale status. This is intentionally engine-facing; it supports generator improvement without becoming a designer-facing error console.
 - Added assumption count instrumentation so readiness reports summarize how much inferred design intent the package is carrying.
+- Added per-stage timing for sketch-driven runs: ingest, interpretation, scale calibration, and drafting-request promotion. Timings are attached only to sketch-driven readiness instrumentation so the baseline generated fixture does not churn on every run.

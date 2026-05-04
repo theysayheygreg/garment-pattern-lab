@@ -17,9 +17,17 @@ const sketchPattern = structuredClone(pattern);
 sketchPattern.source.sourceSketch = "packages/sketch-intent/fixtures/a-line-tunic-scale-reference-semantic-flat.svg";
 sketchPattern.source.draftingRequestState = "draftable";
 sketchPattern.source.scaleStatus = "calibrated";
+sketchPattern.source.stageTimings = [
+  { id: "sketch.ingest", durationMs: 12.34 },
+  { id: "sketch.interpret", durationMs: 4.56 },
+];
 const sketchReadiness = buildReadiness(sketchPattern);
 assert.equal(sketchReadiness.checks.find((check) => check.id === "pipeline.drafting-request").state, "ready");
 assert.equal(sketchReadiness.instrumentation.sketchPipeline.scaleStatus, "calibrated");
+assert.deepEqual(
+  sketchReadiness.instrumentation.sketchPipeline.stageTimings.map((stage) => stage.id),
+  ["sketch.ingest", "sketch.interpret"],
+);
 
 const badUnits = structuredClone(pattern);
 badUnits.units = "in";

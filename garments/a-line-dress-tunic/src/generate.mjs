@@ -2,6 +2,7 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { performance } from "node:perf_hooks";
 import { fileURLToPath } from "node:url";
 import { applyParameterEdit, buildEditSummary, interpretCommand } from "../../../packages/assistant-core/src/commands.mjs";
 import { buildAssembly, buildCutSheet, buildDebugOverlayHtml, buildPackageManifest, buildPreview, buildReadinessMd, buildSvg } from "../../../packages/export-core/src/package-builders.mjs";
@@ -36,11 +37,20 @@ const canonicalBody = readJson("fixtures/measurements/canonical-misses-8.json");
 let params = readJson("fixtures/parameters/v0.1-parameters.json");
 let editIntent = null;
 let sketchPipeline = null;
+const stageTimings = [];
+
+const timeStage = (id, run) => {
+  const startedAt = performance.now();
+  const result = run();
+  const durationMs = Math.round((performance.now() - startedAt) * 100) / 100;
+  stageTimings.push({ id, durationMs });
+  return result;
+};
 
 if (sourceSketch) {
-  const trace = ingestSketch(path.resolve(process.cwd(), sourceSketch));
-  const interpretation = interpretSketchTrace(trace);
-  const calibratedInterpretation = calibrateScale({
+  const trace = timeStage("sketch.ingest", () => ingestSketch(path.resolve(process.cwd(), sourceSketch)));
+  const interpretation = timeStage("sketch.interpret", () => interpretSketchTrace(trace));
+  const calibratedInterpretation = timeStage("sketch.scale-calibrate", () => calibrateScale({
     trace,
     interpretation,
     canonicalBody,
@@ -50,12 +60,12 @@ if (sourceSketch) {
           reason: "--scale-inches-per-source-unit",
         }
       : undefined,
-  });
-  const draftingRequest = buildDraftingRequest({
+  }));
+  const draftingRequest = timeStage("sketch.drafting-request", () => buildDraftingRequest({
     calibratedInterpretation,
     bodyMeasurementSet: body,
     baseParameters: params,
-  });
+  }));
   if (draftingRequest.promotion.state === "refused") {
     console.error(`Drafting request refused: ${draftingRequest.promotion.blockers.join(", ")}`);
     process.exit(1);
@@ -185,6 +195,7 @@ const pattern = {
           sourceSketch,
           draftingRequestState: sketchPipeline.draftingRequest.promotion.state,
           scaleStatus: sketchPipeline.draftingRequest.scaleProfile?.scaleStatus ?? "missing",
+          stageTimings,
         }
       : {}),
     ...(editIntent ? { parameterEdit: editIntent } : {}),
