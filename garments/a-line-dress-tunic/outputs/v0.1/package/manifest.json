@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "0.1-package-manifest",
+  "patternId": "a-line-dress-tunic-v0.1",
+  "title": "Sleeveless A-line Woven Dress/Tunic v0.1",
+  "generatedAt": "2026-05-04T20:20:26.443Z",
+  "readiness": "ready-for-human-sanity-check",
+  "units": "mm",
+  "source": {
+    "generator": "garments/a-line-dress-tunic/src/generate.mjs",
+    "bodyMeasurementSet": "fixtures/measurements/v0.1-body.json",
+    "garmentParameters": "fixtures/parameters/v0.1-parameters.json"
+  },
+  "marker": {
+    "fabricWidthIn": 45,
+    "totalFabricLengthIn": 77.02,
+    "warningCount": 0
+  },
+  "packageFiles": [
+    {
+      "path": "package/pattern.svg",
+      "role": "printable-pattern-source",
+      "format": "svg"
+    },
+    {
+      "path": "package/marker.svg",
+      "role": "fabric-marker-layout",
+      "format": "svg"
+    },
+    {
+      "path": "package/cut-sheet.md",
+      "role": "human-cut-instructions",
+      "format": "markdown"
+    },
+    {
+      "path": "package/assembly.md",
+      "role": "human-sewing-instructions",
+      "format": "markdown"
+    },
+    {
+      "path": "package/preview.html",
+      "role": "static-layout-preview",
+      "format": "html"
+    }
+  ],
+  "devFiles": [
+    {
+      "path": "dev-artifacts/pattern-graph.json",
+      "role": "pattern-graph-candidate",
+      "format": "json"
+    },
+    {
+      "path": "dev-artifacts/readiness.json",
+      "role": "readiness-report",
+      "format": "json"
+    },
+    {
+      "path": "dev-artifacts/readiness.md",
+      "role": "readiness-summary",
+      "format": "markdown"
+    },
+    {
+      "path": "dev-artifacts/marker-plan.json",
+      "role": "marker-plan",
+      "format": "json"
+    }
+  ],
+  "assumptions": [
+    "Dartless loose woven fit for v0.1.",
+    "No closure modeled; neckline/opening must be reviewed for head entry.",
+    "Front and back side seams are intentionally matched for the dirty spike.",
+    "Seam allowance is simplified with rough cut-line expansion, not robust geometric offsetting."
+  ],
+  "knownMissing": [
+    "pattern.pdf tiled home-print export",
+    "marker.pdf printable marker export",
+    "cloth simulation or fit proof"
+  ]
+}

@@ -4,7 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { applyParameterEdit, buildEditSummary, interpretCommand } from "../../../packages/assistant-core/src/commands.mjs";
-import { buildAssembly, buildCutSheet, buildDebugOverlayHtml, buildPreview, buildReadinessMd, buildSvg } from "../../../packages/export-core/src/package-builders.mjs";
+import { buildAssembly, buildCutSheet, buildDebugOverlayHtml, buildPackageManifest, buildPreview, buildReadinessMd, buildSvg } from "../../../packages/export-core/src/package-builders.mjs";
 import { buildMarkerPlan, buildMarkerSvg } from "../../../packages/export-core/src/marker-layout/layout.mjs";
 import { measureNamedEdges, round } from "../../../packages/pattern-core/src/measurements.mjs";
 import { buildDraftingRequest, projectLegacyGeneratorInputs } from "../../../packages/sketch-intent/src/drafting-adapter/drafting-request.mjs";
@@ -232,6 +232,7 @@ if (!checkOnly) {
   fs.writeFileSync(path.join(packageDir, "assembly.md"), buildAssembly(pattern));
   fs.writeFileSync(path.join(packageDir, "preview.html"), buildPreview(pattern, readiness));
   fs.writeFileSync(path.join(packageDir, "marker.svg"), buildMarkerSvg(pattern, markerPlan));
+  fs.writeFileSync(path.join(packageDir, "manifest.json"), `${JSON.stringify(buildPackageManifest(pattern, readiness, markerPlan, { hasSketchPipeline: Boolean(sketchPipeline) }), null, 2)}\n`);
   fs.writeFileSync(path.join(devArtifactsDir, "pattern-graph.json"), `${JSON.stringify(pattern, null, 2)}\n`);
   fs.writeFileSync(path.join(devArtifactsDir, "marker-plan.json"), `${JSON.stringify(markerPlan, null, 2)}\n`);
   fs.writeFileSync(path.join(devArtifactsDir, "readiness.json"), `${JSON.stringify(readiness, null, 2)}\n`);

@@ -296,3 +296,9 @@ Debug overlay start:
 - Sketch-driven generator runs now write `dev-artifacts/debug-overlay.html`.
 - The overlay renders trace curves with status styling and a side panel for trace readiness, interpretation status, drafting state, scale evidence, landmark confidence, curve IDs, and assumptions.
 - Added `npm run check:debug-overlay` using the single-side mirrored fixture to keep assumed landmark visibility covered.
+
+Package manifest start:
+
+- Added `buildPackageManifest()` in `packages/export-core/src/package-builders.mjs`.
+- Generator now writes `package/manifest.json`, listing user-facing package files, dev artifacts, marker summary, source provenance, assumptions, and explicitly missing v0.1 export items such as tiled PDF.
+- Added `npm run check:package-manifest`.

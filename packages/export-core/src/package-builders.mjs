@@ -273,6 +273,55 @@ export function buildDebugOverlayHtml({ trace, interpretation, calibratedInterpr
 `;
 }
 
+export function buildPackageManifest(patternDoc, readinessDoc, markerPlan, options = {}) {
+  const packageFiles = [
+    { path: "package/pattern.svg", role: "printable-pattern-source", format: "svg" },
+    { path: "package/marker.svg", role: "fabric-marker-layout", format: "svg" },
+    { path: "package/cut-sheet.md", role: "human-cut-instructions", format: "markdown" },
+    { path: "package/assembly.md", role: "human-sewing-instructions", format: "markdown" },
+    { path: "package/preview.html", role: "static-layout-preview", format: "html" },
+  ];
+  const devFiles = [
+    { path: "dev-artifacts/pattern-graph.json", role: "pattern-graph-candidate", format: "json" },
+    { path: "dev-artifacts/readiness.json", role: "readiness-report", format: "json" },
+    { path: "dev-artifacts/readiness.md", role: "readiness-summary", format: "markdown" },
+    { path: "dev-artifacts/marker-plan.json", role: "marker-plan", format: "json" },
+    ...(options.hasSketchPipeline
+      ? [
+          { path: "dev-artifacts/editable-trace-layer.json", role: "trace-layer", format: "json" },
+          { path: "dev-artifacts/sketch-interpretation.json", role: "semantic-interpretation", format: "json" },
+          { path: "dev-artifacts/scale-calibration.json", role: "scale-calibration", format: "json" },
+          { path: "dev-artifacts/drafting-request.json", role: "drafting-request", format: "json" },
+          { path: "dev-artifacts/debug-overlay.html", role: "labeled-curve-debug-overlay", format: "html" },
+        ]
+      : []),
+  ];
+  return {
+    schemaVersion: "0.1-package-manifest",
+    patternId: patternDoc.id,
+    title: patternDoc.title,
+    generatedAt: readinessDoc.generatedAt,
+    readiness: readinessDoc.overallState,
+    units: patternDoc.units,
+    source: patternDoc.source,
+    marker: markerPlan
+      ? {
+          fabricWidthIn: markerPlan.fabricWidthIn,
+          totalFabricLengthIn: markerPlan.totalFabricLengthIn,
+          warningCount: markerPlan.warnings.length,
+        }
+      : null,
+    packageFiles,
+    devFiles,
+    assumptions: patternDoc.assumptions,
+    knownMissing: [
+      "pattern.pdf tiled home-print export",
+      "marker.pdf printable marker export",
+      "cloth simulation or fit proof",
+    ],
+  };
+}
+
 function unionBbox(boxes) {
   if (!boxes.length) return null;
   return {
