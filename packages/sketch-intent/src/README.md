@@ -13,3 +13,5 @@ Owns:
 - conversion to editable garment parameters
 
 This is the bridge from art to pattern intent.
+
+Phase B begins with `raster-to-vector/`: a recipe-driven ingest bridge. The first implemented path is SVG passthrough; raster tracing engines plug into the same contract next.

@@ -10,6 +10,7 @@
     "v0.1:generate": "node garments/a-line-dress-tunic/src/generate.mjs",
     "v0.1:check": "node garments/a-line-dress-tunic/src/generate.mjs --check",
     "check:core": "node packages/validation-core/src/readiness.test.mjs",
-    "check": "npm run v0.1:check && npm run dev:check:edit && npm run check:core"
+    "check:sketch": "node packages/sketch-intent/src/raster-to-vector/bridge.test.mjs",
+    "check": "npm run v0.1:check && npm run dev:check:edit && npm run check:core && npm run check:sketch"
   }
 }

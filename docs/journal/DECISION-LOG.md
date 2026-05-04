@@ -413,3 +413,51 @@ The seed fixture work in V0.1-DESIGN.md Phase E should look like "GarmentCode pl
 **Why:** Persona 1's quality bar ("I can hold this printed pattern, cut it, and make a muslin from it") is met by a static one-shot pipeline; Persona 2 features (variants, grading, dependency propagation, editing) are real value but for the wrong version. The thin-UI viewer with turn/pan is the seed of the v1 magic moment without committing to a full workbench. Imperial units throughout because Kiko's audience is US-sewer-shaped. The 45" marker layout matches typical home-sewing fabric purchase patterns; optimization is deferred. Failure mode is best-guess + assumptions surfaced in the package, with hard-failure fallback when even the best guess is below confidence floor — no user-facing correction surface, dev instrumentation handles iteration.
 
 **Door status:** Closed as v0.1 implementation spec. Open for: Codex's implementation choices within the phase contracts (Phases A–J in the design doc), specifically resolving the five `known_implementability_gaps` in the landmark prior file during Phase C; resolving `.ai` ingestion fidelity during Phase B; choosing croquis-matching approach during Phase D. v0.5 and v1 scope decisions are explicitly deferred and remain open.
+
+## 2026-05-04: v0.1 canonical body fallback is US Misses 8 (selectable soon)
+
+**Question:** When the input lacks a human figure or croquis for scale calibration, what's the canonical body the system falls back to?
+
+**Options considered:**
+
+- Hardcode a single canonical body permanently. Simpler but assumes one default fits all v0.1 demos.
+- Make it user-selectable from the start. More flexible but adds a UI surface to v0.1 (which is supposed to be one-shot, no UI).
+- Hardcode a single canonical body for v0.1 with a clear path to making it selectable in v0.1.x or v0.5.
+
+**Where it landed:** v0.1 hardcodes **US Misses 8** as the canonical body fallback. The body table comes from ASTM D5585 (Misses' Standard Body Measurements for Apparel) or comparable industry-standard measurements; Codex selects the authoritative source during Phase D and stores the full table at `garments/a-line-dress-tunic/fixtures/measurements/canonical-misses-8.json`. Selectability becomes a v0.1.x or v0.5 priority — a single hardcoded body works for the dinner demo but is too rigid as a permanent answer.
+
+**Why:** US Misses 8 is the most widely used reference body in commercial pattern drafting for the indie / home-sewer market Persona 1 sits in (Vogue, McCall's, Simplicity all default near it). It matches the FreeSewing/Aldrich measurement context the drafting formulas already assume. Making it selectable in v0.1.x means we don't have to retrofit the schema later.
+
+**Door status:** Closed for v0.1. Open for: the precise measurement table source (ASTM D5585 vs Vogue vs another), and the selectability path (config file in v0.1.x → user-supplied measurement set in v0.5 with assistant prompts).
+
+## 2026-05-04: v0.1 reference inputs come from web-sourced sketches and GPT Image 2 generation
+
+**Question:** Where do the v0.1 reference inputs come from for the smoke test in Phase J? Acceptance criteria depend on real inputs, but Kiko-supplied inputs may be delayed.
+
+**Options considered:**
+
+- Wait for Kiko to deliver reference sketches. Risks Codex blocking.
+- Backstop with synthetic-from-FreeSewing fixtures only. Tests the plumbing but doesn't exercise sketch ingestion.
+- Pull license-clean reference sketches from the web plus generate fixtures via GPT Image 2 per the existing Lane A (`INPUT-LANES.md`).
+
+**Where it landed:** Pull web-sourced reference sketches (license-clean or generated) and use GPT Image 2 to generate prompt-controlled fixtures matching the eight Persona 1 example flows. This unblocks Codex's smoke test work without waiting for Kiko's deliveries; her real inputs land later as additional fixtures.
+
+**Why:** The GPT Image 2 lane is already designed in `docs/project/INPUT-LANES.md` (Lane A) for exactly this purpose — controlled, repeatable, project-owned sketch fixtures with prompt provenance. The Persona 1 example flows give us eight concrete prompt targets. Web-sourced sketches are a backup when GPT Image 2 doesn't produce something usable, and they exercise the noisier-input handling. Reference patterns from the corpus must remain reference-only per the prior copyright decision.
+
+**Door status:** Closed for v0.1 fixture sourcing. Open for: which specific Persona 1 flows we generate fixtures for first (recommend Reece's longer A-line, Sam's Procreate shift, and Lin's gathered midi as the cleanest cases), and the prompt-recipe library to seed.
+
+## 2026-05-04: v0.1 ingests `.ai` files via a known library, not by punting to "convert to SVG first"
+
+**Question:** How does v0.1 handle Adobe Illustrator (`.ai`) input files? The format is partially proprietary.
+
+**Options considered:**
+
+- Punt entirely: tell users "convert to SVG in Illustrator first." Fastest to ship but breaks the Persona 1 promise that the system accepts what designers already work in.
+- Best-effort ad-hoc parsing. Brittle, hard to support.
+- Use a known library that handles `.ai` correctly. Most `.ai` files (CS2, 2005 onwards) are PDF-compatible and can be parsed via PDF tooling.
+
+**Where it landed:** Use a known library. The recommended path: `.ai` files saved with PDF compatibility (the default since Illustrator CS2) are parsed via `pdfjs-dist` (Mozilla's PDF.js) to extract path geometry, which then flows through the same vector-passthrough lane as `.svg` and vector PDF inputs. Codex evaluates `pdfjs-dist`, `ai2svg`, and similar npm libraries during Phase B and picks the most reliable one. Pre-CS2 `.ai` files (rare) fall back to a clear "couldn't read this format — try saving as SVG or PDF-compatible AI" message.
+
+**Why:** Illustrator is where many Persona 1 designers already work (Sam's flow #4 in the example flows is explicitly Procreate→Illustrator vector exports). Punting forces an extra manual step and breaks the "what designers already work in" commitment. The PDF-compatible path is robust because `.ai` files have been PDF-shaped for two decades; the library work is small.
+
+**Door status:** Closed for v0.1 ingestion strategy. Open for: the specific library choice (Codex selects during Phase B), and how to handle edge cases like raster-only `.ai` files or files with embedded fonts.

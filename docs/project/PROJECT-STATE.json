@@ -1,8 +1,8 @@
 {
   "project": "garment-pattern-lab",
   "created": "2026-05-03",
-  "status": "v0.1-phase-a-complete",
-  "currentMilestone": "M0.6-v0.1-foundation-cleanup-complete",
+  "status": "v0.1-phase-b-started",
+  "currentMilestone": "M0.7-v0.1-vector-ingest-started",
   "v01Design": "docs/project/V0.1-DESIGN.md",
   "personas": {
     "directory": "docs/design/personas/",
@@ -64,6 +64,8 @@
   },
   "nextActions": [
     "Phase-B-vectorization-lane",
+    "Phase-B-add-raster-tracer-engines",
+    "Phase-B-add-vector-pdf-ai-ingest",
     "Phase-C-semantic-interpretation",
     "Phase-D-scale-calibration",
     "Phase-E-drafting-integration",

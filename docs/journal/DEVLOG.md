@@ -206,3 +206,10 @@ Phase A foundation cleanup:
 - Split generated output directories into `package/` for sewing-facing artifacts and `dev-artifacts/` for readiness, source graph, and edit provenance.
 - Removed the old root-level generated files from `outputs/v0.1/` and `outputs/v0.1-length-plus-100/`.
 - Moved the internal comparison page from `app/dist/workbench.html` to `app/dev-artifacts/dev-comparison.html`.
+
+Phase B vector ingest start:
+
+- Added `packages/sketch-intent/src/raster-to-vector/recipes.mjs` for recipe definitions.
+- Added `packages/sketch-intent/src/raster-to-vector/bridge.mjs` with SVG passthrough, provenance hashing, recipe selection, and deterministic trace-layer buckets.
+- Added `packages/sketch-intent/fixtures/clean-technical-flat.svg` and `bridge.test.mjs`.
+- Wired `npm run check:sketch` into `npm run check`.

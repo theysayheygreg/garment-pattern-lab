@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="700" viewBox="0 0 400 700">
+  <path id="outer-silhouette" d="M 170 70 L 230 70 L 292 650 L 108 650 Z" fill="none" stroke="#111111" />
+  <path id="neckline" d="M 178 76 C 188 112 212 112 222 76" fill="none" stroke="#111111" />
+  <path id="center-front" d="M 200 88 L 200 650" fill="none" stroke="#111111" stroke-dasharray="8 8" />
+  <path id="left-annotation" d="M 75 160 L 145 160" fill="none" stroke="#666666" />
+</svg>
