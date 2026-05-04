@@ -289,3 +289,10 @@ Phase G marker layout start:
 - Added deterministic non-optimized 45 inch marker layout with sequential front/back panel placement, fixed gutter/margins, total fabric length metrics, and assumptions.
 - Generator now writes `package/marker.svg` and `dev-artifacts/marker-plan.json`.
 - Cut sheet now surfaces marker width/length and replaces the old "fabric layout not checked" note with a more precise non-optimized marker limitation.
+
+Debug overlay start:
+
+- Added `buildDebugOverlayHtml()` in `packages/export-core/src/package-builders.mjs`.
+- Sketch-driven generator runs now write `dev-artifacts/debug-overlay.html`.
+- The overlay renders trace curves with status styling and a side panel for trace readiness, interpretation status, drafting state, scale evidence, landmark confidence, curve IDs, and assumptions.
+- Added `npm run check:debug-overlay` using the single-side mirrored fixture to keep assumed landmark visibility covered.

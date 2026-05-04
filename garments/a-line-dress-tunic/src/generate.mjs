@@ -4,7 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { applyParameterEdit, buildEditSummary, interpretCommand } from "../../../packages/assistant-core/src/commands.mjs";
-import { buildAssembly, buildCutSheet, buildPreview, buildReadinessMd, buildSvg } from "../../../packages/export-core/src/package-builders.mjs";
+import { buildAssembly, buildCutSheet, buildDebugOverlayHtml, buildPreview, buildReadinessMd, buildSvg } from "../../../packages/export-core/src/package-builders.mjs";
 import { buildMarkerPlan, buildMarkerSvg } from "../../../packages/export-core/src/marker-layout/layout.mjs";
 import { measureNamedEdges, round } from "../../../packages/pattern-core/src/measurements.mjs";
 import { buildDraftingRequest, projectLegacyGeneratorInputs } from "../../../packages/sketch-intent/src/drafting-adapter/drafting-request.mjs";
@@ -241,6 +241,7 @@ if (!checkOnly) {
     fs.writeFileSync(path.join(devArtifactsDir, "sketch-interpretation.json"), `${JSON.stringify(sketchPipeline.interpretation, null, 2)}\n`);
     fs.writeFileSync(path.join(devArtifactsDir, "scale-calibration.json"), `${JSON.stringify(sketchPipeline.calibratedInterpretation.scaleCalibration, null, 2)}\n`);
     fs.writeFileSync(path.join(devArtifactsDir, "drafting-request.json"), `${JSON.stringify(sketchPipeline.draftingRequest, null, 2)}\n`);
+    fs.writeFileSync(path.join(devArtifactsDir, "debug-overlay.html"), buildDebugOverlayHtml({ ...sketchPipeline, readiness }));
   }
   if (editIntent) {
     fs.writeFileSync(path.join(devArtifactsDir, "edit-intent.json"), `${JSON.stringify(editIntent, null, 2)}\n`);

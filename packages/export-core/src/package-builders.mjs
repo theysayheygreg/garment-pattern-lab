@@ -178,3 +178,119 @@ export function buildPreview(patternDoc, readinessDoc) {
 </html>
 `;
 }
+
+export function buildDebugOverlayHtml({ trace, interpretation, calibratedInterpretation, draftingRequest, readiness }) {
+  const paths = Object.entries(trace.layers ?? {}).flatMap(([layer, layerPaths]) =>
+    layerPaths.map((path) => ({ ...path, layer })),
+  );
+  const bbox = unionBbox(paths.map((path) => path.bbox).filter(Boolean));
+  const viewBox = bbox
+    ? `${round(bbox.minX - 30)} ${round(bbox.minY - 30)} ${round(bbox.maxX - bbox.minX + 60)} ${round(bbox.maxY - bbox.minY + 60)}`
+    : "0 0 1000 1000";
+  const landmarkByCurve = new Map();
+  for (const landmark of interpretation.landmarks ?? []) {
+    for (const curveId of landmark.geometryRef?.sourceCurveIds ?? []) landmarkByCurve.set(curveId, landmark);
+  }
+  const pathMarkup = paths
+    .map((path) => {
+      const landmark = landmarkByCurve.get(path.id);
+      const status = landmark?.status ?? path.layer;
+      const label = landmark ? `${landmark.slot} ${Math.round(landmark.confidence * 100)}%` : `${path.layer}: ${path.id}`;
+      return `<path id="overlay-${escapeAttr(path.id)}" d="${escapeAttr(path.d)}" class="curve ${escapeAttr(status)} ${escapeAttr(path.layer)}"><title>${escapeHtml(label)}</title></path>`;
+    })
+    .join("\n        ");
+  const landmarkRows = (interpretation.landmarks ?? [])
+    .map(
+      (landmark) =>
+        `<tr><td>${escapeHtml(landmark.slot)}</td><td>${escapeHtml(landmark.status)}</td><td>${Math.round(landmark.confidence * 100)}%</td><td>${escapeHtml((landmark.geometryRef?.sourceCurveIds ?? []).join(", "))}</td></tr>`,
+    )
+    .join("\n");
+  const assumptionItems = [
+    ...(draftingRequest?.evidence?.assumptions ?? []),
+    ...(interpretation.ambiguityReport?.items ?? []),
+  ]
+    .map((item) => `<li>${escapeHtml(item.slot ?? item.slotId ?? "assumption")}: ${escapeHtml(item.message ?? item.prompt ?? item.currentStatus ?? "")}</li>`)
+    .join("\n");
+  const scale = calibratedInterpretation?.scaleCalibration;
+
+  return `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sketch Debug Overlay</title>
+  <style>
+    body { margin: 0; font-family: Helvetica, Arial, sans-serif; color: #111827; background: #f8fafc; }
+    main { display: grid; grid-template-columns: minmax(0, 1fr) 380px; min-height: 100vh; }
+    section { padding: 24px; overflow: auto; }
+    aside { border-left: 1px solid #d1d5db; background: #fff; padding: 20px; overflow: auto; }
+    svg { width: 100%; min-width: 520px; background: #fffdf7; border: 1px solid #d1d5db; }
+    .curve { fill: none; stroke-width: 4; opacity: 0.62; }
+    .silhouette { stroke: #111827; opacity: 0.8; }
+    .assigned { stroke: #2563eb; }
+    .assumed, .needs-confirmation { stroke: #d97706; stroke-dasharray: 10 8; }
+    .missing { stroke: #dc2626; }
+    .not-present { stroke: #9ca3af; opacity: 0.25; }
+    .annotation { stroke: #7c3aed; stroke-dasharray: 4 6; }
+    h1 { font-size: 18px; margin: 0 0 12px; }
+    h2 { font-size: 14px; margin: 24px 0 8px; }
+    p, li, td, th { font-size: 12px; line-height: 1.4; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border-bottom: 1px solid #e5e7eb; padding: 6px 4px; text-align: left; vertical-align: top; }
+    code { background: #f3f4f6; padding: 1px 4px; border-radius: 3px; }
+  </style>
+</head>
+<body>
+  <main>
+    <section>
+      <svg viewBox="${viewBox}" role="img" aria-label="Labeled sketch curves">
+        ${pathMarkup}
+      </svg>
+    </section>
+    <aside>
+      <h1>Sketch Debug Overlay</h1>
+      <p><strong>Trace:</strong> ${escapeHtml(trace.readiness?.status ?? "unknown")}</p>
+      <p><strong>Interpretation:</strong> ${escapeHtml(interpretation.ambiguityReport?.status ?? "unknown")}</p>
+      <p><strong>Drafting:</strong> ${escapeHtml(draftingRequest?.promotion?.state ?? "unknown")}</p>
+      <p><strong>Readiness:</strong> ${escapeHtml(readiness?.overallState ?? "unknown")}</p>
+
+      <h2>Scale</h2>
+      <p><strong>Status:</strong> ${escapeHtml(scale?.unitProfile?.scaleStatus ?? "missing")} (${Math.round((scale?.unitProfile?.confidence ?? 0) * 100)}%)</p>
+      <p><strong>Evidence:</strong> ${escapeHtml(scale?.evidence?.source ?? "missing")} <code>${escapeHtml(scale?.evidence?.sourceRef ?? "")}</code></p>
+
+      <h2>Landmarks</h2>
+      <table>
+        <thead><tr><th>Slot</th><th>Status</th><th>Conf.</th><th>Curve</th></tr></thead>
+        <tbody>${landmarkRows}</tbody>
+      </table>
+
+      <h2>Assumptions</h2>
+      <ul>${assumptionItems || "<li>No assumptions reported.</li>"}</ul>
+    </aside>
+  </main>
+</body>
+</html>
+`;
+}
+
+function unionBbox(boxes) {
+  if (!boxes.length) return null;
+  return {
+    minX: Math.min(...boxes.map((box) => box.minX)),
+    minY: Math.min(...boxes.map((box) => box.minY)),
+    maxX: Math.max(...boxes.map((box) => box.maxX)),
+    maxY: Math.max(...boxes.map((box) => box.maxY)),
+  };
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
+function escapeAttr(value) {
+  return escapeHtml(value).replaceAll("'", "&#39;");
+}
