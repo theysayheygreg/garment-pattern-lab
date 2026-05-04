@@ -675,6 +675,56 @@ This graph now folds in the first broad reference pass:
 
 `Missing3DPreviewGap` records that a reference/product workflow has visual and technical annotation but no 3D fit/drape feedback yet.
 
+### Kew Product Vision Layer
+
+Source: `docs/reference/KEW-PRODUCT-VISION.md` (Kiko's founder north-star document, 2026-05-03).
+
+`KewProductVision` is Kiko's full ecosystem-scale north star for fashion product development: idea-to-finished-product, garment-as-living-product-object, AI-native fashion engine. Garment Pattern Lab is currently the focused execution slice that aligns with the Kew PD layer.
+
+`LivingProductObject` is Kew's framing of the garment as a single shared source of truth from which every downstream view (creative sketch, technical sketch, specs, pattern, fit, factory, merchandising) grows. It is the product-language analog to `PatternGraph`.
+
+`TranslationProblem` names the deeper problem statement: a garment is not a drawing problem, it is a translation problem from creative intent through technical sketch, measurements, construction logic, pattern pieces, fit decisions, factory instructions, sales imagery, and production records.
+
+`KewCanvasFamily` is Kiko's named product slice for idea-to-sketch creative composition, image and text moodboarding, and early creative exploration.
+
+`KewCADFamily` is Kiko's named product slice for print design, surface design, vector editing, and pattern-design work — including Illustrator-level vector control when needed.
+
+`KewPDFamily` is Kiko's named product slice for pattern development, measurements, grading foundations, marker-making foundations, and 3D fit. Garment Pattern Lab maps cleanly into this family.
+
+`KewLifecycleFamily` is Kiko's named product slice for merchandising, planning, product records, shared collaboration, sourcing workflow, and downstream business workflow.
+
+`KewStudioFamily` is Kiko's named product slice for AI-generated photography, line-plan imagery, ecommerce outputs, and market-facing presentation.
+
+`DrapeToPatternWorkflow` is the workflow that begins with a photo of a physical drape or pinned form and translates it into a technical sketch, measurement analysis, and pattern. It is a third input lane beyond the two already in `INPUT-LANES.md` (generated, human-authored).
+
+`DrapePhotoInputLane` is the input-lane primitive for `DrapeToPatternWorkflow`. It shares the downstream contract (`InputProvenance`, `LandmarkSet`, `SketchIntent`, `AmbiguityReport`) with the existing two lanes.
+
+`GuidedProductIntelligence` is the in-workflow advice surface for questions like how much ease this fabric wants, whether a measurement feels too tight, what a pattern adjustment may imply, or how a construction choice may affect fit and production. It generalizes Orrery design-review finding 13 (fix suggestions in design language) by adding a `why-this-matters` companion.
+
+`ExpertNoviceContinuum` is the design constraint that the same product surface should serve experts moving fast and novices learning enough to make better decisions, without making the novice feel talked down to.
+
+`OpenSourceLearningSpirit` is the platform stance that learning material should feel transparent, generous, practical, and available when the user needs it — not behind paywalls or gatekeeping.
+
+`IntelligenceLearningLoop` records the platform's learning signals: approved/rejected names, sketch cleanup choices, path/curve corrections, measurement overrides, pattern edits, and preferred labels. Each guided review moment doubles as a labeled training signal.
+
+`AINativeFashionEngine` is Kiko's beyond-SaaS framing: the moat is fashion-specific intelligence (garment understanding, sketch interpretation, pattern logic, construction, factory communication, fit guidance), not screens, dashboards, forms, or folders.
+
+`KewMoatBoundary` is the constraint that the value of the platform is what it knows about a garment that generic software does not.
+
+`KewCompatibilityTarget` records the long-range interop targets: Adobe, Gerber, CLO 3D, Ned Graphics, Lectra, Browzwear, Optitex. These are export targets through the candidate-to-export interop layer, not just competitor benchmarks.
+
+`MultilingualFactoryInstruction` records the constraint that pattern piece labels, construction notes, callouts, annotations, and technical instructions should support translated text under the English base. Implication for the schema: labels are string keys into a label registry, not hardcoded English.
+
+`CrossDomainAbstractionConstraint` is the soft constraint that the underlying pattern grammar should not gratuitously hardcode "garment" or "wearer" so the engine could later extend to accessories, footwear, furniture, industrial design, architectural design, or interior design.
+
+`KewUserSpan` records Kew's eventual user reach: individual creators, independent brands, studios, enterprise teams, digital fashion creators, and avatar/gaming creators bridging virtual styling to real garments. Garment Pattern Lab's v1 user is a subset.
+
+`AvatarToRealGarmentBridge` is Kew's vision of carrying a digital avatar look into a real garment with full pattern and production support. Out of scope for Garment Pattern Lab v1.
+
+`ConfirmedIntentPayload` is the upstream-canvas-to-Pattern-Lab contract: when Kew Canvas / Kew CAD owns the canvas, Garment Pattern Lab receives `SketchIntent`, `LandmarkSet`, `GarmentParameters`, and provenance — not raw vector or canvas state. Resolves the Orrery design-review canvas-question fork in favor of upstream ownership.
+
+`KewGPLAlignmentPlane` records the strategic position: Garment Pattern Lab is the focused execution slice that proves the engine Kew PD needs underneath. Schema, validation, revision model, and pattern package are designed to be hostable inside Kew without rewrite.
+
 ## Secondary Ingest Edges
 
 ```text
@@ -1285,6 +1335,110 @@ PatternProject
   -> WhereUsedRecord
 ```
 
+```text
+KewProductVision
+  -> LivingProductObject
+  -> PatternGraph
+  -> KewCanvasFamily
+  -> KewCADFamily
+  -> KewPDFamily
+  -> KewLifecycleFamily
+  -> KewStudioFamily
+```
+
+```text
+KewProductVision
+  -> TranslationProblem
+  -> SketchIntent
+  -> GarmentParameters
+  -> PatternGraph
+  -> ManufacturingPackage
+```
+
+```text
+KewPDFamily
+  -> PatternGraph
+  -> ValidationReport
+  -> HumanReadablePatternPackage
+  -> StaticAssemblyPreview
+  -> KewGPLAlignmentPlane
+```
+
+```text
+KewCanvasFamily
+  -> KewCADFamily
+  -> ConfirmedIntentPayload
+  -> SketchIntent
+  -> LandmarkSet
+  -> GarmentParameters
+  -> KewPDFamily
+```
+
+```text
+DrapeToPatternWorkflow
+  -> DrapePhotoInputLane
+  -> InputProvenance
+  -> LandmarkSet
+  -> SketchIntent
+  -> AmbiguityReport
+  -> GarmentParameters
+  -> PatternGraph
+```
+
+```text
+GuidedProductIntelligence
+  -> AmbiguityQuestion
+  -> ValidationReport
+  -> FixSuggestion
+  -> ExpertNoviceContinuum
+```
+
+```text
+IntelligenceLearningLoop
+  -> PatternGraphRevision
+  -> CorrectionOperation
+  -> PatternProgram
+  -> CorrectnessRule
+```
+
+```text
+AINativeFashionEngine
+  -> KewMoatBoundary
+  -> LivingProductObject
+  -> PatternGraph
+  -> GuidedProductIntelligence
+```
+
+```text
+KewCompatibilityTarget
+  -> InteropFormatProfile
+  -> ExportConformanceReport
+  -> RoundTripReport
+```
+
+```text
+MultilingualFactoryInstruction
+  -> PatternPackageModel
+  -> PatternPackageComposer
+  -> HumanReadablePatternPackage
+```
+
+```text
+CrossDomainAbstractionConstraint
+  -> PatternGraph
+  -> Panel
+  -> SeamPair
+  -> Notch
+  -> GrainAxis
+```
+
+```text
+KewUserSpan
+  -> AvatarToRealGarmentBridge
+  -> ExpertNoviceContinuum
+  -> OpenSourceLearningSpirit
+```
+
 ## Representation Boundary Rules
 
 - `PatternGraph` is the manufacturing source of truth.
@@ -1308,6 +1462,9 @@ PatternProject
 - Reusable product logic belongs in `app/` or `packages/`; garment-specific drafting rules, fixtures, references, and generated evidence belong under `garments/`.
 - Onshape-style PDM/PLM/collaboration is a future product architecture reference. Prototype 1 should only preserve revision/provenance hooks, not build enterprise lifecycle workflows.
 - Pattern Lab's MBD analog is `SewingPMI`: manufacturing information embedded in `PatternGraph`, with SVG/PDF/export views generated from it.
+- Garment Pattern Lab is the focused execution slice for `KewPDFamily`. The schema, validation harness, revision model, and pattern package should be designed so they could later host Kew workflows without rewrite, but Garment Pattern Lab does not own `KewCanvasFamily`, `KewCADFamily`, `KewLifecycleFamily`, or `KewStudioFamily` scope.
+- The canvas lives upstream. When Kew or another upstream tool owns the canvas, Garment Pattern Lab receives a `ConfirmedIntentPayload` (`SketchIntent` + `LandmarkSet` + `GarmentParameters` + provenance), not raw vector or canvas state.
+- Pattern piece labels, construction notes, and callouts are string keys into a label registry, not hardcoded English strings, so `MultilingualFactoryInstruction` is reachable without retrofit.
 
 ## Deep Dive Product Decisions
 
