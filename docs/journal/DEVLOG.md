@@ -309,3 +309,9 @@ Phase I static preview start:
 - Replaced the previous hard-coded SVG preview body with a generated Three.js static assembly page sourced from PatternGraph scene data.
 - Preview renders front/back panel meshes, a muted body proxy, and shoulder/side seam-pair guide lines. It remains explicitly non-simulated and read-only.
 - Added `npm run check:preview-3d`.
+
+Interpretation trace start:
+
+- Added Phase J `interpretationTrace` score tables to the semantic interpreter output.
+- Each slot now records selected candidate, selected source, status, confidence, scored candidates, rule scores, and filtered candidates.
+- Sketch-driven generator runs write `dev-artifacts/interpretation-trace.json`; the package manifest lists it for sketch-pipeline outputs.

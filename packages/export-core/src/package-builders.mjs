@@ -358,6 +358,7 @@ export function buildPackageManifest(patternDoc, readinessDoc, markerPlan, optio
       ? [
           { path: "dev-artifacts/editable-trace-layer.json", role: "trace-layer", format: "json" },
           { path: "dev-artifacts/sketch-interpretation.json", role: "semantic-interpretation", format: "json" },
+          { path: "dev-artifacts/interpretation-trace.json", role: "semantic-score-tables", format: "json" },
           { path: "dev-artifacts/scale-calibration.json", role: "scale-calibration", format: "json" },
           { path: "dev-artifacts/drafting-request.json", role: "drafting-request", format: "json" },
           { path: "dev-artifacts/debug-overlay.html", role: "labeled-curve-debug-overlay", format: "html" },

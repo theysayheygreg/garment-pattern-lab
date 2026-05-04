@@ -72,6 +72,7 @@ export function interpretSketchTrace(trace, options = {}) {
   const slots = primaryPanel?.slots ?? {};
   const ambiguityReport = buildAmbiguityReport(interpretedPanels, trace, prior);
   const landmarks = interpretedPanels.flatMap((panel) => panel.landmarks);
+  const interpretationTrace = buildInterpretationTrace(interpretedPanels);
   return {
     schemaVersion: "0.1-phase-c",
     kind: "sketch-interpretation",
@@ -137,6 +138,7 @@ export function interpretSketchTrace(trace, options = {}) {
       slotsByView: Object.fromEntries(interpretedPanels.map((panel) => [panel.view, panel.slots])),
     },
     ambiguityReport,
+    interpretationTrace,
   };
 }
 
@@ -385,16 +387,17 @@ function detectAxis(candidates, silhouette) {
 }
 
 function assignRequiredSlot(slotId, candidates, silhouette, axis) {
-  const scored = scoreSlot(slotId, candidatePoolForSlot(slotId, candidates, axis), silhouette, axis).sort((a, b) => compareScoredCandidates(a, b));
+  const pooledCandidates = candidatePoolForSlot(slotId, candidates, axis);
+  const scored = scoreSlot(slotId, pooledCandidates, silhouette, axis).sort((a, b) => compareScoredCandidates(a, b));
   const best = scored[0];
   const hardFloor = 0.3;
   const baseSlot = baseSlotId(slotId);
   const threshold = baseSlot === "center" ? 0.7 : baseSlot === "hem" ? 0.55 : 0.6;
   if (!best || best.score < hardFloor) {
-    return missingSlot(slotId, true, `No plausible ${slotId.replaceAll("_", " ")} curve was found.`);
+    return withScoreTable(missingSlot(slotId, true, `No plausible ${slotId.replaceAll("_", " ")} curve was found.`), scored, candidates, pooledCandidates);
   }
   const status = best.candidate.source === "mirrored-from-axis" || best.score < threshold ? "assumed" : "assigned";
-  return slotAssignment(slotId, best.candidate, {
+  return withScoreTable(slotAssignment(slotId, best.candidate, {
     required: true,
     status,
     confidence: best.score,
@@ -405,28 +408,29 @@ function assignRequiredSlot(slotId, candidates, silhouette, axis) {
         : status === "assumed"
           ? `${slotId.replaceAll("_", " ")} is below the ambiguity threshold.`
           : undefined,
-  });
+  }), scored, candidates, pooledCandidates);
 }
 
 function assignOptionalSlot(slotId, candidates, silhouette, axis) {
-  const scored = scoreSlot(slotId, candidatePoolForSlot(slotId, candidates, axis), silhouette, axis).sort((a, b) => compareScoredCandidates(a, b));
+  const pooledCandidates = candidatePoolForSlot(slotId, candidates, axis);
+  const scored = scoreSlot(slotId, pooledCandidates, silhouette, axis).sort((a, b) => compareScoredCandidates(a, b));
   const best = scored[0];
   if (!best || best.score < 0.45) {
-    return {
+    return withScoreTable({
       slotId,
       required: false,
       status: "not-present",
       confidence: 0.82,
       assumption: "No dart-like feature was detected in the v0.1 trace.",
-    };
+    }, scored, candidates, pooledCandidates);
   }
-  return slotAssignment(slotId, best.candidate, {
+  return withScoreTable(slotAssignment(slotId, best.candidate, {
     required: false,
     status: "needs-confirmation",
     confidence: best.score,
     ruleScores: best.ruleScores,
     assumption: "Darts change the cut; v0.1 requires human confirmation even when detection is plausible.",
-  });
+  }), scored, candidates, pooledCandidates);
 }
 
 function scoreSlot(slotId, candidates, silhouette, axis) {
@@ -436,6 +440,36 @@ function scoreSlot(slotId, candidates, silhouette, axis) {
     const score = totalWeight === 0 ? 0 : ruleScores.reduce((sum, rule) => sum + rule.score * rule.weight, 0) / totalWeight;
     return { candidate, score: round(score), ruleScores };
   });
+}
+
+function withScoreTable(slot, scored, allCandidates, pooledCandidates) {
+  return {
+    ...slot,
+    scoreTable: buildScoreTable(slot.slotId, scored, allCandidates, pooledCandidates),
+  };
+}
+
+function buildScoreTable(slotId, scored, allCandidates, pooledCandidates) {
+  const pooledIds = new Set(pooledCandidates.map((candidate) => candidate.id));
+  const scoredRows = scored.map((row) => scoreRow(row.candidate, row.score, row.ruleScores, "scored"));
+  const filteredRows = allCandidates
+    .filter((candidate) => !pooledIds.has(candidate.id))
+    .map((candidate) => scoreRow(candidate, 0, [], "filtered"));
+  return {
+    slotId,
+    candidates: [...scoredRows, ...filteredRows],
+  };
+}
+
+function scoreRow(candidate, score, ruleScores, consideration) {
+  return {
+    candidateId: candidate.id,
+    source: candidate.source,
+    layer: candidate.layer,
+    score,
+    consideration,
+    ruleScores,
+  };
 }
 
 function candidatePoolForSlot(slotId, candidates, axis) {
@@ -599,6 +633,28 @@ function buildAmbiguityReport(interpretedPanels, trace, prior) {
     items: questions,
     questions,
   };
+}
+
+function buildInterpretationTrace(interpretedPanels) {
+  return {
+    schemaVersion: "0.1-phase-j-interpretation-trace",
+    panels: interpretedPanels.map((panel) => ({
+      panelId: panel.panelId,
+      view: panel.view,
+      scoreTables: Object.values(panel.slots).map((slot) => ({
+        slotId: slot.slotId,
+        selectedCandidateId: slot.curveId ?? null,
+        selectedSource: slot.source ?? null,
+        status: slot.status,
+        confidence: slot.confidence,
+        candidates: slot.scoreTable?.candidates ?? [],
+      })),
+    })),
+  };
+}
+
+export function buildInterpretationTraceArtifact(interpretation) {
+  return interpretation.interpretationTrace;
 }
 
 function buildLandmarkList(slots, view) {

@@ -86,6 +86,11 @@ assert.equal(singleSideInterpretation.landmarkSet.slots.shoulder_right.source, "
 assert.equal(singleSideInterpretation.landmarkSet.slots.armhole_right.source, "mirrored-from-axis");
 assert.equal(singleSideInterpretation.landmarkSet.slots.side_seam_right.source, "mirrored-from-axis");
 assert.ok(singleSideInterpretation.ambiguityReport.items.some((item) => item.slotId === "shoulder_right"));
+const shoulderRightTrace = singleSideInterpretation.interpretationTrace.panels[0].scoreTables.find((table) => table.slotId === "shoulder_right");
+assert.equal(shoulderRightTrace.selectedCandidateId, "front-right-shoulder");
+assert.equal(shoulderRightTrace.selectedSource, "mirrored-from-axis");
+assert.ok(shoulderRightTrace.candidates.some((candidate) => candidate.candidateId === "front-left-shoulder" && candidate.source === "trace"));
+assert.ok(shoulderRightTrace.candidates.some((candidate) => candidate.consideration === "filtered"));
 
 const tmpDir = path.join("tmp", "semantic-interpreter");
 fs.mkdirSync(tmpDir, { recursive: true });

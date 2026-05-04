@@ -10,7 +10,7 @@ import { measureNamedEdges, round } from "../../../packages/pattern-core/src/mea
 import { buildDraftingRequest, projectLegacyGeneratorInputs } from "../../../packages/sketch-intent/src/drafting-adapter/drafting-request.mjs";
 import { ingestSketch } from "../../../packages/sketch-intent/src/raster-to-vector/bridge.mjs";
 import { calibrateScale } from "../../../packages/sketch-intent/src/scale-calibration/calibrator.mjs";
-import { interpretSketchTrace } from "../../../packages/sketch-intent/src/semantic-interpreter/interpreter.mjs";
+import { buildInterpretationTraceArtifact, interpretSketchTrace } from "../../../packages/sketch-intent/src/semantic-interpreter/interpreter.mjs";
 import { buildReadiness } from "../../../packages/validation-core/src/readiness.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -240,6 +240,7 @@ if (!checkOnly) {
   if (sketchPipeline) {
     fs.writeFileSync(path.join(devArtifactsDir, "editable-trace-layer.json"), `${JSON.stringify(sketchPipeline.trace, null, 2)}\n`);
     fs.writeFileSync(path.join(devArtifactsDir, "sketch-interpretation.json"), `${JSON.stringify(sketchPipeline.interpretation, null, 2)}\n`);
+    fs.writeFileSync(path.join(devArtifactsDir, "interpretation-trace.json"), `${JSON.stringify(buildInterpretationTraceArtifact(sketchPipeline.interpretation), null, 2)}\n`);
     fs.writeFileSync(path.join(devArtifactsDir, "scale-calibration.json"), `${JSON.stringify(sketchPipeline.calibratedInterpretation.scaleCalibration, null, 2)}\n`);
     fs.writeFileSync(path.join(devArtifactsDir, "drafting-request.json"), `${JSON.stringify(sketchPipeline.draftingRequest, null, 2)}\n`);
     fs.writeFileSync(path.join(devArtifactsDir, "debug-overlay.html"), buildDebugOverlayHtml({ ...sketchPipeline, readiness }));
