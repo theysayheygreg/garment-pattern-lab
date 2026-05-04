@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="720" viewBox="0 0 420 720">
+  <title>Semantic A-line tunic technical flat</title>
+  <desc>
+    Phase C support fixture for a sleeveless A-line woven tunic. The full body outline
+    remains available as one closed silhouette for Phase B ingest, while separate
+    semantic paths expose neckline, shoulders, armholes, side seams, hem, center axis,
+    and optional detail lines.
+  </desc>
+
+  <g id="semantic-a-line-tunic" fill="none" stroke="#111111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path
+      id="body-silhouette"
+      data-gpl-role="silhouette"
+      data-gpl-garment="a-line-tunic-front"
+      d="M 156 70 C 166 82 182 88 210 88 C 238 88 254 82 264 70 L 295 104 C 314 194 330 364 358 670 L 62 670 C 90 364 106 194 125 104 Z"
+    />
+
+    <path
+      id="front-neckline"
+      data-gpl-role="neckline"
+      d="M 168 76 C 178 126 242 126 252 76"
+    />
+    <path
+      id="left-shoulder-seam"
+      data-gpl-role="shoulder"
+      d="M 125 104 L 156 70"
+    />
+    <path
+      id="right-shoulder-seam"
+      data-gpl-role="shoulder"
+      d="M 264 70 L 295 104"
+    />
+    <path
+      id="left-armhole"
+      data-gpl-role="armhole"
+      d="M 125 104 C 118 146 112 190 112 236"
+    />
+    <path
+      id="right-armhole"
+      data-gpl-role="armhole"
+      d="M 295 104 C 302 146 308 190 308 236"
+    />
+    <path
+      id="left-side-seam"
+      data-gpl-role="side-seam"
+      d="M 112 236 C 104 348 88 502 62 670"
+    />
+    <path
+      id="right-side-seam"
+      data-gpl-role="side-seam"
+      d="M 308 236 C 316 348 332 502 358 670"
+    />
+    <line
+      id="hem"
+      data-gpl-role="hem"
+      x1="62"
+      y1="670"
+      x2="358"
+      y2="670"
+    />
+  </g>
+
+  <g id="construction-lines" fill="none" stroke="#4f6070" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <line
+      id="center-front-axis"
+      data-gpl-role="center-axis"
+      x1="210"
+      y1="96"
+      x2="210"
+      y2="670"
+      stroke-dasharray="10 10"
+    />
+    <path
+      id="neckline-facing-guide"
+      data-gpl-role="optional-detail"
+      d="M 174 96 C 187 137 233 137 246 96"
+      stroke-dasharray="6 7"
+    />
+    <path
+      id="left-armhole-facing-guide"
+      data-gpl-role="optional-detail"
+      d="M 137 116 C 132 154 128 190 128 228"
+      stroke-dasharray="6 7"
+    />
+    <path
+      id="right-armhole-facing-guide"
+      data-gpl-role="optional-detail"
+      d="M 283 116 C 288 154 292 190 292 228"
+      stroke-dasharray="6 7"
+    />
+    <line
+      id="high-hip-balance-line"
+      data-gpl-role="optional-detail"
+      x1="105"
+      y1="390"
+      x2="315"
+      y2="390"
+      stroke-dasharray="7 8"
+    />
+    <line
+      id="hem-turnback-guide"
+      data-gpl-role="optional-detail"
+      x1="72"
+      y1="634"
+      x2="348"
+      y2="634"
+      stroke-dasharray="7 8"
+    />
+  </g>
+
+  <g id="review-guides" fill="none" stroke="#777777" stroke-width="2">
+    <polyline
+      id="left-pocket-placement-guide"
+      data-gpl-role="optional-detail"
+      points="139,418 181,418 181,486 133,486 139,418"
+    />
+    <polyline
+      id="right-pocket-placement-guide"
+      data-gpl-role="optional-detail"
+      points="239,418 281,418 287,486 239,486 239,418"
+    />
+  </g>
+</svg>

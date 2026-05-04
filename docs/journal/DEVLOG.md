@@ -241,3 +241,11 @@ Phase B complete:
 - Added raster PDF fallback: when Poppler SVG conversion yields no vector paths, render the page to PNG and run the VTracer-backed raster bridge.
 - Added malformed raster coverage so bad image files return a blocked trace-layer payload rather than throwing raw vectorizer errors.
 - Marked Phase B complete in `V0.1-DESIGN.md`, `BUILD-PLAN.md`, and `PROJECT-STATE.json`; next implementation lane is Phase C semantic interpretation.
+
+Phase C semantic interpretation start:
+
+- Added `packages/sketch-intent/src/semantic-interpreter/interpreter.mjs`.
+- Added `a-line-tunic-semantic-flat.svg`, a richer front-view fixture exposing neckline, shoulders, armholes, side seams, hem, center-front axis, and optional construction/detail guides.
+- Added a heuristic A-line v0.1 interpreter over Phase B trace layers. It emits a `sketch-interpretation` package with stable semantic landmark IDs, source curve evidence, trace-space coordinate profile, confidence, assumptions, and ambiguity report.
+- Kept Phase C honest about scale: physical scale is unknown and unit-bearing priors stay disabled until Phase D.
+- Added `npm run check:semantic` and wired it into `npm run check`.

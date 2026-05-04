@@ -493,3 +493,20 @@ The deeper product commitment: **garment family is detected from input, not pre-
 
 **Door status:** Closed for v0.1 axis-handling and the three-layer architecture. Open for: the family-detection algorithm itself (research starts when v0.5 needs it), the specific schema for `asymmetric_features` in family prior files (lands when the second family is added), and the training-mode pre-select UX (probably a config flag in v0.1, a real UI in v0.5+).
 
+
+## 2026-05-04: Patternmaker checkpoint — Kiko is the v0.1 bar; sample-shop critique is the next tier
+
+**Question:** Acceptance criterion #6 in `V0.1-DESIGN.md` wants sewing-literate review. Is Kiko-at-dinner sufficient, or does v0.1 need a separately-booked credentialed patternmaker?
+
+**Options considered:**
+
+- Kiko-at-dinner is the v0.1 acceptance bar in full. She spot-checks both the muslin-feasibility (would I sew this?) and the drafting math (does the rulebook look right?).
+- Book a separate credentialed patternmaker review before declaring v0.1 done. Adds time and cost; uncertain whether the v0.1-grade pattern is mature enough for that level of audit yet.
+- Layered: Kiko is the v0.1 bar; sample-shop critique is a higher-tier check that becomes a required gate before v0.2.
+
+**Where it landed:** Layered. Kiko-at-dinner is the v0.1 acceptance bar — she has real patternmaking capability and can spot-test the drafting math, not just judge a pattern draft. No separate credentialed-patternmaker booking needed for v0.1. Sample-shop critique is the next-tier check: send a v0.1 pattern to a local sample shop; either get a sample made (best case) or get the shop's feedback even if they can't make it. Optional stretch in v0.1.x; becomes a required acceptance gate before v0.2 hardens any rulebook changes.
+
+**Why:** Kiko spot-checking covers the pattern-as-drafted layer (units, math, panel topology, seam pairs, allowances). Sample-shop critique covers the pattern-as-cut-and-sewn layer — failure modes that only show up when fabric meets scissors and machine: notch alignment drifting under a presser foot, seam allowance fighting curves, balance marks that don't match across a fold, fabric grain interactions, ease distribution under hand-feed. Different failure modes than pattern math; both layers matter long-term, but v0.1 doesn't need both to ship.
+
+**Door status:** Closed for v0.1 acceptance. Open for: sourcing a specific local sample shop for the v0.1.x stretch (Greg's relationships matter here), and what specific feedback fields a v0.2 sample-shop critique should produce (a structured "what would you change?" form that feeds into the v0.2 rulebook revision).
+

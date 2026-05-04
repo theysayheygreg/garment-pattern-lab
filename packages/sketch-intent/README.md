@@ -23,6 +23,9 @@ Phase B code:
 - `src/raster-to-vector/bridge.test.mjs`: smoke tests using SVG fixtures, generated PNG/JPG/WEBP fixtures, generated raster/vector PDF fixtures, generated PDF-compatible `.ai`, malformed raster input, and unsupported input.
 - `fixtures/primitive-export-technical-flat.svg`: SVG export hardening fixture using common vector primitives (`polygon`, `polyline`, `line`, `rect`) rather than only `<path>`.
 - `fixtures/hardware-detail-technical-flat.svg`: SVG fixture for circles/ellipses used as hardware, buttons, rings, rivets, or similar garment details.
+- `fixtures/a-line-tunic-semantic-flat.svg`: Phase C fixture with separate semantic paths for the front neckline, shoulders, armholes, side seams, hem, and center axis.
+- `src/semantic-interpreter/interpreter.mjs`: heuristic A-line v0.1 interpreter that converts Phase B trace layers into a `sketch-interpretation` package with semantic landmark IDs, source curve evidence, coordinate profile, assumptions, and ambiguity report.
+- `src/semantic-interpreter/interpreter.test.mjs`: smoke tests for the complete semantic fixture and a sparse blocked fixture.
 
 Local tool assumptions:
 
@@ -32,4 +35,5 @@ Local tool assumptions:
 Useful commands:
 
 - `npm run check:sketch`
+- `npm run check:semantic`
 - `npm run sketch:report`
