@@ -302,3 +302,10 @@ Package manifest start:
 - Added `buildPackageManifest()` in `packages/export-core/src/package-builders.mjs`.
 - Generator now writes `package/manifest.json`, listing user-facing package files, dev artifacts, marker summary, source provenance, assumptions, and explicitly missing v0.1 export items such as tiled PDF.
 - Added `npm run check:package-manifest`.
+
+Phase I static preview start:
+
+- Added `packages/preview-3d/src/static-assembly-scene.mjs`.
+- Replaced the previous hard-coded SVG preview body with a generated Three.js static assembly page sourced from PatternGraph scene data.
+- Preview renders front/back panel meshes, a muted body proxy, and shoulder/side seam-pair guide lines. It remains explicitly non-simulated and read-only.
+- Added `npm run check:preview-3d`.

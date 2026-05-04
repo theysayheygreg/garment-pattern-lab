@@ -1,4 +1,5 @@
 import { panelWidth, round } from "../../pattern-core/src/measurements.mjs";
+import { buildStaticAssemblySceneData } from "../../preview-3d/src/static-assembly-scene.mjs";
 
 const asPath = (points) =>
   points
@@ -130,6 +131,8 @@ ${readinessDoc.checks.map((check) => `| ${check.id} | ${check.state} | ${check.s
 }
 
 export function buildPreview(patternDoc, readinessDoc) {
+  const sceneData = buildStaticAssemblySceneData(patternDoc);
+  const sceneJson = JSON.stringify(sceneData).replaceAll("</", "<\\/");
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -139,13 +142,9 @@ export function buildPreview(patternDoc, readinessDoc) {
   <style>
     body { margin: 0; font-family: Helvetica, Arial, sans-serif; background: #f8fafc; color: #111827; }
     main { display: grid; grid-template-columns: 1fr 320px; min-height: 100vh; }
-    section { display: grid; place-items: center; padding: 32px; }
+    section { position: relative; min-height: 100vh; }
     aside { border-left: 1px solid #d1d5db; padding: 24px; background: #ffffff; }
-    svg { width: min(76vw, 760px); height: auto; }
-    .body { fill: #e5e7eb; stroke: #9ca3af; }
-    .panel { fill: rgba(96, 165, 250, 0.28); stroke: #1d4ed8; stroke-width: 2; }
-    .back { fill: rgba(16, 185, 129, 0.22); stroke: #047857; }
-    .seam { stroke: #111827; stroke-width: 1.5; stroke-dasharray: 5 5; }
+    canvas { display: block; width: 100%; height: 100vh; }
     h1 { font-size: 18px; margin: 0 0 12px; }
     p, li { font-size: 14px; line-height: 1.45; }
   </style>
@@ -153,27 +152,96 @@ export function buildPreview(patternDoc, readinessDoc) {
 <body>
   <main>
     <section>
-      <svg viewBox="0 0 720 720" role="img" aria-label="Static rough garment preview">
-        <ellipse cx="360" cy="112" rx="36" ry="46" class="body" />
-        <path d="M 320 160 C 300 230 300 380 270 650 L 450 650 C 420 380 420 230 400 160 Z" class="body" />
-        <path d="M 302 164 L 418 164 L 468 650 L 252 650 Z" class="panel" />
-        <path d="M 318 176 L 402 176 L 444 628 L 276 628 Z" class="panel back" />
-        <line x1="302" y1="164" x2="252" y2="650" class="seam" />
-        <line x1="418" y1="164" x2="468" y2="650" class="seam" />
-      </svg>
+      <canvas id="static-assembly-preview" aria-label="Three.js static assembly preview"></canvas>
     </section>
     <aside>
       <h1>${patternDoc.title}</h1>
-      <p><strong>Preview status:</strong> read-only static sanity view.</p>
+      <p><strong>Preview status:</strong> read-only Three.js static assembly view.</p>
       <p><strong>Readiness:</strong> ${readinessDoc.overallState}</p>
-      <p>This preview shows orientation and rough silhouette only. It does not simulate cloth or prove fit.</p>
+      <p>This preview shows panel orientation around a muted body proxy. It does not simulate cloth or prove fit.</p>
       <ul>
-        <li>Front/back panels are represented as simple translucent shells.</li>
-        <li>Side seams are indicated by dashed lines.</li>
+        <li>Front/back panels are sourced from PatternGraph seam lines.</li>
+        <li>Shoulder and side seam pairs are rendered as guide lines.</li>
         <li>PatternGraph remains the source of truth.</li>
       </ul>
     </aside>
   </main>
+  <script id="static-assembly-scene-data" type="application/json">${sceneJson}</script>
+  <script type="module">
+    import * as THREE from "https://unpkg.com/three@0.164.1/build/three.module.js";
+
+    const sceneData = JSON.parse(document.getElementById("static-assembly-scene-data").textContent);
+    const canvas = document.getElementById("static-assembly-preview");
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xf8fafc);
+
+    const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 20);
+    camera.position.set(0.15, 0.25, 3.1);
+    camera.lookAt(0, 0, 0);
+
+    scene.add(new THREE.HemisphereLight(0xffffff, 0xd1d5db, 1.8));
+    const body = new THREE.Mesh(
+      new THREE.CapsuleGeometry(sceneData.bodyProxy.shoulderWidth * 0.55, sceneData.bodyProxy.height * 0.75, 8, 16),
+      new THREE.MeshBasicMaterial({ color: 0xe5e7eb, transparent: true, opacity: 0.42, wireframe: true }),
+    );
+    scene.add(body);
+
+    const panelMaterial = (color) => new THREE.MeshBasicMaterial({
+      color,
+      transparent: true,
+      opacity: 0.34,
+      side: THREE.DoubleSide,
+      depthWrite: false,
+    });
+
+    for (const panel of sceneData.panels) {
+      const shape = new THREE.Shape(panel.seamLine.map((point) => new THREE.Vector2(point.x, point.y)));
+      const mesh = new THREE.Mesh(new THREE.ShapeGeometry(shape), panelMaterial(panel.color));
+      mesh.name = panel.id;
+      mesh.position.set(panel.position.x, panel.position.y, panel.position.z);
+      mesh.rotation.y = panel.rotationY;
+      scene.add(mesh);
+
+      const points = panel.seamLine.map((point) => new THREE.Vector3(point.x + panel.position.x, point.y, panel.position.z));
+      points.push(points[0].clone());
+      const outline = new THREE.LineLoop(
+        new THREE.BufferGeometry().setFromPoints(points),
+        new THREE.LineBasicMaterial({ color: 0x111827, transparent: true, opacity: 0.72 }),
+      );
+      outline.name = panel.id + "-outline";
+      scene.add(outline);
+    }
+
+    for (const pair of sceneData.seamPairs) {
+      const material = new THREE.LineDashedMaterial({ color: pair.id === "side-seams" ? 0x111827 : 0x7c3aed, dashSize: 0.035, gapSize: 0.025 });
+      const y = pair.id === "side-seams" ? -0.06 : 0.42;
+      const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(-0.58, y, 0.24),
+        new THREE.Vector3(0.58, y, -0.24),
+      ]), material);
+      line.name = pair.id;
+      line.computeLineDistances();
+      scene.add(line);
+    }
+
+    function resize() {
+      const rect = canvas.getBoundingClientRect();
+      renderer.setSize(rect.width, rect.height, false);
+      camera.aspect = rect.width / rect.height;
+      camera.updateProjectionMatrix();
+    }
+
+    function animate(time) {
+      resize();
+      scene.rotation.y = Math.sin(time * 0.00035) * 0.18;
+      renderer.render(scene, camera);
+      requestAnimationFrame(animate);
+    }
+
+    requestAnimationFrame(animate);
+    window.__GARMENT_PATTERN_LAB_THREE_SCENE__ = { THREE, sceneData, scene };
+  </script>
 </body>
 </html>
 `;
